@@ -1,4 +1,4 @@
-const { Mascota} = require('../db');
+const { Mascotas} = require('../db');
 
 
 const postMascota = async (req, res) => {
@@ -10,9 +10,8 @@ const postMascota = async (req, res) => {
 		if (!name || !specie || !raze || !age || !weight ||!height ||!priority ||!image) {
 			res.status(404).json({msg:"Completa todos los campos."});
 		
-		} else {
-		
-			const newMascota = await Mascota.create({
+		} else {		
+			const newMascota = await Mascotas.create({
 				name,
 				specie,
 				raze,
@@ -26,7 +25,7 @@ const postMascota = async (req, res) => {
 
 			res.status(200).json(newMascota);
 		}
-		
+
 	} catch (error) {
 		res.status(404).send(error.msg);
 	}
