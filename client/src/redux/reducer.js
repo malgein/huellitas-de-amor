@@ -1,14 +1,13 @@
 import { GET_PET_BY_ID } from "./actions";
 const initialState = {
-  pets: [],
+  petDetail: [],
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_PET_BY_ID:
-      break;
-
+      return { ...state, petDetail: payload };
     default:
-      break;
+      return { ...state };
   }
 };
 export default rootReducer;
