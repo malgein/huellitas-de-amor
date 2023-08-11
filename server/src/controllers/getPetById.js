@@ -1,15 +1,21 @@
 //Importar modelos
-const { Mascotas } = require("../db.js");
-const axios = requrire("axios");
+const { Mascota } = require("../db.js");
+// const axios = require("axios");
 
 const getPetById = async (id) => {
-  let getPet = await Mascotas.findOne({
-    where: { id },
-  });
+  try {
+    let getPet = await Mascota.findOne({
+      where: { id },
+    });
 
-  if (!getPet) {
-    return { status: 404, message: "No se encontró esta mascota" };
+    if (!getPet) {
+      return { status: 404, message: "No se encontró esta mascota" };
+    }
+
+    return getPet;
+  } catch (error) {
+    throw { status: error?.status, message: error?.message };
   }
-
-  return videogame;
 };
+
+module.exports = getPetById;
