@@ -5,12 +5,13 @@ const path = require("path");
 //const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`,
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
   {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+    logging: false, 
+    native: false, 
   }
 );
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -37,11 +38,30 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Videogame, Genre, Platforms } = sequelize.models;
+const { CasaDeAdopcion, Comentario, TipoDeUsuario, Usuario, Adopcion, Donacion, Especie, EstadoAdopcion, Mascota } = sequelize.models;
 
-// Aca vendrian las relaciones
+// Relaciones
+Usuario.hasOne(TipoDeUsuario, {through: "Usuario_TipoDeUsuario", timestamps: false});
+TipoDeUsuario.hasOne(Usuario, {through: "Usuario_TipoDeUsuario", timestamps: false});
+
+Usuario.belongsToMany(Donacion, {through: "Usuario_Donacion", timestamps: false});
+Donacion.hasOne(Usuario, {through: "Usuario_Donacion", timestamps: false});
+
+Usuario.belongsToMany(Comentario, {through: "Usuario_Comentario", timestamps: false});
+Comentario.hasOne(Usuario, {through: "Usuario_Comentario", timestamps: false});
+
+Usuario.belongsToMany(Adopcion, {through: "Usuario_Adopcion", timestamps: false});
+Adopcion.hasOne(Usuario, {through: "Usuario_Adopcion", timestamps: false});
+
+CasaDeAdopcion.hasOne(Comentario, {through: "CasaDeAdopcion_Comentario", timestamps: false});
+Comentario.belongsToMany(CasaDeAdopcion, {through: "CasaDeAdopcion_Comentario", timestamps: false});
+
+CasaDeAdopcion.belongsToMany(Mascota, {through: "CasaDeAdopcion_Mascota", timestamps: false});
+Mascota.hasOne(CasaDeAdopcion, {through: "CasaDeAdopcion_Mascota", timestamps: false});
+
+
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  ...sequelize.models, 
+  conn: sequelize,
 };
