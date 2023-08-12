@@ -4,14 +4,14 @@ const router = express.Router();
 
 router.get('/mascotas', async (req, res) => {
   try {
-    const { nombre, edad, sexo, tamano, raza } = req.query; 
+    const {  edad, sexo, tamano, raza } = req.query; 
 
     const query = {};
-    if (nombre) query.nombre = nombre;
+   
     if (edad) query.edad = edad;
     if (sexo) query.sexo = sexo;
     if (tamano) query.tamano = tamano;
-    // if (raza) query.raza = raza; // ver si lo ponemos o no
+    if (raza) query.raza = raza; 
 
     
     const mascotas = await mascota.findAll({ where: query });
