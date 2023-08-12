@@ -25,25 +25,26 @@ const Nav = () => {
       <div className={styles.nav}>
         <Link to="/home">Home</Link>
         <Link to="/account">Mi Perfil</Link>
+        <Link to="/detail">Detalle</Link>
         <Link to="/notificaciones" onClick={abrirModal}>
           Notificaciones
         </Link>
+
         {/* <button onClick={abrirModal}>Notificaciones</button> */}
       </div>
       <div className={styles.divlogin}>
         <Link to="/login">Logout</Link>
       </div>
 
-      
       <div>
-      {location.pathname === "/home" && (
-        <div>
-          <h3>Aqui renderizo el searchbar</h3>
-          {/* <SearchBar /> */}
-          {/* <input value="text" type="name" placeholder="Buscar..." />
+        {location.pathname === "/home" && (
+          <div>
+            <h3>Aqui renderizo el searchbar</h3>
+            {/* <SearchBar /> */}
+            {/* <input value="text" type="name" placeholder="Buscar..." />
           <button className={styles.agregar}>Agregar</button> */}
-        </div>
-      )}
+          </div>
+        )}
       </div>
 
       {modalabierto && (
