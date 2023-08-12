@@ -4,8 +4,12 @@ import Home from "./components/Home/Home";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import Perfil from "./components/PerfilUser/Perfiluser";
+
+import FilterMascotas from "./components/FilterButtons/FilterButtons";
+
 import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
+
 
 function App() {
   return (
