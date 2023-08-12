@@ -18,11 +18,14 @@ function App() {
       <Routes>
         <Route path="/home" element={<Home />} />
 
+
+
       
         <Route path="/filter" element={<FilterMascotas />} />
 
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/detail" element={<Detail />} />
+
 
 
       </Routes>
