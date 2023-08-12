@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/account" element={<Perfil />} />
-        <Route path="/filter" element={<FilterMascotas />} />
+        <Route path="/filter" element={<FilterMascotas />} /> 
       </Routes>
     </>
   );
