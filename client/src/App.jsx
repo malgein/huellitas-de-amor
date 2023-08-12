@@ -4,6 +4,7 @@ import Home from "./components/Home/Home";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import Perfil from "./components/PerfilUser/Perfiluser";
+import Sorts from "./components/Sorts/Sorts";
 
 import FilterMascotas from "./components/FilterButtons/FilterButtons";
 
@@ -25,7 +26,7 @@ function App() {
 
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/detail" element={<Detail />} />
-
+				<Route path='/sorts' element={<Sorts />} />
 
 
       </Routes>
