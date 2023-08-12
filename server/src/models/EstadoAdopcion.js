@@ -1,17 +1,17 @@
-const { dataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
     "estadoAdopcion",
     {
       id: {
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
       estado: {
-        type: dataTypes.ENUM("Adoptado", "En adpción", "En proceso"),
+        type: DataTypes.ENUM("Adoptado", "En adpción", "En proceso"),
         allowNull: false,
       },
     },

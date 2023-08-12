@@ -1,25 +1,25 @@
-const { dataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "donaciones",
+    "donacion",
     {
       id: {
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
       fechaDonacion: {
-        type: dataTypes.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       monto: {
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       estadoDonacion: {
-        type: dataTypes.STRING(50),
+        type: DataTypes.STRING(50),
         allowNull: false,
       },
     },
