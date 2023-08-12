@@ -13,7 +13,6 @@ const postPetById = async ({
 }) => {
   try {
     if (
-      !id ||
       !nombre ||
       !edad ||
       !sexo ||
@@ -27,7 +26,6 @@ const postPetById = async ({
     }
 
     const createPet = await Mascota.create({
-      id,
       nombre,
       edad,
       sexo,
