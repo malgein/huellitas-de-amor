@@ -1,3 +1,4 @@
+
 const { Router } = require('express');
 const getMascotas = require('../controllers/getMascotas');
 const postMascotas = require('../controllers/postMascotas');
@@ -11,8 +12,6 @@ router.get('/mascotas', getMascotas)
 router.get('/mascotas/name', getMascotaByName)  
 router.get('/mascotas/:id', getMascotaById)
 router.post('/mascotas', postMascotas)
-
-
 
 
 
