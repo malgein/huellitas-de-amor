@@ -8,7 +8,7 @@ import Perfil from "./components/PerfilUser/Perfiluser";
 import FilterMascotas from "./components/FilterButtons/FilterButtons";
 
 import Detail from "./components/Detail/Detail";
-
+import PathRoutes from "./helpers/Routes.helper";
 
 
 function App() {
@@ -16,18 +16,11 @@ function App() {
     <>
       <Nav />
       <Routes>
-        <Route path="/home" element={<Home />} />
-
-
-
-      
-        <Route path="/filter" element={<FilterMascotas />} />
-
-        <Route path="/perfil" element={<Perfil />} />
-        <Route path="/detail" element={<Detail />} />
-
-
-
+        <Route path={PathRoutes.LANDINGPAGE} element={<LandingPage />} />
+        <Route path={PathRoutes.HOME} element={<Home />} />
+        <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
+        <Route path={PathRoutes.PERFIL} element={<Perfil />} />
+        <Route path={PathRoutes.DETAIL} element={<Detail />} />
       </Routes>
     </>
   );
