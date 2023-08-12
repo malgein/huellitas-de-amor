@@ -1,19 +1,8 @@
-const { Router } = require('express');
-
-
-
-
+const { Router } = require("express");
+const mascotas = require("./routesMascotas");
 
 const router = Router();
 
-
-router.get()
-
-
-
-
-
-
-
+router.use("/mascotas", mascotas);
 
 module.exports = router;
