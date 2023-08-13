@@ -1,46 +1,105 @@
-.profile_container {
-  font-family: Arial, sans-serif;
-  text-align: center;
+
+.profileContainer {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 100px;
 }
 
-.profile_info {
+.profileHeader {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
 }
 
-.profile_picture {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+.profilePicture {
+  width: 120px;
+  height: 120px;
   object-fit: cover;
-  margin-right: 20px;
+  border-radius: 50%;
+  border: 5px solid #ffffff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
 
-.user_details {
-  text-align: left;
+.profileInfo {
+  margin-left: 20px;
 }
 
-.profile_buttons {
+.profileName {
+  font-size: 28px;
+  margin-bottom: 5px;
+  color: #333333;
+}
+
+.profileLocation {
+  font-size: 16px;
+  color: #777777;
+  margin: 0px;
+}
+
+.profileDetails {
+  margin-top: 30px;
+  line-height: 1.6;
+}
+
+.profileDetails h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333333;
+}
+
+.profileButtons {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-left: 300px;
 }
 
-.edit_button,
-.logout_button {
-  background-color: #007bff;
-  color: #fff;
-  /* border: none; */
+.editButton,
+.logoutButton {
   padding: 10px 20px;
-  margin: 0 10px;
-  border-radius: 5px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-.logout_button {
-  background-color: #dc3545;
+.editButton {
+  background-color: #ffaa00;
+  color: #ffffff;
+}
+
+.editButton:hover {
+  background-color: #333333;
+}
+
+.profileContact {
+  margin-top: 30px;
+}
+
+.profileContact h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333333;
+}
+
+.profileContact p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #777777;
+  margin-bottom: 10px;
+  margin: 0;
+}
+
+.profileContact a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.profileContact a:hover {
+  color: #2980b9;
 }
