@@ -24,6 +24,7 @@ const Nav = () => {
       </div>
       <div className={styles.nav}>
 
+        <Link to="/home">Home</Link>
         <Link to="/home">Inicio</Link>
         <Link to="/perfil">Mi Perfil</Link>
         <Link to="/detail">Detalle</Link>

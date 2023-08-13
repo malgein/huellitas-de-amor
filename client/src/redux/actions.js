@@ -2,6 +2,10 @@ import axios from "axios";
 
 export const GET_PET_BY_ID = "GET_PET_BY_ID";
 
+const ENDPOINT = 'http://localhost:3001/mascotas/';
+const ENDPOINTTYPES = 'http://localhost:3001/types';
+const ENDPOINTNAME = 'http://localhost:3001/mascotas?name=';
+
 //hice el axtions para el filtrado (Nacho)
 export const APPLY_FILTERS = 'APPLY_FILTERS';
 export const FILTERS_ERROR = 'FILTERS_ERROR';
@@ -11,11 +15,12 @@ export const ORDER_BY_WEIGHT = 'ORDER_BY_WEIGHT'
 export const ORDER_BY_AGE = 'ORDER_BY_AGE'
 
 
-const URL_BASE = "";
+//const URL_BASE = "";
+
 
 export const getPetById = () => {
   return async (dispatch) => {
-    await axios.get(URL_BASE + "/pets").then(({ data }) => {
+    await axios.get(ENDPOINT + "/pets").then(({ data }) => {
       return dispatch({ type: GET_PET_BY_ID, payload: data });
     });
   };
