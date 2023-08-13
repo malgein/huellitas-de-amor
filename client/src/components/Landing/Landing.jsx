@@ -46,7 +46,7 @@ function LandingPage() {
         </div>
         <div className="flex-1 p-8">
           <h2 className="text-4xl font-extrabold">Filtra por tipo de mascota, edad y ubicación</h2>
-          <p className="text-lg text-black">Con PetPage, puedes filtrar los animales disponibles por tipo, edad y ubicación para encontrar la mascota perfecta que se ajuste a tus preferencias.</p>
+          <p className="text-lg text-black">Con Huellitas de Amor, puedes filtrar los animales disponibles por tipo, edad y ubicación para encontrar la mascota perfecta que se ajuste a tus preferencias.</p>
         </div>
       </div>
       <div className="flex items-center justify-between space-x-8">
@@ -63,8 +63,8 @@ function LandingPage() {
     <img src={imagenMascota4} alt="Mascota" className="rounded-full max-w-full h-auto border-5 border-gray-300 hover:border-red-300 transition-all duration-300" />
   </div>
   <div className="flex-1 p-8">
-    <h2 className="text-4xl font-extrabold">Diseño minimalista y fácil de usar</h2>
-    <p className="text-lg text-black">Nuestra plataforma ofrece un diseño minimalista y fácil de usar, con tarjetas de animales en un fondo blanco. Puedes navegar y encontrar tu mascota ideal de manera intuitiva.</p>
+    <h2 className="text-4xl font-extrabold">Interactúa con los animales que te gustan</h2>
+    <p className="text-lg text-black">Con PetPage, puedes darle "me gusta" a los animales que te gustan y mostrar tu interés. Esto ayuda a los refugios y rescatistas a conocer tus preferencias y encontrar la mejor opción para ti.</p>
   </div>
 </div>
 <div className="text-center p-8">
