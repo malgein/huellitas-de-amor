@@ -5,6 +5,11 @@ export const GET_PET_BY_ID = "GET_PET_BY_ID";
 //hice el axtions para el filtrado (Nacho)
 export const APPLY_FILTERS = 'APPLY_FILTERS';
 export const FILTERS_ERROR = 'FILTERS_ERROR';
+//Acciones para los ordenamientos - Wilmer
+export const ORDER_BY_RACE = 'ORDER_BY_RACE'
+export const ORDER_BY_WEIGHT = 'ORDER_BY_WEIGHT'
+export const ORDER_BY_AGE = 'ORDER_BY_AGE'
+
 
 const URL_BASE = "";
 
@@ -32,3 +37,24 @@ export const applyFilters = (filters) => async (dispatch) => {
     });
   }
 };
+
+export const orderByWeight = order => {
+  return{
+    type: ORDER_BY_WEIGHT,
+    payload: order
+  }
+}
+
+export const orderByRace = order => {
+  return{
+    type: ORDER_BY_RACE,
+    payload: order
+  }
+}
+
+export const orderByAge = order => {
+  return{
+    type: ORDER_BY_AGE,
+    payload: order
+  }
+}

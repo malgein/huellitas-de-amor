@@ -4,6 +4,7 @@ import Home from "./components/Home/Home";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import Perfil from "./components/PerfilUser/Perfiluser";
+import Sorts from "./components/Sorts/Sorts";
 
 import FilterMascotas from "./components/FilterButtons/FilterButtons";
 
@@ -21,6 +22,7 @@ function App() {
         <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
         <Route path={PathRoutes.PERFIL} element={<Perfil />} />
         <Route path={PathRoutes.DETAIL} element={<Detail />} />
+        <Route path={PathRoutes.SORTS} element={<Sorts />} />
       </Routes>
     </>
   );
