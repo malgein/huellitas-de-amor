@@ -6,6 +6,18 @@ const ENDPOINT = 'http://localhost:3001/mascotas/';
 const ENDPOINTTYPES = 'http://localhost:3001/types';
 const ENDPOINTNAME = 'http://localhost:3001/mascotas?name=';
 
+//hice el axtions para el filtrado (Nacho)
+export const APPLY_FILTERS = 'APPLY_FILTERS';
+export const FILTERS_ERROR = 'FILTERS_ERROR';
+//Acciones para los ordenamientos - Wilmer
+export const ORDER_BY_RACE = 'ORDER_BY_RACE'
+export const ORDER_BY_WEIGHT = 'ORDER_BY_WEIGHT'
+export const ORDER_BY_AGE = 'ORDER_BY_AGE'
+
+
+//const URL_BASE = "";
+
+
 export const getPetById = () => {
   return async (dispatch) => {
     await axios.get(ENDPOINT + "/pets").then(({ data }) => {
@@ -13,3 +25,41 @@ export const getPetById = () => {
     });
   };
 };
+
+
+// Actions de filtros para el FilterButtons (Nacho)
+export const applyFilters = (filters) => async (dispatch) => {
+  try {
+    const response = await axios.get('/mascotas', { params: filters });
+    dispatch({
+      type: APPLY_FILTERS,
+      payload: response.data
+    });
+  } catch (error) {
+    dispatch({
+      type: FILTERS_ERROR,
+      payload: error.message
+    });
+  }
+};
+
+export const orderByWeight = order => {
+  return{
+    type: ORDER_BY_WEIGHT,
+    payload: order
+  }
+}
+
+export const orderByRace = order => {
+  return{
+    type: ORDER_BY_RACE,
+    payload: order
+  }
+}
+
+export const orderByAge = order => {
+  return{
+    type: ORDER_BY_AGE,
+    payload: order
+  }
+}

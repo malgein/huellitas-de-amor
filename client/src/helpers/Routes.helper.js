@@ -1,7 +1,7 @@
 const PathRoutes = {
     HOME: '/home',
     FILTER: '/mascotas',
-    DETAIL: '/detail/:id',
+    DETAIL: '/detail',
     LANDINGPAGE: '/',
     PERFIL: '/perfil',
 }
