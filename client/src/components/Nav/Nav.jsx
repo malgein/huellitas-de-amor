@@ -24,7 +24,7 @@ const Nav = () => {
       </div>
       <div className={styles.nav}>
         <Link to="/home">Home</Link>
-        <Link to="/account">Mi Perfil</Link>
+        <Link to="/perfil">Mi Perfil</Link>
         <Link to="/detail">Detalle</Link>
         <Link to="/notificaciones" onClick={abrirModal}>
           Notificaciones
