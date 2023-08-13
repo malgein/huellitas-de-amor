@@ -1,3 +1,4 @@
+import React from "react";
 import Paginated from "../Paginated/Paginated";
 import { useState } from "react";
 
@@ -15,6 +16,7 @@ export default function Home() {
 /* const currentPet = Array.isArray(allPets) 
  ? allPets.slice(indexOfFirstPets, indexOfLastPets) 
  :[allPets];*/
+
 
   return (
     <div>

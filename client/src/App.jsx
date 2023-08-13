@@ -4,8 +4,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Landing from "./components/Landing/Landing";
 import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
-
-
 import Perfil from "./components/PerfilUser/Perfiluser";
 import Sorts from "./components/Sorts/Sorts";
 
