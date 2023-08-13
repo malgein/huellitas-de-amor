@@ -1,6 +1,8 @@
 import "./App.css";
 
 import { Routes, Route, useLocation } from "react-router-dom";
+import Landing from "./components/Landing/Landing";
+import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
 import Landing from "./components/Landing/Landing";
 import Home from "./components/Home/Home";
@@ -26,6 +28,7 @@ function App() {
         <Route path={PathRoutes.PERFIL} element={<Perfil />} />
         <Route path={PathRoutes.DETAIL} element={<Detail />} />
         <Route path={PathRoutes.SORTS} element={<Sorts />} />
+
       </Routes>
     </>
   );
