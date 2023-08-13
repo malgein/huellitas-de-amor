@@ -23,8 +23,10 @@ const Nav = () => {
         {/* <h1>Huellitas de amor</h1> */}
       </div>
       <div className={styles.nav}>
+
         <Link to="/home">Home</Link>
-        <Link to="/account">Mi Perfil</Link>
+        <Link to="/home">Inicio</Link>
+        <Link to="/perfil">Mi Perfil</Link>
         <Link to="/detail">Detalle</Link>
         <Link to="/notificaciones" onClick={abrirModal}>
           Notificaciones
@@ -33,7 +35,7 @@ const Nav = () => {
         {/* <button onClick={abrirModal}>Notificaciones</button> */}
       </div>
       <div className={styles.divlogin}>
-        <Link to="/login">Logout</Link>
+        <Link to="/login">Iniciar sesion</Link>
       </div>
 
       <div>
