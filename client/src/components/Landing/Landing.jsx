@@ -37,16 +37,16 @@ function LandingPage() {
           <p className="text-lg text-black">¿Buscas adoptar una mascota? Nuestra plataforma te permite crear una página de adopción personalizada para encontrar a tu compañero peludo perfecto.</p>
         </div>
         <div className="flex-1 p-8">
-          <img src={imagenMascota1} alt="Mascota" className="rounded-full max-w-full h-auto border-2 border-gray-300 hover:border-blue-500 transition-all duration-300" />
+          <img src={imagenMascota1} alt="Mascota" className="rounded-full max-w-full h-auto border-5 border-gray-300 hover:border-red-300 transition-all duration-300" />
         </div>
       </div>
       <div className="flex items-center justify-between space-x-8">
         <div className="flex-1 p-8">
-          <img src={imagenMascota2} alt="Mascota" className="rounded-full max-w-full h-auto border-2 border-gray-300 hover:border-blue-500 transition-all duration-300" />
+          <img src={imagenMascota2} alt="Mascota" className="rounded-full max-w-full h-auto border-5 border-gray-300 hover:border-red-300 transition-all duration-300" />
         </div>
         <div className="flex-1 p-8">
           <h2 className="text-4xl font-extrabold">Filtra por tipo de mascota, edad y ubicación</h2>
-          <p className="text-lg text-black">Con PetPage, puedes filtrar los animales disponibles por tipo, edad y ubicación para encontrar la mascota perfecta que se ajuste a tus preferencias.</p>
+          <p className="text-lg text-black">Con Huellitas de Amor, puedes filtrar los animales disponibles por tipo, edad y ubicación para encontrar la mascota perfecta que se ajuste a tus preferencias.</p>
         </div>
       </div>
       <div className="flex items-center justify-between space-x-8">
@@ -55,22 +55,22 @@ function LandingPage() {
           <p className="text-lg text-black">Nuestra plataforma ofrece un diseño minimalista y fácil de usar, con tarjetas de animales en un fondo blanco. Puedes navegar y encontrar tu mascota ideal de manera intuitiva.</p>
         </div>
         <div className="flex-1 p-8">
-          <img src={imagenMascota3} alt="Mascota" className="rounded-full max-w-full h-auto border-2 border-gray-300 hover:border-blue-500 transition-all duration-300" />
+          <img src={imagenMascota3} alt="Mascota" className="rounded-full max-w-full h-auto border-5 border-gray-300 hover:border-red-300 transition-all duration-300" />
         </div>
       </div>
       <div className="flex items-center justify-between space-x-8">
   <div className="flex-1 p-8">
-    <img src={imagenMascota4} alt="Mascota" className="rounded-full max-w-full h-auto border-2 border-gray-300 hover:border-blue-500 transition-all duration-300" />
+    <img src={imagenMascota4} alt="Mascota" className="rounded-full max-w-full h-auto border-5 border-gray-300 hover:border-red-300 transition-all duration-300" />
   </div>
   <div className="flex-1 p-8">
-    <h2 className="text-4xl font-extrabold">Diseño minimalista y fácil de usar</h2>
-    <p className="text-lg text-black">Nuestra plataforma ofrece un diseño minimalista y fácil de usar, con tarjetas de animales en un fondo blanco. Puedes navegar y encontrar tu mascota ideal de manera intuitiva.</p>
+    <h2 className="text-4xl font-extrabold">Interactúa con los animales que te gustan</h2>
+    <p className="text-lg text-black">Con PetPage, puedes darle "me gusta" a los animales que te gustan y mostrar tu interés. Esto ayuda a los refugios y rescatistas a conocer tus preferencias y encontrar la mejor opción para ti.</p>
   </div>
 </div>
 <div className="text-center p-8">
   <h2 className="text-4xl font-extrabold mb-4">No esperes más! Ingresa a Huellitas de Amor y busca la mascota que más te guste! ❤️</h2>
   <Link to="/home" className="inline-block">
-    <img src={logo} alt="Logo" className="mx-auto w-[150px] rounded-full border-2 border-gray-300 hover:border-blue-500 transition-all duration-300 cursor-pointer" />
+    <img src={logo} alt="Logo" className="mx-auto w-[150px] rounded-full border-2 border-gray-300 hover:border-red-400 transition-all duration-300 cursor-pointer" />
   </Link>
 </div>
 
