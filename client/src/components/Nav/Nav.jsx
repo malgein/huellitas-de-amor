@@ -23,21 +23,25 @@ const Nav = () => {
         {/* <h1>Huellitas de amor</h1> */}
       </div>
       <div className={styles.nav}>
+
+        <Link to="/home">Home</Link>
         <Link to="/home">Inicio</Link>
         <Link to="/perfil">Mi Perfil</Link>
+        <Link to="/detail">Detalle</Link>
         <Link to="/notificaciones" onClick={abrirModal}>
           Notificaciones
         </Link>
+
         {/* <button onClick={abrirModal}>Notificaciones</button> */}
       </div>
       <div className={styles.divlogin}>
-        <Link to="/login">Iniciar Sesion</Link>
+        <Link to="/login">Iniciar sesion</Link>
       </div>
 
       <div>
         {location.pathname === "/home" && (
           <div>
-            <h3>Aqui el searchbar</h3>
+            <h3>Aqui renderizo el searchbar</h3>
             {/* <SearchBar /> */}
             {/* <input value="text" type="name" placeholder="Buscar..." />
           <button className={styles.agregar}>Agregar</button> */}
