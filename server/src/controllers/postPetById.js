@@ -1,7 +1,6 @@
 const { Mascota } = require("../db");
 
 const postPetById = async ({
-  id,
   nombre,
   edad,
   sexo,
