@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getPetsByName } from "../../redux/actions";
+import { getPetByName } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
 
 const SearchBar = () => {
@@ -12,7 +12,7 @@ const SearchBar = () => {
     const newNombre = event.target.value;
     setNombre(newNombre);
 
-    dispatch(getDogsByName(newNombre));
+    dispatch(getPetByName(newNombre));
     history.push("/byname");
   };
 
