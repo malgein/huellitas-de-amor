@@ -1,4 +1,6 @@
-import padinated from "../Paginated/Paginated";
+import React from "react";
+import Paginated from "../Paginated/Paginated";
+import { useState } from "react";
 
 export default function Home() {
 
@@ -9,11 +11,12 @@ export default function Home() {
   //El índice de la ultima Mascota por página.
   const indexOfLastPet  = currentPage * petsPerPage;
   //El índice de la primera Mascota por página
-  const indexOfFirstPet = indexOfLastPet - petsPerPagePerPage;
+  const indexOfFirstPet = indexOfLastPet - petsPerPage;
   //Se va guardando las mascotas por pagina
- const currentPet = Array.isArray(allPets) 
+/* const currentPet = Array.isArray(allPets) 
  ? allPets.slice(indexOfFirstPets, indexOfLastPets) 
- :[allPets];
+ :[allPets];*/
+
 
   return (
     <div>
