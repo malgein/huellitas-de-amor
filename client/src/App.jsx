@@ -1,5 +1,5 @@
 import "./App.css";
-
+import Landing from "./components/Landing/Landing";
 import Home from "./components/Home/Home";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
@@ -13,16 +13,19 @@ import PathRoutes from "./helpers/Routes.helper";
 
 
 function App() {
+  
   return (
     <>
       <Nav />
       <Routes>
+
         <Route path={PathRoutes.LANDINGPAGE} element={<LandingPage />} />
         <Route path={PathRoutes.HOME} element={<Home />} />
         <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
         <Route path={PathRoutes.PERFIL} element={<Perfil />} />
         <Route path={PathRoutes.DETAIL} element={<Detail />} />
         <Route path={PathRoutes.SORTS} element={<Sorts />} />
+
       </Routes>
     </>
   );
