@@ -3,7 +3,6 @@ import {
   GET_PET_BY_NAME,
   APPLY_FILTERS,
   FILTERS_ERROR,
-  ORDER_BY_RACE,
   ORDER_BY_AGE,
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
@@ -14,6 +13,8 @@ const initialState = {
   mascotas: [],
   error: null,
 };
+
+
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_MASCOTAS:
@@ -23,7 +24,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
     case GET_PET_BY_NAME:
       return { ...state, petDetail: payload };
-
+//En este caso se ejecuta orderByWeight y se modifica el orden de las mascotas por peso ascendente o descendentemente dependiendo de lo que se le pase al payload
     case ORDER_BY_WEIGHT:
       let weightResult = [];
       if (payload === "ascendente") {
@@ -36,14 +37,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
           (a, b) => b.peso - a.peso
         );
         weightResult = [...descendingWeight];
-      } else if (payload === "defecto") {
-        weightResult = [];
-      }
+      } 
       return {
         ...state,
         mascotas: weightResult,
       };
-
+    //En este caso se ejecuta orderByAge y se modifica el orden de las mascotas por edad ascendente o descendentemente dependiendo de lo que se le pase al payload
     case ORDER_BY_AGE:
       let ageResult = [];
       if (payload === "ascendente") {
@@ -56,9 +55,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           (a, b) => b.edad - a.edad
         );
         ageResult = [...descendingAge];
-      } else if (payload === "defecto") {
-        ageResult = [];
-      }
+      } 
       return {
         ...state,
         mascotas: ageResult,
