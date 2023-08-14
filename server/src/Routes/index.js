@@ -3,7 +3,7 @@ const mascotas = require("./routesMascotas");
 const getPetById = require("../controllers/getPetById");
 const postPetById = require("../controllers/postPetById");
 const getPetByName = require("../controllers/getPetsByName");
-const filtradoMascotas = require("../controllers/filtradoMascotas");
+const filtradoMascotas = require("../controllers/filtradoMascotas")
 const getPets = require("../controllers/getPets");
 const router = Router();
 

@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Input, Textarea,Button } from "@nextui-org/react";
 import styles from "./AgregarMascota.module.css";
+import { useDispatch } from "react-redux";
 
 const validationSchema = Yup.object().shape({
 	nombre: Yup.string()
@@ -49,7 +50,9 @@ const AgregarMascota = () => {
 		sexo: "",
 	};
 	console.log(validationSchema);
+	const dispatch=useDispatch()
 	const handleSubmit = (values) => {
+		console.log(values)
 		dispatch(addMascota(values));
 
 	};

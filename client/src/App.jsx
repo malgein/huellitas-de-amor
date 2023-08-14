@@ -8,7 +8,7 @@ import Perfil from "./components/PerfilUser/Perfiluser";
 import Sorts from "./components/Sorts/Sorts";
 import AgregarMascota from "./components/AgregarMascota/AgregarMascota"
 
-import FilterMascotas from "./components/FilterButtons/FilterButtons";
+//import FilterMascotas from "./components/FilterButtons/FilterButtons";
 
 import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
