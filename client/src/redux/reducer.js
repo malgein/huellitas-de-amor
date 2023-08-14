@@ -11,7 +11,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, petDetail: payload };
 
     case GET_PET_BY_NAME:
-      return { ...state, petDetail: payload };
+      return { ...state, mascotas: payload };
 
     case ORDER_BY_WEIGHT:
       let weightResult = []
