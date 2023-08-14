@@ -23,7 +23,9 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       descripcion: {
-        type: DataTypes.STRING(250),
+        //?Tuve que cambiar el ripo de dataTypes porque las descripciones pueden ser muy largas
+        // type: DataTypes.STRING(250),
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       foto: {
