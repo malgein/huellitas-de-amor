@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
 import Perfil from "./components/PerfilUser/Perfiluser";
 import Sorts from "./components/Sorts/Sorts";
+import AgregarMascota from "./components/AgregarMascota/AgregarMascota"
 
 //import FilterMascotas from "./components/FilterButtons/FilterButtons";
 
@@ -29,7 +30,7 @@ function App() {
 
       <Footer />
     </>
-  );
+  );		
 }
 
 export default App;
