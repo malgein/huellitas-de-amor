@@ -1,8 +1,7 @@
 import React from "react";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
-import { LiaDogSolid } from "react-icons/Lia";
-import { BsGenderFemale } from "react-icons/Bs";
+
 
 export default function Detail() {
   const handleConfetti = () => {
@@ -31,7 +30,7 @@ export default function Detail() {
 
             <Tooltip content="Hembra">
               <Button className="m-1 h-10 w-10">
-                <BsGenderFemale className="m-1 text-lg text-black-500 cursor-pointer" />
+                
               </Button>
             </Tooltip>
           </div>
@@ -93,7 +92,7 @@ export default function Detail() {
               className="bg-blue-500 text-white hover:bg-blue-600"
               onPress={handleConfetti}
             >
-              <LiaDogSolid className="mr-2" /> Adóptame
+              Adóptame
             </Button>
           </div>
         </div>
