@@ -1,4 +1,5 @@
-const { Mascota } = require("../db");
+const { Mascota, Especie } = require("../db");
+const {Op} = require('sequelize');
 
 const postPetById = async ({
   
@@ -10,6 +11,7 @@ const postPetById = async ({
   tamano,
   raza,
   peso,
+  especie,
 }) => {
   try {
     if (
@@ -21,13 +23,14 @@ const postPetById = async ({
       !foto ||
       !tamano ||
       !raza ||
-      !peso
+      !peso ||
+      !especie
     ) {
       return { status: 401, message: "Faltan datos" };
     }
 
     const createPet = await Mascota.create({
-      
+    
       nombre,
       edad,
       sexo,
@@ -37,6 +40,21 @@ const postPetById = async ({
       raza,
       peso,
     });
+
+    //const mascEsp = await Especie.findAll({where: {especie: {[Op.in]:especie}}});
+
+    let mascEsp = await Especie.findOne({ where: { especie } }); // Buscar la especie
+   // await createPet.setEspecie(mascEsp);
+
+
+    if (!mascEsp) {
+      mascEsp = await Especie.create({ especie }); // Crear la especie si no existe
+    }
+
+    await createPet.setEspecie(mascEsp);
+
+    return createPet;
+
     //Llaves foraneas
     /* await createPet.setGenres(genres);
     await createPet.setPlatforms(platforms); */

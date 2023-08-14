@@ -49,73 +49,70 @@ const {
   Especie,
 } = sequelize.models;
 
-Usuario.hasOne(TipoDeUsuario, {
-  through: "Usuario_TipoDeUsuario",
-  timestamps: false,
-});
-TipoDeUsuario.hasOne(Usuario, {
-  through: "Usuario_TipoDeUsuario",
-  timestamps: false,
+Usuario.belongsTo(TipoDeUsuario, {
+  foreignKey: 'tipoDeUsuarioId', 
 });
 
-Usuario.belongsToMany(Donacion, {
-  through: "Usuario_Donacion",
-  timestamps: false,
+TipoDeUsuario.hasMany(Usuario, {
+  foreignKey: 'especieId', 
 });
 
-Donacion.hasOne(Usuario, {
-  through: "Usuario_Donacion",
-  timestamps: false,
+Donacion.belongsTo(Usuario, {
+  foreignKey: 'usuarioId',
 });
 
-Usuario.belongsToMany(Comentario, {
-  through: "Usuario_Comentario",
-  timestamps: false,
+Usuario.hasMany(Donacion, {
+  foreignKey: 'usuarioId',
 });
 
-Comentario.hasOne(Usuario, {
-  through: "Usuario_Comentario",
-  timestamps: false,
+Comentario.belongsTo(Usuario, {
+  foreignKey: 'usuarioId',
 });
 
-Usuario.belongsToMany(Adopcion, {
-  through: "Usuario_Adopcion",
-  timestamps: false,
+Usuario.hasMany(Comentario, {
+  foreignKey: 'usuarioId',
 });
 
-Adopcion.hasOne(Usuario, {
-  through: "Usuario_Adopcion",
-  timestamps: false,
+Adopcion.belongsTo(Usuario, {
+  foreignKey: 'usuarioId',
 });
 
-CasaDeAdopcion.hasOne(Comentario, {
-  through: "CasaDeAdopcion_Comentario",
-  timestamps: false,
+Usuario.hasMany(Adopcion, {
+  foreignKey: 'usuarioId',
 });
 
-Comentario.belongsToMany(CasaDeAdopcion, {
-  through: "CasaDeAdopcion_Comentario",
-  timestamps: false,
+CasaDeAdopcion.belongsTo(Comentario, {
+  foreignKey: 'comentarioId',
 });
 
-CasaDeAdopcion.belongsToMany(Mascota, {
-  through: "CasaDeAdopcion_Mascota",
-  timestamps: false,
+Comentario.hasMany(CasaDeAdopcion, {
+  foreignKey: 'comentarioId',
 });
 
-Mascota.hasOne(CasaDeAdopcion, {
-  through: "CasaDeAdopcion_Mascota",
-  timestamps: false,
+
+CasaDeAdopcion.hasMany(Mascota, {
+  foreignKey: 'casaDeApocionId',
 });
 
-CasaDeAdopcion.belongsToMany(Donacion, {
-  through: "CasaDeAdopcion_Donacion",
-  timestamps: false,
+
+Mascota.belongsTo(CasaDeAdopcion, {
+  foreignKey: 'casaDeAdopcionId', 
 });
 
-Donacion.hasOne(CasaDeAdopcion, {
-  through: "CasaDeAdopcion_Donacion",
-  timestamps: false,
+Mascota.belongsTo(Especie, {
+  foreignKey: 'especieId', 
+});
+
+Especie.hasMany(Mascota, {
+  foreignKey: 'especieId', 
+});
+
+Donacion.belongsTo(CasaDeAdopcion, {
+  foreignKey: 'casaDeApocionId',
+});
+
+CasaDeAdopcion.hasMany(Donacion, {
+  foreignKey: 'casaDeAdpocionId',
 });
 
 module.exports = {

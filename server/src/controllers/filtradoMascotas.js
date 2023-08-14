@@ -23,28 +23,33 @@
 // });
 
 // module.exports = router; 
-const {mascota} = require('../models/Mascota');
+const {Mascota, Especie} = require('../db');
 
-const filtradoMascotas = async (req, res) => {
-  try {
-    const { edad, sexo, tamano, raza, especie, peso } = req.query;
 
-    const query = {};
+const filtradoMascotas = async (req) => {
+try {
+const { edad, sexo, tamano, raza, especie, peso } = req.query;
 
-    if (edad) query.edad = edad;
-    if (sexo) query.sexo = sexo;
-    if (tamano) query.tamano = tamano;
-    if (raza) query.raza = raza;
-    if (especie) query.especie = especie;
-    if (peso) query.peso = peso;
+const query = {};
 
-    const mascotas = await mascota.findAll({ where: query });
+if (edad) query.edad = edad;
+if (sexo) query.sexo = sexo;
+if (tamano) query.tamano = tamano;
+if (raza) query.raza = raza;
+if (especie) query.especie = especie;
+if (peso) query.peso = peso;
 
-    res.json(mascotas);
+
+const mascotas = await Mascota.findAll({ where: query },{include: [Especie]});
+
+
+return mascotas;
+
 
 } catch (error) {
-  res.status(500).send(error.message);
+return {status: 500, message: error.message};
 }
 };
+
 
 module.exports = filtradoMascotas;
