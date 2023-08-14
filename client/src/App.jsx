@@ -12,24 +12,25 @@ import AgregarMascota from "./components/AgregarMascota/AgregarMascota"
 
 import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
-
+import Footer from "./components/Footer/Footer";
 
 function App() {
   //<Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
   const location = useLocation();
   return (
-		<>
-			{location.pathname !== "/" && <Nav />}
-			<Routes>
-				<Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
-				<Route path={PathRoutes.HOME} element={<Home />} />
-				<Route path={PathRoutes.PERFIL} element={<Perfil />} />
-				<Route path={PathRoutes.DETAIL} element={<Detail />} />
-				<Route path={PathRoutes.SORTS} element={<Sorts />} />
-				<Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-			</Routes>
-		</>
-	);
+    <>
+      {location.pathname !== "/" && <Nav />}
+      <Routes>
+        <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
+        <Route path={PathRoutes.HOME} element={<Home />} />
+        <Route path={PathRoutes.PERFIL} element={<Perfil />} />
+        <Route path={PathRoutes.DETAIL} element={<Detail />} />
+        <Route path={PathRoutes.SORTS} element={<Sorts />} />
+      </Routes>
+
+      <Footer />
+    </>
+  );		
 }
 
 export default App;
