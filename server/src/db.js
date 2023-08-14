@@ -49,68 +49,66 @@ const {
   Especie,
 } = sequelize.models;
 
+//Usuarios --> Tipo de Usuarios
 Usuario.belongsTo(TipoDeUsuario, {
   foreignKey: 'tipoDeUsuarioId', 
 });
-
 TipoDeUsuario.hasMany(Usuario, {
   foreignKey: 'especieId', 
 });
 
+//Donaciones --> Usuarios
 Donacion.belongsTo(Usuario, {
   foreignKey: 'usuarioId',
 });
-
 Usuario.hasMany(Donacion, {
   foreignKey: 'usuarioId',
 });
 
+//Comentarios --> Usuarios
 Comentario.belongsTo(Usuario, {
   foreignKey: 'usuarioId',
 });
-
 Usuario.hasMany(Comentario, {
   foreignKey: 'usuarioId',
 });
 
+//Adopciones --> Usuarios
 Adopcion.belongsTo(Usuario, {
   foreignKey: 'usuarioId',
 });
-
 Usuario.hasMany(Adopcion, {
   foreignKey: 'usuarioId',
 });
 
+//Casa de Apciones --> Comentarios
 CasaDeAdopcion.belongsTo(Comentario, {
   foreignKey: 'comentarioId',
 });
-
 Comentario.hasMany(CasaDeAdopcion, {
   foreignKey: 'comentarioId',
 });
 
-
-CasaDeAdopcion.hasMany(Mascota, {
-  foreignKey: 'casaDeApocionId',
-});
-
-
+//Mascotas --> Casa de Adopciones
 Mascota.belongsTo(CasaDeAdopcion, {
   foreignKey: 'casaDeAdopcionId', 
 });
+CasaDeAdopcion.hasMany(Mascota, {
+  foreignKey: 'casaDeAdopcionId',
+});
 
+//Mascotas --> Especies
 Mascota.belongsTo(Especie, {
   foreignKey: 'especieId', 
 });
-
 Especie.hasMany(Mascota, {
   foreignKey: 'especieId', 
 });
 
+//Donaciones --> Casa de Adopciones
 Donacion.belongsTo(CasaDeAdopcion, {
   foreignKey: 'casaDeApocionId',
 });
-
 CasaDeAdopcion.hasMany(Donacion, {
   foreignKey: 'casaDeAdpocionId',
 });
