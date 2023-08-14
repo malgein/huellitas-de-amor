@@ -1,5 +1,6 @@
 const { Mascota } = require("../db");
 const {Op} = require("sequelize");
+
 const getPetsByName = async (nombre) => {
   try {
     let nombreMinuscula = nombre.toUpperCase();
