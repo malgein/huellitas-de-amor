@@ -1,10 +1,16 @@
+//Dependencias
 import React from "react";
-// import Paginated from "../Paginated/Paginated";
-import { useState } from "react";
-import { getMascotas } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+// import Paginated from "../Paginated/Paginated";
+import { useState, useEffect } from "react";
+//Acciones del redux
+import { getMascotas } from "../../redux/actions";
+//Componentes
 import PetCard from "../PetCard/PetCard";
+import Sorts from "../Sorts/Sorts";
+import FilterMascotas from "../FilterButtons/FilterButtons";
+import Padinated from "../Paginated/Paginated";
+
 
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
@@ -28,6 +34,10 @@ export default function Home() {
 
   return (
     <div className="flex h-screen flex-col ">
+      {/* Renderizado de los filtros */}
+      <FilterMascotas />
+      {/* Renderizado de los ordenamientos */}
+      <Sorts />
       {console.log(mascotas)}
       <header className="m-0 h-[10%] w-screen bg-white p-0">
         {/* <NavBar /> */}
@@ -44,7 +54,7 @@ export default function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
                 {mascotas.map((mascota) => {
                   return (
-                    <div>
+                    <div key={crypto.randomUUID()}>
                       <PetCard
                         key={mascota.id}
                         nombre={mascota.nombre}
@@ -52,6 +62,7 @@ export default function Home() {
                         sexo={mascota.sexo}
                         descripcion={mascota.descripcion}
                         foto={mascota.foto}
+                        peso={mascota.peso}
                       />
                     </div>
                   );
@@ -64,6 +75,7 @@ export default function Home() {
           </div>
         </section>
       </div>
+      <Padinated />
     </div>
     /*<div className="w-screen h-screen flex flex-row">
       {console.log(mascotas)}

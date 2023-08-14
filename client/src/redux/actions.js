@@ -12,7 +12,7 @@ const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
 export const APPLY_FILTERS = "APPLY_FILTERS";
 export const FILTERS_ERROR = "FILTERS_ERROR";
 //Acciones para los ordenamientos - Wilmer
-export const ORDER_BY_RACE = "ORDER_BY_RACE";
+
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const ORDER_BY_AGE = "ORDER_BY_AGE";
 
@@ -58,22 +58,25 @@ export const applyFilters = (filters) => async (dispatch) => {
 };
 
 export const orderByWeight = (order) => {
-  return {
-    type: ORDER_BY_WEIGHT,
-    payload: order,
-  };
-};
-
-export const orderByRace = (order) => {
-  return {
-    type: ORDER_BY_RACE,
-    payload: order,
+  return async (dispatch) => {
+    if (order === "defecto") {
+      return dispatch(getMascotas()); // Obtener las mascotas en su orden original
+    }
+    return dispatch({
+      type: ORDER_BY_WEIGHT,
+      payload: order,
+    });
   };
 };
 
 export const orderByAge = (order) => {
-  return {
-    type: ORDER_BY_AGE,
-    payload: order,
+  return async (dispatch) => {
+    if (order === "defecto") {
+      return dispatch(getMascotas()); // Obtener las mascotas en su orden original
+    }
+    return dispatch({
+      type: ORDER_BY_AGE,
+      payload: order,
+    });
   };
 };
