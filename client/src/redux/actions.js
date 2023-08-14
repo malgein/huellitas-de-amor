@@ -6,7 +6,7 @@ export const GET_MASCOTAS = "GET_MASCOTAS";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 const ENDPOINTTYPES = "http://localhost:3001/types";
-const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
+const ENDPOINTNAME = "http://localhost:3001/mascotas/nombre?nombre=";
 
 //hice el axtions para el filtrado (Nacho)
 export const APPLY_FILTERS = "APPLY_FILTERS";
@@ -36,6 +36,7 @@ export const getMascotas = () => {
 export const getPetByName = (nombre) => {
   return async (dispatch) => {
     await axios.get(ENDPOINTNAME + nombre).then(({ data }) => {
+      console.log(data);
       return dispatch({ type: GET_PET_BY_NAME, payload: data });
     });
   };

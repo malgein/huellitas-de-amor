@@ -28,7 +28,6 @@ export default function Home() {
 
   return (
     <div className="flex h-screen flex-col ">
-      {console.log(mascotas)}
       <header className="m-0 h-[10%] w-screen bg-white p-0">
         {/* <NavBar /> */}
       </header>
@@ -47,6 +46,7 @@ export default function Home() {
                     <div>
                       <PetCard
                         key={mascota.id}
+                        id={mascota.id}
                         nombre={mascota.nombre}
                         edad={mascota.edad}
                         sexo={mascota.sexo}

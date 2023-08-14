@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 
-
 const Nav = () => {
   const location = useLocation();
   const [modalabierto, setModalAbierto] = useState(false);
@@ -44,50 +43,47 @@ const Nav = () => {
             Iniciar sesion
           </Link>
         </div>
-      </div> <SearchBar />
-
-
-
-
+      </div>{" "}
+      <SearchBar />
       {modalabierto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <h2 className={styles.notih2}>Notificaciones</h2>
-            <ul class={styles.notificationlist}>
+            <ul className={styles.notificationlist}>
               <li>
-                <div class={styles.notification}>
-                  <div class={styles.notificationinfo}>
-                    <span class={styles.notificationtitle}>
+                <div className={styles.notification}>
+                  <div className={styles.notificationinfo}>
+                    <span className={styles.notificationtitle}>
                       Nueva notificación 1
                     </span>
                     <br />
-                    <span class={styles.notificationtime}>Hace 1 hora</span>
+                    <span className={styles.notificationtime}>Hace 1 hora</span>
                   </div>
-                  <button class={styles.notificationaction}>Ver</button>
+                  <button className={styles.notificationaction}>Ver</button>
                 </div>
               </li>
               <li>
-                <div class={styles.notification}>
-                  <div class={styles.notificationinfo}>
-                    <span class={styles.notificationtitle}>
+                <div className={styles.notification}>
+                  <div className={styles.notificationinfo}>
+                    <span className={styles.notificationtitle}>
                       Nueva notificación 2
                     </span>
                     <br />
-                    <span class={styles.notificationtime}>Hace 3 hora</span>
+                    <span className={styles.notificationtime}>Hace 3 hora</span>
                   </div>
-                  <button class={styles.notificationaction}>Ver</button>
+                  <button className={styles.notificationaction}>Ver</button>
                 </div>
               </li>
               <li>
-                <div class={styles.notification}>
-                  <div class={styles.notificationinfo}>
-                    <span class={styles.notificationtitle}>
+                <div className={styles.notification}>
+                  <div className={styles.notificationinfo}>
+                    <span className={styles.notificationtitle}>
                       Nueva notificación 3
                     </span>
                     <br />
-                    <span class={styles.notificationtime}>Hace 5 hora</span>
+                    <span className={styles.notificationtime}>Hace 5 hora</span>
                   </div>
-                  <button class={styles.notificationaction}>Ver</button>
+                  <button className={styles.notificationaction}>Ver</button>
                 </div>
               </li>
             </ul>
