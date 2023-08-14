@@ -12,6 +12,7 @@ import FilterMascotas from "../FilterButtons/FilterButtons";
 import Padinated from "../Paginated/Paginated";
 
 
+
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
   const dispatch = useDispatch();

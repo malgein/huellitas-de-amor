@@ -11,7 +11,7 @@ import AgregarMascota from "./components/AgregarMascota/AgregarMascota"
 
 import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
-
+import Footer from "./components/Footer/Footer";
 
 function App() {
   //<Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
@@ -26,6 +26,7 @@ function App() {
 				<Route path={PathRoutes.DETAIL} element={<Detail />} />
 				<Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
 			</Routes>
+			<Footer />
 		</>
 	);
 }
