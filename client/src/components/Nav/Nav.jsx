@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-// import SearchBar from "../SearchBar/SearchBar";
-// import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
+
 
 const Nav = () => {
   const location = useLocation();
@@ -44,18 +44,10 @@ const Nav = () => {
             Iniciar sesion
           </Link>
         </div>
-      </div>
+      </div> <SearchBar />
 
-      <div className={styles.divsearchbar}>
-        {location.pathname === "/home" && (
-          <div className={styles.searchbar}>
-            {/* <h3>Aqui renderizo el searchbar</h3> */}
-            {/* <SearchBar /> */}
-            <input value="text" type="name" placeholder="Buscar..." />
-            <button className={styles.agregar}>Agregar</button>
-          </div>
-        )}
-      </div>
+
+
 
       {modalabierto && (
         <div className={styles.modal}>
