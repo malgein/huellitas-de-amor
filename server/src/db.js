@@ -49,73 +49,68 @@ const {
   Especie,
 } = sequelize.models;
 
-Usuario.hasOne(TipoDeUsuario, {
-  through: "Usuario_TipoDeUsuario",
-  timestamps: false,
+//Usuarios --> Tipo de Usuarios
+Usuario.belongsTo(TipoDeUsuario, {
+  foreignKey: "tipoDeUsuarioId",
 });
-TipoDeUsuario.hasOne(Usuario, {
-  through: "Usuario_TipoDeUsuario",
-  timestamps: false,
-});
-
-Usuario.belongsToMany(Donacion, {
-  through: "Usuario_Donacion",
-  timestamps: false,
+TipoDeUsuario.hasMany(Usuario, {
+  foreignKey: "especieId",
 });
 
-Donacion.hasOne(Usuario, {
-  through: "Usuario_Donacion",
-  timestamps: false,
+//Donaciones --> Usuarios
+Donacion.belongsTo(Usuario, {
+  foreignKey: "usuarioId",
+});
+Usuario.hasMany(Donacion, {
+  foreignKey: "usuarioId",
 });
 
-Usuario.belongsToMany(Comentario, {
-  through: "Usuario_Comentario",
-  timestamps: false,
+//Comentarios --> Usuarios
+Comentario.belongsTo(Usuario, {
+  foreignKey: "usuarioId",
+});
+Usuario.hasMany(Comentario, {
+  foreignKey: "usuarioId",
 });
 
-Comentario.hasOne(Usuario, {
-  through: "Usuario_Comentario",
-  timestamps: false,
+//Adopciones --> Usuarios
+Adopcion.belongsTo(Usuario, {
+  foreignKey: "usuarioId",
+});
+Usuario.hasMany(Adopcion, {
+  foreignKey: "usuarioId",
+});
+//Lo comenté porque si no, cuando haces post de casa de adopción te pide un comentario como dato en el json.
+//Casa de Apciones --> Comentarios
+CasaDeAdopcion.belongsTo(Comentario, {
+  foreignKey: "comentarioId",
+});
+Comentario.hasMany(CasaDeAdopcion, {
+  foreignKey: "comentarioId",
 });
 
-Usuario.belongsToMany(Adopcion, {
-  through: "Usuario_Adopcion",
-  timestamps: false,
+//Mascotas --> Casa de Adopciones
+Mascota.belongsTo(CasaDeAdopcion, {
+  foreignKey: "casaDeAdopcionId",
+});
+CasaDeAdopcion.hasMany(Mascota, {
+  foreignKey: "casaDeAdopcionId",
 });
 
-Adopcion.hasOne(Usuario, {
-  through: "Usuario_Adopcion",
-  timestamps: false,
+//Mascotas --> Especies
+Mascota.belongsTo(Especie, {
+  foreignKey: "especieId",
+});
+Especie.hasMany(Mascota, {
+  foreignKey: "especieId",
 });
 
-CasaDeAdopcion.hasOne(Comentario, {
-  through: "CasaDeAdopcion_Comentario",
-  timestamps: false,
+//Donaciones --> Casa de Adopciones
+Donacion.belongsTo(CasaDeAdopcion, {
+  foreignKey: "casaDeApocionId",
 });
-
-Comentario.belongsToMany(CasaDeAdopcion, {
-  through: "CasaDeAdopcion_Comentario",
-  timestamps: false,
-});
-
-CasaDeAdopcion.belongsToMany(Mascota, {
-  through: "CasaDeAdopcion_Mascota",
-  timestamps: false,
-});
-
-Mascota.hasOne(CasaDeAdopcion, {
-  through: "CasaDeAdopcion_Mascota",
-  timestamps: false,
-});
-
-CasaDeAdopcion.belongsToMany(Donacion, {
-  through: "CasaDeAdopcion_Donacion",
-  timestamps: false,
-});
-
-Donacion.hasOne(CasaDeAdopcion, {
-  through: "CasaDeAdopcion_Donacion",
-  timestamps: false,
+CasaDeAdopcion.hasMany(Donacion, {
+  foreignKey: "casaDeAdpocionId",
 });
 
 

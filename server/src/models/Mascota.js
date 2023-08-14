@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       foto: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(150),
         allowNull: false,
       },
       tamano: {

@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getPetById } from "../../redux/actions";
+
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
 
 export default function Detail() {
+  const { id } = useParams();
+
   const handleConfetti = () => {
     confetti({});
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPetById(id));
+  }, [dispatch, id]);
+
+  const mascota = useSelector((state) => state.petDetail);
 
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
@@ -26,12 +41,12 @@ export default function Detail() {
         </div>
         <div className="p-4 ">
           <div className="flex items-center mb-2">
-            <h1 className="text-3xl font-semibold pl-10 mb-2">PokeAmigo </h1>
+            <h1 className="text-3xl font-semibold pl-10 mb-2">
+              {mascota.nombre}{" "}
+            </h1>
 
             <Tooltip content="Hembra">
-              <Button className="m-1 h-10 w-10">
-                
-              </Button>
+              <Button className="m-1 h-10 w-10"></Button>
             </Tooltip>
           </div>
 
