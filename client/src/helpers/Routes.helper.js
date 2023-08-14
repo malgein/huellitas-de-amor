@@ -4,6 +4,7 @@ const PathRoutes = {
     DETAIL: '/detail',
     LANDINGPAGE: '/',
     PERFIL: '/perfil',
+    AGREGAR:'/agregar'
 }
 
 export default PathRoutes;
