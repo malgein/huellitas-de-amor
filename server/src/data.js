@@ -1,7 +1,8 @@
 //*Archivo creado para simular data con la que se trabajara en la home 
 
 const allPets = [
-	
+
+    	
  {"id":1,"nombre":"Rocky", "raza":"Bulldog", "tamano" : "Mediano", "edad":13,"sexo":"Hembra","foto":"https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg", "peso":8.8 , "descripcion":"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem."},
  {"id":2,"nombre":"Cooper", "raza":"Maine Coon", "tamano": "Pequeño", "edad":14,"sexo":"Macho","foto":"https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg", "peso":10.6 , "descripcion":"Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst."},
  {"id":3,"nombre":"Jack", "raza":"Persian", "tamano": "Mediano", "edad":8,"sexo":"Macho","foto":"https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg", "peso":6.0, "descripcion":"Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat."},
@@ -23,7 +24,10 @@ const allPets = [
  {"id":19,"nombre":"Bella", "raza":"Ragdoll", "tamano": "Grande", "edad":9,"sexo":"Macho","foto":"https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg", "peso":12.9, "descripcion":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus."},
  {"id":20,"nombre":"Jack", "raza":"Bulldog", "tamano": "Pequeño", "edad":13,"sexo":"Macho","foto":"https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg", "peso":24.5, "descripcion":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus."}
 
+
 ]
+
+
 
 
  module.exports = allPets

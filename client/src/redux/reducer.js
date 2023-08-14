@@ -6,6 +6,7 @@ import {
   ORDER_BY_AGE,
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
+  FILL_DATABASE
 } from "./actions";
 const initialState = {
   petDetail: [],
@@ -23,7 +24,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, petDetail: payload };
 
     case GET_PET_BY_NAME:
-      return { ...state, petDetail: payload };
+      //Comente esta linea y escribe la que vinene despues de esta porque las mascotas que se buscaban por nombres es mas facil coordinar el paginado, los ordenamientos y los filtros jusntos si estan en el mismo estado en este caso mascotas
+      // return { ...state, petDetail: payload };
+      return { ...state, mascotas: payload };
 //En este caso se ejecuta orderByWeight y se modifica el orden de las mascotas por peso ascendente o descendentemente dependiendo de lo que se le pase al payload
     case ORDER_BY_WEIGHT:
       let weightResult = [];
@@ -61,6 +64,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
         mascotas: ageResult,
       };
 
+      case FILL_DATABASE:
+        return{
+          ...state
+        }
     default:
       return { ...state };
   }

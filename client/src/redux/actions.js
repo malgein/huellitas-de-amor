@@ -6,7 +6,16 @@ export const GET_MASCOTAS = "GET_MASCOTAS";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 const ENDPOINTTYPES = "http://localhost:3001/types";
-const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
+//Realmente me funciono con el endpoint : http://localhost:3001/mascotas/nombre?nombre=
+
+//No me funciono con el siguiente endpoint
+// const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
+
+//Con este endpoint si me funciono
+const ENDPOINTNAME = 'http://localhost:3001/mascotas/nombre?nombre='
+
+//Endpoint para rellenar la base de datos con datos de mascotas X
+const ENDPOINTFILL = 'http://localhost:3001/fill'
 
 //hice el axtions para el filtrado (Nacho)
 export const APPLY_FILTERS = "APPLY_FILTERS";
@@ -15,6 +24,8 @@ export const FILTERS_ERROR = "FILTERS_ERROR";
 
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const ORDER_BY_AGE = "ORDER_BY_AGE";
+
+export const FILL_DATABASE = 'FILL_DATABASE'
 
 //const URL_BASE = "";
 
@@ -80,3 +91,14 @@ export const orderByAge = (order) => {
     });
   };
 };
+
+//action que rellena la base de datos con mascotas x
+export const fillDatabase = () => {
+	return async function(dispatch){
+		let response = await axios.get(ENDPOINTFILL)
+		return dispatch({
+			type: FILL_DATABASE,
+			payload: response.data
+		})
+	}
+}
