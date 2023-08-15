@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_PET_BY_ID = "GET_PET_BY_ID";
 export const GET_PET_BY_NAME = "GET_PET_BY_NAME";
 export const GET_MASCOTAS = "GET_MASCOTAS";
+export const ADD_MASCOTA = "ADD_MASCOTA";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 const ENDPOINTTYPES = "http://localhost:3001/types";
@@ -102,3 +103,17 @@ export const fillDatabase = () => {
 		})
 	}
 }
+
+export const addMascota = (Mascota) => {
+	return async () => {
+		try {
+			const response = await axios.post(`${ENDPOINT}/`, Mascota);
+			return {
+				type: ADD_MASCOTA,
+				payload: response,
+			};
+		} catch (error) {
+			alert(error.message);
+		}
+	};
+};
