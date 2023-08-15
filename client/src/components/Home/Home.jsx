@@ -9,13 +9,17 @@ import { getMascotas, fillDatabase } from "../../redux/actions";
 import PetCard from "../PetCard/PetCard";
 import Sorts from "../Sorts/Sorts";
 import FilterMascotas from "../FilterButtons/FilterButtons";
-import Padinated from "../Paginated/Paginated";
+import Paginated from "../Paginated/Paginated";
+
+
 
 
 
 export default function Home() {
+
   const mascotas = useSelector((state) => state.mascotas);
   const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage] = useState(1);
 
   //Guardame el estado guardame cuantas Mascotas guardo por pagina, en este caso 8.
@@ -32,6 +36,9 @@ export default function Home() {
     dispatch(getMascotas());
   }, []);
 
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
   
   useEffect(() => {
     //funcion que rellena la base de datos con dato de mascotas, mascotas que se hayan en el archivo data.js de server
@@ -58,6 +65,11 @@ export default function Home() {
           {/* {pets.map((pet) => ( */}
           <div className="bg-white w-[90%] h-[90%] ">
             <div className="flex flex-col">
+            <Paginated 
+              petsPerPage={petsPerPage}
+              mascotas={mascotas.length}
+              paginado={paginado}
+            />
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
                 {currentPet.length === 0 && <h1>No se encontraron resultados</h1>}
                 {currentPet.map((mascota) => {
@@ -84,7 +96,7 @@ export default function Home() {
           </div>
         </section>
       </div>
-      <Padinated pokePerPage={8} allPokemons={mascotas}/>
+      
     </div>
     /*<div className="w-screen h-screen flex flex-row">
       {console.log(mascotas)}

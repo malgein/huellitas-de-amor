@@ -16,7 +16,7 @@ const SearchBar = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(getPetByName(nombre)); 
-    console.log(mascotas)
+    setNombre('');
   };
 
   return (
