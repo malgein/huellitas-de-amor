@@ -1,7 +1,7 @@
 import React from "react";
 
 //Hago destructuring de las variables que necesito
-export default function padinated ({pokePerPage, allPokemons, paginado}){
+export default function Padinated ({pokePerPage, allPokemons, paginado}){
     //Inicializo esta variable con un arreglo vacio
     const pageNumbers = [];
 
@@ -13,7 +13,7 @@ export default function padinated ({pokePerPage, allPokemons, paginado}){
     }
 
     return(
-        <div className={style.pagination}>
+        <div >
             {
                 pageNumbers &&
                 pageNumbers.map(number =>(

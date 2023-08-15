@@ -1,29 +1,33 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getPetsByName } from "../../redux/actions";
-import { useHistory } from "react-router-dom";
+import styles from './SearchBar.module.css';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {getPetByName } from '../../redux/actions'
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const [nombre, setNombre] = useState("");
+
+  const mascotas = useSelector((state) => state.mascotas)
+  const [nombre, setNombre] = useState('');
 
   const handleInputChange = (event) => {
-    const newNombre = event.target.value;
-    setNombre(newNombre);
+    setNombre(event.target.value);
+  };
 
-    dispatch(getDogsByName(newNombre));
-    history.push("/byname");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(getPetByName(nombre)); 
+    console.log(mascotas)
   };
 
   return (
-    <form>
-      <input
-        type="text"
-        placeholder="Search by name..."
+    <form className={styles.searchForm} onSubmit={handleSubmit}>
+      <input type="text"
+        className={styles.searchInput}
+        placeholder="Buscar raza de perro..."
         value={nombre}
         onChange={handleInputChange}
       />
+      <button type="submit"  className={styles.submitButton} disabled={!nombre}>Buscar</button>
     </form>
   );
 };

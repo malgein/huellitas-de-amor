@@ -51,66 +51,66 @@ const {
 
 //Usuarios --> Tipo de Usuarios
 Usuario.belongsTo(TipoDeUsuario, {
-  foreignKey: 'tipoDeUsuarioId', 
+  foreignKey: "tipoDeUsuarioId",
 });
 TipoDeUsuario.hasMany(Usuario, {
-  foreignKey: 'especieId', 
+  foreignKey: "especieId",
 });
 
 //Donaciones --> Usuarios
 Donacion.belongsTo(Usuario, {
-  foreignKey: 'usuarioId',
+  foreignKey: "usuarioId",
 });
 Usuario.hasMany(Donacion, {
-  foreignKey: 'usuarioId',
+  foreignKey: "usuarioId",
 });
 
 //Comentarios --> Usuarios
 Comentario.belongsTo(Usuario, {
-  foreignKey: 'usuarioId',
+  foreignKey: "usuarioId",
 });
 Usuario.hasMany(Comentario, {
-  foreignKey: 'usuarioId',
+  foreignKey: "usuarioId",
 });
 
 //Adopciones --> Usuarios
 Adopcion.belongsTo(Usuario, {
-  foreignKey: 'usuarioId',
+  foreignKey: "usuarioId",
 });
 Usuario.hasMany(Adopcion, {
-  foreignKey: 'usuarioId',
+  foreignKey: "usuarioId",
 });
-
+//Lo comenté porque si no, cuando haces post de casa de adopción te pide un comentario como dato en el json.
 //Casa de Apciones --> Comentarios
 CasaDeAdopcion.belongsTo(Comentario, {
-  foreignKey: 'comentarioId',
+  foreignKey: "comentarioId",
 });
 Comentario.hasMany(CasaDeAdopcion, {
-  foreignKey: 'comentarioId',
+  foreignKey: "comentarioId",
 });
 
 //Mascotas --> Casa de Adopciones
 Mascota.belongsTo(CasaDeAdopcion, {
-  foreignKey: 'casaDeAdopcionId', 
+  foreignKey: "casaDeAdopcionId",
 });
 CasaDeAdopcion.hasMany(Mascota, {
-  foreignKey: 'casaDeAdopcionId',
+  foreignKey: "casaDeAdopcionId",
 });
 
 //Mascotas --> Especies
 Mascota.belongsTo(Especie, {
-  foreignKey: 'especieId', 
+  foreignKey: "especieId",
 });
 Especie.hasMany(Mascota, {
-  foreignKey: 'especieId', 
+  foreignKey: "especieId",
 });
 
 //Donaciones --> Casa de Adopciones
 Donacion.belongsTo(CasaDeAdopcion, {
-  foreignKey: 'casaDeApocionId',
+  foreignKey: "casaDeApocionId",
 });
 CasaDeAdopcion.hasMany(Donacion, {
-  foreignKey: 'casaDeAdpocionId',
+  foreignKey: "casaDeAdpocionId",
 });
 
 module.exports = {
