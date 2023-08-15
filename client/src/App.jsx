@@ -14,8 +14,8 @@ import PathRoutes from "./helpers/Routes.helper";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  //<Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
   const location = useLocation();
+  // <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
   return (
 		<>
 			{location.pathname !== "/" && <Nav />}
