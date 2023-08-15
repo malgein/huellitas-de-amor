@@ -29,9 +29,9 @@ export default function Home() {
  ? allPets.slice(indexOfFirstPets, indexOfLastPets) 
  :[allPets];*/
 
-  useEffect(() => {
-    dispatch(getMascotas());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getMascotas());
+  // }, []);
 
   return (
     <div className="flex h-screen flex-col ">
