@@ -35,12 +35,14 @@ const Nav = () => {
           <Link to="/notificaciones" onClick={abrirModal}>
             Notificaciones
           </Link>
-
+          <Link className={styles.agregar} to="/agregar">
+            Agrega tu Mascota
+          </Link>
           {/* <button onClick={abrirModal}>Notificaciones</button> */}
         </div>
-        <div className={styles.agregar}>
+        {/* <div className={styles.agregar}>
           <Link to="/agregar">Agrega tu Mascota</Link>
-        </div>
+        </div> */}
         <div className={styles.divlogin}>
           <Link className={styles.regis} to="/login">
             Registrarse

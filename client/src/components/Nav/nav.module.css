@@ -179,7 +179,8 @@
   margin-right: 50px;
   margin-left: 0px;
   color: #124c5f;
-  border: 1px solid #124c5f;
+  font-weight: bold;
+  /* border: 1px solid #124c5f; */
   padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
