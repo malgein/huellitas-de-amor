@@ -21,15 +21,23 @@ const FilterMascotas = () => {
   };
 
   const applyFilters = () => {
+    const BACKEND_URL = "http://localhost:3001";
+  
     axios
-      .get('/mascotas', { params: filters })
+      .get(`${BACKEND_URL}/mascotas/filtro`, {
+        params: {
+          ...filters,
+        }
+      })
       .then((response) => {
         setMascotas(response.data);
       })
       .catch((error) => {
         console.error(error);
+        alert("Ha ocurrido un error al obtener las mascotas. Por favor, intenta de nuevo más tarde.");
       });
   };
+  
 
   const toggleDropdown = (name) => {
     setShowDropdown(showDropdown === name ? null : name);
