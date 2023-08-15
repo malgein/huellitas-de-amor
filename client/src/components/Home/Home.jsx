@@ -13,8 +13,6 @@ import Paginated from "../Paginated/Paginated";
 
 
 
-
-
 export default function Home() {
 
   const mascotas = useSelector((state) => state.mascotas);
@@ -29,7 +27,9 @@ export default function Home() {
   //El índice de la primera Mascota por página
   const indexOfFirstPet = indexOfLastPet - petsPerPage;
   //Se va guardando las mascotas por pagina
-  const currentPet = Array.isArray(mascotas) ? mascotas.slice(indexOfFirstPet, indexOfLastPet) :[mascotas];
+  const currentPet = Array.isArray(mascotas)
+    ? mascotas.slice(indexOfFirstPet, indexOfLastPet)
+    : [mascotas];
 
   //Funcion inicial que trae todaas las mascotas de la base de datos
   useEffect(() => {
@@ -39,12 +39,11 @@ export default function Home() {
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   }
-  
+
   useEffect(() => {
     //funcion que rellena la base de datos con dato de mascotas, mascotas que se hayan en el archivo data.js de server
-    dispatch(fillDatabase())
-  },[])
-
+    dispatch(fillDatabase());
+  }, [fillDatabase]);
 
   return (
     <div className="flex h-screen flex-col ">
@@ -71,7 +70,9 @@ export default function Home() {
               paginado={paginado}
             />
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
-                {currentPet.length === 0 && <h1>No se encontraron resultados</h1>}
+                {currentPet.length === 0 && (
+                  <h1>No se encontraron resultados</h1>
+                )}
                 {currentPet.map((mascota) => {
                   return (
                     <div key={crypto.randomUUID()}>
@@ -87,7 +88,6 @@ export default function Home() {
                     </div>
                   );
                 })}
-                
               </div>
               <div className="pt-[20px] flex justify-center">
                 {/* <Pagination total={10} initialPage={1} /> */}
@@ -96,7 +96,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-      
     </div>
     /*<div className="w-screen h-screen flex flex-row">
       {console.log(mascotas)}
