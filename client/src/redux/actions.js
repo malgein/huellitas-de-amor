@@ -10,30 +10,27 @@ export const ORDER_BY_AGE = "ORDER_BY_AGE";
 export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
 export const FETCHING_MASCOTAS_SUCCESS = "FETCHING_MASCOTAS_SUCCESS";
 export const FETCHING_MASCOTAS_ERROR = "FETCHING_MASCOTAS_ERROR";
-export const ADD_MASCOTA = 'ADD_MASCOTA'
-
+export const ADD_MASCOTA = "ADD_MASCOTA";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 const ENDOPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
-const ENDPOINTTYPES = "http://localhost:3001/types";  // Nota: No usaste este endpoint en las acciones presentadas
+const ENDPOINTTYPES = "http://localhost:3001/types"; // Nota: No usaste este endpoint en las acciones presentadas
 const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
 
-
-const ENDPOINTNAME2 ='http://localhost:3001/mascotas/nombre?nombre='
+const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
 
 // export const FILL_DATABASE = 'FILL_DATABASE'
 
 //const URL_BASE = "";
-
 
 const handleError = (dispatch, errorType, error) => {
   console.error(error);
   dispatch({ type: errorType, payload: error.message });
 };
 
-export const getPetById = () => async (dispatch) => {
+export const getPetById = (id) => async (dispatch) => {
   try {
-    const { data } = await axios.get(ENDPOINT + "/pets");
+    const { data } = await axios.get(ENDPOINT + `${id}`);
     dispatch({ type: GET_PET_BY_ID, payload: data });
   } catch (error) {
     handleError(dispatch, FETCHING_MASCOTAS_ERROR, error);
@@ -95,5 +92,3 @@ export const addMascota = (Mascota) => {
     }
   };
 };
-
-

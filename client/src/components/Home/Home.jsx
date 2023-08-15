@@ -4,17 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 // import Paginated from "../Paginated/Paginated";
 import { useState, useEffect } from "react";
 //Acciones del redux
-import { getMascotas} from "../../redux/actions";
+import { getMascotas } from "../../redux/actions";
 //Componentes
 import PetCard from "../PetCard/PetCard";
 import Sorts from "../Sorts/Sorts";
 import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
 
-
-
 export default function Home() {
-
   const mascotas = useSelector((state) => state.mascotas);
   const dispatch = useDispatch();
 
@@ -34,16 +31,14 @@ export default function Home() {
     ? mascotas.slice(indexOfFirstPet, indexOfLastPet)
     : [mascotas];
 
-
   //Funcion inicial que trae todaas las mascotas de la base de datos
   useEffect(() => {
     dispatch(getMascotas());
   }, []);
 
-
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
-  }
+  };
 
   return (
     <div className="flex h-screen flex-col ">
@@ -64,11 +59,11 @@ export default function Home() {
           {/* {pets.map((pet) => ( */}
           <div className="bg-white w-[90%] h-[90%] ">
             <div className="flex flex-col">
-            <Paginated 
-              petsPerPage={petsPerPage}
-              mascotas={mascotas.length}
-              paginado={paginado}
-            />
+              <Paginated
+                petsPerPage={petsPerPage}
+                mascotas={mascotas.length}
+                paginado={paginado}
+              />
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
                 {currentPet.length === 0 && (
                   <h1>No se encontraron resultados</h1>
@@ -78,6 +73,7 @@ export default function Home() {
                     <div key={crypto.randomUUID()}>
                       <PetCard
                         key={mascota.id}
+                        id={mascota.id}
                         nombre={mascota.nombre}
                         edad={mascota.edad}
                         sexo={mascota.sexo}
