@@ -1,5 +1,6 @@
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 function PetCard({ id, nombre, edad, sexo, descripcion, foto }) {
   //Esto es de favoritos
   const dispatch = useDispatch();
@@ -22,11 +23,15 @@ function PetCard({ id, nombre, edad, sexo, descripcion, foto }) {
     setIsFav(favs?.some((fav) => fav.id === id));
   }, [favs, id]);
 
+=======
+function PetCard({ nombre, edad, sexo, descripcion, foto, peso }) {
+>>>>>>> 166efa192a3326f4ba07a814bc1fca40cd958c62
   return (
     <Card className="py-4">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <p className="text-tiny uppercase font-bold">{nombre}</p>
-        <small className="text-default-500">{edad} año</small>
+        <small className="text-default-500">{edad} años</small>
+        <small className="text-default-500">{peso} kg</small>
         <h4 className="font-bold text-large">{sexo}</h4>
       </CardHeader>
       <CardBody className="overflow-visible py-2">

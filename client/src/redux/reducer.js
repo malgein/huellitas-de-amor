@@ -1,90 +1,94 @@
 import {
   GET_PET_BY_ID,
   GET_PET_BY_NAME,
-  APPLY_FILTERS,
-  FILTERS_ERROR,
-  ORDER_BY_RACE,
   ORDER_BY_AGE,
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
+
+  FETCH_MASCOTAS_REQUEST,
+  FETCH_MASCOTAS_SUCCESS,
+  FETCH_MASCOTAS_FAILURE,
+
+  FILL_DATABASE,
+  ADD_MASCOTA
+
 } from "./actions";
+
 const initialState = {
   petDetail: [],
-  //hago la peticion GET a '/mascotas' (nacho)
+  loading: false,
   mascotas: [],
   error: null,
-  favorites: [],
 };
+
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+
+    case FETCH_MASCOTAS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case FETCH_MASCOTAS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        mascotas: payload,
+        error: null
+      };
+
+    case FETCH_MASCOTAS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        mascotas: [],
+        error: payload
+      };
+
     case GET_MASCOTAS:
       return { ...state, mascotas: payload };
+
     case GET_PET_BY_ID:
       return { ...state, petDetail: payload };
 
     case GET_PET_BY_NAME:
+
       return { ...state, petDetail: payload };
 
+
+      //Comente esta linea y escribe la que vinene despues de esta porque las mascotas que se buscaban por nombres es mas facil coordinar el paginado, los ordenamientos y los filtros jusntos si estan en el mismo estado en este caso mascotas
+      // return { ...state, petDetail: payload };
+      return { ...state, mascotas: payload };
+//En este caso se ejecuta orderByWeight y se modifica el orden de las mascotas por peso ascendente o descendentemente dependiendo de lo que se le pase al payload
+
     case ORDER_BY_WEIGHT:
-      let weightResult = [];
-      if (payload === "ascendente") {
-        const ascendingWeight = [...state.mascotas].sort(
-          (a, b) => a.peso - b.peso
-        );
-        weightResult = [...ascendingWeight];
-      } else if (payload === "descendente") {
-        const descendingWeight = [...state.mascotas].sort(
-          (a, b) => b.peso - a.peso
-        );
-        weightResult = [...descendingWeight];
-      } else if (payload === "defecto") {
-        weightResult = [];
-      }
+      const sortedByWeight = [...state.mascotas].sort((a, b) => 
+        payload === "ascendente" ? a.peso - b.peso : b.peso - a.peso
+      );
       return {
         ...state,
-        mascotas: weightResult,
+        mascotas: sortedByWeight,
       };
 
     case ORDER_BY_AGE:
-      let ageResult = [];
-      if (payload === "ascendente") {
-        const ascendingAge = [...state.mascotas].sort(
-          (a, b) => a.edad - b.edad
-        );
-        ageResult = [...ascendingAge];
-      } else if (payload === "descendente") {
-        const descendingAge = [...state.mascotas].sort(
-          (a, b) => b.edad - a.edad
-        );
-        ageResult = [...descendingAge];
-      } else if (payload === "defecto") {
-        ageResult = [];
-      }
+      const sortedByAge = [...state.mascotas].sort((a, b) => 
+        payload === "ascendente" ? a.edad - b.edad : b.edad - a.edad
+      );
       return {
         ...state,
-        mascotas: ageResult,
+        mascotas: sortedByAge,
       };
 
-    //Aqui favoritos
-    // case ADD_TO_FAVS:
-    //   const favorites = state.favorites || [];
-    //   if (!favorites.find((fav) => fav.id === payload)) {
-    //     return {
-    //       ...state,
-    //       favorites: [...favorites, { id: payload }],
-    //     };
-    //   } else {
-    //     return state;
-    //   }
-
-    // case REMOVE_FROM_FAVS:
-    //   return {
-    //     ...state,
-    //     favorites: state.favorites?.filter((el) => el.id !== payload),
-    //   };
-
+      case FILL_DATABASE:
+        return{
+          ...state
+        }
     default:
       return { ...state };
   }
 };
+
 export default rootReducer;
+
+

@@ -1,10 +1,17 @@
+//Dependencias
 import React from "react";
-// import Paginated from "../Paginated/Paginated";
-import { useState } from "react";
-import { getMascotas } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+// import Paginated from "../Paginated/Paginated";
+import { useState, useEffect } from "react";
+//Acciones del redux
+import { getMascotas, fillDatabase } from "../../redux/actions";
+//Componentes
 import PetCard from "../PetCard/PetCard";
+import Sorts from "../Sorts/Sorts";
+import FilterMascotas from "../FilterButtons/FilterButtons";
+import Padinated from "../Paginated/Paginated";
+
+
 
 //FAVORITOS
 // import Favorites from "../Favorites/Favorites";
@@ -33,17 +40,27 @@ export default function Home() {
   //El índice de la primera Mascota por página
   const indexOfFirstPet = indexOfLastPet - petsPerPage;
   //Se va guardando las mascotas por pagina
-  /* const currentPet = Array.isArray(allPets) 
- ? allPets.slice(indexOfFirstPets, indexOfLastPets) 
- :[allPets];*/
+  const currentPet = Array.isArray(mascotas) ? mascotas.slice(indexOfFirstPet, indexOfLastPet) :[mascotas];
 
+  //Funcion inicial que trae todaas las mascotas de la base de datos
   useEffect(() => {
     dispatch(getMascotas());
   }, []);
 
+  
+  useEffect(() => {
+    //funcion que rellena la base de datos con dato de mascotas, mascotas que se hayan en el archivo data.js de server
+    dispatch(fillDatabase())
+  },[])
+
+
   return (
     <div className="flex h-screen flex-col ">
-      {console.log(mascotas)}
+      {/* Renderizado de los filtros */}
+      <FilterMascotas />
+      {/* Renderizado de los ordenamientos */}
+      <Sorts />
+      {/* {console.log(currentPet)} */}
       <header className="m-0 h-[10%] w-screen bg-white p-0">
         {/* <NavBar /> */}
       </header>
@@ -57,9 +74,10 @@ export default function Home() {
           <div className="bg-white w-[90%] h-[90%] ">
             <div className="flex flex-col">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
-                {mascotas.map((mascota) => {
+                {currentPet.length === 0 && <h1>No se encontraron resultados</h1>}
+                {currentPet.map((mascota) => {
                   return (
-                    <div>
+                    <div key={crypto.randomUUID()}>
                       <PetCard
                         key={mascota.id}
                         nombre={mascota.nombre}
@@ -67,10 +85,12 @@ export default function Home() {
                         sexo={mascota.sexo}
                         descripcion={mascota.descripcion}
                         foto={mascota.foto}
+                        peso={mascota.peso}
                       />
                     </div>
                   );
                 })}
+                
               </div>
               <div className="pt-[20px] flex justify-center">
                 {/* <Pagination total={10} initialPage={1} /> */}
@@ -79,20 +99,7 @@ export default function Home() {
           </div>
         </section>
       </div>
-
-      {/* <div>
-        <div onClick={handleOpenModal}>
-          ❤️
-          <span>{Favs?.length}</span>
-        </div>
-        {openModal && (
-          <Favorites
-            handleCloseModal={handleCloseModal}
-            openModal={openModal}
-          />
-        )}
-      </div> */}
-      {/* className={styles.custom_btn} */}
+      <Padinated pokePerPage={8} allPokemons={mascotas}/>
     </div>
     /*<div className="w-screen h-screen flex flex-row">
       {console.log(mascotas)}
