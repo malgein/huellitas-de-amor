@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import Paginated from "../Paginated/Paginated";
 import { useState, useEffect } from "react";
 //Acciones del redux
-import { getMascotas, fillDatabase } from "../../redux/actions";
+import { getMascotas} from "../../redux/actions";
 //Componentes
 import PetCard from "../PetCard/PetCard";
 import Sorts from "../Sorts/Sorts";
@@ -27,23 +27,23 @@ export default function Home() {
   //El índice de la primera Mascota por página
   const indexOfFirstPet = indexOfLastPet - petsPerPage;
   //Se va guardando las mascotas por pagina
+
+  // const currentPet = Array.isArray(mascotas) ? mascotas.slice(indexOfFirstPet, indexOfLastPet) :[mascotas];
+
   const currentPet = Array.isArray(mascotas)
     ? mascotas.slice(indexOfFirstPet, indexOfLastPet)
     : [mascotas];
+
 
   //Funcion inicial que trae todaas las mascotas de la base de datos
   useEffect(() => {
     dispatch(getMascotas());
   }, []);
 
+
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   }
-
-  useEffect(() => {
-    //funcion que rellena la base de datos con dato de mascotas, mascotas que se hayan en el archivo data.js de server
-    dispatch(fillDatabase());
-  }, [fillDatabase]);
 
   return (
     <div className="flex h-screen flex-col ">

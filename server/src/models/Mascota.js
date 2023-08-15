@@ -27,6 +27,8 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       foto: {
+        //?Tuve que cambiar el ripo de dataTypes porque las url pueden ser muy largas
+        // type: DataTypes.STRING(150),
         type: DataTypes.TEXT,
         allowNull: false,
       },
