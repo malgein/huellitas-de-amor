@@ -23,11 +23,11 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       descripcion: {
-        type: DataTypes.STRING(250),
+        type: DataTypes.STRING(350),
         allowNull: false,
       },
       foto: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(250),
         allowNull: false,
       },
       tamano: {
