@@ -7,7 +7,9 @@ import {
   FETCHING_MASCOTAS,
   FETCHING_MASCOTAS_SUCCESS,
   FETCHING_MASCOTAS_ERROR,
-  ADD_MASCOTA,
+  APPLY_FILTERS,
+  FILTERS_ERROR,
+  FILL_DATABASE,
 } from "./actions";
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
   loading: false,
   mascotas: [],
   error: null,
+  mascotasBackUp: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -23,6 +26,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: true,
+        mascotas: payload,
+        mascotasBackUp: payload,
+      };
+    case APPLY_FILTERS:
+      return {
+        ...state,
+        mascotas: payload,
+      };
+
+    case FILTERS_ERROR:
+      return {
+        ...state,
+        error: payload,
       };
 
     case FETCHING_MASCOTAS_SUCCESS:

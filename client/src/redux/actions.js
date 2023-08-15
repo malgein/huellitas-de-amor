@@ -18,6 +18,8 @@ const ENDPOINT = "http://localhost:3001/mascotas/";
 const ENDOPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
 const ENDPOINTTYPES = "http://localhost:3001/types"; // Nota: No usaste este endpoint en las acciones presentadas
 const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
+// const ENDPOINTFILL = 'http://localhost:3001/fill';
+export const FILL_DATABASE = "FILL_DATABASE";
 
 const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
 
@@ -60,9 +62,14 @@ export const getPetByName = (nombre) => async (dispatch) => {
 //NAcho
 export const applyFilters = (filters) => async (dispatch) => {
   try {
-    const response = await axios.get(ENDOPOINT_FILTER, { params: filters });
+    console.log("Endpoint:", ENDPOINT_FILTER);
+    console.log("Filters:", filters);
+    const response = await axios.get(ENDPOINT_FILTER, { params: filters });
+    console.log("Response from server:", response.data);
     dispatch({ type: APPLY_FILTERS, payload: response.data });
   } catch (error) {
+    console.error("Error when applying filters:", error);
+
     handleError(dispatch, FILTERS_ERROR, error);
   }
 };
