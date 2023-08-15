@@ -7,6 +7,7 @@ import { getPetById } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
+
 export default function Detail() {
   const { id } = useParams();
 

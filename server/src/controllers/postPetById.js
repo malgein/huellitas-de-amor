@@ -38,7 +38,7 @@ const postPetById = async ({
       raza,
       peso,
     });
-
+console.log(createPet)
     //const mascEsp = await Especie.findAll({where: {especie: {[Op.in]:especie}}});
 
     let mascEsp = await Especie.findOne({ where: { especie } }); // Buscar la especie
