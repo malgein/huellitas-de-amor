@@ -10,6 +10,7 @@ export const ORDER_BY_AGE = "ORDER_BY_AGE";
 export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
 export const FETCHING_MASCOTAS_SUCCESS = "FETCHING_MASCOTAS_SUCCESS";
 export const FETCHING_MASCOTAS_ERROR = "FETCHING_MASCOTAS_ERROR";
+
 export const ADD_MASCOTA = "ADD_MASCOTA";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
@@ -22,13 +23,12 @@ export const FILL_DATABASE = 'FILL_DATABASE'
 
 
 
-
-
 const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
 
 // export const FILL_DATABASE = 'FILL_DATABASE'
 
 //const URL_BASE = "";
+
 
 const handleError = (dispatch, errorType, error) => {
   console.error(error);
