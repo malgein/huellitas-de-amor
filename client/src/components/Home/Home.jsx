@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import Paginated from "../Paginated/Paginated";
 import { useState, useEffect } from "react";
 //Acciones del redux
-import { getMascotas } from "../../redux/actions";
+import { getMascotas, fillDatabase } from "../../redux/actions";
 //Componentes
 import PetCard from "../PetCard/PetCard";
 import Sorts from "../Sorts/Sorts";
@@ -25,13 +25,19 @@ export default function Home() {
   //El índice de la primera Mascota por página
   const indexOfFirstPet = indexOfLastPet - petsPerPage;
   //Se va guardando las mascotas por pagina
-  /* const currentPet = Array.isArray(allPets) 
- ? allPets.slice(indexOfFirstPets, indexOfLastPets) 
- :[allPets];*/
+  const currentPet = Array.isArray(mascotas) ? mascotas.slice(indexOfFirstPet, indexOfLastPet) :[mascotas];
 
-  // useEffect(() => {
-  //   dispatch(getMascotas());
-  // }, []);
+  //Funcion inicial que trae todaas las mascotas de la base de datos
+  useEffect(() => {
+    dispatch(getMascotas());
+  }, []);
+
+  
+  useEffect(() => {
+    //funcion que rellena la base de datos con dato de mascotas, mascotas que se hayan en el archivo data.js de server
+    dispatch(fillDatabase())
+  },[])
+
 
   return (
     <div className="flex h-screen flex-col ">
@@ -39,7 +45,7 @@ export default function Home() {
       <FilterMascotas />
       {/* Renderizado de los ordenamientos */}
       <Sorts />
-      {console.log(mascotas)}
+      {/* {console.log(currentPet)} */}
       <header className="m-0 h-[10%] w-screen bg-white p-0">
         {/* <NavBar /> */}
       </header>
@@ -53,7 +59,8 @@ export default function Home() {
           <div className="bg-white w-[90%] h-[90%] ">
             <div className="flex flex-col">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
-                {mascotas.map((mascota) => {
+                {currentPet.length === 0 && <h1>No se encontraron resultados</h1>}
+                {currentPet.map((mascota) => {
                   return (
                     <div key={crypto.randomUUID()}>
                       <PetCard
@@ -68,6 +75,7 @@ export default function Home() {
                     </div>
                   );
                 })}
+                
               </div>
               <div className="pt-[20px] flex justify-center">
                 {/* <Pagination total={10} initialPage={1} /> */}
@@ -76,7 +84,7 @@ export default function Home() {
           </div>
         </section>
       </div>
-      <Padinated />
+      <Padinated pokePerPage={8} allPokemons={mascotas}/>
     </div>
     /*<div className="w-screen h-screen flex flex-row">
       {console.log(mascotas)}

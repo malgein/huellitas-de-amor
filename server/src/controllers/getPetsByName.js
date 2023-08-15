@@ -6,15 +6,22 @@ const getPetsByName = async (nombre) => {
     let nombreMinuscula = nombre.toUpperCase();
     if (nombreMinuscula)   {
       console.log(nombre);
-      const petName = await Mascota.findOne({ where: 
-        { nombre: { [Op.iLike]: `%${nombre}%` } } });
+      // const petName = await Mascota.findOne({ where: 
+      //   { nombre: { [Op.iLike]: `%${nombre}%` } } });
+
+      const petName =  await Mascota.findAll({
+        where: {
+          nombre: {
+            [Op.iLike]: `%${nombre}%`,
+            },
+          },
+        });
       return petName
-     
-      
     }
     else {
       const mascotas = await Mascota.findAll();
     return mascotas;
+    // return []
     }
     
   } catch (error) {
