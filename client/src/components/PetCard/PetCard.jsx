@@ -9,6 +9,7 @@ function PetCard({ id, nombre, edad, sexo, descripcion, foto }) {
           <small className="text-default-500">
             {edad > 1 ? `${edad} años` : `${edad} año`}{" "}
           </small>
+          <small className="text-default-500">{peso} kg</small>
           <h4 className="font-bold text-large">{sexo}</h4>
         </CardHeader>
         <CardBody className="overflow-visible py-2">
