@@ -1,10 +1,11 @@
 import styles from "./SearchBar.module.css";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPetByName } from "../../redux/actions";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
+  const masctoas = useSelector((state) => state.mascotas);
   const [nombre, setNombre] = useState("");
 
   const handleInputChange = (event) => {
@@ -14,7 +15,6 @@ const SearchBar = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(getPetByName(nombre));
-    setNombre("");
   };
 
   return (

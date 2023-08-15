@@ -1,23 +1,49 @@
 import {
   GET_PET_BY_ID,
   GET_PET_BY_NAME,
-  APPLY_FILTERS,
-  FILTERS_ERROR,
-  ORDER_BY_RACE,
   ORDER_BY_AGE,
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
+  FETCHING_MASCOTAS,
+  FETCHING_MASCOTAS_SUCCESS,
+  FETCHING_MASCOTAS_ERROR,
+  ADD_MASCOTA,
 } from "./actions";
+
 const initialState = {
   petDetail: [],
-  //hago la peticion GET a '/mascotas' (nacho)
+  loading: false,
   mascotas: [],
   error: null,
 };
+
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case FETCHING_MASCOTAS:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case FETCHING_MASCOTAS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        mascotas: payload,
+        error: null,
+      };
+
+    case FETCHING_MASCOTAS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        mascotas: [],
+        error: payload,
+      };
+
     case GET_MASCOTAS:
       return { ...state, mascotas: payload };
+
     case GET_PET_BY_ID:
       return { ...state, petDetail: payload };
 
@@ -25,47 +51,31 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, mascotas: payload };
 
     case ORDER_BY_WEIGHT:
-      let weightResult = [];
-      if (payload === "ascendente") {
-        const ascendingWeight = [...state.mascotas].sort(
-          (a, b) => a.peso - b.peso
-        );
-        weightResult = [...ascendingWeight];
-      } else if (payload === "descendente") {
-        const descendingWeight = [...state.mascotas].sort(
-          (a, b) => b.peso - a.peso
-        );
-        weightResult = [...descendingWeight];
-      } else if (payload === "defecto") {
-        weightResult = [];
-      }
+      const sortedByWeight = [...state.mascotas].sort((a, b) =>
+        payload === "ascendente" ? a.peso - b.peso : b.peso - a.peso
+      );
       return {
         ...state,
-        mascotas: weightResult,
+        mascotas: sortedByWeight,
       };
 
     case ORDER_BY_AGE:
-      let ageResult = [];
-      if (payload === "ascendente") {
-        const ascendingAge = [...state.mascotas].sort(
-          (a, b) => a.edad - b.edad
-        );
-        ageResult = [...ascendingAge];
-      } else if (payload === "descendente") {
-        const descendingAge = [...state.mascotas].sort(
-          (a, b) => b.edad - a.edad
-        );
-        ageResult = [...descendingAge];
-      } else if (payload === "defecto") {
-        ageResult = [];
-      }
+      const sortedByAge = [...state.mascotas].sort((a, b) =>
+        payload === "ascendente" ? a.edad - b.edad : b.edad - a.edad
+      );
       return {
         ...state,
-        mascotas: ageResult,
+        mascotas: sortedByAge,
       };
 
+    // case FILL_DATABASE:
+    //   console.log(payload)
+    //   return{
+    //     ...state
+    //   }
     default:
       return { ...state };
   }
 };
+
 export default rootReducer;
