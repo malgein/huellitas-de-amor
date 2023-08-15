@@ -11,11 +11,26 @@ import Sorts from "../Sorts/Sorts";
 import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
 
+//FAVORITOS
+// import Favorites from "../Favorites/Favorites";
+
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
+
+  //FAVORITOS
+  // const Favs = useSelector((state) => state.favorites);
+  // const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   //Guardame el estado guardame cuantas Mascotas guardo por pagina, en este caso 8.
   const [petsPerPage, setPetsPerPage] = useState(8);
