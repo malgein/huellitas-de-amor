@@ -3,7 +3,6 @@ import axios from "axios";
 export const GET_PET_BY_ID = "GET_PET_BY_ID";
 export const GET_PET_BY_NAME = "GET_PET_BY_NAME";
 export const GET_MASCOTAS = "GET_MASCOTAS";
-
 export const APPLY_FILTERS = "APPLY_FILTERS";
 export const FILTERS_ERROR = "FILTERS_ERROR";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
@@ -11,26 +10,34 @@ export const ORDER_BY_AGE = "ORDER_BY_AGE";
 export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
 export const FETCHING_MASCOTAS_SUCCESS = "FETCHING_MASCOTAS_SUCCESS";
 export const FETCHING_MASCOTAS_ERROR = "FETCHING_MASCOTAS_ERROR";
-
+export const ADD_MASCOTA = "ADD_MASCOTA";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
+
 const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
 const ENDPOINTTYPES = "http://localhost:3001/types";  // Nota: No usaste este endpoint en las acciones presentadas
 const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
 // const ENDPOINTFILL = 'http://localhost:3001/fill';
 export const FILL_DATABASE = 'FILL_DATABASE'
 
-//const URL_BASE = "";
 
+
+
+
+const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
+
+// export const FILL_DATABASE = 'FILL_DATABASE'
+
+//const URL_BASE = "";
 
 const handleError = (dispatch, errorType, error) => {
   console.error(error);
   dispatch({ type: errorType, payload: error.message });
 };
 
-export const getPetById = () => async (dispatch) => {
+export const getPetById = (id) => async (dispatch) => {
   try {
-    const { data } = await axios.get(ENDPOINT + "/pets");
+    const { data } = await axios.get(ENDPOINT + `${id}`);
     dispatch({ type: GET_PET_BY_ID, payload: data });
   } catch (error) {
     handleError(dispatch, FETCHING_MASCOTAS_ERROR, error);
@@ -49,7 +56,7 @@ export const getMascotas = () => async (dispatch) => {
 
 export const getPetByName = (nombre) => async (dispatch) => {
   try {
-    const { data } = await axios.get(ENDPOINTNAME + nombre);
+    const { data } = await axios.get(ENDPOINTNAME2 + nombre);
     dispatch({ type: GET_PET_BY_NAME, payload: data });
   } catch (error) {
     handleError(dispatch, FETCHING_MASCOTAS_ERROR, error);
@@ -85,29 +92,16 @@ export const orderByAge = (order) => (dispatch) => {
   return dispatch({ type: ORDER_BY_AGE, payload: order });
 };
 
-
-//action que rellena la base de datos con mascotas x
-export const fillDatabase = () => {
-	return async function(dispatch){
-		let response = await axios.get(ENDPOINTFILL)
-		return dispatch({
-			type: FILL_DATABASE,
-			payload: response.data
-		})
-	}
-}
-
 export const addMascota = (Mascota) => {
-	return async () => {
-		try {
-			const response = await axios.post(`${ENDPOINT}/`, Mascota);
-			return {
-				type: ADD_MASCOTA,
-				payload: response,
-			};
-		} catch (error) {
-			alert(error.message);
-		}
-	};
+  return async () => {
+    try {
+      const response = await axios.post(`${ENDPOINT}/`, Mascota);
+      return {
+        type: ADD_MASCOTA,
+        payload: response,
+      };
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 };
-

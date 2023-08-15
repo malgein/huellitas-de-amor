@@ -40,7 +40,7 @@ if (especie) query.especie = especie;
 if (peso) query.peso = peso;
 
 
-const mascotas = await Mascota.findAll({ where: query },{include: [Especie]});
+const mascotas = await Mascota.findAll({ where: query });
 
 
 return mascotas;
