@@ -25,7 +25,7 @@ export const FILTERS_ERROR = "FILTERS_ERROR";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const ORDER_BY_AGE = "ORDER_BY_AGE";
 
-export const FILL_DATABASE = 'FILL_DATABASE'
+// export const FILL_DATABASE = 'FILL_DATABASE'
 
 //const URL_BASE = "";
 
@@ -92,13 +92,13 @@ export const orderByAge = (order) => {
   };
 };
 
-//action que rellena la base de datos con mascotas x
-export const fillDatabase = () => {
-	return async function(dispatch){
-		let response = await axios.get(ENDPOINTFILL)
-		return dispatch({
-			type: FILL_DATABASE,
-			payload: response.data
-		})
-	}
-}
+// //action que rellena la base de datos con mascotas x
+// export const fillDatabase = () => {
+// 	return async function(dispatch){
+// 		let response = await axios.get(ENDPOINTFILL)
+// 		return dispatch({
+// 			type: FILL_DATABASE,
+// 			payload: response.data
+// 		})
+// 	}
+// }

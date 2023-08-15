@@ -6,7 +6,7 @@ import {
   ORDER_BY_AGE,
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
-  FILL_DATABASE
+  // FILL_DATABASE
 } from "./actions";
 const initialState = {
   petDetail: [],
@@ -64,10 +64,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         mascotas: ageResult,
       };
 
-      case FILL_DATABASE:
-        return{
-          ...state
-        }
+      // case FILL_DATABASE:
+      //   console.log(payload)
+      //   return{
+      //     ...state
+      //   }
     default:
       return { ...state };
   }
