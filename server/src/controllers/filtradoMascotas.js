@@ -89,9 +89,10 @@ const filtradoMascotas = async (req) => {
             query.peso = getPesoRango(peso);
         }
 
-        const mascotas = await Mascota.findAll({ where: query, include: [Especie] });
-        
-        return mascotas;
+const mascotas = await Mascota.findAll({ where: query },{include: [Especie]});
+
+
+return mascotas;
 
     } catch (error) {
         return {status: 500, message: error.message};

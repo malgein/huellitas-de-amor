@@ -8,11 +8,14 @@ import {
   FETCHING_MASCOTAS,
   FETCHING_MASCOTAS_SUCCESS,
   FETCHING_MASCOTAS_ERROR,
+
   APPLY_FILTERS,
   FILTERS_ERROR,
 
   FILL_DATABASE,
   
+
+
 
 } from "./actions";
 
@@ -70,7 +73,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
     case GET_PET_BY_NAME:
 
-      return { ...state, petDetail: payload };
+      return { ...state, mascotas: payload };
 
 
       //Comente esta linea y escribe la que vinene despues de esta porque las mascotas que se buscaban por nombres es mas facil coordinar el paginado, los ordenamientos y los filtros jusntos si estan en el mismo estado en este caso mascotas
@@ -96,10 +99,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         mascotas: sortedByAge,
       };
 
-      case FILL_DATABASE:
-        return{
-          ...state
-        }
+      // case FILL_DATABASE:
+      //   console.log(payload)
+      //   return{
+      //     ...state
+      //   }
     default:
       return { ...state };
   }
