@@ -4,9 +4,9 @@ import {
   ORDER_BY_AGE,
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
-  FETCH_MASCOTAS_REQUEST,
-  FETCH_MASCOTAS_SUCCESS,
-  FETCH_MASCOTAS_FAILURE,
+  FETCHING_MASCOTAS,
+  FETCHING_MASCOTAS_SUCCESS,
+  FETCHING_MASCOTAS_ERROR,
   FILL_DATABASE,
   // ADD_MASCOTA,
 } from "./actions";
@@ -20,13 +20,13 @@ const initialState = {
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case FETCH_MASCOTAS_REQUEST:
+    case FETCHING_MASCOTAS:
       return {
         ...state,
         loading: true,
       };
 
-    case FETCH_MASCOTAS_SUCCESS:
+    case FETCHING_MASCOTAS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -34,7 +34,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         error: null,
       };
 
-    case FETCH_MASCOTAS_FAILURE:
+    case FETCHING_MASCOTAS_ERROR:
       return {
         ...state,
         loading: false,

@@ -38,6 +38,9 @@ const Nav = () => {
 
           {/* <button onClick={abrirModal}>Notificaciones</button> */}
         </div>
+        <div className={styles.agregar}>
+          <Link to="/agregar">Agrega tu Mascota</Link>
+        </div>
         <div className={styles.divlogin}>
           <Link className={styles.regis} to="/login">
             Registrarse
@@ -47,7 +50,11 @@ const Nav = () => {
           </Link>
         </div>
       </div>
-      <SearchBar />
+
+      <div className={styles.divsearchbar}>
+        <SearchBar />
+      </div>
+
       {modalabierto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
