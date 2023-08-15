@@ -6,7 +6,8 @@ import {
   ORDER_BY_AGE,
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
-  FILL_DATABASE
+  FILL_DATABASE,
+  ADD_MASCOTA
 } from "./actions";
 const initialState = {
   petDetail: [],
