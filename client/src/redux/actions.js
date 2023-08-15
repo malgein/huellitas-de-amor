@@ -16,6 +16,10 @@ export const ORDER_BY_RACE = "ORDER_BY_RACE";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const ORDER_BY_AGE = "ORDER_BY_AGE";
 
+//Favoritos
+// export const ADD_TO_FAVS = "ADD_TO_FAVS";
+// export const REMOVE_FROM_FAVS = "REMOVE_FROM_FAVS";
+
 //const URL_BASE = "";
 
 export const getPetById = () => {
@@ -77,3 +81,18 @@ export const orderByAge = (order) => {
     payload: order,
   };
 };
+
+//Para adicionar favoritos
+// export const addToFavs = (payload) => {
+//   return {
+//     type: ADD_TO_FAVS,
+//     payload,
+//   };
+// };
+
+// export const removeFromFavs = (payload) => {
+//   return {
+//     type: REMOVE_FROM_FAVS,
+//     payload,
+//   };
+// };

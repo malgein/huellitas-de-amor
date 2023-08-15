@@ -6,16 +6,18 @@ const getPets = require("../controllers/getPets");
 const getPetByName = require("../controllers/getPetsByName");
 const filtradoMascotas = require("../controllers/filtradoMascotas");
 
-router.get('/filtro', async (req, res) => {
+router.get("/filtro", async (req, res) => {
   try {
     const mascotasFiltradas = await filtradoMascotas(req);
-    if(mascotasFiltradas.status) {
-      return res.status(mascotasFiltradas.status).json({ message:mascotasFiltradas.message});
-    } 
-    return res.status(200).json(mascotasFiltradas);
-    } catch (error) {
-    res.status(error.status || 500).json({ message: error.message });
+    if (mascotasFiltradas.status) {
+      return res
+        .status(mascotasFiltradas.status)
+        .json({ message: mascotasFiltradas.message });
     }
+    return res.status(200).json(mascotasFiltradas);
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message });
+  }
 });
 
 router.get("/", async (req, res) => {
@@ -56,6 +58,5 @@ router.get("/:id", async (req, res) => {
     res.status(error.status || 500).json({ message: error.message });
   }
 });
-
 
 module.exports = router;

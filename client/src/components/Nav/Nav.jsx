@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
-
+// import { addToFavs, removeFromFavs } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 const Nav = () => {
   const location = useLocation();
+
   const [modalabierto, setModalAbierto] = useState(false);
 
   const abrirModal = () => {
@@ -44,11 +46,8 @@ const Nav = () => {
             Iniciar sesion
           </Link>
         </div>
-      </div> <SearchBar />
-
-
-
-
+      </div>
+      <SearchBar />
       {modalabierto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>

@@ -13,6 +13,7 @@ const initialState = {
   //hago la peticion GET a '/mascotas' (nacho)
   mascotas: [],
   error: null,
+  favorites: [],
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -63,6 +64,24 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         mascotas: ageResult,
       };
+
+    //Aqui favoritos
+    // case ADD_TO_FAVS:
+    //   const favorites = state.favorites || [];
+    //   if (!favorites.find((fav) => fav.id === payload)) {
+    //     return {
+    //       ...state,
+    //       favorites: [...favorites, { id: payload }],
+    //     };
+    //   } else {
+    //     return state;
+    //   }
+
+    // case REMOVE_FROM_FAVS:
+    //   return {
+    //     ...state,
+    //     favorites: state.favorites?.filter((el) => el.id !== payload),
+    //   };
 
     default:
       return { ...state };

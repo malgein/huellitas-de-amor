@@ -6,10 +6,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import PetCard from "../PetCard/PetCard";
 
+//FAVORITOS
+// import Favorites from "../Favorites/Favorites";
+
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+
+  //FAVORITOS
+  // const Favs = useSelector((state) => state.favorites);
+  // const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   //Guardame el estado guardame cuantas Mascotas guardo por pagina, en este caso 8.
   const [petsPerPage, setPetsPerPage] = useState(8);
@@ -64,6 +79,20 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      {/* <div>
+        <div onClick={handleOpenModal}>
+          ❤️
+          <span>{Favs?.length}</span>
+        </div>
+        {openModal && (
+          <Favorites
+            handleCloseModal={handleCloseModal}
+            openModal={openModal}
+          />
+        )}
+      </div> */}
+      {/* className={styles.custom_btn} */}
     </div>
     /*<div className="w-screen h-screen flex flex-row">
       {console.log(mascotas)}
