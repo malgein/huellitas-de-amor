@@ -24,7 +24,9 @@ const SearchBar = () => {
       <input
         type="text"
         className={styles.searchInput}
+
         placeholder="Buscar nombre de..."
+
         value={nombre}
         onChange={handleInputChange}
       />

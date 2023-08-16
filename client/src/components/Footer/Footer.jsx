@@ -23,9 +23,9 @@ const Footer = () => {
       <div className={styles.footerredes}>
         <div className={styles.copy}>©2023, All right reserved.</div>
         <div className={styles.redes}>
-          <i class="fa-brands fa-square-facebook"></i>
-          <i class="fa-brands fa-square-instagram"></i>
-          <i class="fa-brands fa-square-x-twitter"></i>
+          <i className="fab fa-facebook-square"></i>
+          <i className="fab fa-instagram-square"></i>
+          <i className="fab fa-twitter-square"></i>
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import { Button } from "@nextui-org/react";
 const Nav = () => {
   const location = useLocation();
 
+
   const mostarSearchBar = location.pathname === "/home";
 
   const [modalabierto, setModalAbierto] = useState(false);
@@ -66,6 +67,7 @@ const Nav = () => {
           </div>
         </div>
       </div>
+
 
       {modalabierto && (
         <div className={styles.modal}>
