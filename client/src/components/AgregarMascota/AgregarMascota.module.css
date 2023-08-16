@@ -2,7 +2,8 @@
  display: flex;
   justify-content: space-evenly;
 }
-.select {
+
+.selectRed{
  
   background-color: azure;
   width: 200px;
@@ -10,7 +11,19 @@ height: 55px;
 top: 328px;
 left: 503px;
 border-radius: 12px;
-margin-bottom: 15px;;
+margin-bottom: 20px;
+border-color: red;;
+}
+.selectGreen{
+ 
+  background-color: azure;
+  width: 200px;
+height: 55px;
+top: 328px;
+left: 503px;
+border-radius: 12px;
+margin-bottom: 20px;
+border-color: green;;
 }
 
 .formContainer {
@@ -37,7 +50,7 @@ height: 55px;
 top: 328px;
 left: 503px;
 border-radius: 12px;
-margin-bottom: 15px;;
+margin-bottom: 20px;;
 
 }
 .FielTextarea{
@@ -47,7 +60,7 @@ height: 110px;
 top: 328px;
 left: 503px;
 border-radius: 12px;
-margin-bottom: 15px;;
+margin-bottom: 20px;;
 
 }
 .form{

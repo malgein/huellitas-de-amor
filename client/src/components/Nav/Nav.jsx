@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Nav = () => {
   const location = useLocation();
-
+  const mostarSearchBar = location.pathname === "/home";
   const [modalabierto, setModalAbierto] = useState(false);
 
   const abrirModal = () => {
@@ -53,9 +53,15 @@ const Nav = () => {
         </div>
       </div>
 
-      <div className={styles.divsearchbar}>
+      {/* <div className={styles.divsearchbar}>
         <SearchBar />
-      </div>
+      </div> */}
+
+      {mostarSearchBar && (
+        <div className={styles.divsearchbar}>
+          <SearchBar />
+        </div>
+      )}
 
       {modalabierto && (
         <div className={styles.modal}>

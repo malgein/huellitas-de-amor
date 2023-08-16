@@ -22,7 +22,7 @@ const validationSchema = Yup.object().shape({
 		.integer("La edad debe ser un número positivo"),
 	tamano: Yup.string().required("Campo requerido"),
 	peso: Yup.number()
-		.min(0, "El peso debe ser mayor o igual a 0")
+		.min(1, "El peso debe ser mayor o igual a 0")
 		.required("Campo requerido"),
 	descripcion: Yup.string()
 		.min(3, "Debe poseer mínimo 3 caracteres ")
@@ -59,66 +59,19 @@ const AgregarMascota = () => {
 
 	};
 	const tamañoOptions = ["Pequeño", "Mediano", "Grande"];
-
+  const getValidationState = (fieldName, errors) => {
+		return fieldName && fieldName in errors ? "danger" : "success";
+	};
 	return (
 		<div className={styles.formContainer}>
 			<Formik
 				initialValues={initialValues}
 				validationSchema={validationSchema}
 				onSubmit={handleSubmit}>
-				{({ isSubmitting, isValid }) => (
+				{({ isSubmitting, errors }) => (
 					<div className={styles.form}>
 						<Form>
 							<div className={styles.tittle}>
-								{/* <svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='287'
-									height='70'
-									viewBox='0 0 287 70'
-									fill='none'>
-									<g filter='url(#filter0_d_82_220)'>
-										<path
-											d='M4 10.1191C4 4.5963 8.47716 0.119144 14 0.119149L153 0.119267L273 0.11915C278.523 0.119145 283 4.5963 283 10.1192V51.9999C283 57.5227 278.523 61.9999 273 61.9999H14C8.47715 61.9999 4 57.5227 4 51.9999V10.1191Z'
-											fill='#FFEE93'
-										/>
-									</g>
-									<defs>
-										<filter
-											id='filter0_d_82_220'
-											x='0'
-											y='0.119141'
-											width='287'
-											height='69.8806'
-											filterUnits='userSpaceOnUse'
-											color-interpolation-filters='sRGB'>
-											<feFlood flood-opacity='0' result='BackgroundImageFix' />
-											<feColorMatrix
-												in='SourceAlpha'
-												type='matrix'
-												values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-												result='hardAlpha'
-											/>
-											<feOffset dy='4' />
-											<feGaussianBlur stdDeviation='2' />
-											<feComposite in2='hardAlpha' operator='out' />
-											<feColorMatrix
-												type='matrix'
-												values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'
-											/>
-											<feBlend
-												mode='normal'
-												in2='BackgroundImageFix'
-												result='effect1_dropShadow_82_220'
-											/>
-											<feBlend
-												mode='normal'
-												in='SourceGraphic'
-												in2='effect1_dropShadow_82_220'
-												result='shape'
-											/>
-										</filter>
-									</defs>
-								</svg> */}
 								<h1>Agrega una nueva mascota</h1>
 							</div>
 							<div className={styles.Field}>
@@ -132,10 +85,9 @@ const AgregarMascota = () => {
 									name='nombre'
 									errorMessage={<ErrorMessage name='nombre' component='div' />}
 									validationState={validationSchema}
-									// color={
-									// 	isValid ? "danger" : "success"
-									// }
+									color={errors.nombre ? "danger" : "success"}
 								/>
+								{console.log(errors)}
 								{/* <ErrorMessage name='nombre' component='span' /> */}
 								{/* {console.log(validationSchema.isValidSync("nombre"))} */}
 							</div>
@@ -150,11 +102,7 @@ const AgregarMascota = () => {
 									name='especie'
 									errorMessage={<ErrorMessage name='especie' component='div' />}
 									validationState={validationSchema}
-									// color={
-									// 	!validationSchema.isValidSync("especie")
-									// 		? "danger"
-									// 		: "success"
-									// }
+									color={errors.especie ? "danger" : "success"}
 								/>
 								{/* <ErrorMessage name='especie' component='div' /> */}
 							</div>
@@ -169,9 +117,7 @@ const AgregarMascota = () => {
 									name='edad'
 									errorMessage={<ErrorMessage name='edad' component='div' />}
 									validationState={validationSchema}
-									// color={
-									// 	!validationSchema.isValidSync("edad") ? "danger" : "success"
-									// }
+									color={errors.edad ? "danger" : "success"}
 								/>
 							</div>
 
@@ -186,9 +132,7 @@ const AgregarMascota = () => {
 									name='peso'
 									errorMessage={<ErrorMessage name='peso' component='div' />}
 									validationState={validationSchema}
-									// color={
-									// 	!validationSchema.isValidSync("peso") ? "danger" : "success"
-									// }
+									color={errors.peso ? "danger" : "success"}
 								/>
 							</div>
 							<div className={styles.FielTextarea}>
@@ -203,11 +147,7 @@ const AgregarMascota = () => {
 										<ErrorMessage name='descripcion' component='div' />
 									}
 									validationState={validationSchema}
-									// color={
-									// 	!validationSchema.isValidSync("descripcion")
-									// 		? "danger"
-									// 		: "success"
-									// }
+									color={errors.descripcion ? "danger" : "success"}
 								/>
 							</div>
 							<div className={styles.Field}>
@@ -219,10 +159,8 @@ const AgregarMascota = () => {
 									id='foto'
 									name='foto'
 									errorMessage={<ErrorMessage name='foto' component='div' />}
-									validationState={isValid}
-									// color={
-									// 	!validationSchema.isValidSync("foto") ? "danger" : "success"
-									// }
+									// validationState={}
+									color={errors.foto ? "danger" : "success"}
 								/>
 							</div>
 							<div className={styles.Field}>
@@ -235,13 +173,14 @@ const AgregarMascota = () => {
 									name='raza'
 									errorMessage={<ErrorMessage name='raza' component='div' />}
 									validationState={validationSchema}
-									// color={
-									// 	!validationSchema.isValidSync("raza") ? "danger" : "success"
-									// }
+									color={errors.raza ? "danger" : "success"}
 								/>
 							</div>
 							<div className={styles.selectContainer}>
-								<div className={styles.select}>
+								<div
+									className={
+										errors.tamano ? styles.selectRed : styles.selectGreen
+									}>
 									<div class='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
 										<label
 											class='block font-medium  dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none
@@ -277,7 +216,10 @@ const AgregarMascota = () => {
 										component='div'
 									/>
 								</div>
-								<div className={styles.select}>
+								<div
+									className={
+										errors.sexo ? styles.selectRed : styles.selectGreen
+									}>
 									<div class='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
 										<label
 											class='block font-medium 
