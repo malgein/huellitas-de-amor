@@ -53,6 +53,7 @@ const Nav = () => {
         </div>
       </div>
 
+
       {/* <div className={styles.divsearchbar}>
         <SearchBar />
       </div> */}
