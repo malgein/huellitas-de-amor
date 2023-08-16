@@ -26,7 +26,9 @@ function App() {
 				<Route path={PathRoutes.DETAIL} element={<Detail />} />
 				<Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
 			</Routes>
-			<Footer />
+			<div>
+				{location.pathname !=='/home' && <Footer />}
+			</div>
 		</>
 	);
 }
