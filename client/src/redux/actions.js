@@ -63,20 +63,26 @@ export const getPetByName = (nombre) => async (dispatch) => {
   }
 };
 //NAcho
-export const applyFilters = (filters) => async (dispatch) => {
-  try {
-    console.log("Endpoint:", ENDPOINT_FILTER);
-    console.log("Filters:", filters);
-    const response = await axios.get(ENDPOINT_FILTER, { params: filters });
-    console.log("Response from server:", response.data);
-    dispatch({ type: APPLY_FILTERS, payload: response.data });
-  } catch (error) {
-    console.error("Error when applying filters:", error);
-
-
-    handleError(dispatch, FILTERS_ERROR, error);
-  }
+// actions.js
+// actions.js
+export const applyFilters = (filters) => {
+  return (dispatch, getState) => {
+    // const BACKEND_URL = "http://localhost:3001";
+    axios
+			.get(`${ENDPOINT_FILTER}`, { params: filters })
+			.then((response) => {
+				dispatch({
+					type: APPLY_FILTERS,
+					payload: response.data,
+				});
+			})
+			.catch((error) => {
+				console.error(error);
+				// Puedes despachar otro tipo de acción aquí si quieres manejar errores.
+			});
+  };
 };
+
 
 export const orderByWeight = (order) => (dispatch) => {
   if (order === "defecto") {
