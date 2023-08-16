@@ -131,13 +131,34 @@ import Sorts from "../Sorts/Sorts";
 import FilterMascotas from "../FilterButtons/FilterButtons";
 import Padinated from "../Paginated/Paginated";
 
+//FAVORITOS
+// import Favorites from "../Favorites/Favorites";
+
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [petsPerPage] = useState(8); // Puesto constante ya que nunca lo modificas
 
+
   // Cálculos de paginación
+
+  //FAVORITOS
+  // const Favs = useSelector((state) => state.favorites);
+  // const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  //Guardame el estado guardame cuantas Mascotas guardo por pagina, en este caso 8.
+  //const [petsPerPage, setPetsPerPage] = useState(8);
+  //El índice de la ultima Mascota por página.
+
   const indexOfLastPet = currentPage * petsPerPage;
   const indexOfFirstPet = indexOfLastPet - petsPerPage;
   const currentPet = Array.isArray(mascotas) ? mascotas.slice(indexOfFirstPet, indexOfLastPet) : [mascotas];
