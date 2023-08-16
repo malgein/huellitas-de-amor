@@ -18,16 +18,18 @@ function App() {
   return (
     <>
       {location.pathname !== "/" && <Nav />}
-      <Routes>
+    <Routes>
         <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
         <Route path={PathRoutes.HOME} element={<Home />} />
         <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
-        <Route path={PathRoutes.PERFIL} element={<Perfil />} />
-        <Route path={PathRoutes.DETAIL} element={<Detail />} />
-        <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-      </Routes>
-      {/* <Footer /> */}
-    </>
+		<Route path={PathRoutes.PERFIL} element={<Perfil />} />
+		<Route path={PathRoutes.DETAIL} element={<Detail />} />
+		<Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
+	</Routes>
+			<div>
+				{location.pathname !=='/home' && <Footer />}
+			</div>
+		</>
   );
 }
 
