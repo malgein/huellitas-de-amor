@@ -15,6 +15,7 @@ export const ADD_MASCOTA = "ADD_MASCOTA";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 
+
 const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
 const ENDPOINTTYPES = "http://localhost:3001/types";  // Nota: No usaste este endpoint en las acciones presentadas
 const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
