@@ -54,7 +54,7 @@ const Nav = () => {
       </div>
 
       <div className={styles.divsearchbar}>
-        <SearchBar />
+        {location.pathname === "/home" && <SearchBar />}
       </div>
 
       {modalabierto && (
