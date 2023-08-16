@@ -1,10 +1,10 @@
 const { Mascota } = require("../db");
-const {Op} = require("sequelize");
+const { Op } = require("sequelize");
 
 const getPetsByName = async (nombre) => {
   try {
     let nombreMinuscula = nombre.toUpperCase();
-    if (nombreMinuscula)   {
+    if (nombreMinuscula) {
       console.log(nombre);
       // const petName = await Mascota.findOne({ where: 
       //   { nombre: { [Op.iLike]: `%${nombre}%` } } });
@@ -23,9 +23,8 @@ const getPetsByName = async (nombre) => {
     return mascotas;
     // return []
     }
-    
   } catch (error) {
-    throw { stats: error?.status, message: error?.message };
+    throw { status: error?.status, message: error?.message };
   }
 };
 
