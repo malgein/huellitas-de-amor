@@ -78,7 +78,7 @@ export const applyFilters = (filters) => {
       })
       .catch((error) => {
         console.error(error);
-        // Puedes despachar otro tipo de acción aquí si quieres manejar errores.
+        
       });
   };
 };
