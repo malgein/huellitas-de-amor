@@ -11,17 +11,17 @@ import { Tabs, Tab } from "@nextui-org/react";
 const Sorts = () => {
   const dispatch = useDispatch();
   const mascotas = useSelector((state) => state.pets);
-  const [selectedTab, setSelectedTab] = useState("defecto"); // Estado para mantener el valor de la pestaña seleccionada
+  const [selectedTab, setSelectedTab] = useState("defecto");
 
   const handleWeight = (order) => {
     dispatch(orderByWeight(order));
-    setSelectedTab(order); // Actualiza la pestaña seleccionada
+    setSelectedTab(order);
     console.log(mascotas);
   };
 
   const handleAge = (order) => {
     dispatch(orderByAge(order));
-    setSelectedTab(order); // Actualiza la pestaña seleccionada
+    setSelectedTab(order);
     console.log(mascotas);
   };
 
@@ -56,7 +56,6 @@ const Sorts = () => {
           <img src={edad} className="w-6 h-6 mr-2" />
           <Tabs aria-label="Options" color="primary" variant="bordered">
             <Tab
-              value="defecto"
               key="defecto"
               selected={selectedTab === "defecto"}
               title={
@@ -69,7 +68,6 @@ const Sorts = () => {
               }
             />
             <Tab
-              value="ascendente"
               key="ascendente"
               selected={selectedTab === "ascendente"}
               title={
@@ -84,7 +82,6 @@ const Sorts = () => {
               }
             />
             <Tab
-              value="descendente"
               key="descendente"
               selected={selectedTab === "descendente"}
               title={
