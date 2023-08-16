@@ -23,7 +23,7 @@ const SearchBar = () => {
     <form className={styles.searchForm} onSubmit={handleSubmit}>
       <input type="text"
         className={styles.searchInput}
-        placeholder="Buscar raza de perro..."
+        placeholder="Buscar nombre de perro..."
         value={nombre}
         onChange={handleInputChange}
       />
