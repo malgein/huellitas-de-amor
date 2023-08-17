@@ -5,13 +5,16 @@ import {
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
 
+
   FETCHING_MASCOTAS,
   FETCHING_MASCOTAS_SUCCESS,
   FETCHING_MASCOTAS_ERROR,
 
-  FILL_DATABASE,
-  //ADD_MASCOTA
+  APPLY_FILTERS,
+  FILTERS_ERROR,
 
+  FILL_DATABASE,
+  
 } from "./actions";
 
 const initialState = {
@@ -19,23 +22,39 @@ const initialState = {
   loading: false,
   mascotas: [],
   error: null,
+  mascotasBackUp: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-
     case FETCHING_MASCOTAS:
       return {
         ...state,
-        loading: true
+        loading: true,
+
+        mascotas: payload,
+        mascotasBackUp: payload
+
+
       };
+      case APPLY_FILTERS:
+      return {
+        ...state,
+        mascotas: payload,
+      };
+      
+      case FILTERS_ERROR:
+      return {
+        ...state,
+        error: payload
+      }
 
     case FETCHING_MASCOTAS_SUCCESS:
       return {
         ...state,
         loading: false,
         mascotas: payload,
-        error: null
+        error: null,
       };
 
     case FETCHING_MASCOTAS_ERROR:
@@ -43,7 +62,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         mascotas: [],
-        error: payload
+        error: payload,
       };
 
     case GET_MASCOTAS:
@@ -54,16 +73,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
     case GET_PET_BY_NAME:
 
-      return { ...state, petDetail: payload };
+
+      return { ...state, mascotas: payload };
 
 
       //Comente esta linea y escribe la que vinene despues de esta porque las mascotas que se buscaban por nombres es mas facil coordinar el paginado, los ordenamientos y los filtros jusntos si estan en el mismo estado en este caso mascotas
       // return { ...state, petDetail: payload };
       return { ...state, mascotas: payload };
-//En este caso se ejecuta orderByWeight y se modifica el orden de las mascotas por peso ascendente o descendentemente dependiendo de lo que se le pase al payload
+    //En este caso se ejecuta orderByWeight y se modifica el orden de las mascotas por peso ascendente o descendentemente dependiendo de lo que se le pase al payload
 
     case ORDER_BY_WEIGHT:
-      const sortedByWeight = [...state.mascotas].sort((a, b) => 
+      const sortedByWeight = [...state.mascotas].sort((a, b) =>
         payload === "ascendente" ? a.peso - b.peso : b.peso - a.peso
       );
       return {
@@ -72,7 +92,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case ORDER_BY_AGE:
-      const sortedByAge = [...state.mascotas].sort((a, b) => 
+      const sortedByAge = [...state.mascotas].sort((a, b) =>
         payload === "ascendente" ? a.edad - b.edad : b.edad - a.edad
       );
       return {
@@ -80,15 +100,16 @@ const rootReducer = (state = initialState, { type, payload }) => {
         mascotas: sortedByAge,
       };
 
-      case FILL_DATABASE:
-        return{
-          ...state
-        }
+
+      // case FILL_DATABASE:
+      //   console.log(payload)
+      //   return{
+      //     ...state
+      //   }
+
     default:
       return { ...state };
   }
 };
 
 export default rootReducer;
-
-

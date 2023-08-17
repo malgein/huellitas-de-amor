@@ -7,6 +7,8 @@ import { getPetById } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
+import iconMacho from "../../assets/macho.png";
+import iconHembra from "../../assets/hembra.png";
 
 export default function Detail() {
   const { id } = useParams();
@@ -29,7 +31,7 @@ export default function Detail() {
         <div className="relative">
           <img
             className="rounded-t-lg w-full h-auto"
-            src="https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg"
+            src={mascota.foto}
             alt="Detalle del perro"
           />
           <Badge
@@ -44,9 +46,10 @@ export default function Detail() {
             <h1 className="text-3xl font-semibold pl-10 mb-2">
               {mascota.nombre}{" "}
             </h1>
-
-            <Tooltip content="Hembra">
-              <Button className="m-1 h-10 w-10"></Button>
+            <Tooltip content={mascota.sexo}>
+              <Button className="m-1 h-10 w-10 font-extrabold text-xl	">
+                {mascota.sexo == "macho" ? "♂️" : "♀️"}
+              </Button>
             </Tooltip>
           </div>
 
@@ -54,34 +57,35 @@ export default function Detail() {
             <div className="w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center">
               <div>
                 <h2 className="text-lg font-semibold mb-1">Tamaño</h2>
-                <p className="text-gray-500">Mediano</p>
+                <p className="text-gray-500">{mascota.tamano}</p>
               </div>
             </div>
             <div className="w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center">
               <div>
                 <h2 className="text-lg font-semibold mb-1">Peso</h2>
-                <p className="text-gray-500">10 kg</p>
+                <p className="text-gray-500">{`${mascota.peso} kg`}</p>
               </div>
             </div>
             <div className="w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center">
               <div>
-                <h2 className="text-lg font-semibold mb-1">Especie</h2>
-                <p className="text-gray-500">Canino</p>
+                <h2 className="text-lg font-semibold mb-1">Raza</h2>
+                <p className="text-gray-500">{mascota.raza}</p>
               </div>
             </div>
             <div className="w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center">
               <div>
                 <h2 className="text-lg font-semibold mb-1">Edad</h2>
-                <p className="text-gray-500">3 años</p>
+                <p className="text-gray-500">
+                  {mascota.edad >= 2
+                    ? `${mascota.edad} años`
+                    : `${mascota.edad} año`}
+                </p>
               </div>
             </div>
           </div>
           <p className="text-black font-semibold text-xl pl-10 pb-2">Detalle</p>
           <p className="text-gray-500 text-base pr-10 pl-10 text-justify">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-            penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-            Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+            {mascota.descripcion}
           </p>
         </div>
         <div className="flex justify-between pt-4">
@@ -97,14 +101,16 @@ export default function Detail() {
             <div className="pl-4">
               <p className="text-gray-500">Posteado por:</p>
               <p className="text-black font-semibold">
-                Casa de Adopcion Pokeamigos
+                {mascota.casaDeAdopcionId === null
+                  ? "Casa de Adopcion Pokeamigos"
+                  : mascota.casaDeAdopcionId}
               </p>
             </div>
           </div>
-          <div className="px-4 py-2 bg-white pb-8 flex items-center">
+          <div className="px-14 py-2 bg-white pb-8 flex items-center">
             <Button
               radius="full"
-              className="bg-blue-500 text-white hover:bg-blue-600"
+              className="bg-blue-500 text-white hover:bg-blue-600 "
               onPress={handleConfetti}
             >
               Adóptame

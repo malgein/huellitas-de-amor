@@ -7,12 +7,18 @@
   flex-direction: column;
   margin-bottom: 0;
 
+  /* position: absolute;
+  top: 1800px;
+  left: 0; */
+  
+
 
   /* align-content: center; */
   /* justify-content: center; */
-
-
 }
+
+
+
 
 .footerinfo {
   /* border: 1px solid green; */
@@ -74,6 +80,7 @@
   /* border: 1px solid red; */
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
+  gap: 10px;
   margin-right: 50px;
 }

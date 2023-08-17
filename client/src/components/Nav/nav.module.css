@@ -174,3 +174,26 @@
   cursor: pointer;
   width: 100px;
 }
+
+.agregar {
+  margin-right: 50px;
+  margin-left: 0px;
+  color: #124c5f;
+  font-weight: bold;
+  /* border: 1px solid #124c5f; */
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  /* width: 100px; */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.agregar:hover {
+  /* background-color: #333333; */
+  color: #000;
+}
+
+.fuent {
+  font-weight: bold;
+  color: #f9f9f9;
+}
