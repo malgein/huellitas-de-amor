@@ -22,7 +22,7 @@ const SearchBar = () => {
       <input
         type="text"
         className={styles.searchInput}
-        placeholder="Buscar raza de perro..."
+        placeholder="Buscar nombre de perro..."
         value={nombre}
         onChange={handleInputChange}
       />

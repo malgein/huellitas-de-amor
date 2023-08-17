@@ -22,7 +22,11 @@ const Footer = () => {
 
       <div className={styles.footerredes}>
         <div className={styles.copy}>©2023, All right reserved.</div>
-        <div className={styles.redes}>Redes sociales</div>
+        <div className={styles.redes}>
+          <i className="fab fa-facebook-square"></i>
+          <i className="fab fa-instagram-square"></i>
+          <i className="fab fa-twitter-square"></i>
+        </div>
       </div>
     </div>
   );

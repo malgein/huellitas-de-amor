@@ -1,3 +1,4 @@
+
 //*Archivo creado para simular data con la que se trabajara en la home
 
 const allPets = [
@@ -29,5 +30,4 @@ const allPets = [
    ]
    
     module.exports = allPets
-   
    

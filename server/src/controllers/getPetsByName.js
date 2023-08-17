@@ -15,7 +15,7 @@ const getPetsByName = async (nombre) => {
       return mascotas;
     }
   } catch (error) {
-    throw { stats: error?.status, message: error?.message };
+    throw { status: error?.status, message: error?.message };
   }
 };
 

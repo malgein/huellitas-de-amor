@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+// import { addToFavs, removeFromFavs } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 const Nav = () => {
   const location = useLocation();
+  const mostarSearchBar = location.pathname === "/home";
   const [modalabierto, setModalAbierto] = useState(false);
 
   const abrirModal = () => {
@@ -32,9 +35,14 @@ const Nav = () => {
           <Link to="/notificaciones" onClick={abrirModal}>
             Notificaciones
           </Link>
-
+          <Link className={styles.agregar} to="/agregar">
+            Agrega tu Mascota
+          </Link>
           {/* <button onClick={abrirModal}>Notificaciones</button> */}
         </div>
+        {/* <div className={styles.agregar}>
+          <Link to="/agregar">Agrega tu Mascota</Link>
+        </div> */}
         <div className={styles.divlogin}>
           <Link className={styles.regis} to="/login">
             Registrarse
@@ -43,8 +51,18 @@ const Nav = () => {
             Iniciar sesion
           </Link>
         </div>
-      </div>{" "}
-      <SearchBar />
+      </div>
+
+      {/* <div className={styles.divsearchbar}>
+        <SearchBar />
+      </div> */}
+
+      {mostarSearchBar && (
+        <div className={styles.divsearchbar}>
+          <SearchBar />
+        </div>
+      )}
+
       {modalabierto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
