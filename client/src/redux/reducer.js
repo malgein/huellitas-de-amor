@@ -23,6 +23,8 @@ const initialState = {
   mascotas: [],
   error: null,
   mascotasBackUp: [],
+  //Estado que representa la cesta de adopcion
+  bascket: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {

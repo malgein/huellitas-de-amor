@@ -12,6 +12,8 @@ import FilterMascotas from "./components/FilterButtons/FilterButtons";
 import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
 import Footer from "./components/Footer/Footer";
+//Componente de cesta de adopcion
+import Bascket from "./components/Bascket/Bascket";
 
 function App() {
   const location = useLocation();
@@ -19,12 +21,14 @@ function App() {
     <>
       {location.pathname !== "/" && <Nav />}
     <Routes>
-        <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
-        <Route path={PathRoutes.HOME} element={<Home />} />
-        <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
-		<Route path={PathRoutes.PERFIL} element={<Perfil />} />
-		<Route path={PathRoutes.DETAIL} element={<Detail />} />
-		<Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
+    	<Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
+      <Route path={PathRoutes.HOME} element={<Home />} />
+      <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
+			<Route path={PathRoutes.PERFIL} element={<Perfil />} />
+			<Route path={PathRoutes.DETAIL} element={<Detail />} />
+			<Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
+			//Cesta de adopcion
+			<Route path={PathRoutes.BASCKET} element={<Bascket />}></Route>
 	</Routes>
 			<div>
 				{location.pathname !=='/home' && <Footer />}

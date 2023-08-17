@@ -3,10 +3,16 @@ import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  DropdownItem,
+	Button 
+} from "@nextui-org/react";
+import {MdOutlinePets} from 'react-icons/md'
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
-import { useSelector, useDispatch } from "react-redux";
-
-import { Button } from "@nextui-org/react";
 
 const Nav = () => {
   const location = useLocation();
@@ -59,13 +65,23 @@ const Nav = () => {
               </div>
             )}
           </div>
-
           <div className={styles.fuent}>
             <Link className={styles.agregar} to="/agregar">
               <Button color="success">Crear Nueva Mascota</Button>
             </Link>
           </div>
         </div>
+				<Dropdown>
+      		<DropdownTrigger>
+						<Button color='secondary' variant='shadow'>
+          		Cesta de Adopcion<MdOutlinePets />
+							{10}
+						</Button>
+      		</DropdownTrigger>
+      		<DropdownMenu aria-label="Static Actions">
+						<DropdownItem key="empty">Tu esta esta vacia</DropdownItem>
+     		 	</DropdownMenu>
+   		 	</Dropdown>
       </div>
 
 

@@ -150,6 +150,7 @@ export default function Home() {
     setCurrentPage(pageNumber);
   };
 
+  const bascket = useSelector((state) => state.bascket)
   // Cálculos de paginación
 
   //FAVORITOS
