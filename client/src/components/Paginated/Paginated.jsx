@@ -1,4 +1,6 @@
 import React from "react";
+import {Pagination} from "@nextui-org/react";
+
 
 //Hago destructuring de las variables que necesito
 export default function Paginated ({petsPerPage, mascotas, paginado}){
