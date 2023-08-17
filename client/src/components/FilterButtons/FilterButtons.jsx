@@ -122,8 +122,8 @@ const FilterMascotas = () => {
 
   const options = {
     sexo: ["Macho", "Hembra"],
-    tamano: ["Chico", "Mediano", "Grande"],
-    especie: ["Perro", "Gato"],
+    tamano: ["Pequeño", "Mediano", "Grande"],
+    // especie: ['Perro', 'Gato'],
     peso: ["Ligero", "Mediano", "Pesado"],
   };
 

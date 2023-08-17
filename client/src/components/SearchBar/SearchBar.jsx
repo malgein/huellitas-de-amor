@@ -5,7 +5,8 @@ import { getPetByName } from "../../redux/actions";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const masctoas = useSelector((state) => state.mascotas);
+
+  const mascotas = useSelector((state) => state.mascotas);
   const [nombre, setNombre] = useState("");
 
   const handleInputChange = (event) => {
@@ -15,6 +16,7 @@ const SearchBar = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(getPetByName(nombre));
+    setNombre("");
   };
 
   return (
@@ -22,7 +24,7 @@ const SearchBar = () => {
       <input
         type="text"
         className={styles.searchInput}
-        placeholder="Buscar nombre de perro..."
+        placeholder="Buscar nombre de..."
         value={nombre}
         onChange={handleInputChange}
       />

@@ -8,6 +8,7 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
         <Link to={PathRoutes.DETAIL.replace(":id", id)}>
           <p className="text-tiny uppercase font-bold">{nombre}</p>
         </Link>
+
         <small className="text-default-500">{edad} años</small>
         <small className="text-default-500">{peso} kg</small>
         <h4 className="font-bold text-large">{sexo}</h4>
