@@ -44,16 +44,7 @@
 	gap: 20px;
 	margin: auto;
 }
-.Field {
-	background-color: azure;
-	width: 420px;
-	height: 55px;
-	top: 328px;
-	left: 503px;
-	border-radius: 12px;
-	margin-bottom: 5px;
-	margin-top: 20px;
-}
+
 .FielTextarea {
 	background-color: azure;
 	width: 420px;
