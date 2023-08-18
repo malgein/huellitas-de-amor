@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       edad: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       sexo: {
