@@ -8,7 +8,7 @@ const filtradoMascotas = require("../controllers/filtradoMascotas");
 const getPets = require("../controllers/getPets");
 const postCasaAdopcion = require("./routesCasaDeAdopcion");
 const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
-const fillPets = require('../controllers/fillPets')
+const fillPets = require('../utils/fillPets')
 
 router.get('/fill', fillPets)
 router.use("/mascotas", mascotas);
