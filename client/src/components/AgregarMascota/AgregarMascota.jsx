@@ -26,10 +26,10 @@ const validationSchema = Yup.object().shape({
 		.required("Campo requerido"),
 	descripcion: Yup.string()
 		.min(3, "Debe poseer mínimo 3 caracteres ")
-		.max(250, "Debe poseer máximo 250 caracteres")
+		
 		.required("Campo requerido"),
 	foto: Yup.string()
-		.max(250, "Debe poseer máximo 250 caracteres")
+		
 		.url("Debe ser una URL válida")
 		.required("Campo requerido"),
 	raza: Yup.string()

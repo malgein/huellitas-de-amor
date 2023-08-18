@@ -47,7 +47,7 @@ export const getPetById = (id) => async (dispatch) => {
 
 export const getMascotas = () => async (dispatch) => {
   try {
-    dispatch({ type: FETCHING_MASCOTAS });
+    // dispatch({ type: FETCHING_MASCOTAS });
     const response = await axios.get(ENDPOINT);
     dispatch({ type: FETCHING_MASCOTAS_SUCCESS, payload: response.data });
   } catch (error) {
