@@ -7,6 +7,7 @@ import { getPetById } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
+import { Link } from "react-router-dom";
 import iconMacho from "../../assets/macho.png";
 import iconHembra from "../../assets/hembra.png";
 
@@ -19,6 +20,7 @@ export default function Detail() {
 
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     dispatch(getPetById(id));
   }, [dispatch, id]);
@@ -116,6 +118,16 @@ export default function Detail() {
               Adóptame
             </Button>
           </div>
+          <Link>
+          <Button
+              radius="full"
+              className="bg-blue-500 text-white hover:bg-blue-600 "
+              
+              >
+              Volver
+            </Button>
+              </Link>
+          
         </div>
       </div>
     </div>

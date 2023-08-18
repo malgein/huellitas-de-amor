@@ -93,7 +93,7 @@ import { applyFilters } from "../../redux/actions"; // Asegúrate de que la ruta
 
 const FilterMascotas = () => {
   const dispatch = useDispatch();
-  const mascotas = useSelector((state) => state.mascotas);
+ // const mascotas = useSelector((state) => state.mascotas);
 
   const [filters, setFilters] = useState({
     edad: "",
@@ -105,6 +105,8 @@ const FilterMascotas = () => {
   });
   const [showDropdown, setShowDropdown] = useState(null);
 
+  
+
   const handleChange = (name, value) => {
     setFilters({
       ...filters,
@@ -112,10 +114,12 @@ const FilterMascotas = () => {
     });
   };
 
+  
   const handleApplyFilters = () => {
     dispatch(applyFilters(filters));
-  };
 
+  };
+  
   const toggleDropdown = (name) => {
     setShowDropdown(showDropdown === name ? null : name);
   };
@@ -165,7 +169,7 @@ const FilterMascotas = () => {
           onClick={handleApplyFilters}
         >
           Aplicar Filtros
-        </button>
+        </button>   
       </div>
     </div>
   );

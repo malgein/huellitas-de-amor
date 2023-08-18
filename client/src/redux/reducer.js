@@ -5,23 +5,17 @@ import {
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
 
-
   FETCHING_MASCOTAS,
-  FETCHING_MASCOTAS_SUCCESS,
-  FETCHING_MASCOTAS_ERROR,
-
+ 
   APPLY_FILTERS,
   FILTERS_ERROR,
 
-  FILL_DATABASE,
-  
 } from "./actions";
 
 const initialState = {
   petDetail: [],
   loading: false,
   mascotas: [],
-  error: null,
   mascotasBackUp: [],
 };
 
@@ -31,55 +25,31 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: true,
-
         mascotas: payload,
         mascotasBackUp: payload
-
-
       };
-      case APPLY_FILTERS:
+
+    case APPLY_FILTERS:
       return {
         ...state,
         mascotas: payload,
       };
-      
-      case FILTERS_ERROR:
+
+    case FILTERS_ERROR:
       return {
         ...state,
         error: payload
       }
 
-    case FETCHING_MASCOTAS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        mascotas: payload,
-        error: null,
-      };
-
-    case FETCHING_MASCOTAS_ERROR:
-      return {
-        ...state,
-        loading: false,
-        mascotas: [],
-        error: payload,
-      };
-
-    case GET_MASCOTAS:
-      return { ...state, mascotas: payload };
-
     case GET_PET_BY_ID:
       return { ...state, petDetail: payload };
 
     case GET_PET_BY_NAME:
-
-
       return { ...state, mascotas: payload };
-
 
       //Comente esta linea y escribe la que vinene despues de esta porque las mascotas que se buscaban por nombres es mas facil coordinar el paginado, los ordenamientos y los filtros jusntos si estan en el mismo estado en este caso mascotas
       // return { ...state, petDetail: payload };
-      return { ...state, mascotas: payload };
+     // return { ...state, mascotas: payload };
     //En este caso se ejecuta orderByWeight y se modifica el orden de las mascotas por peso ascendente o descendentemente dependiendo de lo que se le pase al payload
 
     case ORDER_BY_WEIGHT:
@@ -99,13 +69,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         mascotas: sortedByAge,
       };
-
-
-      // case FILL_DATABASE:
-      //   console.log(payload)
-      //   return{
-      //     ...state
-      //   }
 
     default:
       return { ...state };

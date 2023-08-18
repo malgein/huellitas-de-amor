@@ -53,6 +53,7 @@ const AgregarMascota = () => {
 	const initialValues = mascota
 	
 	const dispatch=useDispatch()
+	
 	const handleSubmit = (mascota) => {
 		console.log(mascota);
 		dispatch(addMascota(mascota));
