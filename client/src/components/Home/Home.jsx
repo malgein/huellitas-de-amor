@@ -11,10 +11,13 @@ import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
 import { Pagination } from "@nextui-org/react";
 
-//FAVORITOS
-// import Favorites from "../Favorites/Favorites";
-
 export default function Home() {
+<<<<<<< HEAD
+  const mascotas = useSelector((state) => state.mascotas);
+  const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [petsPerPage] = useState(8); // Puesto constante ya que nunca lo modificas
+=======
 	const mascotas = useSelector((state) => state.mascotas);
 	const dispatch = useDispatch();
 	const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +25,7 @@ export default function Home() {
 	//Guardame el estado guardame cuantas Mascotas guardo por pagina, en este caso 8.
 	//const [petsPerPage, setPetsPerPage] = useState(8);
 	//El índice de la ultima Mascota por página.
+>>>>>>> origin/qa
 
 	const indexOfLastPet = currentPage * petsPerPage;
 	const indexOfFirstPet = indexOfLastPet - petsPerPage;
@@ -33,6 +37,11 @@ export default function Home() {
 		setCurrentPage(pageNumber);
 	};
 
+<<<<<<< HEAD
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+=======
 	// Cálculos de paginación
 
 	//FAVORITOS
@@ -42,14 +51,21 @@ export default function Home() {
 	const handleOpenModal = () => {
 		setOpenModal(true);
 	};
+>>>>>>> origin/qa
 
 	const handleCloseModal = () => {
 		setOpenModal(false);
 	};
 
+<<<<<<< HEAD
+  useEffect(() => {
+    dispatch(getMascotas());
+  }, []); // Agregado dispatch como dependencia para evitar warnings
+=======
 	useEffect(() => {
 		dispatch(getMascotas());
 	}, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
+>>>>>>> origin/qa
 
 	return (
 		<div className='flex h-screen flex-col '>

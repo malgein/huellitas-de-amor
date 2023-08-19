@@ -15,7 +15,9 @@ import Registro from "../Registro/Registro";
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Button } from "@nextui-org/react";
+import { useAuth } from "../../context/authContext";
+
+const { user } = useAuth();
 
 const Nav = () => {
   const location = useLocation();
@@ -45,6 +47,7 @@ const Nav = () => {
         <div className={styles.nav}>
           <Link to="/home">Inicio</Link>
           <Link to="/perfil">Mi Perfil</Link>
+          <Link to="/register">Registrarse</Link>
           <Link to="/notificaciones" onClick={abrirModal}>
             Notificaciones
           </Link>
@@ -69,11 +72,9 @@ const Nav = () => {
               </div>
             )}
           </div>
-
-          <div className={styles.fuent}>
-            <Link className={styles.agregar} to="/agregar">
-              <Button color="success">Crear Nueva Mascota</Button>
-            </Link>
+          <div>
+            {" "}
+            <h1>{user?.email}</h1>{" "}
           </div>
         </div>
       </div>
