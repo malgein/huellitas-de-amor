@@ -6,6 +6,8 @@ import styles from "./AgregarMascota.module.css";
 import { useDispatch } from "react-redux";
 import { addMascota } from "../../redux/actions";
 import FormInput from "../FormInput/FormInput";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const validationSchema = Yup.object().shape({
 	nombre: Yup.string()
@@ -53,10 +55,18 @@ const AgregarMascota = () => {
 	});
 
 	const dispatch = useDispatch();
+	const Navigate = useNavigate()
 
 	const handleSubmit = (mascota) => {
 		dispatch(addMascota(mascota));
 		localStorage.removeItem("formData");
+		  Swal.fire({
+				tittle: "MASCOTA AGREGADA",
+				text: "La mascota se ha agregado satisfactoriamente",
+				icon: "success",
+				buttons: "OK",
+			});
+			Navigate("/Home");
 	};
 
 	const handleFormChange = (values) => {
