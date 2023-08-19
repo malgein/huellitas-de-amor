@@ -15,6 +15,7 @@ export const ADD_MASCOTA = "ADD_MASCOTA";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 
+
 const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
 const ENDPOINTTYPES = "http://localhost:3001/types";  // Nota: No usaste este endpoint en las acciones presentadas
 const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
@@ -46,7 +47,7 @@ export const getPetById = (id) => async (dispatch) => {
 
 export const getMascotas = () => async (dispatch) => {
   try {
-    dispatch({ type: FETCHING_MASCOTAS });
+    // dispatch({ type: FETCHING_MASCOTAS });
     const response = await axios.get(ENDPOINT);
     dispatch({ type: FETCHING_MASCOTAS_SUCCESS, payload: response.data });
   } catch (error) {
@@ -67,19 +68,19 @@ export const getPetByName = (nombre) => async (dispatch) => {
 // actions.js
 export const applyFilters = (filters) => {
   return (dispatch, getState) => {
-    const BACKEND_URL = "http://localhost:3001";
+    // const BACKEND_URL = "http://localhost:3001";
     axios
-      .get(`${BACKEND_URL}/mascotas/filtro`, { params: filters })
-      .then((response) => {
-        dispatch({
-          type: APPLY_FILTERS, 
-          payload: response.data
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-        // Puedes despachar otro tipo de acción aquí si quieres manejar errores.
-      });
+			.get(`${ENDPOINT_FILTER}`, { params: filters })
+			.then((response) => {
+				dispatch({
+					type: APPLY_FILTERS,
+					payload: response.data,
+				});
+			})
+			.catch((error) => {
+				console.error(error);
+				// Puedes despachar otro tipo de acción aquí si quieres manejar errores.
+			});
   };
 };
 

@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
-import styles from "./nav.module.css";
+// import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+} from "@nextui-org/react";
+import Registro from "../Registro/Registro";
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -12,6 +21,7 @@ const { user } = useAuth();
 
 const Nav = () => {
   const location = useLocation();
+
 
   const mostarSearchBar = location.pathname === "/home";
 
@@ -49,6 +59,7 @@ const Nav = () => {
         </div> */}
         <div className={styles.divlogin}>
           {/* <Link className={styles.regis} to="/login">
+          <Link className={styles.regis} to="/registro">
             Registrarse
           </Link>
           <Link className={styles.iniciosesion} to="/login">
@@ -67,6 +78,7 @@ const Nav = () => {
           </div>
         </div>
       </div>
+
 
       {modalabierto && (
         <div className={styles.modal}>
