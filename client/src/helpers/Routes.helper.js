@@ -5,7 +5,12 @@ const PathRoutes = {
   DETAIL: "/detail/:id",
   LANDINGPAGE: "/",
   PERFIL: "/perfil",
-  BASCKET: '/cesta'
+  DASHBOARD: '/dashboard',
+  DASHBOARD_MASCOTAS: '/dashboard/mascotas',
+  DASHBOARD_USUARIOS: '/dashboard/usuarios',
+  DASHBOARD_CASAS_DE_ADOPCION: '/dashboard/casas-de-adopcion',
+  DASHBOARD_DONACIONES: '/dashboard/donaciones'
+
 };
 
 

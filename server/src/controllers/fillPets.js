@@ -1,7 +1,7 @@
 //Trae la instancia la tabla Mascota en la base de datos
 const { Mascota } = require('../db'); 
 // Traae todos los datos de mascotas del archivo json
-const allPets = require('../data'); 
+const allPets = require('../dataPets'); 
 
 const fillPets =  async (req, res) => {
   try {

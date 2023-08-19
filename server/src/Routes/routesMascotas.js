@@ -5,7 +5,7 @@ const postPetById = require("../controllers/postPetById");
 const getPets = require("../controllers/getPets");
 const getPetByName = require("../controllers/getPetsByName");
 const filtradoMascotas = require("../controllers/filtradoMascotas");
-const data = require('../data')
+
 
 
 router.get("/filtro", async (req, res) => {

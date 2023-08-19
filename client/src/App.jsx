@@ -12,8 +12,17 @@ import FilterMascotas from "./components/FilterButtons/FilterButtons";
 import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
 import Footer from "./components/Footer/Footer";
-//Componente de cesta de adopcion
-import Bascket from "./components/Bascket/Bascket";
+//Componente dashboard
+import Dashboard from "./components/Dashboard/Dashboard";
+//Componente dashboard gestiona mascotas
+import Pets from "./components/Dashboard/Pets";
+//Componente dashboard gestiona Usuarios
+import Users from './components/Dashboard/Users'
+//Componente dashboard gestiona casas de adopcion
+import AdoptionHouses from './components/Dashboard/AdoptionHouses'
+//Componente dashboard gestiona donaciones
+import Donations from './components/Dashboard/Donations'
+
 
 function App() {
   const location = useLocation();
@@ -27,8 +36,11 @@ function App() {
 			<Route path={PathRoutes.PERFIL} element={<Perfil />} />
 			<Route path={PathRoutes.DETAIL} element={<Detail />} />
 			<Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-			//Cesta de adopcion
-			<Route path={PathRoutes.BASCKET} element={<Bascket />}></Route>
+			<Route path={PathRoutes.DASHBOARD} element={<Dashboard/>}/>
+			<Route path={PathRoutes.DASHBOARD_MASCOTAS} element={<Pets/>}/>
+			<Route path={PathRoutes.DASHBOARD_USUARIOS} element={<Users/>}/>
+			<Route path={PathRoutes.DASHBOARD_CASAS_DE_ADOPCION} element={<AdoptionHouses/>}/>
+			<Route path={PathRoutes.DASHBOARD_DONACIONES} element={<Donations/>}/>
 	</Routes>
 			<div>
 				{location.pathname !=='/home' && <Footer />}

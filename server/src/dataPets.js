@@ -28,6 +28,7 @@ const allPets = [
     {"nombre":"Princesa", "raza":"American Shorthair", "tamano": "Mediano", "edad":3,"sexo":"Hembra","foto":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6iy_bNvm1ggeIeYM40zEM529tRk2NAXBONvhXB2n9Pyd9vkCtNqoe1H0GMFugILV7DTs&usqp=CAU", "peso":7.9, "descripcion":"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede."},
     {"nombre":"Fifi", "raza":"Pincher", "tamano": "Pequeño", "edad":10,"sexo":"Hembra","foto":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUFuGVPIOzFvm1c6rCa6vu7JSHSOAZ7v1enA&usqp=CAU", "peso":4.3, "descripcion":"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede."},
    ]
+
    
     module.exports = allPets
    
