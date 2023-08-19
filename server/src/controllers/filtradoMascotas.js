@@ -72,6 +72,18 @@ const getPesoRango = (categoria) => {
             return {};
     }
 }
+const getEdadRango = (categoria) => {
+    switch (categoria) {
+        case "Cachorro":
+            return { [Op.lte]: '1' };  // <= 1
+        case "Junior":
+            return { [Op.gt]: '2', [Op.lte]: '3' };  // > 2 y <= 3
+        case "Adulto":
+            return { [Op.gt]: '4' };  // > 4
+        default:
+            return {};
+    }
+}
 
 const filtradoMascotas = async (req) => {
     try {
@@ -79,14 +91,16 @@ const filtradoMascotas = async (req) => {
         
         const query = {};
         
-        if (edad) query.edad = edad;
         if (sexo) query.sexo = sexo;
         if (tamano) query.tamano = tamano;
         if (raza) query.raza = raza;
         if (especie) query.especie = especie;
-
+        
         if (peso) {
             query.peso = getPesoRango(peso);
+        }
+        if (edad){
+            query.edad = getEdadRango(edad);
         }
 
 const mascotas = await Mascota.findAll({ where: query },{include: [Especie]});

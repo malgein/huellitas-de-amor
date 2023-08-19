@@ -16,7 +16,8 @@ export const FETCHING_MASCOTAS_ERROR = "FETCHING_MASCOTAS_ERROR";
 export const ADD_MASCOTA = "ADD_MASCOTA";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
-const ENDOPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
+
+const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
 const ENDPOINTTYPES = "http://localhost:3001/types"; // Nota: No usaste este endpoint en las acciones presentadas
 const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
 // const ENDPOINTFILL = 'http://localhost:3001/fill';
