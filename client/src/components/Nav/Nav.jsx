@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from "react";
-import styles from "./nav.module.css";
+// import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+} from "@nextui-org/react";
+import Registro from "../Registro/Registro";
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 
+import { Button } from "@nextui-org/react";
+
 const Nav = () => {
   const location = useLocation();
+
+
   const mostarSearchBar = location.pathname === "/home";
+
   const [modalabierto, setModalAbierto] = useState(false);
 
   const abrirModal = () => {
@@ -31,38 +45,39 @@ const Nav = () => {
         <div className={styles.nav}>
           <Link to="/home">Inicio</Link>
           <Link to="/perfil">Mi Perfil</Link>
-          <Link to="/detail">Detalle</Link>
           <Link to="/notificaciones" onClick={abrirModal}>
             Notificaciones
           </Link>
-          <Link className={styles.agregar} to="/agregar">
-            Agrega tu Mascota
-          </Link>
+
           {/* <button onClick={abrirModal}>Notificaciones</button> */}
         </div>
         {/* <div className={styles.agregar}>
           <Link to="/agregar">Agrega tu Mascota</Link>
         </div> */}
         <div className={styles.divlogin}>
-          <Link className={styles.regis} to="/login">
+          {/* <Link className={styles.regis} to="/login">
+          <Link className={styles.regis} to="/registro">
             Registrarse
           </Link>
           <Link className={styles.iniciosesion} to="/login">
             Iniciar sesion
-          </Link>
+          </Link> */}
+          <div>
+            {mostarSearchBar && (
+              <div className={styles.divsearchbar}>
+                <SearchBar />
+              </div>
+            )}
+          </div>
+
+          <div className={styles.fuent}>
+            <Link className={styles.agregar} to="/agregar">
+              <Button color="success">Crear Nueva Mascota</Button>
+            </Link>
+          </div>
         </div>
       </div>
 
-
-      {/* <div className={styles.divsearchbar}>
-        <SearchBar />
-      </div> */}
-
-      {mostarSearchBar && (
-        <div className={styles.divsearchbar}>
-          <SearchBar />
-        </div>
-      )}
 
       {modalabierto && (
         <div className={styles.modal}>

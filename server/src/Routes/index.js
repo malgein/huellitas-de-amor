@@ -8,9 +8,11 @@ const filtradoMascotas = require("../controllers/filtradoMascotas");
 const getPets = require("../controllers/getPets");
 const postCasaAdopcion = require("./routesCasaDeAdopcion");
 const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
-const fillPets = require('../controllers/fillPets')
+const fillPets = require("../utils/fillPets");
+const postUsuario = require("./routesUsuario");
+const crearUsuario = require("../controllers/crearUsuario");
 
-router.get('/fill', fillPets)
+router.get("/fill", fillPets);
 router.use("/mascotas", mascotas);
 router.get("/", getPets);
 router.get("/nombre", getPetByName);
@@ -19,5 +21,7 @@ router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.use("/casaDeAdopcion", postCasaAdopcion);
 
+router.use("/usuario", postUsuario);
+// router.post("/", crearUsuario);
 
 module.exports = router;
