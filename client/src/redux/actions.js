@@ -14,6 +14,8 @@ export const FETCHING_MASCOTAS_SUCCESS = "FETCHING_MASCOTAS_SUCCESS";
 export const FETCHING_MASCOTAS_ERROR = "FETCHING_MASCOTAS_ERROR";
 
 export const ADD_MASCOTA = "ADD_MASCOTA";
+export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
+export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 
@@ -109,3 +111,16 @@ export const addMascota = (Mascota) => {
     }
   };
 };
+
+export const subirImagenes = (imagenes) => (dispatch) => {
+  return dispatch({
+    type: SUBIR_IMAGENES,
+    payload: imagenes,
+  })
+}
+export const limpiarImagenes = () => {
+  return {
+    type: LIMPIAR_IMAGENES,
+    payload: imagenes,
+  }
+}

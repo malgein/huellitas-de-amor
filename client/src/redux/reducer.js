@@ -10,6 +10,8 @@ import {
   APPLY_FILTERS,
   FILTERS_ERROR,
   FILL_DATABASE,
+  SUBIR_IMAGENES,
+  LIMPIAR_IMAGENES,
 } from "./actions";
 
 const initialState = {
@@ -18,6 +20,7 @@ const initialState = {
   mascotas: [],
   error: null,
   mascotasBackUp: [],
+  imagenes: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -90,11 +93,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
         mascotas: sortedByAge,
       };
 
+    case SUBIR_IMAGENES:
+      return {...state, imagenes: payload}
+
+    case LIMPIAR_IMAGENES: 
+      return {...state, imagenes: []}
     // case FILL_DATABASE:
     //   console.log(payload)
     //   return{
     //     ...state
     //   }
+
+    
+    
 
     default:
       return { ...state };
