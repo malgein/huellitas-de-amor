@@ -12,20 +12,25 @@ import FilterMascotas from "./components/FilterButtons/FilterButtons";
 import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
 import Footer from "./components/Footer/Footer";
+import { AuthProvider } from "./context/authContext";
+import ModalLogSig from "./components/modalLogSig/modalLogSig";
 
 function App() {
   const location = useLocation();
   return (
     <>
       {location.pathname !== "/" && <Nav />}
-      <Routes>
-        <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
-        <Route path={PathRoutes.HOME} element={<Home />} />
-        <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
-        <Route path={PathRoutes.PERFIL} element={<Perfil />} />
-        <Route path={PathRoutes.DETAIL} element={<Detail />} />
-        <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
+          <Route path={PathRoutes.HOME} element={<Home />} />
+          <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
+          <Route path={PathRoutes.PERFIL} element={<Perfil />} />
+          <Route path={PathRoutes.DETAIL} element={<Detail />} />
+          <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
+          <Route path={PathRoutes.REGISTER} element={<ModalLogSig />}></Route>
+        </Routes>
+      </AuthProvider>
       {/* <Footer /> */}
     </>
   );

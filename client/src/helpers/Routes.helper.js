@@ -1,11 +1,11 @@
 const PathRoutes = {
-  AGREGAR: '/agregar',
+  AGREGAR: "/agregar",
   HOME: "/home",
   FILTER: "/mascotas",
   DETAIL: "/detail/:id",
   LANDINGPAGE: "/",
   PERFIL: "/perfil",
+  REGISTER: "/register",
 };
-
 
 export default PathRoutes;
