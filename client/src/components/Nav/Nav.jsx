@@ -4,6 +4,7 @@ import styles from "./nav.module.css";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link, Button, Image } from "@nextui-org/react";
+import logoPrueba from "../../assets/LogoPrueba.jpg";
 import Registro from "../Registro/Registro";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -26,24 +27,28 @@ const Nav = () => {
   //Por aqui unos cambios
 
   return (
-    <div class="flex flex-col justify-center flex flex-col border-b shadow-lg my-2">
-      <div class="flex justify-between ... ... gap-4 flex flex-row ...">
-        <div class="ml-2 ... ">
+    <div class="flex flex-col justify-center border-b shadow-lg my-2">
+      <div class="flex justify-between gap-4 flex flex-row ...">
+        <div class="ml-2 flex items-center">
           <Image
             width={100}
             height={100}
             alt="NextUI hero Image"
             // src="../../assets/LogoPrueba.jpg"
-            src="https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
+            src={logoPrueba}
           />
           {/* <img src="../../assets/LogoPrueba.jpg" alt="Imagen" /> */}
           {/* <h1>Huellitas de amor</h1> */}
         </div>
 
-        <div class=" gap-20 flex flex-row text-black">
-          <Link to="/home">Inicio</Link>
-          <Link to="/perfil">Mi Perfil</Link>
-          <Link to="/notificaciones" onClick={abrirModal}>
+        <div class=" gap-20 flex flex-row items-center text-black">
+          <Link class="flex " href="/home">
+            Inicio
+          </Link>
+          <Link class="flex" href="/perfil">
+            Mi Perfil
+          </Link>
+          <Link class="flex " href="/notificaciones" onClick={abrirModal}>
             Notificaciones
           </Link>
 
@@ -58,7 +63,7 @@ const Nav = () => {
           <Link to="/agregar">Agrega tu Mascota</Link>
         </div> */}
 
-        <div class="gap-4 flex flex-row ... mr-4 ...">
+        <div class="gap-4 flex flex-row items-center mr-4">
           <Link to="/registro">
             <Button color="primary" variant="bordered">
               Registrarse
