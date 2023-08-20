@@ -20,6 +20,7 @@ function App() {
   return (
     <>
       {location.pathname !== "/" && <Nav />}
+
       <AuthProvider>
         <Routes>
           <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
@@ -29,9 +30,11 @@ function App() {
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
           <Route path={PathRoutes.REGISTER} element={<ModalLogSig />}></Route>
+          <Route path={PathRoutes.REGISTRO} element={<Registro />} />
         </Routes>
       </AuthProvider>
       {/* <Footer /> */}
+
     </>
   );
 }
