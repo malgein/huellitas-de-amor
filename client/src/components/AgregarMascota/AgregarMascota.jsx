@@ -32,10 +32,10 @@ const validationSchema = Yup.object().shape({
 		.min(3, "Debe poseer mínimo 3 caracteres ")
 
 		.required("Campo requerido"),
-	foto: Yup.string()
+	/* foto: Yup.string()
 
 		.url("Debe ser una URL válida")
-		.required("Campo requerido"),
+		.required("Campo requerido"), */
 	raza: Yup.string()
 		.min(3, "Debe poseer mínimo 3 caracteres ")
 		.max(50, "Debe poseer máximo 50 caracteres")
@@ -60,8 +60,11 @@ const AgregarMascota = () => {
 	const imagenes = useSelector((state) => state.imagenes)
 
 	const handleSubmit = (mascota) => {
-		mascota.foto.push(imagenes)
-		dispatch(addMascota(mascota));
+		const nuevaMascota = { ...mascota };
+  		nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
+		/* console.log(nuevaMascota.foto) */
+  		dispatch(addMascota(nuevaMascota));
+		/* dispatch(addMascota(mascota)); */
 		dispatch(limpiarImagenes())
 		localStorage.removeItem("formData");
 		  Swal.fire({
@@ -200,7 +203,8 @@ const AgregarMascota = () => {
 							</div>
 							<div>
 								<SubirImagenes setImagenes={(imagenes) => setMascota({ ...mascota, foto: imagenes })} />
-								{console.log(imagenes)}
+								{/* {console.log(imagenes)}
+								{console.log(mascota)} */}
 							</div>
 							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
 								{imagenes && imagenes.map((imag) => {
