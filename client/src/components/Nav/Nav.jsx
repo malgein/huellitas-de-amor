@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link, Button, Image } from "@nextui-org/react";
 import logoPrueba from "../../assets/LogoPrueba.jpg";
-import Registro from "../Registro/Registro";
+import Registro from "../Registro/registro";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -64,7 +64,7 @@ const Nav = () => {
         </div> */}
 
         <div class="gap-4 flex flex-row items-center mr-4">
-          <Link to="/registro">
+          <Link href="/registro">
             <Button color="primary" variant="bordered">
               Registrarse
             </Button>
@@ -132,6 +132,8 @@ const Nav = () => {
             </button>
           </div>
         </div>
+
+        
       )}
     </div>
   );
