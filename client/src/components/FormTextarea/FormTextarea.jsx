@@ -1,0 +1,23 @@
+import React from "react";
+import { Field, ErrorMessage } from "formik";
+import { Textarea } from "@nextui-org/react";
+import styles from './FormTextarea.module.css';
+
+const FormTextarea=({ label, error, name })=> {
+	return (
+		<div className={styles.FormTextarea}>
+			<Field
+				as={Textarea}
+				label={label}
+				variant='bordered'
+				placeholder={`${label} de la mascota`}
+				id={name}
+				name={name}
+				errorMessage={<ErrorMessage name={name} component='div' />}
+				color={error ? "danger" : "success"}
+			/>
+		</div>
+	);
+}
+
+export default FormTextarea;
