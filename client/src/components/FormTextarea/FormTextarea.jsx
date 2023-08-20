@@ -3,7 +3,7 @@ import { Field, ErrorMessage } from "formik";
 import { Textarea } from "@nextui-org/react";
 import styles from './FormTextarea.module.css';
 /*necesario para actualizar repo*/
-const FormTextarea=({ label, error, name })=> {
+const FormTextarea=({ label, error, name, placeholder })=> {
 	return (
 		
 		<div className={styles.FormTextarea}>
@@ -12,7 +12,7 @@ const FormTextarea=({ label, error, name })=> {
 				as={Textarea}
 				label={label}
 				variant='bordered'
-				placeholder={`${label} de la mascota`}
+				placeholder={`${placeholder} de la mascota`}
 				id={name}
 				name={name}
 				errorMessage={<ErrorMessage name={name} component='div' />}

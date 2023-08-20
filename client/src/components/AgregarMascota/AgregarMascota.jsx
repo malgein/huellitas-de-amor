@@ -95,7 +95,12 @@ const AgregarMascota = () => {
 								<h1>Agrega una nueva mascota</h1>
 							</div>
 							<div>
-								<FormInput label='Nombre' name='nombre' error={errors.nombre} />
+								<FormInput
+									label='Nombre'
+									name='nombre'
+									placeholder='Nombre'
+									error={errors.nombre}
+								/>
 							</div>
 							{console.log(localStorage)}
 							<div>
@@ -103,24 +108,41 @@ const AgregarMascota = () => {
 									label='Especie'
 									name='especie'
 									error={errors.especie}
+									placeholder='Especie'
 								/>
 							</div>
 							<div>
-								<FormInput label='Edad' name='edad' error={errors.edad} />
+								<FormInput
+									label='Edad'
+									placeholder='Edad'
+									name='edad'
+									error={errors.edad}
+								/>
 							</div>
 							<div>
-								<FormInput label='Peso' name='peso' error={errors.peso} />
+								<FormInput
+									label='Peso'
+									placeholder='Peso'
+									name='peso'
+									error={errors.peso}
+								/>
 							</div>
 							{/* <div>
 								<FormInput label='Foto' name='foto' error={errors.foto} />
 							</div> */}
 							<div>
-								<FormInput label='Raza' name='raza' error={errors.raza} />
+								<FormInput
+									label='Raza'
+									placeholder='Raza'
+									name='raza'
+									error={errors.raza}
+								/>
 							</div>
 							<div>
 								<FormTextarea
 									label='Descripción'
 									name='descripcion'
+									placeholder='Descripción'
 									error={errors.descripcion}
 								/>
 							</div>
@@ -131,11 +153,11 @@ const AgregarMascota = () => {
 										errors.tamano ? styles.selectRed : styles.selectGreen
 									}>
 									{/* <div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'> */}
-										<div>
+									<div>
 										{/* <label
 											className='block font-medium  dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none
 							w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small' */}
-											{/* htmlFor='tamano'>
+										{/* htmlFor='tamano'>
 											Tamaño:
 										</label> */}
 										<Field
@@ -199,15 +221,20 @@ const AgregarMascota = () => {
 								</div>
 							</div>
 							<div>
-								<SubirImagenes setImagenes={(imagenes) => setMascota({ ...mascota, foto: imagenes })} />
+								<SubirImagenes
+									setImagenes={(imagenes) =>
+										setMascota({ ...mascota, foto: imagenes })
+									}
+								/>
 								{console.log(imagenes)}
 							</div>
-							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
-								{imagenes && imagenes.map((imag) => {
-									return (
-										<img src={imag} alt="" className="h-[80px] m-[15px]" />
-									)
-								})}
+							<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center'>
+								{imagenes &&
+									imagenes.map((imag) => {
+										return (
+											<img src={imag} alt='' className='h-[80px] m-[15px]' />
+										);
+									})}
 							</div>
 							<div className={styles.button}>
 								<Button
