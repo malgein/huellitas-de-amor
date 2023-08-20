@@ -14,7 +14,7 @@ import PathRoutes from "./helpers/Routes.helper";
 import Footer from "./components/Footer/Footer";
 import { AuthProvider } from "./context/AuthContext";
 import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
-import Registro from "./components/Registro/registro";
+import Registro from "./components/Registro/Registro";
 
 function App() {
   const location = useLocation();
@@ -34,7 +34,6 @@ function App() {
         </Routes>
       </AuthProvider>
       {/* <Footer /> */}
-
     </>
   );
 }
