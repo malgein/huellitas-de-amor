@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 import SearchBar from "../SearchBar/SearchBar";
+import AgregarMascota from "../AgregarMascota/AgregarMascota";
 
 import { Link, Button, Image } from "@nextui-org/react";
 import logoPrueba from "../../assets/LogoPrueba.jpg";
@@ -51,11 +52,16 @@ const Nav = () => {
             Notificaciones
           </Link>
 
-          {/* <div class="mt-3 ml-2  ...">
-            <Link to="/agregar">
-              <Button color="primary">Crear Nueva Mascota</Button>
+          <div>
+            <Link href="/agregar">
+              <Button
+                className="border border-black text-black bg-white hover:bg-slate-100  "
+                color="primary"
+              >
+                Crear Nueva Mascota
+              </Button>
             </Link>
-          </div> */}
+          </div>
         </div>
 
         <div className="gap-4 flex flex-row items-center mr-4">
