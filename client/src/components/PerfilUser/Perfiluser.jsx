@@ -66,25 +66,20 @@
 // export default Perfil;
 
 import React from "react";
-import styles from "./perfil.module.css";
+// import styles from "./perfil.module.css";
 import fotoPerfil from "../../assets/fotoPerfil.jpg";
 
 const Perfil = () => {
   return (
-    <div className={styles.profileContainer}>
-      <div className={styles.profileHeader}>
-        <img
-          src={fotoPerfil}
-          alt="Foto de perfil"
-          className={styles.profilePicture}
-        />
-        <div className={styles.profileInfo}>
-          <h1 className={styles.profileName}>Juan Pérez</h1>
-          <p className={styles.profileLocation}>Buenos Aires, Argentina</p>
-          
+    <div>
+      <div>
+        <img src={fotoPerfil} alt="Foto de perfil" />
+        <div>
+          <h1>Juan Pérez</h1>
+          <p>Buenos Aires, Argentina</p>
         </div>
       </div>
-      <div className={styles.profileDetails}>
+      <div>
         <h2>Acerca de Mí</h2>
         <p>
           ¡Hola! Soy Juan, un amante de los animales. Adopté a mi compañero
@@ -95,14 +90,14 @@ const Perfil = () => {
           hogar lleno de amor!
         </p>
       </div>
-      <div className={styles.profileContact}>
+      <div>
         <h2>Contacto</h2>
         <p>Correo electrónico: juan.perez@example.com</p>
         <p>Teléfono: (123) 456-7890</p>
         <p>Redes sociales: @juanperez</p>
       </div>
-      <div className={styles.profileButtons}>
-        <button className={styles.editButton}>Editar Perfil</button>
+      <div>
+        <button>Editar Perfil</button>
       </div>
     </div>
   );

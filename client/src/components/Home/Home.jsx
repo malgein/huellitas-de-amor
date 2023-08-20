@@ -11,9 +11,6 @@ import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
 import { Pagination } from "@nextui-org/react";
 
-//FAVORITOS
-// import Favorites from "../Favorites/Favorites";
-
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
   const dispatch = useDispatch();
@@ -51,8 +48,12 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getMascotas());
+<<<<<<< HEAD
     
   }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
+=======
+  }, []); // Agregado dispatch como dependencia para evitar warnings
+>>>>>>> 6d369e2692971856603e11f2fd18a2f1e8da3451
 
   return (
     <div className="flex h-screen flex-col ">
@@ -63,7 +64,6 @@ export default function Home() {
         </div>
         <Sorts />
       </div>
-
       <header className="m-0 h-[10%] w-screen bg-white p-0">
         {/* Se parece que tienes un NavBar comentado. Si no lo usas, puedes eliminar este bloque. */}
       </header>
@@ -101,5 +101,11 @@ export default function Home() {
           </div>
         </section>
       </div>
+         
     </div>
+<<<<<<< HEAD
   );}
+=======
+  );
+}
+>>>>>>> 6d369e2692971856603e11f2fd18a2f1e8da3451

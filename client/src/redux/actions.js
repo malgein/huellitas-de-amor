@@ -11,6 +11,7 @@ export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 
+
 const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
 //const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
 const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
@@ -30,6 +31,10 @@ export const getPetById = (id) => async (dispatch) => {
 //Guardo todas las mascotas
 export const getMascotas = () => async (dispatch) => {
   try {
+<<<<<<< HEAD
+=======
+    // dispatch({ type: FETCHING_MASCOTAS });
+>>>>>>> 6d369e2692971856603e11f2fd18a2f1e8da3451
     const response = await axios.get(ENDPOINT);
    dispatch({type: FETCHING_MASCOTAS, payload: response.data});
   } catch (error) {
