@@ -3,11 +3,12 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Input, Textarea, Button } from "@nextui-org/react";
 import styles from "./AgregarMascota.module.css";
-import { useDispatch } from "react-redux";
-import { addMascota } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addMascota, limpiarImagenes } from "../../redux/actions";
 import FormInput from "../FormInput/FormInput";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SubirImagenes from "../SubirImagenes/SubirImagenes";
 
 const validationSchema = Yup.object().shape({
 	nombre: Yup.string()
@@ -49,16 +50,19 @@ const AgregarMascota = () => {
 		tamano: "",
 		peso: 0,
 		descripcion: "",
-		foto: "",
+		foto: [],
 		raza: "",
 		sexo: "",
 	});
 
 	const dispatch = useDispatch();
 	const Navigate = useNavigate()
+	const imagenes = useSelector((state) => state.imagenes)
 
 	const handleSubmit = (mascota) => {
+		mascota.foto.push(imagenes)
 		dispatch(addMascota(mascota));
+		dispatch(limpiarImagenes())
 		localStorage.removeItem("formData");
 		  Swal.fire({
 				tittle: "MASCOTA AGREGADA",
@@ -106,9 +110,9 @@ const AgregarMascota = () => {
 							<div>
 								<FormInput label='Peso' name='peso' error={errors.peso} />
 							</div>
-							<div>
+							{/* <div>
 								<FormInput label='Foto' name='foto' error={errors.foto} />
-							</div>
+							</div> */}
 							<div>
 								<FormInput label='Raza' name='raza' error={errors.raza} />
 							</div>
@@ -193,6 +197,17 @@ const AgregarMascota = () => {
 										component='div'
 									/>
 								</div>
+							</div>
+							<div>
+								<SubirImagenes setImagenes={(imagenes) => setMascota({ ...mascota, foto: imagenes })} />
+								{console.log(imagenes)}
+							</div>
+							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+								{imagenes && imagenes.map((imag) => {
+									return (
+										<img src={imag} alt="" className="h-[80px] m-[15px]" />
+									)
+								})}
 							</div>
 							<div className={styles.button}>
 								<Button type='submit' disabled={isSubmitting} size='lg'>

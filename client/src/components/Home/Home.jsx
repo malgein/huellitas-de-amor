@@ -19,6 +19,7 @@ export default function Home() {
   //const [petsPerPage, setPetsPerPage] = useState(8);
   //El índice de la ultima Mascota por página.
 
+
   const indexOfLastPet = currentPage * petsPerPage;
   const indexOfFirstPet = indexOfLastPet - petsPerPage;
   const currentPet = Array.isArray(mascotas)
@@ -54,7 +55,6 @@ export default function Home() {
           {" "}
           <FilterMascotas />
         </div>
-
         <Sorts />
       </div>
       <header className="m-0 h-[10%] w-screen bg-white p-0">

@@ -83,13 +83,18 @@
 //   );
 // };
 
-
 // export default FilterMascotas;
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { applyFilters } from "../../redux/actions"; // Asegúrate de que la ruta sea la correcta
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
 
 const FilterMascotas = () => {
   const dispatch = useDispatch();
@@ -132,10 +137,7 @@ const FilterMascotas = () => {
       {Object.keys(options).map((filter) => (
         <Dropdown key={filter}>
           <DropdownTrigger>
-            <Button 
-              variant="bordered" 
-              className="capitalize"
-            >
+            <Button variant="bordered" className="capitalize">
               {filters[filter] || filter}
             </Button>
           </DropdownTrigger>
@@ -145,7 +147,9 @@ const FilterMascotas = () => {
             disallowEmptySelection
             selectionMode="single"
             selectedKeys={new Set([filters[filter]])}
-            onSelectionChange={(keys) => handleChange(filter, Array.from(keys)[0])}
+            onSelectionChange={(keys) =>
+              handleChange(filter, Array.from(keys)[0])
+            }
           >
             {options[filter].map((option) => (
               <DropdownItem key={option}>{option}</DropdownItem>
@@ -153,8 +157,8 @@ const FilterMascotas = () => {
           </DropdownMenu>
         </Dropdown>
       ))}
-      <Button 
-        className="capitalize ml-2" 
+      <Button
+        className="capitalize ml-2"
         color="error" // Usamos el color "error" para que destaque como acción de reset
         onClick={handleResetFilters}
       >
@@ -165,10 +169,3 @@ const FilterMascotas = () => {
 };
 
 export default FilterMascotas;
-
-
-
-
-
-
-

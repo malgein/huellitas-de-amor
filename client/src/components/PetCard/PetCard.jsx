@@ -1,7 +1,6 @@
 import { Card, CardHeader, CardBody, Image, Button } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import PathRoutes from "../../helpers/Routes.helper";
-
 function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
   return (
     <Card className="py-4 h-full">

@@ -104,54 +104,57 @@ const Nav = () => {
         </div>
       </div>
 
+
+      {/*comentando para mergear CREO QUE SON ELEMENTOS ELIMINADOS EN LA VERSION DE OZI; PERO ES MEJOR CORROBORAR ESA INFORMACION
       <div class="flex justify-center">
         {mostarSearchBar && (
           <div class="flex justify-center w-96 my-2">
             <SearchBar />
           </div>
         )}
-      </div>
+      </div>*/}
+
 
 
       {modalabierto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <h2 className={styles.notih2}>Notificaciones</h2>
-            <ul class={styles.notificationlist}>
+            <ul className={styles.notificationlist}>
               <li>
-                <div class={styles.notification}>
-                  <div class={styles.notificationinfo}>
-                    <span class={styles.notificationtitle}>
+                <div className={styles.notification}>
+                  <div className={styles.notificationinfo}>
+                    <span className={styles.notificationtitle}>
                       Nueva notificación 1
                     </span>
                     <br />
-                    <span class={styles.notificationtime}>Hace 1 hora</span>
+                    <span className={styles.notificationtime}>Hace 1 hora</span>
                   </div>
-                  <button class={styles.notificationaction}>Ver</button>
+                  <button className={styles.notificationaction}>Ver</button>
                 </div>
               </li>
               <li>
-                <div class={styles.notification}>
-                  <div class={styles.notificationinfo}>
-                    <span class={styles.notificationtitle}>
+                <div className={styles.notification}>
+                  <div className={styles.notificationinfo}>
+                    <span className={styles.notificationtitle}>
                       Nueva notificación 2
                     </span>
                     <br />
-                    <span class={styles.notificationtime}>Hace 3 hora</span>
+                    <span className={styles.notificationtime}>Hace 3 hora</span>
                   </div>
-                  <button class={styles.notificationaction}>Ver</button>
+                  <button className={styles.notificationaction}>Ver</button>
                 </div>
               </li>
               <li>
-                <div class={styles.notification}>
-                  <div class={styles.notificationinfo}>
-                    <span class={styles.notificationtitle}>
+                <div className={styles.notification}>
+                  <div className={styles.notificationinfo}>
+                    <span className={styles.notificationtitle}>
                       Nueva notificación 3
                     </span>
                     <br />
-                    <span class={styles.notificationtime}>Hace 5 hora</span>
+                    <span className={styles.notificationtime}>Hace 5 hora</span>
                   </div>
-                  <button class={styles.notificationaction}>Ver</button>
+                  <button className={styles.notificationaction}>Ver</button>
                 </div>
               </li>
             </ul>
