@@ -39,14 +39,28 @@ const Registro = () => {
     password: Yup.string().required("Por favor, crea una contraseña."),
   });
 
+  // const onSubmit = (values) => {
+  //   axios
+  //     .post("http://localhost:3001/usuario", values)
+  //     .then((res) => {
+  //       alert("Usuario registrado con éxito");
+  //       // setRegistroExitoso(true);
+  //     })
+  //     .catch((err) => {
+  //       alert("Hubo un error al registrar al usuario");
+  //     });
+  // };
+
   const onSubmit = (values) => {
     axios
       .post("http://localhost:3001/usuario", values)
       .then((res) => {
+        // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito
         alert("Usuario registrado con éxito");
-        // setRegistroExitoso(true);
+        resetForm();
       })
       .catch((err) => {
+        // Manejar errores, por ejemplo, mostrar un mensaje de error
         alert("Hubo un error al registrar al usuario");
       });
   };
