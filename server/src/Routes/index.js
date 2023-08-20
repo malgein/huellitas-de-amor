@@ -8,9 +8,11 @@ const filtradoMascotas = require("../controllers/filtradoMascotas");
 const getPets = require("../controllers/getPets");
 const postCasaAdopcion = require("./routesCasaDeAdopcion");
 const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
-const fillPets = require('../controllers/fillPets')
+const fillPets = require('../controllers/fillPets');
+const postSendEmail = require ('../controllers/postSendEmail');
 
 router.get('/fill', fillPets)
+router.post("/email", postSendEmail);
 router.use("/mascotas", mascotas);
 router.get("/", getPets);
 router.get("/nombre", getPetByName);
