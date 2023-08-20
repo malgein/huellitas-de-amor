@@ -9,6 +9,7 @@ import logoPrueba from "../../assets/LogoPrueba.jpg";
 import Registro from "../Registro/registro";
 
 import { useSelector, useDispatch } from "react-redux";
+import AvatarImg from "../AvatarImg/AvatarImg";
 
 
 
@@ -80,6 +81,26 @@ const Nav = () => {
               Iniciar sesión
             </Button>
           </Link>
+
+          <Link className={styles.iniciosesion} to="/login">
+            Iniciar sesion
+          </Link> */}
+          <div className="flex flex-row">
+            {mostarSearchBar && (
+              <div className="mr-6">
+                <SearchBar />
+              </div>
+            )}
+            <div className="mr-9">
+              {" "}
+              <AvatarImg />
+            </div>
+          </div>
+          {/* <div>
+            {" "}
+            <h1>{user?.email}</h1>{" "}
+          </div> */}
+
         </div>
       </div>
 

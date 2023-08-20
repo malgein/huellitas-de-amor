@@ -30,6 +30,7 @@ const Registro = () => {
     password: Yup.string().required("El correo electrónico es requerido"),
   });
 
+
   // const onSubmit = (values) => {
   //   values.preventDefault();
   //   axios

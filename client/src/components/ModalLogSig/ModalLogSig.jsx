@@ -48,7 +48,7 @@ export default function ModalLogSig() {
 
   return (
     <div className="w-full max-w-xs m-auto">
-      <form
+      {/* <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
@@ -100,7 +100,7 @@ export default function ModalLogSig() {
             Olvidaste tu contraseña?
           </a>
         </div>
-      </form>
+      </form> */}
       <button
         onClick={handleGoogleSignin}
         className="bg-slate-50 hover:bg-slate-200 text-black  shadow rounded border-2 border-gray-300 py-2 px-4 w-full"
