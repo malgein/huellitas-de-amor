@@ -5,11 +5,8 @@ const PathRoutes = {
   DETAIL: "/detail/:id",
   LANDINGPAGE: "/",
   PERFIL: "/perfil",
-<<<<<<< HEAD
-  REGISTER: "/register",
-=======
+
   REGISTRO: "/registro",
->>>>>>> origin/qa
 };
 
 export default PathRoutes;

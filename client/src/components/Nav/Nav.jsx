@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import styles from "./nav.module.css";
+import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
@@ -8,20 +8,18 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
   Button,
 } from "@nextui-org/react";
 import Registro from "../Registro/Registro";
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 
-import { useAuth } from "../../context/authContext";
+// import { useAuth } from "../../context/authContext";
 
-const { user } = useAuth();
+// const { user } = useAuth();
 
 const Nav = () => {
   const location = useLocation();
-
 
   const mostarSearchBar = location.pathname === "/home";
 
@@ -72,13 +70,12 @@ const Nav = () => {
               </div>
             )}
           </div>
-          <div>
+          {/* <div>
             {" "}
             <h1>{user?.email}</h1>{" "}
-          </div>
+          </div> */}
         </div>
       </div>
-
 
       {modalabierto && (
         <div className={styles.modal}>
