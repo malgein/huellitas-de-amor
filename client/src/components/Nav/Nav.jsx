@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./nav.module.css";
+
 // import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
@@ -8,6 +9,8 @@ import logoPrueba from "../../assets/LogoPrueba.jpg";
 import Registro from "../Registro/registro";
 
 import { useSelector, useDispatch } from "react-redux";
+
+
 
 const Nav = () => {
   const location = useLocation();
@@ -41,6 +44,7 @@ const Nav = () => {
           {/* <h1>Huellitas de amor</h1> */}
         </div>
 
+
         <div class=" gap-20 flex flex-row items-center text-black">
           <Link class="flex " href="/home">
             Inicio
@@ -49,6 +53,7 @@ const Nav = () => {
             Mi Perfil
           </Link>
           <Link class="flex " href="/notificaciones" onClick={abrirModal}>
+
             Notificaciones
           </Link>
 
@@ -62,6 +67,7 @@ const Nav = () => {
         {/* <div className={styles.agregar}>
           <Link to="/agregar">Agrega tu Mascota</Link>
         </div> */}
+
 
         <div class="gap-4 flex flex-row items-center mr-4">
           <Link href="/registro">
@@ -84,6 +90,7 @@ const Nav = () => {
           </div>
         )}
       </div>
+
 
       {modalabierto && (
         <div className={styles.modal}>

@@ -5,6 +5,7 @@ const PathRoutes = {
   DETAIL: "/detail/:id",
   LANDINGPAGE: "/",
   PERFIL: "/perfil",
+
   REGISTRO: "/registro",
 };
 
