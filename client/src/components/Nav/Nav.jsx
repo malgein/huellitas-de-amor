@@ -71,20 +71,8 @@ const Nav = () => {
 
 
         <div class="gap-4 flex flex-row items-center mr-4">
-          <Link href="/registro">
-            <Button color="primary" variant="bordered">
-              Registrarse
-            </Button>
-          </Link>
-          <Link to="/login">
-            <Button color="primary" variant="solid">
-              Iniciar sesión
-            </Button>
-          </Link>
-
-          <Link className={styles.iniciosesion} to="/login">
-            Iniciar sesion
-          </Link> 
+          
+         
           <div className="flex flex-row">
             {mostarSearchBar && (
               <div className="mr-6">
