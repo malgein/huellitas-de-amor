@@ -12,7 +12,7 @@ import FilterMascotas from "./components/FilterButtons/FilterButtons";
 import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
 import Footer from "./components/Footer/Footer";
-import Registro from "./components/Registro/registro";
+import Registro from "./components/Registro/Registro";
 
 function App() {
   const location = useLocation();

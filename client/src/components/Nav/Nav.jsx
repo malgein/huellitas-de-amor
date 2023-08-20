@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 import SearchBar from "../SearchBar/SearchBar";
-import AgregarMascota from "../AgregarMascota/AgregarMascota";
 
 import { Link, Button, Image } from "@nextui-org/react";
 import logoPrueba from "../../assets/LogoPrueba.jpg";
