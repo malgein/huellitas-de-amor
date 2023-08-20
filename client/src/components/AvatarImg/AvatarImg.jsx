@@ -1,6 +1,6 @@
 import React from "react";
 // import { Avatar } from "@nextui-org/react";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 
 // export default function AvatarImg() {
 //   const { user } = useAuth();
@@ -28,7 +28,7 @@ import {
   Avatar,
   User,
 } from "@nextui-org/react";
-import ModalLogSig from "../modalLogSig/modalLogSig";
+import ModalLogSig from "../ModalLogSig/ModalLogSig";
 
 export default function AvatarImg() {
   const { user } = useAuth();
