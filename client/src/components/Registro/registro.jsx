@@ -1,11 +1,9 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import axios from "axios"
-
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 
 const Registro = () => {
-
   const initialValues = {
     nombre: "",
     apellido: "",
@@ -19,31 +17,33 @@ const Registro = () => {
   };
 
   const validationSchema = Yup.object({
-    nombre: Yup.string().required('El nombre es requerido'),
-    apellido: Yup.string().required('El nombre es requerido'),
-    nacionalidad: Yup.string().required('El nombre es requerido'),
-    localizacion: Yup.string().required('El nombre es requerido'),
-    direccion: Yup.string().required('El nombre es requerido'),
-    telefono: Yup.string().required('El nombre es requerido'),
-    acerca: Yup.string().required('El nombre es requerido'),
-    email: Yup.string().email('Correo electrónico inválido').required('El correo electrónico es requerido'),
-    password: Yup.string().required('El correo electrónico es requerido'),
-
+    nombre: Yup.string().required("El nombre es requerido"),
+    apellido: Yup.string().required("El nombre es requerido"),
+    nacionalidad: Yup.string().required("El nombre es requerido"),
+    localizacion: Yup.string().required("El nombre es requerido"),
+    direccion: Yup.string().required("El nombre es requerido"),
+    telefono: Yup.string().required("El nombre es requerido"),
+    acerca: Yup.string().required("El nombre es requerido"),
+    email: Yup.string()
+      .email("Correo electrónico inválido")
+      .required("El correo electrónico es requerido"),
+    password: Yup.string().required("El correo electrónico es requerido"),
   });
-  
 
   const onSubmit = (values) => {
-    values.preventDefault()
-    axios.post("http://localhost:3001/usuario", initialValues)
-      .then(res => alert(res.data))
-      .catch(err => alert(err))
-
-  }
+    values.preventDefault();
+    axios
+      .post("http://localhost:3001/usuario", initialValues)
+      .then((res) => alert(res.data))
+      .catch((err) => alert(err));
+  };
 
   return (
-
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
       <Form>
         <div>
           <label htmlFor="nombre">Nombre:</label>
@@ -100,15 +100,9 @@ const Registro = () => {
         </div>
 
         <button type="submit">Enviar</button>
-
       </Form>
-
-
     </Formik>
+  );
+};
 
-  )
-}
-
-
-
-export default Registro
+export default Registro;

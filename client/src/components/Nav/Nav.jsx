@@ -13,6 +13,7 @@ import {
 import Registro from "../Registro/Registro";
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
+import AvatarImg from "../AvatarImg/AvatarImg";
 
 // import { useAuth } from "../../context/authContext";
 
@@ -63,12 +64,16 @@ const Nav = () => {
           <Link className={styles.iniciosesion} to="/login">
             Iniciar sesion
           </Link> */}
-          <div>
+          <div className="flex flex-row">
             {mostarSearchBar && (
-              <div className={styles.divsearchbar}>
+              <div className="mr-6">
                 <SearchBar />
               </div>
             )}
+            <div className="mr-9">
+              {" "}
+              <AvatarImg />
+            </div>
           </div>
           {/* <div>
             {" "}

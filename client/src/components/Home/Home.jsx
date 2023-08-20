@@ -9,7 +9,6 @@ import PetCard from "../PetCard/PetCard";
 import Sorts from "../Sorts/Sorts";
 import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
-import { Pagination } from "@nextui-org/react";
 
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
@@ -51,10 +50,11 @@ export default function Home() {
   return (
     <div className="flex h-screen flex-col ">
       <div className="flex h-full flex-row justify-between pr-12">
-        <div className="pl-20 flex flex-col">
+        <div className="pl-12 flex flex-col">
           {" "}
           <FilterMascotas />
         </div>
+
         <Sorts />
       </div>
       <header className="m-0 h-[10%] w-screen bg-white p-0">
@@ -94,7 +94,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-         
     </div>
   );
 }

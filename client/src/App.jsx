@@ -19,8 +19,8 @@ function App() {
   const location = useLocation();
   return (
     <>
-      {location.pathname !== "/" && <Nav />}
       <AuthProvider>
+        {location.pathname !== "/" && <Nav />}
         <Routes>
           <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
           <Route path={PathRoutes.HOME} element={<Home />} />
