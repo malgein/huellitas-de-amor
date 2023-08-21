@@ -29,7 +29,7 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
           {console.log(foto)}
           <Image
             alt="Card background"
-            className="object-cover rounded-xl w-70 h-60"
+            className="object-cover rounded-xl w-[500px] h-[350px]"
             src={foto[0]}
           />
         </div>

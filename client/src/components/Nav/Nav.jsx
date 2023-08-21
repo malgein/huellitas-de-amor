@@ -13,7 +13,7 @@ import Registro from "../Registro/Registro";
 
 const Nav = () => {
   const location = useLocation();
-//style
+  //style
 
   const mostarSearchBar = location.pathname === "/home";
   const [modalabierto, setModalAbierto] = useState(false);
@@ -30,7 +30,7 @@ const Nav = () => {
 
   return (
     <div className="flex flex-col justify-center border-b shadow-lg my-2">
-      <div className="flex justify-between gap-4 flex flex-row ...">
+      <div className="flex justify-between gap-4 flex-row ...">
         <div className="ml-2 flex items-center">
           <Image
             width={100}
@@ -69,7 +69,6 @@ const Nav = () => {
         </div>
 
         {/* <div className="gap-4 flex flex-row items-center mr-4">
-
           <Link href="/registro" className="text-black">
             <Button
               className="border border-black text-black bg-white hover:bg-slate-100  "

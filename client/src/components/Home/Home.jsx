@@ -11,7 +11,6 @@ import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
 
 export default function Home() {
-
   const mascotas = useSelector((state) => state.mascotas);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,20 +48,23 @@ export default function Home() {
   }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
 
   return (
-    <div className="flex h-screen flex-col ">
+    <div className="bg-red-700 flex h-screen w-screen flex-col ">
       <div className="flex h-full flex-row justify-between pr-12">
         <div className="pl-20 flex flex-col">
           {" "}
           <FilterMascotas />
         </div>
-        <Sorts />
+        <div>
+          <Sorts />
+        </div>
       </div>
 
-      <header className="m-0 h-[10%] w-screen bg-white p-0">
-        {/* Se parece que tienes un NavBar comentado. Si no lo usas, puedes eliminar este bloque. */}
-      </header>
-      <div className="m-0 h-full w-screen  flex  bg-white p-0">
-        <section className="m-0 h-[100%]  w-screen bg-white p-0 flex flex-grow items-center justify-center">
+      {/* <header className="m-0 h-[10%] w-screen bg-white p-0">
+        Se parece que tienes un NavBar comentado. Si no lo usas, puedes eliminar este bloque.
+        algo
+      </header> */}
+      <div className="border-4 m-0 h-full w-screen  flex  bg-white p-0">
+        <section className="border border-danger-200 m-0 h-[100%]  w-screen bg-white p-0 flex flex-grow items-center justify-center">
           <div className="bg-white w-[90%] h-[90%] ">
             <div className="flex flex-col">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
