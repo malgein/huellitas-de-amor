@@ -8,13 +8,13 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
         <div className="flex flex-row">
           <div>
             <Link to={PathRoutes.DETAIL.replace(":id", id)}>
-              <p className="text-tiny uppercase font-bold">{nombre}</p>
+              <p className="uppercase font-bold text-lg">{nombre}</p>
             </Link>
             <small className="text-default-500">{edad} años</small>
             <small className="text-default-500">{peso} kg</small>
             <h4 className="font-bold text-large">{sexo}</h4>
           </div>
-          <div className="ml-20">
+          <div className="relative top-1 ml-[132px]">
             <Button color="primary">Donar</Button>
           </div>
         </div>

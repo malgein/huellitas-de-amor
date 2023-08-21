@@ -1,34 +1,15 @@
 import React from "react";
-// import { Avatar } from "@nextui-org/react";
-
-// export default function AvatarImg() {
-//   const { user } = useAuth();
-
-//   return (
-//     <div className="flex gap-4 items-center">
-//       <div>
-//         <h1 className="font-bold">{user?.displayName}</h1>
-//         <h1>{user?.email}</h1>
-//       </div>
-//       <div>
-//         <Avatar radius="lg" color="default" src={user?.photoURL} />
-//       </div>
-//     </div>
-//   );
-// }
-
-// import React from "react";
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Button,
-  Avatar,
   User,
 } from "@nextui-org/react";
 import ModalLogSig from "../ModalLogSig/ModalLogSig";
 import { useAuth } from "../../context/authContext";
+import PathRoutes from "../../helpers/Routes.helper";
+import { Link } from "react-router-dom";
 
 export default function AvatarImg() {
   const { user } = useAuth();
@@ -54,11 +35,15 @@ export default function AvatarImg() {
             <p className="font-bold">Hola 🐾</p>
             <p className="font-bold">{user?.displayName}</p>
           </DropdownItem>
-          {/* <DropdownItem key="settings">My Settings</DropdownItem> */}
-          {/* <DropdownItem key="team_settings">Team Settings</DropdownItem> */}
-          <DropdownItem key="analytics">OTROS 1</DropdownItem>
-          <DropdownItem key="system">OTROS 2</DropdownItem>
-          <DropdownItem key="configurations">OTROS 3</DropdownItem>
+          <DropdownItem key="analytics" to="/registro">
+            <Link to={PathRoutes.HOME}>Home</Link>
+          </DropdownItem>
+          <DropdownItem key="dashboard">
+            <Link to={PathRoutes.DASHBOARD}>Dasboard</Link>
+          </DropdownItem>
+          <DropdownItem key="configurations">
+            <Link to={PathRoutes.REGISTRO}>Registro</Link>
+          </DropdownItem>
           <DropdownItem>
             <ModalLogSig />
           </DropdownItem>
