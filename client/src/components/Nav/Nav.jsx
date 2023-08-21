@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
-
-import { useLocation } from "react-router-dom";
+import styles from "./nav.module.css";
 // import { Link } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import { useSelector, useDispatch } from "react-redux";
+import logoPrueba from "../../assets/LogoPrueba.jpg";
 
 import { Link, Button, Image } from "@nextui-org/react";
-import logoPrueba from "../../assets/LogoPrueba.jpg";
-import styles from "./nav.module.css";
+import Registro from "../Registro/Registro";
+
+// import { addToFavs, removeFromFavs } from "../../redux/actions";
 
 const Nav = () => {
   const location = useLocation();
+//style
+
   const mostarSearchBar = location.pathname === "/home";
   const [modalabierto, setModalAbierto] = useState(false);
 
@@ -24,6 +26,7 @@ const Nav = () => {
     setModalAbierto(false);
   };
 
+  //Por aqui unos cambios
 
   return (
     <div className="flex flex-col justify-center border-b shadow-lg my-2">

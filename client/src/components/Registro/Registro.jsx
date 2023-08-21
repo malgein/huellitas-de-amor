@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import axios from "axios";
-import { Textarea, Button, Input } from "@nextui-org/react";
-import styles from "./registro.module.css";
-import FormInput from "../FormInput/FormInput";
+import styles from "./Registro.module.css";
+import validationSchema from "./Validaciones"; 
+
 
 const Registro = () => {
-  // const [registroExitoso, setRegistroExitoso] = useState(false);
-
   const initialValues = {
     nombre: "",
     apellido: "",
@@ -21,36 +18,7 @@ const Registro = () => {
     password: "",
   };
 
-  const validationSchema = Yup.object({
-    nombre: Yup.string().required("Por favor, introduce tu nombre."),
-    apellido: Yup.string().required("Por favor, introduce tu apellido."),
-    nacionalidad: Yup.string().required(
-      "Por favor, introduce tu nacionalidad."
-    ),
-    localizacion: Yup.string().required("Por favor, proporciona tu ubicación."),
-    direccion: Yup.string().required("Por favor, proporciona tu dirección."),
-    telefono: Yup.string().required(
-      "Por favor, ingresa tu número de teléfono."
-    ),
-    acerca: Yup.string().required("Por favor, cuéntanos un poco acerca de ti."),
-    email: Yup.string()
-      .email("Correo electrónico inválido")
-      .required("Por favor, introduce tu dirección de correo electrónico."),
-    password: Yup.string().required("Por favor, crea una contraseña."),
-  });
-
-  // const onSubmit = (values) => {
-  //   axios
-  //     .post("http://localhost:3001/usuario", values)
-  //     .then((res) => {
-  //       alert("Usuario registrado con éxito");
-  //       // setRegistroExitoso(true);
-  //     })
-  //     .catch((err) => {
-  //       alert("Hubo un error al registrar al usuario");
-  //     });
-  // };
-
+  
   const onSubmit = (values) => {
     axios
       .post("http://localhost:3001/usuario", values)
@@ -65,96 +33,78 @@ const Registro = () => {
       });
   };
 
+
   return (
-    <div className={styles.formcontainer}>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-        // enableReinitialize={true}
-      >
-        {({ isSubmitting, errors, values, setValues }) => (
-          <Form>
-            <div className={styles.tittle}>
-              <h1>Registrate</h1>
-            </div>
-            <div>
-              <FormInput label="Nombre" name="nombre" error={errors.nombre} />
-            </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      <Form className={styles.formContainer}>
 
-            <div>
-              <FormInput
-                label="Apellido"
-                name="apellido"
-                error={errors.apellido}
-              />
-            </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="nombre">Nombre:</label>
+          <Field type="text" id="nombre" name="nombre" />
+          <ErrorMessage className={styles.error} name="nombre" component="div" />
+        </div>
 
-            <div>
-              <FormInput
-                label="Nacionalidad"
-                name="nacionalidad"
-                error={errors.nacionalidad}
-              />
-            </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="apellido">Apellido:</label>
+          <Field type="text" id="apellido" name="apellido" />
+          <ErrorMessage className={styles.error} name="apellido" component="div" />
+        </div>
 
-            <div>
-              <FormInput
-                label="Localizacion"
-                name="localizacion"
-                error={errors.localizacion}
-              />
-            </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="nacionalidad">Nacionalidad:</label>
+          <Field type="text" id="nacionalidad" name="nacionalidad" />
+          <ErrorMessage className={styles.error} name="nacionalidad" component="div" />
+        </div>
 
-            <div>
-              <FormInput
-                label="Direccion"
-                name="direccion"
-                error={errors.direccion}
-              />
-            </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="localizacion">Localizacion:</label>
+          <Field type="text" id="localizacion" name="localizacion" />
+          <ErrorMessage className={styles.error} name="localizacion" component="div" />
+        </div>
 
-            <div>
-              <FormInput
-                label="Telefono"
-                name="telefono"
-                error={errors.telefono}
-              />
-            </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="direccion">Direccion:</label>
+          <Field type="text" id="direccion" name="direccion" />
+          <ErrorMessage className={styles.error} name="direccion" component="div" />
+        </div>
 
-            <div>
-              <FormInput label="Acerca" name="acerca" error={errors.acerca} />
-            </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="telefono">Telefono:</label>
+          <Field type="text" id="telefono" name="telefono" />
+          <ErrorMessage className={styles.error} name="telefono" component="div" />
+        </div>
 
-            <div>
-              <FormInput label="Email" name="email" error={errors.email} />
-            </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="acerca">Acerca:</label>
+          <Field type="text" id="acerca" name="acerca" />
+          <ErrorMessage className={styles.error} name="acerca" component="div" />
+        </div>
 
-            <div>
-              <FormInput
-                label="Contraseña"
-                name="password"
-                error={errors.password}
-              />
-            </div>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="email">Email:</label>
+          <Field type="email" id="email" name="email" />
+          <ErrorMessage className={styles.error} name="email" component="div" />
+        </div>
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="border border-black text-black hover:bg-slate-100 mt-8 bg-inherit "
-              size="lg"
-            >
-              Registrate
-            </Button>
+        <div className={styles.fieldContainer}>
+          <label htmlFor="password">Password:</label>
+          <Field type="password" id="password" name="password" />
+          <ErrorMessage className={styles.error} name="password" component="div" />
+        </div>
 
-            {/* {registroExitoso && setValues(initialValues)} */}
-          </Form>
-        )}
-      </Formik>
-    </div>
+        <div>
+          <button type="submit" className={styles.submitButton}>
+            Enviar
+          </button>
+        </div>
+
+      </Form>
+    </Formik>
   );
 };
 
 export default Registro;
-
-
