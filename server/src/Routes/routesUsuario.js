@@ -1,22 +1,24 @@
 const { Router } = require("express");
 const router = Router();
-const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
-const fillHomes = require('../utils/fillHomes')
-const getAllHomes = require('../controllers/getAllHomes')
-const modHouseById = require('../controllers/modHouseById')
-const deleteHouseAdoptionById = require('../controllers/deleteHouseAdoption')
+const crearUsuario = require("../controllers/crearUsuario");
+//controlador que llena la bd de usuarios para prueba
+const llenarUsuario = require('../utils/llenarUsuario')
+const getUsers = require('../controllers/getUsers')
+const modUserById = require('../controllers/modUsersById')
+const deleteUsersById = require('../controllers/deleteUsersById')
 
 router.post("/", async (req, res) => {
   try {
     const response = req.body;
-    const casaPost = await postCasaDeAdopcion(response);
-    res.status(200).json(casaPost);
+    const usuarioPost = await crearUsuario(response);
+    res.status(200).json(usuarioPost);
   } catch (error) {
     res.status(error.status || 500).json({ message: error.message });
   }
 });
-
-router.get('/fill', async (req, res) => {
+ 
+//controlador que funciona con propositos de llenar la base de datos con datos de usuario para testeo
+router.get('/fill',  async (req, res) => {
   try {
 		//Esta linea de codigo borra la tabla para asegurarse que no se vuelva a rescribir la informacion que le estamos a punto de pasar
     
@@ -26,21 +28,22 @@ router.get('/fill', async (req, res) => {
 
     //Llama llenarUsuario que usa un metodo de sequelize llamado bulkCreate que llena la la base de datos con data de usuarios validos
 
-
-    const getFill = () => fillHomes()
+    console.log(llenarUsuario)
+    const getFill = () => llenarUsuario()
     
      getFill()
 
-    res.status(200).json({ message: 'Datos de casas de adopcion llenados exitosamente' });
+    res.status(200).json({ message: 'Datos de usuarios llenados exitosamente' });
   } catch (error) {
     console.error('Error al llenar los datos:', error);
-    res.status(500).json({ error: 'Error al llenar los datos de las casas de adopcion' });
+    res.status(500).json({ error: 'Error al llenar los datos de los usuarios' });
   }
 })
 
+//Ruta que me trae todos los usuarios de la base de datos necesario para la gestion de usuarios en el componente admin
 router.get('/', async(req,res) => {
   try{
-    const data = await getAllHomes()
+    const data = await getUsers()
 
     return res.status(200).json(data)
   }catch(error){
@@ -53,8 +56,8 @@ router.patch("/:id", async (req, res) => {
     const { id } = req.params;
     const response = req.body
     console.log(req.body)
-    const houseId =  await modHouseById(id, response);
-    return res.status(200).json(houseId);
+    const userId =  await modUserById(id, response);
+    return res.status(200).json(userId);
   } catch (error) {
     return res.status(500).json({ mensaje: "Error en el servidor" });
   }
@@ -63,11 +66,12 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const houseId =  await deleteHouseAdoptionById(id);
-    return res.status(200).json(houseId);
+    const userId =  await deleteUsersById(id);
+    return res.status(200).json(userId);
   } catch (error) {
     return res.status(500).json({ mensaje: "Error en el servidor" });
   }
 });
+
 
 module.exports = router;

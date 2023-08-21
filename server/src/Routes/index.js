@@ -7,19 +7,23 @@ const getPetByName = require("../controllers/getPetsByName");
 const filtradoMascotas = require("../controllers/filtradoMascotas");
 const getPets = require("../controllers/getPets");
 const postCasaAdopcion = require("./routesCasaDeAdopcion");
-const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
-const fillPets = require('../controllers/fillPets')
-const fillUsers = require('../controllers/fillUsers')
+const fillDonations = require("../controllers/fillDonations");
+//Todas las rutas del usuario
+const postUsuario = require("./routesUsuario");
+const postDonaciones = require('./routesDonaciones')
 
-router.get('/fillUsers', fillUsers)
-router.get('/fill', fillPets)
+
+router.get("/fill", fillDonations);
+router.use('/donaciones', postDonaciones)
+router.use("/usuario", postUsuario);
+router.use("/casaDeAdopcion", postCasaAdopcion);
 router.use("/mascotas", mascotas);
 router.get("/", getPets);
 router.get("/nombre", getPetByName);
 router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
-router.use("/casaDeAdopcion", postCasaAdopcion);
 
+// router.post("/", crearUsuario);
 
 module.exports = router;

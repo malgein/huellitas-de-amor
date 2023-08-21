@@ -12,6 +12,7 @@ import FilterMascotas from "./components/FilterButtons/FilterButtons";
 import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
 import Footer from "./components/Footer/Footer";
+
 //Componente dashboard
 import Dashboard from "./components/Dashboard/Dashboard";
 //Componente dashboard gestiona mascotas
@@ -22,6 +23,8 @@ import Users from './components/Dashboard/Users'
 import AdoptionHouses from './components/Dashboard/AdoptionHouses'
 //Componente dashboard gestiona donaciones
 import Donations from './components/Dashboard/Donations'
+
+import Registro from "./components/Registro/Registro";
 
 
 function App() {
@@ -36,17 +39,22 @@ function App() {
 			<Route path={PathRoutes.PERFIL} element={<Perfil />} />
 			<Route path={PathRoutes.DETAIL} element={<Detail />} />
 			<Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
+			{/* Componente dashboard  */}
 			<Route path={PathRoutes.DASHBOARD} element={<Dashboard/>}/>
+			{/* Subruta de dashboard que gestiona las mascotas para ek admin */}
 			<Route path={PathRoutes.DASHBOARD_MASCOTAS} element={<Pets/>}/>
+			{/* Subruta de dashboard que gestiona los usuarios para el admin */}
 			<Route path={PathRoutes.DASHBOARD_USUARIOS} element={<Users/>}/>
+			{/* Subruta de dashboard que gestiona las casas de adopcion para el admin */}
 			<Route path={PathRoutes.DASHBOARD_CASAS_DE_ADOPCION} element={<AdoptionHouses/>}/>
+			{/* Subruta de dashboard que gestiona las donaciones para el admin */}
 			<Route path={PathRoutes.DASHBOARD_DONACIONES} element={<Donations/>}/>
 	</Routes>
 			<div>
 				{location.pathname !=='/home' && <Footer />}
 			</div>
 		</>
-  );
+	);
 }
 
 export default App;

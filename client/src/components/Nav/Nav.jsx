@@ -3,12 +3,21 @@ import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
-import {Button} from '@nextui-org/react'
+
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Button,
+} from "@nextui-org/react";
+import Registro from "../Registro/Registro";
+
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 
 const Nav = () => {
   const location = useLocation();
-
+//style
 
   const mostarSearchBar = location.pathname === "/home";
 
@@ -45,6 +54,7 @@ const Nav = () => {
         </div> */}
         <div className={styles.divlogin}>
           {/* <Link className={styles.regis} to="/login">
+          <Link className={styles.regis} to="/registro">
             Registrarse
           </Link>
           <Link className={styles.iniciosesion} to="/login">

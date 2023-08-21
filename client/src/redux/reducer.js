@@ -13,8 +13,17 @@ import {
   APPLY_FILTERS,
   FILTERS_ERROR,
 
-  FILL_DATABASE,
-  
+
+  GET_ALL_DONATIONS,
+  //accion que me trae todos los usuarios
+  GET_USERS,
+  GET_ALL_HOMES,
+  EDIT_USER,
+  DELETE_USERS,
+  EDIT_PETS,
+  DELETE_PET,
+  EDIT_HOUSES,
+  DELETE_HOUSES
 } from "./actions";
 
 const initialState = {
@@ -24,7 +33,10 @@ const initialState = {
   error: null,
   mascotasBackUp: [],
   //Estado que representa la cesta de adopcion
-  bascket: []
+  bascket: [],
+  usuarios: [],
+  casasDeAdopcion: [],
+  donaciones: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -102,13 +114,39 @@ const rootReducer = (state = initialState, { type, payload }) => {
         mascotas: sortedByAge,
       };
 
-
-      // case FILL_DATABASE:
-      //   console.log(payload)
-      //   return{
-      //     ...state
-      //   }
-
+      case GET_USERS:
+        return{
+          ...state,
+          usuarios: payload
+        }
+        case GET_ALL_HOMES:
+          return{
+            ...state,
+            casasDeAdopcion:payload
+          }
+          case GET_ALL_DONATIONS:
+            return{
+              ...state,
+              donaciones: payload
+            }
+          case EDIT_USER:
+            console.log(payload)
+            return { ...state};  
+          case DELETE_USERS:
+            // console.log(payload)
+            return { ...state};    
+          case EDIT_PETS:
+            console.log(payload)
+            return { ...state};
+          case DELETE_PET:
+            // console.log(payload)
+            return { ...state};
+          case EDIT_HOUSES:
+            console.log(payload)
+            return { ...state};
+          case DELETE_HOUSES:
+            console.log(payload)
+            return { ...state};
     default:
       return { ...state };
   }

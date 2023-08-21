@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Input, Textarea,Button } from "@nextui-org/react";
+import { Input, Textarea, Button } from "@nextui-org/react";
 import styles from "./AgregarMascota.module.css";
 import { useDispatch } from "react-redux";
 import { addMascota } from "../../redux/actions";
+import FormInput from "../FormInput/FormInput";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const validationSchema = Yup.object().shape({
 	nombre: Yup.string()
@@ -26,10 +29,10 @@ const validationSchema = Yup.object().shape({
 		.required("Campo requerido"),
 	descripcion: Yup.string()
 		.min(3, "Debe poseer mínimo 3 caracteres ")
-		.max(250, "Debe poseer máximo 250 caracteres")
+
 		.required("Campo requerido"),
 	foto: Yup.string()
-		.max(250, "Debe poseer máximo 250 caracteres")
+
 		.url("Debe ser una URL válida")
 		.required("Campo requerido"),
 	raza: Yup.string()
@@ -39,7 +42,7 @@ const validationSchema = Yup.object().shape({
 	sexo: Yup.string().required("Campo requerido"),
 });
 const AgregarMascota = () => {
-	const mascota ={
+	const [mascota, setMascota] = useState({
 		nombre: "",
 		especie: "",
 		edad: 0,
@@ -49,91 +52,65 @@ const AgregarMascota = () => {
 		foto: "",
 		raza: "",
 		sexo: "",
-	}
-	const initialValues = mascota
-	
-	const dispatch=useDispatch()
-	const handleSubmit = (mascota) => {
-		console.log(mascota);
-		dispatch(addMascota(mascota));
+	});
 
+	const dispatch = useDispatch();
+	const Navigate = useNavigate()
+
+	const handleSubmit = (mascota) => {
+		dispatch(addMascota(mascota));
+		localStorage.removeItem("formData");
+		  Swal.fire({
+				tittle: "MASCOTA AGREGADA",
+				text: "La mascota se ha agregado satisfactoriamente",
+				icon: "success",
+				buttons: "OK",
+			});
+			Navigate("/Home");
 	};
+
+	const handleFormChange = (values) => {
+		localStorage.setItem("formData", JSON.stringify(values));
+	};
+
+	const storedData = localStorage.getItem("formData");
+
 	const tamañoOptions = ["Pequeño", "Mediano", "Grande"];
-  const getValidationState = (fieldName, errors) => {
-		return fieldName && fieldName in errors ? "danger" : "success";
-	};
 	return (
 		<div className={styles.formContainer}>
 			<Formik
-				initialValues={initialValues}
+				initialValues={storedData ? JSON.parse(storedData) : mascota}
 				validationSchema={validationSchema}
 				onSubmit={handleSubmit}>
-				{({ isSubmitting, errors }) => (
+				{({ isSubmitting, errors, values }) => (
 					<div className={styles.form}>
-						<Form>
+						{setMascota(values)}
+						<Form onChange={() => handleFormChange(values)}>
 							<div className={styles.tittle}>
 								<h1>Agrega una nueva mascota</h1>
 							</div>
-							<div className={styles.Field}>
-								<Field
-									as={Input}
-									label='Nombre'
-									variant='bordered'
-									placeholder='Nombre de la mascota...'
-									type='text'
-									id='nombre'
-									name='nombre'
-									errorMessage={<ErrorMessage name='nombre' component='div' />}
-									validationState={validationSchema}
-									color={errors.nombre ? "danger" : "success"}
-								/>
-								{console.log(errors)}
-								{/* <ErrorMessage name='nombre' component='span' /> */}
-								{/* {console.log(validationSchema.isValidSync("nombre"))} */}
+							<div>
+								<FormInput label='Nombre' name='nombre' error={errors.nombre} />
 							</div>
-							<div className={styles.Field}>
-								<Field
-									as={Input}
+							{console.log(localStorage)}
+							<div>
+								<FormInput
 									label='Especie'
-									variant='bordered'
-									placeholder='Agrega la especie de tu mascota...'
-									type='text'
-									id='especie'
 									name='especie'
-									errorMessage={<ErrorMessage name='especie' component='div' />}
-									validationState={validationSchema}
-									color={errors.especie ? "danger" : "success"}
-								/>
-								{/* <ErrorMessage name='especie' component='div' /> */}
-							</div>
-							<div className={styles.Field}>
-								<Field
-									as={Input}
-									label='Edad'
-									variant='bordered'
-									placeholder='Agrega la edad de tu mascota...'
-									type='text'
-									id='edad'
-									name='edad'
-									errorMessage={<ErrorMessage name='edad' component='div' />}
-									validationState={validationSchema}
-									color={errors.edad ? "danger" : "success"}
+									error={errors.especie}
 								/>
 							</div>
-
-							<div className={styles.Field}>
-								<Field
-									as={Input}
-									label='Peso'
-									placeholder='Agrega la peso de tu mascota...'
-									variant='bordered'
-									type='text'
-									id='peso'
-									name='peso'
-									errorMessage={<ErrorMessage name='peso' component='div' />}
-									validationState={validationSchema}
-									color={errors.peso ? "danger" : "success"}
-								/>
+							<div>
+								<FormInput label='Edad' name='edad' error={errors.edad} />
+							</div>
+							<div>
+								<FormInput label='Peso' name='peso' error={errors.peso} />
+							</div>
+							<div>
+								<FormInput label='Foto' name='foto' error={errors.foto} />
+							</div>
+							<div>
+								<FormInput label='Raza' name='raza' error={errors.raza} />
 							</div>
 							<div className={styles.FielTextarea}>
 								<Field
@@ -146,44 +123,19 @@ const AgregarMascota = () => {
 									errorMessage={
 										<ErrorMessage name='descripcion' component='div' />
 									}
-									validationState={validationSchema}
+									// validationState={validationSchema}
 									color={errors.descripcion ? "danger" : "success"}
 								/>
 							</div>
-							<div className={styles.Field}>
-								<Field
-									as={Input}
-									variant='bordered'
-									label='Foto (URL)'
-									placeholder='Agrega la foto de tu mascota...'
-									id='foto'
-									name='foto'
-									errorMessage={<ErrorMessage name='foto' component='div' />}
-									// validationState={}
-									color={errors.foto ? "danger" : "success"}
-								/>
-							</div>
-							<div className={styles.Field}>
-								<Field
-									as={Input}
-									variant='bordered'
-									label='Raza'
-									placeholder='Agrega la raza de tu mascota...'
-									id='raza'
-									name='raza'
-									errorMessage={<ErrorMessage name='raza' component='div' />}
-									validationState={validationSchema}
-									color={errors.raza ? "danger" : "success"}
-								/>
-							</div>
+
 							<div className={styles.selectContainer}>
 								<div
 									className={
 										errors.tamano ? styles.selectRed : styles.selectGreen
 									}>
-									<div class='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
+									<div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
 										<label
-											class='block font-medium  dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none
+											className='block font-medium  dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none
 							w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small'
 											htmlFor='tamano'>
 											Tamaño:
@@ -198,11 +150,12 @@ const AgregarMascota = () => {
 											errorMessage={
 												<ErrorMessage name='tamano' component='div' />
 											}
-											validationState={validationSchema}>
+											// validationState={validationSchema}
+										>
 											<option value=''>Tamaño</option>
 											{tamañoOptions.map((option) => (
 												<option
-													class='w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small'
+													className='w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small'
 													key={option}
 													value={option}>
 													{option}
@@ -211,7 +164,7 @@ const AgregarMascota = () => {
 										</Field>
 									</div>
 									<ErrorMessage
-										class='text-tiny text-danger'
+										className='text-tiny text-danger'
 										name='tamano'
 										component='div'
 									/>
@@ -220,9 +173,9 @@ const AgregarMascota = () => {
 									className={
 										errors.sexo ? styles.selectRed : styles.selectGreen
 									}>
-									<div class='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
+									<div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
 										<label
-											class='block font-medium 
+											className='block font-medium 
 										
 										 dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none'
 											htmlFor='tamano'>
@@ -235,7 +188,7 @@ const AgregarMascota = () => {
 										</Field>
 									</div>
 									<ErrorMessage
-										class='text-tiny text-danger'
+										className='text-tiny text-danger'
 										name='sexo'
 										component='div'
 									/>
