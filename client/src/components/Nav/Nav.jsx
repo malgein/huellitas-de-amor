@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link, Button, Image } from "@nextui-org/react";
 import logoPrueba from "../../assets/LogoPrueba.jpg";
-/* import Registro from "../Registro/Registro"; */
+import Registro from "../Registro/Registro";
 
 import { useSelector, useDispatch } from "react-redux";
 import AvatarImg from "../AvatarImg/AvatarImg";
@@ -84,7 +84,7 @@ const Nav = () => {
 
           <Link className={styles.iniciosesion} to="/login">
             Iniciar sesion
-          </Link> 
+          </Link>
           <div className="flex flex-row">
             {mostarSearchBar && (
               <div className="mr-6">

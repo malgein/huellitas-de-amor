@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-
 export default function ModalLogSig() {
   const [user, setUser] = useState({
     email: "",
@@ -109,7 +108,7 @@ export default function ModalLogSig() {
       </button>
       <p className="my-4 text-sm flex justify-between px-3">
         ¿No tienes Cuenta?
-        <Link to="/register" className="text-blue-700 hover:text-blue-900">
+        <Link to="/registro" className="text-blue-700 hover:text-blue-900">
           Regístrate
         </Link>
       </p>
