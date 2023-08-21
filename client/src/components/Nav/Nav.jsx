@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
+
+
+
 import { useLocation } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
@@ -36,18 +40,24 @@ const Nav = () => {
           />
         </div>
 
+
         <div className=" gap-20 flex flex-row justify-center items-center text-black">
           <Link className="text-black" href="/home">
+
             Inicio
           </Link>
           <Link href="/perfil" className="text-black">
             Mi Perfil
           </Link>
+
+
           <Link
             href="/notificaciones"
             onClick={abrirModal}
             className="text-black"
           >
+
+
             Notificaciones
           </Link>
 
@@ -64,11 +74,16 @@ const Nav = () => {
         </div>
 
         {/* <div className="gap-4 flex flex-row items-center mr-4">
+
+
+
           <Link href="/registro" className="text-black">
             <Button
               className="border border-black text-black bg-white hover:bg-slate-100  "
               color="primary"
             >
+
+
               Registrarse
             </Button>
           </Link>
