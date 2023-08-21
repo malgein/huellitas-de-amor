@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, ModalContent, Button, useDisclosure } from "@nextui-org/react";
-import ModalLogSig from "../modalLogSig/modalLogSig";
+import ModalLogSig from "../ModalLogSig/ModalLogSig";
 
 export default function ButonModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

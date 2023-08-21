@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link, Button, Image } from "@nextui-org/react";
 import logoPrueba from "../../assets/LogoPrueba.jpg";
-import Registro from "../Registro/registro";
+/* import Registro from "../Registro/Registro"; */
 
 import { useSelector, useDispatch } from "react-redux";
 import AvatarImg from "../AvatarImg/AvatarImg";
@@ -32,7 +32,7 @@ const Nav = () => {
 
   return (
     <div class="flex flex-col justify-center border-b shadow-lg my-2">
-      <div class="flex justify-between gap-4 flex flex-row ...">
+      <div class="flex justify-between gap-4 flex-row ...">
         <div class="ml-2 flex items-center">
           <Image
             width={100}
@@ -84,7 +84,7 @@ const Nav = () => {
 
           <Link className={styles.iniciosesion} to="/login">
             Iniciar sesion
-          </Link> */}
+          </Link> 
           <div className="flex flex-row">
             {mostarSearchBar && (
               <div className="mr-6">
