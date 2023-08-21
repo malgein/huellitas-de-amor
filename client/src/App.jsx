@@ -24,7 +24,7 @@ import AdoptionHouses from './components/Dashboard/AdoptionHouses'
 import Donations from './components/Dashboard/Donations'
 
 import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
-import { AuthProvider } from "./context/authContext";
+import { AuthProvider } from "./context/AuthContext";
 import Registro from "./components/Registro/Registro";
 
 

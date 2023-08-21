@@ -108,7 +108,7 @@ import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, C
 import {EditIcon} from "./EditIcon";
 import { DeleteIcon } from './DeletIcon'
 import {EyeIcon} from "./EyeIcon";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 
 const statusColorMap = {
