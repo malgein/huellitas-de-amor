@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
+
+
 import { useLocation } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
@@ -10,8 +12,6 @@ import SearchBar from "../SearchBar/SearchBar";
 import { Link, Button, Image } from "@nextui-org/react";
 import logoPrueba from "../../assets/LogoPrueba.jpg";
 import styles from "./nav.module.css";
-
-
 
 const Nav = () => {
   const location = useLocation();
@@ -41,10 +41,8 @@ const Nav = () => {
         </div>
 
 
-        <div className=" gap-20 flex flex-row items-center text-black">
+        <div className=" gap-20 flex flex-row justify-center items-center text-black">
           <Link className="text-black" href="/home">
-
-
 
             Inicio
           </Link>
@@ -52,11 +50,13 @@ const Nav = () => {
             Mi Perfil
           </Link>
 
+
           <Link
             href="/notificaciones"
             onClick={abrirModal}
             className="text-black"
           >
+
 
             Notificaciones
           </Link>
@@ -73,13 +73,16 @@ const Nav = () => {
           </div>
         </div>
 
+        {/* <div className="gap-4 flex flex-row items-center mr-4">
 
-        <div className="gap-4 flex flex-row items-center mr-4">
+
+
           <Link href="/registro" className="text-black">
             <Button
               className="border border-black text-black bg-white hover:bg-slate-100  "
               color="primary"
             >
+
 
               Registrarse
             </Button>
@@ -87,7 +90,7 @@ const Nav = () => {
           <Link to="/login">
             <Button className="text-white bg-black">Iniciar sesión</Button>
           </Link>
-        </div>
+        </div> */}
       </div>
 
       <div className="flex justify-center">
@@ -97,7 +100,6 @@ const Nav = () => {
           </div>
         )}
       </div>
-
 
       {modalabierto && (
         <div className={styles.modal}>
