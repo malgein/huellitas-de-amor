@@ -109,6 +109,7 @@ import {EditIcon} from "./EditIcon";
 import { DeleteIcon } from './DeletIcon'
 import {EyeIcon} from "./EyeIcon";
 import Swal from 'sweetalert2'
+import { json } from 'react-router-dom'
 
 
 const statusColorMap = {
@@ -141,6 +142,30 @@ function Users() {
     }
   }, [userDeleted, dispatch]);
 
+  const handleEdit = async(id) => {
+    console.log(id)
+    const { value: formValues } = await Swal.fire({
+      title: 'Introduce la propiedad y el valor que deseas modificar',
+      html:
+        '<input id="swal-input1" class="swal2-input">' +
+        '<input id="swal-input2" class="swal2-input">',
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById('swal-input1').value,
+          document.getElementById('swal-input2').value
+        ]
+      }
+    })
+    
+    if (formValues) {
+      const result = {[formValues[0]] : formValues[1]}
+      console.log(result)
+      // const resultJson = JSON.stringify(result)
+      dispatch(editUser(id, result))
+      Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
+    }
+  }
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -161,6 +186,8 @@ function Users() {
       }
     })
   }
+
+
 
 
   const toggleEdit = (userId) => {
@@ -216,7 +243,7 @@ function Users() {
             </Tooltip>
             <Tooltip content="Edit user">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EditIcon />
+                <EditIcon  onClick={() => handleEdit(user.id)}/>
               </span>
             </Tooltip>
             <Tooltip color="danger" content="Delete user">
