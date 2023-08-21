@@ -15,6 +15,7 @@ import Footer from "./components/Footer/Footer";
 
 import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
 import { AuthProvider } from "./context/authContext";
+import Registro from "./components/Registro/Registro";
 
 function App() {
   const location = useLocation();
@@ -29,6 +30,7 @@ function App() {
           <Route path={PathRoutes.PERFIL} element={<Perfil />} />
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
+          <Route Path={PathRoutes.REGISTRO} element={<Registro />}></Route>
         </Routes>
       </AuthProvider>
       {/* <Footer /> */}
