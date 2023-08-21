@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { Textarea, Button, Input } from "@nextui-org/react";
+import styles from "./registro.module.css";
+import FormInput from "../FormInput/FormInput";
 
 const Registro = () => {
+  // const [registroExitoso, setRegistroExitoso] = useState(false);
+
   const initialValues = {
     nombre: "",
     apellido: "",
@@ -17,92 +22,139 @@ const Registro = () => {
   };
 
   const validationSchema = Yup.object({
-    nombre: Yup.string().required("El nombre es requerido"),
-    apellido: Yup.string().required("El nombre es requerido"),
-    nacionalidad: Yup.string().required("El nombre es requerido"),
-    localizacion: Yup.string().required("El nombre es requerido"),
-    direccion: Yup.string().required("El nombre es requerido"),
-    telefono: Yup.string().required("El nombre es requerido"),
-    acerca: Yup.string().required("El nombre es requerido"),
+    nombre: Yup.string().required("Por favor, introduce tu nombre."),
+    apellido: Yup.string().required("Por favor, introduce tu apellido."),
+    nacionalidad: Yup.string().required(
+      "Por favor, introduce tu nacionalidad."
+    ),
+    localizacion: Yup.string().required("Por favor, proporciona tu ubicación."),
+    direccion: Yup.string().required("Por favor, proporciona tu dirección."),
+    telefono: Yup.string().required(
+      "Por favor, ingresa tu número de teléfono."
+    ),
+    acerca: Yup.string().required("Por favor, cuéntanos un poco acerca de ti."),
     email: Yup.string()
       .email("Correo electrónico inválido")
-      .required("El correo electrónico es requerido"),
-    password: Yup.string().required("El correo electrónico es requerido"),
+      .required("Por favor, introduce tu dirección de correo electrónico."),
+    password: Yup.string().required("Por favor, crea una contraseña."),
   });
 
+  // const onSubmit = (values) => {
+  //   axios
+  //     .post("http://localhost:3001/usuario", values)
+  //     .then((res) => {
+  //       alert("Usuario registrado con éxito");
+  //       // setRegistroExitoso(true);
+  //     })
+  //     .catch((err) => {
+  //       alert("Hubo un error al registrar al usuario");
+  //     });
+  // };
+
   const onSubmit = (values) => {
-    values.preventDefault();
     axios
-      .post("http://localhost:3001/usuario", initialValues)
-      .then((res) => alert(res.data))
-      .catch((err) => alert(err));
+      .post("http://localhost:3001/usuario", values)
+      .then((res) => {
+        // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito
+        alert("Usuario registrado con éxito");
+        resetForm();
+      })
+      .catch((err) => {
+        // Manejar errores, por ejemplo, mostrar un mensaje de error
+        alert("Hubo un error al registrar al usuario");
+      });
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      <Form>
-        <div>
-          <label htmlFor="nombre">Nombre:</label>
-          <Field type="text" id="nombre" name="nombre" />
-          <ErrorMessage name="nombre" component="div" />
-        </div>
+    <div className={styles.formcontainer}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+        // enableReinitialize={true}
+      >
+        {({ isSubmitting, errors, values, setValues }) => (
+          <Form>
+            <div className={styles.tittle}>
+              <h1>Registrate</h1>
+            </div>
+            <div>
+              <FormInput label="Nombre" name="nombre" error={errors.nombre} />
+            </div>
 
-        <div>
-          <label htmlFor="apellido">Apellido:</label>
-          <Field type="text" id="apellido" name="apellido" />
-          <ErrorMessage name="apellido" component="div" />
-        </div>
+            <div>
+              <FormInput
+                label="Apellido"
+                name="apellido"
+                error={errors.apellido}
+              />
+            </div>
 
-        <div>
-          <label htmlFor="nacionalidad">Nacionalidad:</label>
-          <Field type="text" id="nacionalidad" name="nacionalidad" />
-          <ErrorMessage name="nacionalidad" component="div" />
-        </div>
+            <div>
+              <FormInput
+                label="Nacionalidad"
+                name="nacionalidad"
+                error={errors.nacionalidad}
+              />
+            </div>
 
-        <div>
-          <label htmlFor="localizacion">Localización:</label>
-          <Field type="text" id="localizacion" name="localizacion" />
-          <ErrorMessage name="localizacion" component="div" />
-        </div>
+            <div>
+              <FormInput
+                label="Localizacion"
+                name="localizacion"
+                error={errors.localizacion}
+              />
+            </div>
 
-        <div>
-          <label htmlFor="direccion">Direccion:</label>
-          <Field type="text" id="direccion" name="direccion" />
-          <ErrorMessage name="direccion" component="div" />
-        </div>
+            <div>
+              <FormInput
+                label="Direccion"
+                name="direccion"
+                error={errors.direccion}
+              />
+            </div>
 
-        <div>
-          <label htmlFor="telefono">Telefono:</label>
-          <Field type="text" id="telefono" name="telefono" />
-          <ErrorMessage name="telefono" component="div" />
-        </div>
+            <div>
+              <FormInput
+                label="Telefono"
+                name="telefono"
+                error={errors.telefono}
+              />
+            </div>
 
-        <div>
-          <label htmlFor="acerca">Acerca:</label>
-          <Field type="text" id="acerca" name="acerca" />
-          <ErrorMessage name="acerca" component="div" />
-        </div>
+            <div>
+              <FormInput label="Acerca" name="acerca" error={errors.acerca} />
+            </div>
 
-        <div>
-          <label htmlFor="email">Email:</label>
-          <Field type="email" id="email" name="email" />
-          <ErrorMessage name="email" component="div" />
-        </div>
+            <div>
+              <FormInput label="Email" name="email" error={errors.email} />
+            </div>
 
-        <div>
-          <label htmlFor="password">Password:</label>
-          <Field type="password" id="password" name="password" />
-          <ErrorMessage name="password" component="div" />
-        </div>
+            <div>
+              <FormInput
+                label="Contraseña"
+                name="password"
+                error={errors.password}
+              />
+            </div>
 
-        <button type="submit">Enviar</button>
-      </Form>
-    </Formik>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="border border-black text-black hover:bg-slate-100 mt-8 bg-inherit "
+              size="lg"
+            >
+              Registrate
+            </Button>
+
+            {/* {registroExitoso && setValues(initialValues)} */}
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 
 export default Registro;
+
+

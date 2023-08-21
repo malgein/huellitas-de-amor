@@ -4,16 +4,11 @@ import {
   ORDER_BY_AGE,
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
-
-
   FETCHING_MASCOTAS,
   FETCHING_MASCOTAS_SUCCESS,
   FETCHING_MASCOTAS_ERROR,
-
   APPLY_FILTERS,
   FILTERS_ERROR,
-
-
   GET_ALL_DONATIONS,
   //accion que me trae todos los usuarios
   GET_USERS,
@@ -23,7 +18,9 @@ import {
   EDIT_PETS,
   DELETE_PET,
   EDIT_HOUSES,
-  DELETE_HOUSES
+  DELETE_HOUSES,
+  SUBIR_IMAGENES,
+  LIMPIAR_IMAGENES,
 } from "./actions";
 
 const initialState = {
@@ -32,11 +29,10 @@ const initialState = {
   mascotas: [],
   error: null,
   mascotasBackUp: [],
-  //Estado que representa la cesta de adopcion
-  bascket: [],
   usuarios: [],
   casasDeAdopcion: [],
-  donaciones: []
+  donaciones: [],
+  imagenes: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -47,21 +43,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
         loading: true,
 
         mascotas: payload,
-        mascotasBackUp: payload
-
-
+        mascotasBackUp: payload,
       };
-      case APPLY_FILTERS:
+    case APPLY_FILTERS:
       return {
         ...state,
         mascotas: payload,
       };
-      
-      case FILTERS_ERROR:
+
+    case FILTERS_ERROR:
       return {
         ...state,
-        error: payload
-      }
+        error: payload,
+      };
 
     case FETCHING_MASCOTAS_SUCCESS:
       return {
@@ -86,10 +80,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, petDetail: payload };
 
     case GET_PET_BY_NAME:
-
-
       return { ...state, mascotas: payload };
-
 
       //Comente esta linea y escribe la que vinene despues de esta porque las mascotas que se buscaban por nombres es mas facil coordinar el paginado, los ordenamientos y los filtros jusntos si estan en el mismo estado en este caso mascotas
       // return { ...state, petDetail: payload };
@@ -113,7 +104,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         mascotas: sortedByAge,
       };
-
       case GET_USERS:
         return{
           ...state,
@@ -147,6 +137,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
           case DELETE_HOUSES:
             console.log(payload)
             return { ...state};
+    case SUBIR_IMAGENES:
+      return {...state, imagenes: payload}
+
+    case LIMPIAR_IMAGENES: 
+      return {...state, imagenes: []}
     default:
       return { ...state };
   }

@@ -83,12 +83,12 @@ Usuario.hasMany(Adopcion, {
 });
 //Lo comenté porque si no, cuando haces post de casa de adopción te pide un comentario como dato en el json.
 //Casa de Apciones --> Comentarios
-CasaDeAdopcion.belongsTo(Comentario, {
+/* CasaDeAdopcion.belongsTo(Comentario, {
   foreignKey: "comentarioId",
 });
 Comentario.hasMany(CasaDeAdopcion, {
   foreignKey: "comentarioId",
-});
+}); */
 
 //Mascotas --> Casa de Adopciones
 Mascota.belongsTo(CasaDeAdopcion, {

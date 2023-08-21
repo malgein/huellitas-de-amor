@@ -9,10 +9,6 @@ import PetCard from "../PetCard/PetCard";
 import Sorts from "../Sorts/Sorts";
 import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
-import { Pagination } from "@nextui-org/react";
-
-//FAVORITOS
-// import Favorites from "../Favorites/Favorites";
 
 export default function Home() {
 
