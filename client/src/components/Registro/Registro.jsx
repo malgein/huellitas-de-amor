@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React from "react";
 import axios from "axios";
-import { Textarea, Button, Input } from "@nextui-org/react";
+
 import styles from "./registro.module.css";
 import FormInput from "../FormInput/FormInput";
+import { Button } from "@nextui-org/button";
+
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import validationSchema from "./Validaciones";
+import * as Yup from "yup";
 
 const Registro = () => {
   // const [registroExitoso, setRegistroExitoso] = useState(false);
@@ -21,43 +24,13 @@ const Registro = () => {
     password: "",
   };
 
-  const validationSchema = Yup.object({
-    nombre: Yup.string().required("Por favor, introduce tu nombre."),
-    apellido: Yup.string().required("Por favor, introduce tu apellido."),
-    nacionalidad: Yup.string().required(
-      "Por favor, introduce tu nacionalidad."
-    ),
-    localizacion: Yup.string().required("Por favor, proporciona tu ubicación."),
-    direccion: Yup.string().required("Por favor, proporciona tu dirección."),
-    telefono: Yup.string().required(
-      "Por favor, ingresa tu número de teléfono."
-    ),
-    acerca: Yup.string().required("Por favor, cuéntanos un poco acerca de ti."),
-    email: Yup.string()
-      .email("Correo electrónico inválido")
-      .required("Por favor, introduce tu dirección de correo electrónico."),
-    password: Yup.string().required("Por favor, crea una contraseña."),
-  });
-
-  // const onSubmit = (values) => {
-  //   axios
-  //     .post("http://localhost:3001/usuario", values)
-  //     .then((res) => {
-  //       alert("Usuario registrado con éxito");
-  //       // setRegistroExitoso(true);
-  //     })
-  //     .catch((err) => {
-  //       alert("Hubo un error al registrar al usuario");
-  //     });
-  // };
-
   const onSubmit = (values) => {
     axios
       .post("http://localhost:3001/usuario", values)
       .then((res) => {
         // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito
         alert("Usuario registrado con éxito");
-        resetForm();
+        // resetForm();
       })
       .catch((err) => {
         // Manejar errores, por ejemplo, mostrar un mensaje de error
@@ -156,5 +129,3 @@ const Registro = () => {
 };
 
 export default Registro;
-
-
