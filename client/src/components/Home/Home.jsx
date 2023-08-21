@@ -9,7 +9,6 @@ import PetCard from "../PetCard/PetCard";
 import Sorts from "../Sorts/Sorts";
 import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
-import { Pagination } from "@nextui-org/react";
 
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
@@ -47,21 +46,17 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(getMascotas());
-<<<<<<< HEAD
-    
+    dispatch(getMascotas());    
   }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
-=======
-  }, []); // Agregado dispatch como dependencia para evitar warnings
->>>>>>> 6d369e2692971856603e11f2fd18a2f1e8da3451
 
   return (
     <div className="flex h-screen flex-col ">
       <div className="flex h-full flex-row justify-between pr-12">
-        <div className="pl-20 flex flex-col">
+        <div className="pl-12 flex flex-col">
           {" "}
           <FilterMascotas />
         </div>
+
         <Sorts />
       </div>
       <header className="m-0 h-[10%] w-screen bg-white p-0">
@@ -101,11 +96,7 @@ export default function Home() {
           </div>
         </section>
       </div>
-         
     </div>
-<<<<<<< HEAD
   );}
-=======
-  );
-}
->>>>>>> 6d369e2692971856603e11f2fd18a2f1e8da3451
+
+

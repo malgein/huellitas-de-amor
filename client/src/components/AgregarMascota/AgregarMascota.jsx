@@ -52,20 +52,9 @@ const AgregarMascota = () => {
 		foto: "",
 		raza: "",
 		sexo: "",
-<<<<<<< HEAD
-	}
-	const initialValues = mascota
+	});
 	
 	const dispatch=useDispatch()
-	
-	const handleSubmit = (mascota) => {
-		console.log(mascota);
-		dispatch(addMascota(mascota));
-=======
-	});
->>>>>>> 6d369e2692971856603e11f2fd18a2f1e8da3451
-
-	const dispatch = useDispatch();
 	const Navigate = useNavigate()
 
 	const handleSubmit = (mascota) => {

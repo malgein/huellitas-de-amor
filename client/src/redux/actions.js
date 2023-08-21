@@ -31,10 +31,6 @@ export const getPetById = (id) => async (dispatch) => {
 //Guardo todas las mascotas
 export const getMascotas = () => async (dispatch) => {
   try {
-<<<<<<< HEAD
-=======
-    // dispatch({ type: FETCHING_MASCOTAS });
->>>>>>> 6d369e2692971856603e11f2fd18a2f1e8da3451
     const response = await axios.get(ENDPOINT);
    dispatch({type: FETCHING_MASCOTAS, payload: response.data});
   } catch (error) {

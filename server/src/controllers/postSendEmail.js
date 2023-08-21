@@ -7,16 +7,18 @@ const postSendEmail = async (req, res) => {
 
         // Configurar el transporter de nodemailer
         const transporter = nodemailer.createTransport({
-            service: 'Gmail', // Puedes usar otro servicio de correo aquí
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false, // Puedes usar otro servicio de correo aquí
             auth: {
-                user: '@gmail.com',
-                pass: 'key',
+                user: 'jorge.tarazona.co@gmail.com',
+                pass: 'Jt20410394*',
             },
         });
 
         // Configurar los detalles del correo electrónico (Remitente)
         const mailOptions = {
-            from: 'g.javier.jgl@gmail.com',
+            from: 'jorge.tarazona.co@gmail.com',
             to: to,
             subject: subject,
             text: text,
