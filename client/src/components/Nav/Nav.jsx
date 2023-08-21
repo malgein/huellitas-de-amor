@@ -8,12 +8,13 @@ import logoPrueba from "../../assets/LogoPrueba.jpg";
 
 import { Link, Button, Image } from "@nextui-org/react";
 import Registro from "../Registro/Registro";
+import AvatarImg from "../AvatarImg/AvatarImg";
 
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 
 const Nav = () => {
   const location = useLocation();
-//style
+  //style
 
   const mostarSearchBar = location.pathname === "/home";
   const [modalabierto, setModalAbierto] = useState(false);
@@ -29,8 +30,8 @@ const Nav = () => {
   //Por aqui unos cambios
 
   return (
-    <div className="flex flex-col justify-center border-b shadow-lg my-2">
-      <div className="flex justify-between gap-4 flex flex-row ...">
+    <div className="flex flex-col justify-center border-b shadow-lg my-2 w-screen">
+      <div className="flex justify-between gap-4 flex-row bg-slate-500">
         <div className="ml-2 flex items-center">
           <Image
             width={100}
@@ -82,14 +83,17 @@ const Nav = () => {
             <Button className="text-white bg-black">Iniciar sesión</Button>
           </Link>
         </div> */}
-      </div>
 
-      <div className="flex justify-center">
-        {mostarSearchBar && (
-          <div className="flex justify-center w-96 my-2">
-            <SearchBar />
-          </div>
-        )}
+        <div className="flex justify-center">
+          {mostarSearchBar && (
+            <div className="flex justify-center w-96 my-2">
+              <SearchBar />
+            </div>
+          )}
+        </div>
+        <div className="flex items-center m-8 ">
+          <AvatarImg />
+        </div>
       </div>
 
       {modalabierto && (
