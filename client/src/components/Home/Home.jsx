@@ -11,6 +11,7 @@ import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
 
 export default function Home() {
+
   const mascotas = useSelector((state) => state.mascotas);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +19,6 @@ export default function Home() {
   //Guardame el estado guardame cuantas Mascotas guardo por pagina, en este caso 8.
   //const [petsPerPage, setPetsPerPage] = useState(8);
   //El índice de la ultima Mascota por página.
-
 
   const indexOfLastPet = currentPage * petsPerPage;
   const indexOfFirstPet = indexOfLastPet - petsPerPage;
@@ -46,17 +46,18 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getMascotas());
-  }, []); // Agregado dispatch como dependencia para evitar warnings
+  }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
 
   return (
     <div className="flex h-screen flex-col ">
       <div className="flex h-full flex-row justify-between pr-12">
-        <div className="pl-12 flex flex-col">
+        <div className="pl-20 flex flex-col">
           {" "}
           <FilterMascotas />
         </div>
         <Sorts />
       </div>
+
       <header className="m-0 h-[10%] w-screen bg-white p-0">
         {/* Se parece que tienes un NavBar comentado. Si no lo usas, puedes eliminar este bloque. */}
       </header>
