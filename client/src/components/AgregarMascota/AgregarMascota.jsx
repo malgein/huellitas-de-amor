@@ -10,6 +10,8 @@ import FormTextarea from "../FormTextarea/FormTextarea";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SubirImagenes from "../SubirImagenes/SubirImagenes";
+import Calificacion from '../Calificacion/Calificacion';
+
 
 const validationSchema = Yup.object().shape({
 	nombre: Yup.string()
@@ -245,6 +247,7 @@ const AgregarMascota = () => {
 									Enviar
 								</Button>
 							</div>
+							<Calificacion />
 						</Form>
 					</div>
 				)}
