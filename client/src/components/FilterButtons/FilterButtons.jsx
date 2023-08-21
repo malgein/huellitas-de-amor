@@ -133,12 +133,12 @@ const FilterMascotas = () => {
   };
 
   return (
-    <div className="border-x-fuchsia-800 p-10 bg-white shadow-md rounded-md max-w-screen-lg mx-auto flex flex-wrap space-x-10 justify-between">
+    <div className=" p-10 rounded-md max-w-screen-lg mx-auto flex flex-wrap space-x-10 justify-between">
       {Object.keys(options).map((filter) => (
         <Dropdown key={filter}>
           <DropdownTrigger>
             <Button
-              className="border border-blue-500 text-black bg-white hover:bg-slate-100 capitalize"
+              className="border border-sky-300 text-black bg-white hover:bg-sky-100 capitalize"
               variant="bordered"
             >
               {filters[filter] || filter}
@@ -161,8 +161,9 @@ const FilterMascotas = () => {
         </Dropdown>
       ))}
       <Button
-        className="border border-black text-black bg-white hover:bg-slate-100 capitalize ml-2"
-        color="error" // Usamos el color "error" para que destaque como acción de reset
+        className="border text-black hover:bg-slate-100 bg-sky-200"
+        // color="error" // Usamos el color "error" para que destaque como acción de reset
+        // color="warning"
         onClick={handleResetFilters}
       >
         Restablecer Filtros
