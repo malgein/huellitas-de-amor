@@ -6,6 +6,7 @@ const PathRoutes = {
   LANDINGPAGE: "/",
   PERFIL: "/perfil",
   REGISTRO: "/registro",
+
   //Ruta para el dashboard principal
   DASHBOARD: "/dashboard",
   //Sub ruta para el dashboard de mascotas

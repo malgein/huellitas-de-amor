@@ -25,7 +25,7 @@ import Donations from "./components/Dashboard/Donations";
 
 import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
 import { AuthProvider } from "./context/authContext";
-// import Registro from "./components/Registro/Registro";
+
 import Registro from "./components/Registro/Registro";
 
 function App() {
@@ -41,7 +41,8 @@ function App() {
           <Route path={PathRoutes.PERFIL} element={<Perfil />} />
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-          <Route Path={PathRoutes.REGISTRO} element={<Registro />}></Route>
+          <Route path={PathRoutes.REGISTRO} element={<Registro />}></Route>
+
           {/* Componente dashboard  */}
           <Route path={PathRoutes.DASHBOARD} element={<Dashboard />} />
           {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
