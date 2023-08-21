@@ -42,7 +42,6 @@ function App() {
           <Route path={PathRoutes.PERFIL} element={<Perfil />} />
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-          <Route path={PathRoutes.REGISTER} element={<ModalLogSig />}></Route>
           <Route Path={PathRoutes.REGISTRO} element={<Registro />}></Route>
           {/* Componente dashboard  */}
           <Route path={PathRoutes.DASHBOARD} element={<Dashboard/>}/>
