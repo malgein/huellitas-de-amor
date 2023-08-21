@@ -50,13 +50,13 @@ export default function Home() {
   //h-screen w-screen
   return (
     <div className=" mx-[50px] flex justify-center items-center flex-col">
-      <div className=" flex flex-row justify-between w-[100%] mt-4 ">
-        <div className="flex flex-col">
+      <div className=" flex flex-row items-center justify-center w-[100%] mt-4 ">
+        <div>
           {/* {" "} */}
-          <FilterMascotas />
+          <Sorts />
         </div>
         <div>
-          <Sorts />
+          <FilterMascotas />
         </div>
       </div>
 
