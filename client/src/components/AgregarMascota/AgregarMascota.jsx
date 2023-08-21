@@ -202,9 +202,7 @@ const AgregarMascota = () => {
 								</div>
 							</div>
 							<div>
-								<SubirImagenes setImagenes={(imagenes) => setMascota({ ...mascota, foto: imagenes })} />
-								{/* {console.log(imagenes)}
-								{console.log(mascota)} */}
+								
 							</div>
 							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
 								{imagenes && imagenes.map((imag) => {
