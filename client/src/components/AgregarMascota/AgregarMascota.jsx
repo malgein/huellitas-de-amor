@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Input, Textarea, Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import styles from "./AgregarMascota.module.css";
-import { useDispatch } from "react-redux";
-import { addMascota } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addMascota, limpiarImagenes } from "../../redux/actions";
 import FormInput from "../FormInput/FormInput";
+import FormTextarea from "../FormTextarea/FormTextarea";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SubirImagenes from "../SubirImagenes/SubirImagenes";
 
 const validationSchema = Yup.object().shape({
 	nombre: Yup.string()
@@ -31,10 +33,10 @@ const validationSchema = Yup.object().shape({
 		.min(3, "Debe poseer mínimo 3 caracteres ")
 
 		.required("Campo requerido"),
-	foto: Yup.string()
+	/* foto: Yup.string()
 
 		.url("Debe ser una URL válida")
-		.required("Campo requerido"),
+		.required("Campo requerido"), */
 	raza: Yup.string()
 		.min(3, "Debe poseer mínimo 3 caracteres ")
 		.max(50, "Debe poseer máximo 50 caracteres")
@@ -49,16 +51,22 @@ const AgregarMascota = () => {
 		tamano: "",
 		peso: 0,
 		descripcion: "",
-		foto: "",
+		foto: [],
 		raza: "",
 		sexo: "",
 	});
 
 	const dispatch = useDispatch();
 	const Navigate = useNavigate()
+	const imagenes = useSelector((state) => state.imagenes)
 
 	const handleSubmit = (mascota) => {
-		dispatch(addMascota(mascota));
+		const nuevaMascota = { ...mascota };
+  		nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
+		/* console.log(nuevaMascota.foto) */
+  		dispatch(addMascota(nuevaMascota));
+		/* dispatch(addMascota(mascota)); */
+		dispatch(limpiarImagenes())
 		localStorage.removeItem("formData");
 		  Swal.fire({
 				tittle: "MASCOTA AGREGADA",
@@ -90,7 +98,12 @@ const AgregarMascota = () => {
 								<h1>Agrega una nueva mascota</h1>
 							</div>
 							<div>
-								<FormInput label='Nombre' name='nombre' error={errors.nombre} />
+								<FormInput
+									label='Nombre'
+									name='nombre'
+									placeholder='Nombre'
+									error={errors.nombre}
+								/>
 							</div>
 							{console.log(localStorage)}
 							<div>
@@ -98,33 +111,42 @@ const AgregarMascota = () => {
 									label='Especie'
 									name='especie'
 									error={errors.especie}
+									placeholder='Especie'
 								/>
 							</div>
 							<div>
-								<FormInput label='Edad' name='edad' error={errors.edad} />
+								<FormInput
+									label='Edad'
+									placeholder='Edad'
+									name='edad'
+									error={errors.edad}
+								/>
 							</div>
 							<div>
-								<FormInput label='Peso' name='peso' error={errors.peso} />
+								<FormInput
+									label='Peso'
+									placeholder='Peso'
+									name='peso'
+									error={errors.peso}
+								/>
 							</div>
-							<div>
+							{/* <div>
 								<FormInput label='Foto' name='foto' error={errors.foto} />
+							</div> */}
+							<div>
+								<FormInput
+									label='Raza'
+									placeholder='Raza'
+									name='raza'
+									error={errors.raza}
+								/>
 							</div>
 							<div>
-								<FormInput label='Raza' name='raza' error={errors.raza} />
-							</div>
-							<div className={styles.FielTextarea}>
-								<Field
-									as={Textarea}
-									variant='bordered'
+								<FormTextarea
 									label='Descripción'
-									placeholder='Agrega la descripcion de tu mascota...'
-									id='descripcion'
 									name='descripcion'
-									errorMessage={
-										<ErrorMessage name='descripcion' component='div' />
-									}
-									// validationState={validationSchema}
-									color={errors.descripcion ? "danger" : "success"}
+									placeholder='Descripción'
+									error={errors.descripcion}
 								/>
 							</div>
 
@@ -133,14 +155,16 @@ const AgregarMascota = () => {
 									className={
 										errors.tamano ? styles.selectRed : styles.selectGreen
 									}>
-									<div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
-										<label
+									{/* <div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'> */}
+									<div>
+										{/* <label
 											className='block font-medium  dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none
-							w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small'
-											htmlFor='tamano'>
+							w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small' */}
+										{/* htmlFor='tamano'>
 											Tamaño:
-										</label>
+										</label> */}
 										<Field
+											className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start  justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled text-medium'
 											as='select'
 											label='Tamaño'
 											variant='bordered'
@@ -173,15 +197,20 @@ const AgregarMascota = () => {
 									className={
 										errors.sexo ? styles.selectRed : styles.selectGreen
 									}>
-									<div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
-										<label
+									<div>
+										{/* <label
 											className='block font-medium 
 										
 										 dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none'
 											htmlFor='tamano'>
 											Sexo:
-										</label>
-										<Field label='Sexo' as='select' id='sexo' name='sexo'>
+										</label> */}
+										<Field
+											className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled font-large'
+											// label='Sexo'
+											as='select'
+											id='sexo'
+											name='sexo'>
 											<option value=''>Sexo</option>
 											<option value='Macho'>Macho</option>
 											<option value='Hembra'>Hembra</option>
@@ -194,8 +223,24 @@ const AgregarMascota = () => {
 									/>
 								</div>
 							</div>
+							<div>
+                 <SubirImagenes setImagenes={(imagenes) => setMascota({ ...mascota, foto: imagenes })}/>
+								{console.log(imagenes)}
+							</div>
+							<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center'>
+								{imagenes &&
+									imagenes.map((imag) => {
+										return (
+											<img src={imag} alt='' className='h-[80px] m-[15px]' />
+										);
+									})}
+							</div>
 							<div className={styles.button}>
-								<Button type='submit' disabled={isSubmitting} size='lg'>
+								<Button
+									type='submit'
+									color='primary'
+									disabled={isSubmitting}
+									size='lg'>
 									Enviar
 								</Button>
 							</div>
