@@ -15,7 +15,9 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
             <h4 className="font-bold text-large">{sexo}</h4>
           </div>
           <div className="relative top-1 ml-[132px]">
-            <Button color="primary">Donar</Button>
+            <Button className=" hover:bg-orange-300" color="warning">
+              Donar
+            </Button>
           </div>
         </div>
       </CardHeader>
