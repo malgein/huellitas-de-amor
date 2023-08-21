@@ -2,6 +2,9 @@ import { Card, CardHeader, CardBody, Image, Button } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import PathRoutes from "../../helpers/Routes.helper";
 function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
+
+  
+
   return (
     <Card className="py-4 h-full">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
@@ -26,10 +29,11 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
         <div className="aspect-w-3 aspect-h-4 w-full flex items-center justify-center">
           {" "}
           {/* Centra la imagen */}
+          {console.log(foto)}
           <Image
             alt="Card background"
             className="object-cover rounded-xl"
-            src={foto}
+            src={foto[0]}
             width={300}
             height={400}
           />
