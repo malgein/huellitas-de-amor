@@ -3,6 +3,8 @@ import axios from "axios";
 export const GET_PET_BY_ID = "GET_PET_BY_ID";
 export const GET_PET_BY_NAME = "GET_PET_BY_NAME";
 export const GET_MASCOTAS = "GET_MASCOTAS";
+
+//hice el axtions para el filtrado (Nacho)
 export const APPLY_FILTERS = "APPLY_FILTERS";
 export const FILTERS_ERROR = "FILTERS_ERROR";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
@@ -23,21 +25,22 @@ export const GET_USERS = 'GET_USER'
 export const GET_ALL_DONATIONS = 'GET_DONATIONS'
 
 export const ADD_MASCOTA = "ADD_MASCOTA";
+export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
+export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
+
 
 export const EDIT_USER = 'EDIT_USER';
 
 
+
 const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
-const ENDPOINTTYPES = "http://localhost:3001/types";  // Nota: No usaste este endpoint en las acciones presentadas
+const ENDPOINTTYPES = "http://localhost:3001/types"; // Nota: No usaste este endpoint en las acciones presentadas
 const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
 // const ENDPOINTFILL = 'http://localhost:3001/fill';
-export const FILL_DATABASE = 'FILL_DATABASE'
-
 
 const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
-
 
 
 
@@ -48,7 +51,7 @@ const handleError = (dispatch, errorType, error) => {
 
 export const getPetById = (id) => async (dispatch) => {
   try {
-    const { data } = await axios.get(ENDPOINT + `${id}`);
+    const { data } = await axios.get(ENDPOINT + `/${id}`);
     dispatch({ type: GET_PET_BY_ID, payload: data });
   } catch (error) {
     handleError(dispatch, FETCHING_MASCOTAS_ERROR, error);
@@ -80,20 +83,19 @@ export const applyFilters = (filters) => {
   return (dispatch, getState) => {
     // const BACKEND_URL = "http://localhost:3001";
     axios
-			.get(`${ENDPOINT_FILTER}`, { params: filters })
-			.then((response) => {
-				dispatch({
-					type: APPLY_FILTERS,
-					payload: response.data,
-				});
-			})
-			.catch((error) => {
-				console.error(error);
-				// Puedes despachar otro tipo de acción aquí si quieres manejar errores.
-			});
+      .get(`${ENDPOINT_FILTER}`, { params: filters })
+      .then((response) => {
+        dispatch({
+          type: APPLY_FILTERS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        // Puedes despachar otro tipo de acción aquí si quieres manejar errores.
+      });
   };
 };
-
 
 export const orderByWeight = (order) => (dispatch) => {
   if (order === "defecto") {
@@ -122,6 +124,7 @@ export const addMascota = (Mascota) => {
     }
   };
 };
+
 
 export const getUsers = () => async(dispatch) => {
   try{
@@ -233,5 +236,17 @@ export const deleteHouses = (id) => {
       });
       });
    };
+}
+export const subirImagenes = (imagenes) => (dispatch) => {
+  return dispatch({
+    type: SUBIR_IMAGENES,
+    payload: imagenes,
+  })
+}
+export const limpiarImagenes = () => {
+  return {
+    type: LIMPIAR_IMAGENES,
+    payload: imagenes,
+  }
 }
 
