@@ -13,7 +13,6 @@ import Detail from "./components/Detail/Detail";
 import PathRoutes from "./helpers/Routes.helper";
 import Footer from "./components/Footer/Footer";
 import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
-import Registro from "./components/Registro/registro";
 import { AuthProvider } from "./context/authContext";
 
 function App() {
@@ -29,8 +28,6 @@ function App() {
           <Route path={PathRoutes.PERFIL} element={<Perfil />} />
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-          <Route path={PathRoutes.REGISTER} element={<ModalLogSig />}></Route>
-          <Route path={PathRoutes.REGISTRO} element={<Registro />} />
         </Routes>
       </AuthProvider>
       {/* <Footer /> */}
