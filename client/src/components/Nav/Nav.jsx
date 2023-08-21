@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import logoPrueba from "../../assets/LogoPrueba.jpg";
-import Registro from "../Registro/Registro";
 
 import { Link, Button, Image } from "@nextui-org/react";
 import Registro from "../Registro/Registro";
