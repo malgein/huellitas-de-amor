@@ -29,7 +29,7 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
         <div className="aspect-w-3 aspect-h-4 w-full flex items-center justify-center">
           {" "}
           {/* Centra la imagen */}
-          {console.log(foto)}
+          {/* {console.log(foto)} */}
           <Image
             alt="Card background"
             className="object-cover rounded-xl"

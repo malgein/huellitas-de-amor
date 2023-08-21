@@ -10,7 +10,7 @@ import FormTextarea from "../FormTextarea/FormTextarea";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SubirImagenes from "../SubirImagenes/SubirImagenes";
-import Calificacion from '../Calificacion/Calificacion';
+// import Calificacion from '../Calificacion/Calificacion';
 
 
 const validationSchema = Yup.object().shape({
@@ -227,7 +227,7 @@ const AgregarMascota = () => {
 							</div>
 							<div>
                  <SubirImagenes setImagenes={(imagenes) => setMascota({ ...mascota, foto: imagenes })}/>
-								{console.log(imagenes)}
+								{/* {console.log(imagenes)} */}
 							</div>
 							<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center'>
 								{imagenes &&
@@ -246,7 +246,7 @@ const AgregarMascota = () => {
 									Enviar
 								</Button>
 							</div>
-							<Calificacion />
+							{/* <Calificacion /> */}
 						</Form>
 					</div>
 				)}
