@@ -24,6 +24,7 @@ const Nav = () => {
     setModalAbierto(false);
   };
 
+
   return (
     <div className="flex flex-col justify-center border-b shadow-lg my-2">
       <div className="flex justify-between gap-4 flex flex-row ...">
