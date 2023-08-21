@@ -10,10 +10,16 @@ import ModalLogSig from "../ModalLogSig/ModalLogSig";
 import { useAuth } from "../../context/AuthContext";
 import PathRoutes from "../../helpers/Routes.helper";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function AvatarImg() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const imgProfile = user?.photoURL;
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
     <div className="flex items-center gap-4">
@@ -36,20 +42,25 @@ export default function AvatarImg() {
             <p className="font-bold">{user?.displayName}</p>
           </DropdownItem>
           <DropdownItem key="analytics" to="/registro">
-            <Link to={PathRoutes.HOME}>Home</Link>
+            <Link to={PathRoutes.HOME}>Inicio</Link>
           </DropdownItem>
           <DropdownItem key="dashboard">
-            <Link to={PathRoutes.DASHBOARD}>Dasboard</Link>
+            <Link to={PathRoutes.DASHBOARD}>Panel</Link>
           </DropdownItem>
-          <DropdownItem key="configurations">
+          {/* <DropdownItem key="configurations">
             <Link to={PathRoutes.REGISTRO}>Registro</Link>
-          </DropdownItem>
-          <DropdownItem>
-            <ModalLogSig />
-          </DropdownItem>
-          <DropdownItem key="logout" color="danger">
-            Log Out
-          </DropdownItem>
+          </DropdownItem> */}
+          {user ? (
+            <DropdownItem key="logout" color="danger">
+              <Link to="#" onClick={handleLogout}>
+                Cerrar sesión
+              </Link>
+            </DropdownItem>
+          ) : (
+            <DropdownItem>
+              <ModalLogSig />
+            </DropdownItem>
+          )}
         </DropdownMenu>
       </Dropdown>
     </div>
