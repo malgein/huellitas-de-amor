@@ -30,8 +30,9 @@ const Nav = () => {
   //Por aqui unos cambios
 
   return (
-    <div className="flex flex-col justify-center border-b shadow-lg my-2 w-screen">
-      <div className="flex justify-between gap-4 flex-row bg-slate-500">
+    //"flex flex-col justify-center border-b shadow-lg my-2 w-screen"
+    <div className="flex flex-col justify-center border-b shadow-lg w-screen">
+      <div className="flex justify-between gap-4 flex-row">
         <div className="ml-2 flex items-center">
           <Image
             width={100}
@@ -60,7 +61,7 @@ const Nav = () => {
           <div>
             <Link href="/agregar">
               <Button
-                className="border border-black text-black bg-white hover:bg-slate-100  "
+                className="border border-black text-black bg-white hover:bg-slate-100"
                 color="primary"
               >
                 Crear Nueva Mascota
@@ -70,7 +71,6 @@ const Nav = () => {
         </div>
 
         {/* <div className="gap-4 flex flex-row items-center mr-4">
-
           <Link href="/registro" className="text-black">
             <Button
               className="border border-black text-black bg-white hover:bg-slate-100  "
