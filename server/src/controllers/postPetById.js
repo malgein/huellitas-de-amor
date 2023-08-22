@@ -12,6 +12,7 @@ const postPetById = async ({
   peso,
   casaid,
   especie,
+  /* casaDeAdopcionId */
 }) => {
   try {
     if (
@@ -23,7 +24,8 @@ const postPetById = async ({
       !tamano ||
       !raza ||
       !peso ||
-      !especie
+      !especie /* || 
+      !casaDeAdopcionId */
     ) {
       return { status: 401, message: "Faltan datos" };
     }
@@ -38,7 +40,7 @@ const postPetById = async ({
       raza,
       peso,
     });
-console.log(createPet)
+    console.log(createPet)
     //const mascEsp = await Especie.findAll({where: {especie: {[Op.in]:especie}}});
 
     let mascEsp = await Especie.findOne({ where: { especie } }); // Buscar la especie
@@ -49,7 +51,7 @@ console.log(createPet)
     }
 
     await createPet.setEspecie(mascEsp);
-    await createPet.setCasaDeAdopcion(casaid);
+    await createPet.setCasaDeAdopcion(casaDeAdopcionId);
     return createPet;
 
     //Llaves foraneas

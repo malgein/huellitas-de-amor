@@ -21,6 +21,7 @@ import {
   DELETE_HOUSES,
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
+  ELIMINAR_IMAGENES
 } from "./actions";
 
 const initialState = {
@@ -142,6 +143,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
     case LIMPIAR_IMAGENES: 
       return {...state, imagenes: []}
+
+    case ELIMINAR_IMAGENES:
+      return {...state, imagenes: payload}
     default:
       return { ...state };
   }
