@@ -34,12 +34,14 @@ const Nav = () => {
     <div className="flex flex-col justify-center border-b shadow-lg w-screen">
       <div className="flex justify-between gap-4 flex-row">
         <div className="ml-2 flex items-center">
-          <Image
-            width={100}
-            height={100}
-            alt="NextUI hero Image"
-            src={logoPrueba}
-          />
+          <Link href="/home">
+            <Image
+              width={100}
+              height={100}
+              alt="NextUI hero Image"
+              src={logoPrueba}
+            />
+           </Link>
         </div>
 
         <div className=" gap-20 flex flex-row justify-center items-center text-black">
@@ -82,17 +84,18 @@ const Nav = () => {
           <Link to="/login">
             <Button className="text-white bg-black">Iniciar sesión</Button>
           </Link>
-        </div> */}
+          </div> */}
 
-        <div className="flex justify-center">
+        <div className="flex flex-row">
           {mostarSearchBar && (
-            <div className="flex justify-center w-96 my-2">
+            <div className="mr-6">
               <SearchBar />
             </div>
           )}
-        </div>
-        <div className="flex items-center m-8 ">
-          <AvatarImg />
+          <div className="mr-9">
+            {" "}
+            <AvatarImg />
+          </div>
         </div>
       </div>
 

@@ -1,6 +1,8 @@
 import { Card, CardHeader, CardBody, Image, Button } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import PathRoutes from "../../helpers/Routes.helper";
+import Donar from "../BotonDonar/BotonDonar";
+
 function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
   return (
     <Card className="py-4 h-full">
@@ -14,11 +16,9 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
             <small className="text-default-500">{peso} kg</small>
             <h4 className="font-bold text-large">{sexo}</h4>
           </div>
-          <div className="relative top-1 ml-[132px]">
-            <Button className=" hover:bg-orange-300" color="warning">
-              Donar
-            </Button>
           </div>
+          <div className="ml-20">
+            <Donar/>
         </div>
       </CardHeader>
 
