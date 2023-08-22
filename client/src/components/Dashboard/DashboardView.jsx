@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch, FaEnvelope, FaRegBell } from "react-icons/fa";
 import profile from "./Wilmer.jpg";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Dashboardview = () => {
   const [open, setOpen] = useState(false);

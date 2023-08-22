@@ -13,6 +13,7 @@ import Paginated from "../Paginated/Paginated";
 import { Button, Image } from "@nextui-org/react";
 import imagenHome from "../../assets/banner1.png";
 import imagenDos from "../../assets/imagenMascota2-min.jpg";
+// import Rate from "../Rate/Rate";
 
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
@@ -101,6 +102,7 @@ export default function Home() {
           {/* {" "} */}
           <Sorts />
         </div>
+        
         <div>
           <FilterMascotas />
         </div>
@@ -114,6 +116,7 @@ export default function Home() {
         <section className=" m-0 h-[100%]  w-screen bg-white p-0 flex flex-grow items-center justify-center">
           <div className="bg-white w-[90%] h-[90%] ">
             <div className="flex flex-col">
+
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
                 {currentPet
                   .filter((mascota) => mascota && mascota.nombre)

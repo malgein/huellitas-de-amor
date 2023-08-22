@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SubirImagenes from "../SubirImagenes/SubirImagenes";
 
+
+
 const validationSchema = Yup.object().shape({
 	nombre: Yup.string()
 		.min(3, "Debe poseer mínimo 3 caracteres ")
@@ -229,7 +231,7 @@ const AgregarMascota = () => {
 							</div>
 							<div>
                  <SubirImagenes setImagenes={(imagenes) => setMascota({ ...mascota, foto: imagenes })}/>
-								
+
 							</div>
 							<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center'>
 								{imagenes &&
@@ -249,6 +251,7 @@ const AgregarMascota = () => {
 									Enviar
 								</Button>
 							</div>
+						
 						</Form>
 					</div>
 				)}
