@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Button } from "@nextui-org/react";
 import styles from "./AgregarMascota.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addMascota, limpiarImagenes } from "../../redux/actions";
+import { addMascota, eliminarImagenes, limpiarImagenes } from "../../redux/actions";
 import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
 import { useNavigate } from "react-router-dom";
@@ -63,9 +63,7 @@ const AgregarMascota = () => {
 	const handleSubmit = (mascota) => {
 		const nuevaMascota = { ...mascota };
   		nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
-		/* console.log(nuevaMascota.foto) */
   		dispatch(addMascota(nuevaMascota));
-		/* dispatch(addMascota(mascota)); */
 		dispatch(limpiarImagenes())
 		localStorage.removeItem("formData");
 		  Swal.fire({
@@ -80,6 +78,13 @@ const AgregarMascota = () => {
 	const handleFormChange = (values) => {
 		localStorage.setItem("formData", JSON.stringify(values));
 	};
+
+	const handleClickImages = async(clickedImage) => {
+		console.log(clickedImage)
+		const updatedImages = imagenes.filter(image => image !== clickedImage);
+		dispatch(eliminarImagenes(updatedImages))		
+		/* console.log(updatedImages) */
+	} 
 
 	const storedData = localStorage.getItem("formData");
 
@@ -155,14 +160,13 @@ const AgregarMascota = () => {
 									className={
 										errors.tamano ? styles.selectRed : styles.selectGreen
 									}>
-									{/* <div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'> */}
-									<div>
-										{/* <label
+									<div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
+										<label
 											className='block font-medium  dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none
-							w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small' */}
-										{/* htmlFor='tamano'>
+							w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small'
+											htmlFor='tamano'>
 											Tamaño:
-										</label> */}
+										</label> 
 										<Field
 											className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start  justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled text-medium'
 											as='select'
@@ -225,13 +229,14 @@ const AgregarMascota = () => {
 							</div>
 							<div>
                  <SubirImagenes setImagenes={(imagenes) => setMascota({ ...mascota, foto: imagenes })}/>
-								{console.log(imagenes)}
+								
 							</div>
 							<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center'>
 								{imagenes &&
 									imagenes.map((imag) => {
 										return (
-											<img src={imag} alt='' className='h-[80px] m-[15px]' />
+									
+											<img onClick={() => handleClickImages(imag)} src={imag} alt='' className='h-[80px] m-[15px]' />
 										);
 									})}
 							</div>
