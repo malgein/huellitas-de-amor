@@ -36,7 +36,7 @@ const Sorts = () => {
       <div className="flex flex-col">
         <Dropdown>
           <DropdownTrigger>
-            <Button className="border border-sky-300 text-black bg-white hover:bg-sky-100 cursor-pointer">
+            <Button className="border border-orange-300 text-orange-500 bg-white hover:bg-sky-100 cursor-pointer">
               <span>Ordenar por edad</span>
             </Button>
           </DropdownTrigger>
@@ -69,7 +69,7 @@ const Sorts = () => {
       <div className="flex flex-col">
         <Dropdown>
           <DropdownTrigger>
-            <Button className="border border-sky-300 text-black bg-white hover:bg-sky-100 cursor-pointer">
+            <Button className="border border-orange-300 text-orange-500 bg-white hover:bg-sky-100 cursor-pointer">
               <span>Ordenar por peso</span>
             </Button>
           </DropdownTrigger>
