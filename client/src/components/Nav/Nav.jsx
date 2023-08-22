@@ -82,20 +82,21 @@ const Nav = () => {
           <Link to="/login">
             <Button className="text-white bg-black">Iniciar sesión</Button>
           </Link>
-        </div> */}
+          </div> */}
 
-        <div className="flex justify-center">
-          {mostarSearchBar && (
-            <div className="flex justify-center w-96 my-2">
-              <SearchBar />
-            </div>
-          )}
-        </div>
-        <div className="flex items-center m-8 ">
-          <AvatarImg />
-        </div>
+          <div className="flex flex-row">
+            {mostarSearchBar && (
+              <div className="mr-6">
+                <SearchBar />
+              </div>
+            )}
+            <div className="mr-9">
+              {" "}
+              <AvatarImg />
+          </div>
       </div>
-
+    </div>
+    
       {modalabierto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>

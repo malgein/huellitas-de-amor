@@ -5,8 +5,6 @@ import {
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
   FETCHING_MASCOTAS,
-  FETCHING_MASCOTAS_SUCCESS,
-  FETCHING_MASCOTAS_ERROR,
   APPLY_FILTERS,
   FILTERS_ERROR,
   GET_ALL_DONATIONS,
@@ -58,21 +56,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         error: payload,
       };
 
-    case FETCHING_MASCOTAS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        mascotas: payload,
-        error: null,
-      };
-
-    case FETCHING_MASCOTAS_ERROR:
-      return {
-        ...state,
-        loading: false,
-        mascotas: [],
-        error: payload,
-      };
 
     case GET_MASCOTAS:
       return { ...state, mascotas: payload };
