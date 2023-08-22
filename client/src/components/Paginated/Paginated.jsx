@@ -29,9 +29,7 @@
 // }
 
 import React from "react";
-
 import {Pagination} from "@nextui-org/react";
-
 
 
 export default function Paginated({ petsPerPage, mascotas, paginado }) {
@@ -47,6 +45,7 @@ export default function Paginated({ petsPerPage, mascotas, paginado }) {
         total={pageNumbers.length}
         onChange={paginado}
         initialPage={1}
+        color={"warning"}
       />
       {/* <div>
         {pageNumbers.map((number) => (

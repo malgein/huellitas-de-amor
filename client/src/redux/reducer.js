@@ -5,8 +5,8 @@ import {
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
   FETCHING_MASCOTAS,
-  FETCHING_MASCOTAS_SUCCESS,
-  FETCHING_MASCOTAS_ERROR,
+  // FETCHING_MASCOTAS_SUCCESS,
+  // FETCHING_MASCOTAS_ERROR,
   APPLY_FILTERS,
   FILTERS_ERROR,
   GET_ALL_DONATIONS,
@@ -21,6 +21,7 @@ import {
   DELETE_HOUSES,
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
+  ELIMINAR_IMAGENES
 } from "./actions";
 
 const initialState = {
@@ -51,27 +52,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
         mascotas: payload,
       };
 
+  
+
     case FILTERS_ERROR:
       return {
         ...state,
         error: payload,
       };
 
-    case FETCHING_MASCOTAS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        mascotas: payload,
-        error: null,
-      };
-
-    case FETCHING_MASCOTAS_ERROR:
-      return {
-        ...state,
-        loading: false,
-        mascotas: [],
-        error: payload,
-      };
 
     case GET_MASCOTAS:
       return { ...state, mascotas: payload };
@@ -142,6 +130,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
     case LIMPIAR_IMAGENES: 
       return {...state, imagenes: []}
+
+
+    case ELIMINAR_IMAGENES:
+      /* console.log(payload) */
+      return {...state, imagenes: payload}
     default:
       return { ...state };
   }

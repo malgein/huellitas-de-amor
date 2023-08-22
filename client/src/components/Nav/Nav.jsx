@@ -8,12 +8,13 @@ import logoPrueba from "../../assets/LogoPrueba.jpg";
 
 import { Link, Button, Image } from "@nextui-org/react";
 import Registro from "../Registro/Registro";
+import AvatarImg from "../AvatarImg/AvatarImg";
 
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 
 const Nav = () => {
   const location = useLocation();
-//style
+  //style
 
   const mostarSearchBar = location.pathname === "/home";
   const [modalabierto, setModalAbierto] = useState(false);
@@ -29,15 +30,18 @@ const Nav = () => {
   //Por aqui unos cambios
 
   return (
-    <div className="flex flex-col justify-center border-b shadow-lg my-2">
-      <div className="flex justify-between gap-4 flex flex-row ...">
+    //"flex flex-col justify-center border-b shadow-lg my-2 w-screen"
+    <div className="flex flex-col justify-center border-b shadow-lg w-screen">
+      <div className="flex justify-between gap-4 flex-row">
         <div className="ml-2 flex items-center">
-          <Image
-            width={100}
-            height={100}
-            alt="NextUI hero Image"
-            src={logoPrueba}
-          />
+          <Link href="/home">
+            <Image
+              width={100}
+              height={100}
+              alt="NextUI hero Image"
+              src={logoPrueba}
+            />
+           </Link>
         </div>
 
         <div className=" gap-20 flex flex-row justify-center items-center text-black">
@@ -59,7 +63,7 @@ const Nav = () => {
           <div>
             <Link href="/agregar">
               <Button
-                className="border border-black text-black bg-white hover:bg-slate-100  "
+                className="border border-black text-black bg-white hover:bg-slate-100"
                 color="primary"
               >
                 Crear Nueva Mascota
@@ -69,7 +73,6 @@ const Nav = () => {
         </div>
 
         {/* <div className="gap-4 flex flex-row items-center mr-4">
-
           <Link href="/registro" className="text-black">
             <Button
               className="border border-black text-black bg-white hover:bg-slate-100  "
@@ -81,15 +84,19 @@ const Nav = () => {
           <Link to="/login">
             <Button className="text-white bg-black">Iniciar sesión</Button>
           </Link>
-        </div> */}
-      </div>
+          </div> */}
 
-      <div className="flex justify-center">
-        {mostarSearchBar && (
-          <div className="flex justify-center w-96 my-2">
-            <SearchBar />
+        <div className="flex flex-row">
+          {mostarSearchBar && (
+            <div className="mr-6">
+              <SearchBar />
+            </div>
+          )}
+          <div className="mr-9">
+            {" "}
+            <AvatarImg />
           </div>
-        )}
+        </div>
       </div>
 
       {modalabierto && (

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPetById } from "../../redux/actions";
@@ -7,6 +10,7 @@ import { getPetById } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
+import { Link } from "react-router-dom";
 import iconMacho from "../../assets/macho.png";
 import iconHembra from "../../assets/hembra.png";
 
@@ -29,11 +33,30 @@ export default function Detail() {
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
         <div className="relative">
-          <img
-            className="rounded-t-lg w-full h-auto"
-            src={mascota.foto}
-            alt="Detalle del perro"
-          />
+          {mascota.foto && mascota.foto.length === 1 ? (
+            <img
+              className="rounded-t-lg w-full h-auto"
+              src={mascota.foto[0]}
+              alt="Detalle del perro"
+            />
+          ) : (
+            <Carousel
+              infiniteLoop={true}
+              showThumbs={false}
+              showStatus={false}
+              dynamicHeight={true}
+            >
+              {mascota.foto &&
+                mascota.foto.map((fotoUrl, index) => (
+                  <img
+                    key={index}
+                    className="rounded-t-lg object-cover h-[500px] w-full"
+                    src={fotoUrl}
+                    alt={`Detalle del perro ${index + 1}`}
+                  />
+                ))}
+            </Carousel>
+          )}
           <Badge
             className="absolute top-[-12px] right-[-110px] text-lg text-white"
             content="En Adopcion"
@@ -116,6 +139,15 @@ export default function Detail() {
               Adóptame
             </Button>
           </div>
+          <Link>
+          <Button
+              radius="full"
+              className="bg-blue-500 text-white hover:bg-blue-600 "
+              
+              >
+              Volver
+            </Button>
+              </Link>          
         </div>
       </div>
     </div>
