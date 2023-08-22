@@ -138,7 +138,7 @@ const FilterMascotas = () => {
         <Dropdown key={filter}>
           <DropdownTrigger>
             <Button
-              className="border border-sky-300 text-black bg-white hover:bg-sky-100 capitalize"
+              className="border border-orange-300 text-orange-500 bg-white hover:bg-sky-100 capitalize"
               variant="bordered"
             >
               {filters[filter] || filter}
@@ -161,7 +161,7 @@ const FilterMascotas = () => {
         </Dropdown>
       ))}
       <Button
-        className="border text-black hover:bg-slate-100 bg-sky-200"
+        className="border text-black hover:bg-slate-100 bg-orange-300"
         // color="error" // Usamos el color "error" para que destaque como acción de reset
         // color="warning"
         onClick={handleResetFilters}
