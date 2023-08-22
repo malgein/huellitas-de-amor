@@ -213,7 +213,7 @@ export const deletePets = (id) => {
    };
 }
 
-export const editHouses = (id) => {
+export const editHouses = (id, updatedData) => {
   const endpoint = `http://localhost:3001/casaDeAdopcion/${id}`;
 
   return (dispatch) => {
