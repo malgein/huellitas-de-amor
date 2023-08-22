@@ -35,6 +35,7 @@ function App() {
           <Route path={PathRoutes.PERFIL} element={<Perfil />} />
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
+
           <Route path={PathRoutes.REGISTRO} element={<Registro />}></Route>
 
           {/* Componente dashboard  */}
@@ -53,6 +54,7 @@ function App() {
             path={PathRoutes.DASHBOARD_DONACIONES}
             element={<Donations />}
           />
+
         </Routes>
         <div>{location.pathname !== "/home" && <Footer />}</div>
       </AuthProvider>
