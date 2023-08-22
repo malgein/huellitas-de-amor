@@ -83,6 +83,7 @@ const AgregarMascota = () => {
 		console.log(clickedImage)
 		const updatedImages = imagenes.filter(image => image !== clickedImage);
 		dispatch(eliminarImagenes(updatedImages))		
+		/* console.log(updatedImages) */
 	} 
 
 	const storedData = localStorage.getItem("formData");

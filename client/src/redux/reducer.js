@@ -145,6 +145,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {...state, imagenes: []}
 
     case ELIMINAR_IMAGENES:
+      /* console.log(payload) */
       return {...state, imagenes: payload}
     default:
       return { ...state };
