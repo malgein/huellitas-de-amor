@@ -55,8 +55,8 @@ const AgregarMascota = () => {
 		raza: "",
 		sexo: "",
 	});
-
-	const dispatch = useDispatch();
+	
+	const dispatch=useDispatch()
 	const Navigate = useNavigate()
 	const imagenes = useSelector((state) => state.imagenes)
 

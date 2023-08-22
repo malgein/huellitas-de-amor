@@ -25,6 +25,8 @@ export default function Home() {
     ? mascotas.slice(indexOfFirstPet, indexOfLastPet)
     : [mascotas];
 
+    const [sortPets, setSortPets] = useState([]);
+
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -44,19 +46,19 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(getMascotas());
+    dispatch(getMascotas());    
   }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
 
   //h-screen w-screen
   return (
     <div className=" mx-[50px] flex justify-center items-center flex-col">
-      <div className=" flex flex-row justify-between w-[100%] mt-4 ">
-        <div className="flex flex-col">
+      <div className=" flex flex-row items-center justify-center w-[100%] mt-4 ">
+        <div>
           {/* {" "} */}
-          <FilterMascotas />
+          <Sorts />
         </div>
         <div>
-          <Sorts />
+          <FilterMascotas />
         </div>
       </div>
 
@@ -99,5 +101,6 @@ export default function Home() {
         </section>
       </div>
     </div>
-  );
-}
+  );}
+
+

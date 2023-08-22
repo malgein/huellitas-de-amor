@@ -10,8 +10,7 @@ export const FILTERS_ERROR = "FILTERS_ERROR";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const ORDER_BY_AGE = "ORDER_BY_AGE";
 export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
-export const FETCHING_MASCOTAS_SUCCESS = "FETCHING_MASCOTAS_SUCCESS";
-export const FETCHING_MASCOTAS_ERROR = "FETCHING_MASCOTAS_ERROR";
+
 export const GET_ALL_HOMES = 'GET_ALL_HOMES'
 export const DELETE_USERS = 'DELETE_USERS'
 export const EDIT_PETS = 'EDIT_PETS'
@@ -27,73 +26,58 @@ export const GET_ALL_DONATIONS = 'GET_DONATIONS'
 export const ADD_MASCOTA = "ADD_MASCOTA";
 export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
-
-const ENDPOINT = "http://localhost:3001/mascotas/";
-
-
 export const EDIT_USER = 'EDIT_USER';
 
-
-
+const ENDPOINT = "http://localhost:3001/mascotas/";
 const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
-const ENDPOINTTYPES = "http://localhost:3001/types"; // Nota: No usaste este endpoint en las acciones presentadas
-const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
-// const ENDPOINTFILL = 'http://localhost:3001/fill';
-
 const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
+const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
 
 
-
-const handleError = (dispatch, errorType, error) => {
-  console.error(error);
-  dispatch({ type: errorType, payload: error.message });
-};
-
+///Get de mascotas por id
 export const getPetById = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(ENDPOINT + `/${id}`);
     dispatch({ type: GET_PET_BY_ID, payload: data });
   } catch (error) {
-    handleError(dispatch, FETCHING_MASCOTAS_ERROR, error);
+    console.log(error);
   }
 };
 
+//Guardo todas las mascotas
 export const getMascotas = () => async (dispatch) => {
   try {
-    // dispatch({ type: FETCHING_MASCOTAS });
     const response = await axios.get(ENDPOINT);
-    dispatch({ type: FETCHING_MASCOTAS_SUCCESS, payload: response.data });
+   dispatch({type: FETCHING_MASCOTAS, payload: response.data});
   } catch (error) {
-    handleError(dispatch, FETCHING_MASCOTAS_ERROR, error);
+    console.log(error);
   }
 };
 
+//Busco las mascotas por la query que recibo
 export const getPetByName = (nombre) => async (dispatch) => {
   try {
     const { data } = await axios.get(ENDPOINTNAME2 + nombre);
     dispatch({ type: GET_PET_BY_NAME, payload: data });
   } catch (error) {
-    handleError(dispatch, FETCHING_MASCOTAS_ERROR, error);
+    console.log(error);
   }
 };
-//NAcho
-// actions.js
-// actions.js
+
+//Filtros para las mascotas
 export const applyFilters = (filters) => {
   return (dispatch, getState) => {
     // const BACKEND_URL = "http://localhost:3001";
-    axios
-      .get(`${ENDPOINT_FILTER}`, { params: filters })
-      .then((response) => {
-        dispatch({
-          type: APPLY_FILTERS,
-          payload: response.data,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-        // Puedes despachar otro tipo de acción aquí si quieres manejar errores.
-      });
+    axios.get(`${ENDPOINT_FILTER}`, { params: filters })
+			.then((response) => {
+				dispatch({
+					type: APPLY_FILTERS,
+					payload: response.data,
+				});
+			})
+			.catch((error) => {
+				console.error(error);
+			});
   };
 };
 
@@ -104,6 +88,7 @@ export const orderByWeight = (order) => (dispatch) => {
   return dispatch({ type: ORDER_BY_WEIGHT, payload: order });
 };
 
+//Ordena las mascotas segun la edad, de menor a mayor o veceversa
 export const orderByAge = (order) => (dispatch) => {
   if (order === "defecto") {
     return dispatch(getMascotas());
@@ -111,16 +96,15 @@ export const orderByAge = (order) => (dispatch) => {
   return dispatch({ type: ORDER_BY_AGE, payload: order });
 };
 
+//Agrega una nueva mascota
 export const addMascota = (Mascota) => {
   return async () => {
     try {
       const response = await axios.post(`${ENDPOINT}/`, Mascota);
-      return {
-        type: ADD_MASCOTA,
-        payload: response,
-      };
+      return alert("Mascota creada con éxito.")
+        
     } catch (error) {
-      alert(error.message);
+      console.log(error);
     }
   };
 };

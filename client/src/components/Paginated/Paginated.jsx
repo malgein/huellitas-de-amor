@@ -29,8 +29,8 @@
 // }
 
 import React from "react";
+import {Pagination} from "@nextui-org/react";
 
-import { Pagination } from "@nextui-org/react";
 
 export default function Paginated({ petsPerPage, mascotas, paginado }) {
   const pageNumbers = [];
