@@ -29,7 +29,7 @@ export default function ModalLogSig() {
   const handleGoogleSignin = async () => {
     try {
       await loginWithGoogle();
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       setError(error.message);
     }
@@ -37,10 +37,13 @@ export default function ModalLogSig() {
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-    if (!user.email) return setError("Write an email to reset password");
+    if (!user.email)
+      return setError(
+        "Escriba un correo electrónico para restablecer la contraseña"
+      );
     try {
       await resetPassword(user.email);
-      setError("We sent you an email. Check your inbox");
+      setError("Te enviamos un correo electrónico. Revisa tu correo");
     } catch (error) {
       setError(error.message);
     }

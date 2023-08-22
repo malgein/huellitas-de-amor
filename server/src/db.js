@@ -49,6 +49,8 @@ const {
   Donacion,
   Adopcion,
   Especie,
+  Favorito,
+  Rating,
 } = sequelize.models;
 
 //Usuarios --> Tipo de Usuarios
@@ -91,6 +93,11 @@ Comentario.hasMany(CasaDeAdopcion, {
   foreignKey: "comentarioId",
 }); */
 
+//!Ratings --> Casa de Adopciones
+CasaDeAdopcion.hasMany(Rating,{foreignKey: "ratingId"});
+Rating.belongsTo(CasaDeAdopcion, { foreignKey: "ratingId" });
+//!Ratings --> Casa de Adopciones
+
 //Mascotas --> Casa de Adopciones
 Mascota.belongsTo(CasaDeAdopcion, {
   foreignKey: "casaDeAdopcionId",
@@ -114,6 +121,25 @@ Donacion.belongsTo(CasaDeAdopcion, {
 CasaDeAdopcion.hasMany(Donacion, {
   foreignKey: "casaDeAdpocionId",
 });
+
+//Usuarios -->  favoritos
+Favorito.belongsTo(Usuario, {
+  foreignKey: "favoritoId",
+}); //Un usuario puede tener muchos favoritos (1 a N)
+
+Usuario.hasMany(Favorito ,
+  {foreignKey: 'usuarioId'
+});//
+
+//Mascotas --> Favoritos
+
+Favorito.belongsTo(Mascota, {
+  foreignKey: "favoritoId",
+}); //Un usuario puede tener muchos favoritos (1 a N)
+
+Mascota.hasMany(Favorito ,
+  {foreignKey: 'mascotaId'
+});//
 
 
 module.exports = {

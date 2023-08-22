@@ -5,7 +5,8 @@ const postPetById = require("../controllers/postPetById");
 const getPets = require("../controllers/getPets");
 const getPetByName = require("../controllers/getPetsByName");
 const filtradoMascotas = require("../controllers/filtradoMascotas");
-const data = require('../utils/data')
+const modPetById = require('../controllers/modPetById')
+const deletePetById = require('../controllers/deletePetById')
 
 
 router.get("/filtro", async (req, res) => {
@@ -62,6 +63,28 @@ router.get("/:id", async (req, res) => {
     res.status(200).json(petId);
   } catch (error) {
     res.status(error.status || 500).json({ message: error.message });
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = req.body
+    console.log(req.body)
+    const petId =  await modPetById(id, response);
+    return res.status(200).json(petId);
+  } catch (error) {
+    return res.status(500).json({ mensaje: "Error en el servidor" });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const petId =  await deletePetById(id);
+    return res.status(200).json(petId);
+  } catch (error) {
+    return res.status(500).json({ mensaje: "Error en el servidor" });
   }
 });
 
