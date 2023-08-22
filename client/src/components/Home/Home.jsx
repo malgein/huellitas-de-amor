@@ -47,15 +47,16 @@ export default function Home() {
     dispatch(getMascotas());
   }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
 
+  //h-screen w-screen
   return (
-    <div className="bg-red-700 flex h-screen w-screen flex-col ">
-      <div className="flex h-full flex-row justify-between pr-12">
-        <div className="pl-20 flex flex-col">
-          {" "}
-          <FilterMascotas />
+    <div className=" mx-[50px] flex justify-center items-center flex-col">
+      <div className=" flex flex-row items-center justify-center w-[100%] mt-4 ">
+        <div>
+          {/* {" "} */}
+          <Sorts />
         </div>
         <div>
-          <Sorts />
+          <FilterMascotas />
         </div>
       </div>
 
@@ -63,8 +64,8 @@ export default function Home() {
         Se parece que tienes un NavBar comentado. Si no lo usas, puedes eliminar este bloque.
         algo
       </header> */}
-      <div className="border-4 m-0 h-full w-screen  flex  bg-white p-0">
-        <section className="border border-danger-200 m-0 h-[100%]  w-screen bg-white p-0 flex flex-grow items-center justify-center">
+      <div className="flex bg-white w-[100%] mt-4">
+        <section className=" m-0 h-[100%]  w-screen bg-white p-0 flex flex-grow items-center justify-center">
           <div className="bg-white w-[90%] h-[90%] ">
             <div className="flex flex-col">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
