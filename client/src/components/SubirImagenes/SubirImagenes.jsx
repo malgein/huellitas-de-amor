@@ -60,6 +60,9 @@ const SubirImagenes = ({setImagenes}) => {
     });
     
   };
+  const handleDelete =() => {
+    
+  }
   return (
     <div>
       <div
