@@ -1,38 +1,25 @@
 import React from "react";
-// import { Avatar } from "@nextui-org/react";
-import { useAuth } from "../../context/authContext";
-
-// export default function AvatarImg() {
-//   const { user } = useAuth();
-
-//   return (
-//     <div className="flex gap-4 items-center">
-//       <div>
-//         <h1 className="font-bold">{user?.displayName}</h1>
-//         <h1>{user?.email}</h1>
-//       </div>
-//       <div>
-//         <Avatar radius="lg" color="default" src={user?.photoURL} />
-//       </div>
-//     </div>
-//   );
-// }
-
-// import React from "react";
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Button,
-  Avatar,
   User,
 } from "@nextui-org/react";
-import ModalLogSig from "../modalLogSig/modalLogSig";
+import ModalLogSig from "../ModalLogSig/ModalLogSig";
+import { useAuth } from "../../context/authContext";
+import PathRoutes from "../../helpers/Routes.helper";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function AvatarImg() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const imgProfile = user?.photoURL;
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
     <div className="flex items-center gap-4">
@@ -54,17 +41,26 @@ export default function AvatarImg() {
             <p className="font-bold">Hola 🐾</p>
             <p className="font-bold">{user?.displayName}</p>
           </DropdownItem>
-          {/* <DropdownItem key="settings">My Settings</DropdownItem> */}
-          {/* <DropdownItem key="team_settings">Team Settings</DropdownItem> */}
-          <DropdownItem key="analytics">OTROS 1</DropdownItem>
-          <DropdownItem key="system">OTROS 2</DropdownItem>
-          <DropdownItem key="configurations">OTROS 3</DropdownItem>
-          <DropdownItem>
-            <ModalLogSig />
+          <DropdownItem key="analytics" to="/registro">
+            <Link to={PathRoutes.HOME}>Inicio</Link>
           </DropdownItem>
-          <DropdownItem key="logout" color="danger">
-            Log Out
+          <DropdownItem key="dashboard">
+            <Link to={PathRoutes.DASHBOARD}>Panel</Link>
           </DropdownItem>
+          {/* <DropdownItem key="configurations">
+            <Link to={PathRoutes.REGISTRO}>Registro</Link>
+          </DropdownItem> */}
+          {user ? (
+            <DropdownItem key="logout" color="danger">
+              <Link to="#" onClick={handleLogout}>
+                Cerrar sesión
+              </Link>
+            </DropdownItem>
+          ) : (
+            <DropdownItem>
+              <ModalLogSig />
+            </DropdownItem>
+          )}
         </DropdownMenu>
       </Dropdown>
     </div>

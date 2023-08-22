@@ -12,9 +12,15 @@ const postSendEmail = require ('../controllers/postSendEmail');
 const postUsuario = require("./routesUsuario");
 const crearUsuario = require("../controllers/crearUsuario");
 const postMercadoPago = require("../controllers/postMercadoPago");
+const fillDonations = require("../controllers/fillDonations");
+const postDonaciones = require('./routesDonaciones')
 
 
 router.post("/email", postSendEmail);
+router.get("/fill", fillDonations);
+router.use('/donaciones', postDonaciones)
+router.use("/usuario", postUsuario);
+
 router.use("/mascotas", mascotas);
 router.get("/", getPets);
 router.get("/nombre", getPetByName);
@@ -24,7 +30,7 @@ router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago)
 router.use("/casaDeAdopcion", postCasaAdopcion);
 
-router.use("/usuario", postUsuario);
+
 // router.post("/", crearUsuario);
 
 module.exports = router;

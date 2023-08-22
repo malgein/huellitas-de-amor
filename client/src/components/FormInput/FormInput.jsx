@@ -3,14 +3,14 @@ import { Field, ErrorMessage } from "formik";
 import { Input } from "@nextui-org/react";
 import styles from './FormInput.module.css'
 
-function FormInput({label,error,name,}) {
+function FormInput({label,error,name,placeholder}) {
   return (
 		<div className={styles.FormInput}>
 			<Field
 				as={Input}
 				label={label}
 				variant='bordered'
-				placeholder={`${label} de la mascota`}
+				placeholder={`${placeholder} de la mascota`}
 				type='text'
 				id={name}
 				name={name}

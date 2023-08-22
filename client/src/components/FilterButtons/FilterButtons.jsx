@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { applyFilters } from "../../redux/actions"; // Asegúrate de que la ruta sea la correcta
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
+import { applyFilters } from "../../redux/actions";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
 
 const FilterMascotas = () => {
   const dispatch = useDispatch();
@@ -40,13 +46,13 @@ const FilterMascotas = () => {
   };
 
   return (
-    <div className="p-10 bg-white shadow-md rounded-md max-w-screen-lg mx-auto flex flex-wrap space-x-10 justify-between">
+    <div className="border-x-fuchsia-800 p-10 bg-white shadow-md rounded-md max-w-screen-lg mx-auto flex flex-wrap space-x-10 justify-between">
       {Object.keys(options).map((filter) => (
         <Dropdown key={filter}>
           <DropdownTrigger>
-            <Button 
-              variant="bordered" 
-              className="capitalize"
+            <Button
+              className="border border-blue-500 text-black bg-white hover:bg-slate-100 capitalize"
+              variant="bordered"
             >
               {filters[filter] || filter}
             </Button>
@@ -57,7 +63,9 @@ const FilterMascotas = () => {
             disallowEmptySelection
             selectionMode="single"
             selectedKeys={new Set([filters[filter]])}
-            onSelectionChange={(keys) => handleChange(filter, Array.from(keys)[0])}
+            onSelectionChange={(keys) =>
+              handleChange(filter, Array.from(keys)[0])
+            }
           >
             {options[filter].map((option) => (
               <DropdownItem key={option}>{option}</DropdownItem>
@@ -65,8 +73,8 @@ const FilterMascotas = () => {
           </DropdownMenu>
         </Dropdown>
       ))}
-      <Button 
-        className="capitalize ml-2" 
+      <Button
+        className="border border-black text-black bg-white hover:bg-slate-100 capitalize ml-2"
         color="error" // Usamos el color "error" para que destaque como acción de reset
         onClick={handleResetFilters}
       >
@@ -77,3 +85,4 @@ const FilterMascotas = () => {
 };
 
 export default FilterMascotas;
+
