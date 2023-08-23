@@ -26,7 +26,10 @@ export const GET_ALL_DONATIONS = 'GET_DONATIONS'
 export const ADD_MASCOTA = "ADD_MASCOTA";
 export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
+export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
+
 export const EDIT_USER = 'EDIT_USER';
+
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
@@ -232,5 +235,12 @@ export const limpiarImagenes = () => {
     type: LIMPIAR_IMAGENES,
     payload: imagenes,
   }
+}
+export const eliminarImagenes = (imagenes) => (dispatch) => {
+  return dispatch({
+    /* console.log(imagenes) */
+    type: ELIMINAR_IMAGENES,
+    payload: imagenes,
+  })
 }
 

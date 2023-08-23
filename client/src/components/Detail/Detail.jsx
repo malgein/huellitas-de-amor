@@ -23,7 +23,6 @@ export default function Detail() {
 
   const dispatch = useDispatch();
 
-  
   useEffect(() => {
     dispatch(getPetById(id));
   }, [dispatch, id]);
@@ -148,8 +147,7 @@ export default function Detail() {
               >
               Volver
             </Button>
-              </Link>
-          
+              </Link>          
         </div>
       </div>
     </div>
