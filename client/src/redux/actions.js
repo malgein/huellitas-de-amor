@@ -17,6 +17,7 @@ export const EDIT_PETS = 'EDIT_PETS'
 export const DELETE_PET = 'DELETE_PET'
 export const EDIT_HOUSES = 'EDIT_HOUSES'
 export const DELETE_HOUSES = 'DELETE_HOUSES'
+export const MOD_COMPLETE_USER = 'MOD_COMPLETE_USER'
 
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = 'GET_USER'
@@ -26,10 +27,12 @@ export const GET_ALL_DONATIONS = 'GET_DONATIONS'
 export const ADD_MASCOTA = "ADD_MASCOTA";
 export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
+
 export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
-export const EDIT_USER = 'EDIT_USER';
 
+
+export const EDIT_USER = 'EDIT_USER';
 
 const ENDPOINT = "http://localhost:3001/mascotas/";
 const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
@@ -37,7 +40,13 @@ const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
 const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
 
 
-///Get de mascotas por id
+
+const handleError = (dispatch, errorType, error) => {
+  console.error(error);
+  dispatch({ type: errorType, payload: error.message });
+};
+
+
 export const getPetById = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(ENDPOINT + `/${id}`);
@@ -200,7 +209,7 @@ export const deletePets = (id) => {
    };
 }
 
-export const editHouses = (id) => {
+export const editHouses = (id, updatedData) => {
   const endpoint = `http://localhost:3001/casaDeAdopcion/${id}`;
 
   return (dispatch) => {
@@ -236,6 +245,7 @@ export const limpiarImagenes = () => {
     payload: imagenes,
   }
 }
+
 export const eliminarImagenes = (imagenes) => (dispatch) => {
   return dispatch({
     /* console.log(imagenes) */
@@ -243,4 +253,18 @@ export const eliminarImagenes = (imagenes) => (dispatch) => {
     payload: imagenes,
   })
 }
+
+export const modCompleteUser  = (id, updatedProperties) => {
+  const endpoint = `http://localhost:3001/usuario/${id}`;
+  console.log(updatedProperties)
+  return (dispatch) => {
+    axios.put(endpoint, updatedProperties).then(({ data }) => {
+      dispatch({
+        type: MOD_COMPLETE_USER,
+        payload: data,
+      });
+    });
+  };
+};
+
 
