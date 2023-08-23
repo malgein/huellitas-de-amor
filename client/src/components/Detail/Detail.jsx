@@ -10,12 +10,13 @@ import { getPetById } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
-import { Link } from "react-router-dom";
 import iconMacho from "../../assets/macho.png";
 import iconHembra from "../../assets/hembra.png";
+import { useAuth } from "../../context/authContext";
 
 export default function Detail() {
   const { id } = useParams();
+  const { user } = useAuth();
 
   const handleConfetti = () => {
     confetti({});
@@ -131,20 +132,21 @@ export default function Detail() {
             </div>
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
-            <Button
-              radius="full"
-              className="bg-blue-500 text-white hover:bg-blue-600 "
-              onPress={handleConfetti}
-            >
-              Adóptame
-            </Button>
-          </div>
-          <Link>
-          <Button
-              radius="full"
-              className="bg-blue-500 text-white hover:bg-blue-600 "
-              
+            {user ? (
+              <Button
+                radius="full"
+                className="bg-blue-500 text-white hover:bg-blue-600 "
+                onPress={handleConfetti}
               >
+
+                Adóptame
+              </Button>
+            ) : (
+              <Button radius="full" isDisabled color="primary">
+                Adóptame
+              </Button>
+            )}
+          </div>
               Volver
             </Button>
               </Link>          
