@@ -84,19 +84,19 @@ const Nav = () => {
           </Link>
           </div> */}
 
-          <div className="flex flex-row">
-            {mostarSearchBar && (
-              <div className="mr-6">
-                <SearchBar />
-              </div>
-            )}
-            <div className="mr-9">
-              {" "}
-              <AvatarImg />
+        <div className="flex flex-row items-center">
+          {mostarSearchBar && (
+            <div className="mr-6">
+              <SearchBar />
+            </div>
+          )}
+          <div className="mr-9">
+            {" "}
+            <AvatarImg />
           </div>
+        </div>
       </div>
-    </div>
-    
+
       {modalabierto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
