@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import logoPrueba from "../../assets/LogoPrueba.jpg";
 
 import { Link, Button, Image } from "@nextui-org/react";
-import Registro from "../Registro/Registro";
+// import Registro from "../Registro/Registro";
 import AvatarImg from "../AvatarImg/AvatarImg";
 
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
