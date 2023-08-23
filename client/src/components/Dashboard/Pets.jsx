@@ -1,10 +1,46 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import Sidebar from './Sidebar'
 import Dashboardview from './DashboardView'
 import { useSelector, useDispatch } from 'react-redux'
 import { getMascotas, deletePets, editPets } from '../../redux/actions'
 import Swal from 'sweetalert2'
-import { DeleteIcon } from './DeletIcon'
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Input,
+  Button,
+  DropdownTrigger,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Chip,
+  User,
+  Pagination,
+} from "@nextui-org/react";
+import {VerticalDotsIcon} from "./VerticalDotsIcon";
+import {SearchIcon} from "./SearchIcon";
+import {ChevronDownIcon} from "./ChevronDownIcon";
+// import {columns, users, statusOptions} from "./data";
+import {capitalize} from "./Accesory";
+
+const statusColorMap = {
+  Macho: "success",
+  Hembra: "danger",
+  // vacation: "warning",
+};
+
+//Aqui piuedo colocar la disponibilidad de la mascota adoptada, en busca de un hogar
+const statusOptions = [
+  {name: "Active", uid: "active"},
+  {name: "Paused", uid: "paused"},
+  {name: "Vacation", uid: "vacation"},
+];
+//!Esto muestra las columnas que se ven al inicio
+const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre", "raza","sexo", "edad",  "tamano", "peso", "actions"];
 
 
 function Pets() {
@@ -13,14 +49,14 @@ function Pets() {
 
   const dispatch = useDispatch()
 
-  const [petDeleted , setPetDeleted] = useState(true)
+  const [petModified , setPetModified] = useState(true)
 
   useEffect(() => {
-    if(petDeleted){
+    if(petModified){
       dispatch(getMascotas())
-      setPetDeleted(false)
+      setPetModified(false)
     }
-  },[dispatch, petDeleted])
+  },[dispatch, petModified])
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -33,63 +69,364 @@ function Pets() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire('mascota borrada con exito', '', 'success')
-        setPetDeleted(!petDeleted)
+        setPetModified(!petModified)
         dispatch(deletePets(id))
-        console.log(petDeleted)
+        console.log(petModified)
       } else if (result.isDenied) {
         Swal.fire('La mascota no ha sido borrada', '', 'info')
       }
     })
   }
   
+  const handleEdit = async(id) => {
+    console.log(id)
+    const { value: formValues } = await Swal.fire({
+      title: 'Introduce la propiedad y el valor que deseas modificar',
+      html:
+        '<input id="swal-input1" class="swal2-input">' +
+        '<input id="swal-input2" class="swal2-input">',
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById('swal-input1').value,
+          document.getElementById('swal-input2').value
+        ]
+      }
+    })
+    
+    if (formValues) {
+      const result = {[formValues[0]] : formValues[1]}
+      console.log(result)
+      // const resultJson = JSON.stringify(result)
+      dispatch(editPets(id, result))
+      setPetModified(true)
+      Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
+    }
+  }
 
+  const columns = [
+    {name: "ID", uid: "id", sortable: true},
+    {name: "NOMBRE", uid: "nombre", sortable: true},
+    {name: "RAZA", uid: "raza", sortable: true},
+    {name: "SEXO", uid: "sexo", sortable: true},
+    {name: "EDAD", uid: "edad", sortable: true},
+    {name: "PESO", uid: "peso", sortable: true},
+    // {name: "STATUS", uid: "status", sortable: true},
+    {name: "TAMANO", uid: "tamano" , sortable: true},
+    {name: "ACTIONS", uid: "actions"},
+  ];  
+
+  const [filterValue, setFilterValue] = React.useState("");
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
+  const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));
+  const [statusFilter, setStatusFilter] = React.useState("all");
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [sortDescriptor, setSortDescriptor] = React.useState({
+    column: "age",
+    direction: "ascending",
+  });
+  const [page, setPage] = React.useState(1);
+
+  const hasSearchFilter = Boolean(filterValue);
+
+  const headerColumns = React.useMemo(() => {
+    if (visibleColumns === "all") return columns;
+
+    return columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
+  }, [visibleColumns]);
+
+  const filteredItems = React.useMemo(() => {
+    let filteredUsers = [...mascotas];
+
+    if (hasSearchFilter) {
+      filteredUsers = filteredUsers.filter((user) =>
+        user.nombre.toLowerCase().includes(filterValue.toLowerCase()),
+      );
+    }
+    //Para modificar el estado de la mascota
+    if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
+      filteredUsers = filteredUsers.filter((user) =>
+        Array.from(statusFilter).includes(user.status),
+      );
+    }
+
+    return filteredUsers;
+  }, [mascotas, filterValue, statusFilter]);
+
+  const pages = Math.ceil(filteredItems.length / rowsPerPage);
+
+  const items = React.useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    return filteredItems.slice(start, end);
+  }, [page, filteredItems, rowsPerPage]);
+
+  const sortedItems = React.useMemo(() => {
+    return [...items].sort((a, b) => {
+      const first = a[sortDescriptor.column];
+      const second = b[sortDescriptor.column];
+      const cmp = first < second ? -1 : first > second ? 1 : 0;
+
+      return sortDescriptor.direction === "descending" ? -cmp : cmp;
+    });
+  }, [sortDescriptor, items]);
+
+  const renderCell = React.useCallback((user, columnKey) => {
+    const cellValue = user[columnKey];
+
+    switch (columnKey) {
+      case "nombre":
+        return (
+          <User
+          //aqui va la foto de la mascota
+            avatarProps={{radius: "lg", src: user.foto}}
+            description={user.nombre}
+            name={cellValue}
+          >
+            {user.id}
+          </User>
+        );
+      case "raza":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{cellValue}</p>
+            <p className="text-bold text-tiny capitalize text-default-400">{user.raza}</p>
+          </div>
+        );
+      case "sexo":
+        return (
+          <Chip className="capitalize" color={statusColorMap[user.sexo]} size="sm" variant="flat">
+            {cellValue}
+          </Chip>
+        );
+      case "actions":
+        return (
+          <div className="relative flex justify-end items-center gap-2 ">
+            <Dropdown>
+              <DropdownTrigger>
+                <Button isIconOnly size="sm" variant="light">
+                  <VerticalDotsIcon className="text-default-300" />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Dynamic Actions">
+                <DropdownItem>Detalle</DropdownItem>
+                <DropdownItem onClick={() => handleEdit(user.id)}>Editar</DropdownItem>
+                //!Aqui se borra y arriba se edita y se detalla
+                <DropdownItem  color="danger" className="text-danger" onClick={() => handleDelete(user.id)}>Borrar</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+        );
+      default:
+        return cellValue;
+    }
+  }, []);
+
+  const onNextPage = React.useCallback(() => {
+    if (page < pages) {
+      setPage(page + 1);
+    }
+  }, [page, pages]);
+
+  const onPreviousPage = React.useCallback(() => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  }, [page]);
+
+  const onRowsPerPageChange = React.useCallback((e) => {
+    setRowsPerPage(Number(e.target.value));
+    setPage(1);
+  }, []);
+
+  const onSearchChange = React.useCallback((value) => {
+    if (value) {
+      setFilterValue(value);
+      setPage(1);
+    } else {
+      setFilterValue("");
+    }
+  }, []);
+
+  const onClear = useCallback(()=>{
+    setFilterValue("")
+    setPage(1)
+  },[])
+
+  const topContent = React.useMemo(() => {
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="flex justify-between gap-3 items-end">
+          <Input
+            isClearable
+            className="w-full sm:max-w-[44%]"
+            placeholder="Busca por nombre..."
+            startContent={<SearchIcon />}
+            value={filterValue}
+            onClear={() => onClear()}
+            onValueChange={onSearchChange}
+          />
+          <div className="flex gap-3">
+            <Dropdown>
+              {/* <DropdownTrigger className="hidden sm:flex">
+                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                  Status
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                disallowEmptySelection
+                aria-label="Table Columns"
+                closeOnSelect={false}
+                selectedKeys={statusFilter}
+                selectionMode="multiple"
+                onSelectionChange={setStatusFilter}
+              >
+                {statusOptions.map((status) => (
+                  <DropdownItem key={status.uid} className="capitalize">
+                    {capitalize(status.name)}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu> */}
+            </Dropdown>
+            <Dropdown>
+              <DropdownTrigger className="hidden sm:flex">
+                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                  Columnas
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                disallowEmptySelection
+                aria-label="Table Columns"
+                closeOnSelect={false}
+                selectedKeys={visibleColumns}
+                selectionMode="multiple"
+                onSelectionChange={setVisibleColumns}
+              >
+                {columns.map((column) => (
+                  <DropdownItem key={column.uid} className="capitalize">
+                    {capitalize(column.name)}
+                    {/* {console.log(column)} */}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+            {/* <Button color="primary" endContent={<PlusIcon />}>
+              Add New
+            </Button> */}
+          </div>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-default-400 text-small">Total {mascotas.length} Mascotas</span>
+          <label className="flex items-center text-default-400 text-small">
+            Filas por pagina:
+            <select
+              className="bg-transparent outline-none text-default-400 text-small"
+              onChange={onRowsPerPageChange}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    );
+  }, [
+    filterValue,
+    statusFilter,
+    visibleColumns,
+    onRowsPerPageChange,
+    mascotas.length,
+    onSearchChange,
+    hasSearchFilter,
+  ]);
+
+  const bottomContent = React.useMemo(() => {
+    return (
+      <div className="py-2 px-2 flex justify-between items-center">
+        <span className="w-[30%] text-small text-default-400">
+          {selectedKeys === "all"
+            ? "All items selected"
+            : `${selectedKeys.size} de ${filteredItems.length} seleccionado`}
+        </span>
+        <Pagination
+          isCompact
+          showControls
+          showShadow
+          color="primary"
+          page={page}
+          total={pages}
+          onChange={setPage}
+        />
+        <div className="hidden sm:flex w-[30%] justify-end gap-2">
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
+            Previo
+          </Button>
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
+            Siguiente
+          </Button>
+        </div>
+      </div>
+    );
+  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+    
+    
   return (
-    <div className='flex overflow-scroll'>
+    <div >
+       <div className='flex overflow-scroll '>
 			<div className="flex overflow-scroll ">
         <div className="basis-[12%] h-[100vh]">
-          {/* Necesario que para que se vea el sidebar en la gestion de las mascotas */}
+          {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
 					<Sidebar />
         </div>
         <div className="basis-[88%] border overflow-scroll h-[100vh]">
-           {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
+          {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
 						<Dashboardview />
 					<div>
-          <div className="flex justify-center">
-      <div className="w-full px-4 py-2">
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="py-2 px-4">Imagen</th>
-              <th className="py-2 px-4">Nombre</th>
-              <th className="py-2 px-4">Edad</th>
-              <th className="py-2 px-4">Sexo</th>
-              <th className="py-2 px-4">Tamano</th>
-              <th className="py-2 px-4">Raza</th>
-              <th className="py-2 px-4">Peso</th>
-              <th className="py-2 px-4">Borrar</th>
-            </tr>
-          </thead>
-          <tbody>
-            {mascotas?.map((item) => (
-              <tr key={item.id} className="border-b border-gray-200">
-                <td className="py-2 px-4"><img src={item.foto} alt='item.name' /> </td>
-                <td className="py-2 px-4">{item.nombre}</td>
-                <td className="py-2 px-4">{item.edad}</td>
-                <td className="py-2 px-4">{item.sexo}</td>
-                <td className="py-2 px-4">{item.tamano}</td>
-                <td className="py-2 px-4">{item.raza}</td>
-                <td className="py-2 px-4">{item.peso}</td>
-                <td className="py-2 px-4" onClick={() => handleDelete(item.id)}><DeleteIcon /></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+            {/* Soy la gestion de casas de adopcion */}
+            {/* {console.log(casasDeAdopcion)} */}
+            <Table
+      aria-label="Example table with custom cells, pagination and sorting"
+      isHeaderSticky
+      bottomContent={bottomContent}
+      bottomContentPlacement="outside"
+      classNames={{
+        wrapper: "max-h-[382px]",
+      }}
+      selectedKeys={selectedKeys}
+      selectionMode="multiple"
+      sortDescriptor={sortDescriptor}
+      topContent={topContent}
+      topContentPlacement="outside"
+      onSelectionChange={setSelectedKeys}
+      onSortChange={setSortDescriptor}
+    >
+      <TableHeader columns={headerColumns}>
+        {(column) => (
+          <TableColumn
+            key={column.uid}
+            align={column.uid === "actions" ? "center" : "start"}
+            allowsSorting={column.sortable}
+          >
+            {/* {column.name} */}
+            {column.name}
+          </TableColumn>
+        )}
+      </TableHeader>
+      <TableBody emptyContent={"No Se encontraron Mascotas"} items={sortedItems}>
+        {(item) => (
+          <TableRow key={item.id}>
+            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
           </div>
         </div>
       </div>
 		</div>
+    </div>
   )
 }
 

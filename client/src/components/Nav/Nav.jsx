@@ -34,12 +34,14 @@ const Nav = () => {
     <div className="flex flex-col justify-center border-b shadow-lg w-screen">
       <div className="flex justify-between gap-4 flex-row">
         <div className="ml-2 flex items-center">
-          <Image
-            width={100}
-            height={100}
-            alt="NextUI hero Image"
-            src={logoPrueba}
-          />
+          <Link href="/home">
+            <Image
+              width={100}
+              height={100}
+              alt="NextUI hero Image"
+              src={logoPrueba}
+            />
+           </Link>
         </div>
 
         <div className=" gap-20 flex flex-row justify-center items-center text-black">
@@ -84,19 +86,21 @@ const Nav = () => {
           </Link>
           </div> */}
 
-          <div className="flex flex-row">
-            {mostarSearchBar && (
-              <div className="mr-6">
-                <SearchBar />
-              </div>
-            )}
-            <div className="mr-9">
-              {" "}
-              <AvatarImg />
+
+        <div className="flex flex-row items-center">
+
+          {mostarSearchBar && (
+            <div className="mr-6">
+              <SearchBar />
+            </div>
+          )}
+          <div className="mr-9">
+            {" "}
+            <AvatarImg />
           </div>
+        </div>
       </div>
-    </div>
-    
+
       {modalabierto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
