@@ -86,7 +86,9 @@ const Nav = () => {
           </Link>
           </div> */}
 
-        <div className="flex flex-row">
+
+        <div className="flex flex-row items-center">
+
           {mostarSearchBar && (
             <div className="mr-6">
               <SearchBar />

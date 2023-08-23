@@ -15,7 +15,6 @@ const postMercadoPago = require("../controllers/postMercadoPago");
 const fillDonations = require("../controllers/fillDonations");
 const rateCasas = require("./routesRateCasas");
 //Todas las rutas del usuario
-// const postUsuario = require("./routesUsuario");
 const postDonaciones = require('./routesDonaciones')
 
 

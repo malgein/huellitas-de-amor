@@ -5,6 +5,8 @@ import {
   ORDER_BY_WEIGHT,
   GET_MASCOTAS,
   FETCHING_MASCOTAS,
+  // FETCHING_MASCOTAS_SUCCESS,
+  // FETCHING_MASCOTAS_ERROR,
   APPLY_FILTERS,
   FILTERS_ERROR,
   GET_ALL_DONATIONS,
@@ -49,6 +51,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         mascotas: payload,
       };
+
+  
 
     case FILTERS_ERROR:
       return {
@@ -126,6 +130,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
     case LIMPIAR_IMAGENES: 
       return {...state, imagenes: []}
+
 
     case ELIMINAR_IMAGENES:
       /* console.log(payload) */
