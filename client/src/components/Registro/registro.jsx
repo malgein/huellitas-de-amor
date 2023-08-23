@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import Swal from 'sweetalert2'
 import styles from "./registro.module.css";
 import FormInput from "../FormInput/FormInput";
 import { Button } from "@nextui-org/button";
@@ -28,13 +28,18 @@ const Registro = () => {
     axios
       .post("http://localhost:3001/usuario", values)
       .then((res) => {
-        // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito
-        alert("Usuario registrado con éxito");
-        // resetForm();
+        Swal.fire({
+          icon: 'success',
+          title: 'Registro exitoso',
+          text: 'Usuario registrado con éxito',
+        });
       })
       .catch((err) => {
-        // Manejar errores, por ejemplo, mostrar un mensaje de error
-        alert("Hubo un error al registrar al usuario");
+        Swal.fire({
+          icon: 'error',
+          title: 'Error de registro',
+          text: 'Hubo un error al registrar al usuario',
+        });
       });
   };
 
