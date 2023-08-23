@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 import iconMacho from "../../assets/macho.png";
 import iconHembra from "../../assets/hembra.png";
 
+import PathRoutes from '../../helpers/Routes.helper'
+
 export default function Detail() {
   const { id } = useParams();
 
@@ -140,11 +142,10 @@ export default function Detail() {
               Adóptame
             </Button>
           </div>
-          <Link>
+          <Link to={PathRoutes.HOME}>
           <Button
               radius="full"
-              className="bg-blue-500 text-white hover:bg-blue-600 "
-              
+              className="bg-blue-500 text-white hover:bg-blue-600 " 
               >
               Volver
             </Button>
