@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import Sidebar from './Sidebar'
-import Dashboardview from './DashboardView'
 import {useSelector, useDispatch} from 'react-redux'
 import { getDonations } from '../../redux/actions'
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Pagination, getKeyValue} from "@nextui-org/react";
@@ -18,7 +17,7 @@ function Donations() {
   }, [dispatch])
 
   const [page, setPage] = React.useState(1);
-  const rowsPerPage = 4;
+  const rowsPerPage = 12;
 
   const pages = Math.ceil(donaciones.length / rowsPerPage);
 
@@ -39,7 +38,6 @@ function Donations() {
         </div>
         <div className="basis-[88%] border overflow-scroll h-[100vh]">
            {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
-						<Dashboardview />
 					<div>
             
             {/* {console.log(donaciones)} */}
@@ -62,15 +60,18 @@ function Donations() {
         wrapper: "min-h-[222px]",
       }}
     >
-      <TableHeader>
-        <TableColumn key="estadoDonacion">ESTADO DE DONACION</TableColumn>
-        <TableColumn key="fechaDonacion">FECHA DE DONACION</TableColumn>
-        <TableColumn key="monto">MONTO</TableColumn>
+      <TableHeader >
+       
+
+        <TableColumn key="estadoDonacion"  >ESTADO DE DONACION</TableColumn>
+        <TableColumn key="fechaDonacion"  >FECHA DE DONACION</TableColumn>
+        <TableColumn key="monto" >MONTO</TableColumn>
+      
       </TableHeader>
       <TableBody items={items}>
         {(item) => (
           <TableRow key={item.name}>
-            {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
+            {(columnKey) => <TableCell className='mt-200'>{getKeyValue(item, columnKey)}</TableCell>}
           </TableRow>
         )}
       </TableBody>
