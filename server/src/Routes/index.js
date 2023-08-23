@@ -19,6 +19,7 @@ const postDonaciones = require('./routesDonaciones')
 
 
 
+router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fill", fillDonations);
 router.use('/donaciones', postDonaciones)
@@ -32,7 +33,6 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago)
-router.use("/casaDeAdopcion", postCasaAdopcion);
 
 
 // router.post("/", crearUsuario);
