@@ -19,6 +19,10 @@ const Dashboard = () => {
 						{/* El elemento Outlet es necesario para poder navegar en subrutas del dashboard*/}
 						<Outlet></Outlet>
 						<h1>Bienvenido Admind</h1>
+						<h1>Nombre del admin</h1>
+						<h1>Correo del admin</h1>
+						
+
           </div>
         </div>
       </div>

@@ -57,8 +57,9 @@ router.get("/", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
+
     const response = req.body;
-    console.log(req.body);
+    console.log(response);
     const userId = await modUserById(id, response);
     return res.status(200).json(userId);
   } catch (error) {

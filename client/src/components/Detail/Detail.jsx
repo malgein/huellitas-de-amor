@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPetById } from "../../redux/actions";
 
@@ -141,9 +141,11 @@ export default function Detail() {
                 Adóptame
               </Button>
             ) : (
-              <Button radius="full" isDisabled color="primary">
-                Adóptame
-              </Button>
+              <Link to="/registro">
+                <Button radius="full" color="primary">
+                  Adóptame
+                </Button>
+              </Link>
             )}
           </div>
         </div>

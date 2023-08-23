@@ -6,6 +6,7 @@ const PathRoutes = {
   DETAIL: "/detail/:id",
   AGREGAR: "/agregar",
   REGISTRO: "/registro",
+  LOGIN: "/login",
 
   //Ruta para el dashboard principal
   DASHBOARD: "/dashboard",

@@ -65,6 +65,7 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
 
       <CardBody className="overflow-visible py-2 flex flex-col items-center">
         <div className="aspect-w-3 aspect-h-4  flex items-center justify-center">
+
           <Image
             alt="Card background"
             className="object-cover rounded-xl w-[450px] h-[300px]"

@@ -9,9 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import validationSchema from "./Validaciones";
 import * as Yup from "yup";
+import ModalLogSig from "../ModalLogSig/ModalLogSig";
 
 const Registro = () => {
-  const [registroExitoso, setRegistroExitoso] = useState(false);
+  // const [registroExitoso, setRegistroExitoso] = useState(false);
 
   const initialValues = {
     nombre: "",
@@ -43,80 +44,86 @@ const Registro = () => {
 
   return (
     <div className={styles.formcontainer}>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-        // enableReinitialize={true}
-      >
-        {({ isSubmitting, errors, values, setValues }) => (
-          <Form>
-            <div className={styles.tittle}>
-              <h1>Registrate</h1>
-            </div>
-            <div>
-              <FormInput label="Nombre" name="nombre" error={errors.nombre} />
-            </div>
-            <div>
-              <FormInput
-                label="Apellido"
-                name="apellido"
-                error={errors.apellido}
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Nacionalidad"
-                name="nacionalidad"
-                error={errors.nacionalidad}
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Localizacion"
-                name="localizacion"
-                error={errors.localizacion}
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Direccion"
-                name="direccion"
-                error={errors.direccion}
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Telefono"
-                name="telefono"
-                error={errors.telefono}
-              />
-            </div>
-            <div>
-              <FormInput label="Acerca" name="acerca" error={errors.acerca} />
-            </div>
-            <div>
-              <FormInput label="Email" name="email" error={errors.email} />
-            </div>
-            <div>
-              <FormInput
-                label="Contraseña"
-                name="password"
-                error={errors.password}
-              />
-            </div>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="border border-black text-black hover:bg-slate-100 mt-8 bg-inherit "
-              size="lg"
-            >
-              Registrate
-            </Button>
-            {/* {registroExitoso && setValues(initialValues)} */}
-          </Form>
-        )}
-      </Formik>
+      <div className="flex flex-col items-center">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+          // enableReinitialize={true}
+        >
+          {({ isSubmitting, errors, values, setValues }) => (
+            <Form>
+              <div className={styles.tittle}>
+                <h1>Registrate</h1>
+              </div>
+              <div>
+                <FormInput label="Nombre" name="nombre" error={errors.nombre} />
+              </div>
+              <div>
+                <FormInput
+                  label="Apellido"
+                  name="apellido"
+                  error={errors.apellido}
+                />
+              </div>
+              <div>
+                <FormInput
+                  label="Nacionalidad"
+                  name="nacionalidad"
+                  error={errors.nacionalidad}
+                />
+              </div>
+              <div>
+                <FormInput
+                  label="Localizacion"
+                  name="localizacion"
+                  error={errors.localizacion}
+                />
+              </div>
+              <div>
+                <FormInput
+                  label="Direccion"
+                  name="direccion"
+                  error={errors.direccion}
+                />
+              </div>
+              <div>
+                <FormInput
+                  label="Telefono"
+                  name="telefono"
+                  error={errors.telefono}
+                />
+              </div>
+              <div>
+                <FormInput label="Acerca" name="acerca" error={errors.acerca} />
+              </div>
+              <div>
+                <FormInput label="Email" name="email" error={errors.email} />
+              </div>
+              <div>
+                <FormInput
+                  label="Contraseña"
+                  name="password"
+                  error={errors.password}
+                />
+              </div>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="border border-black text-black hover:bg-slate-100 mt-8 bg-inherit "
+                size="lg"
+              >
+                Registrate
+              </Button>
+              {/* {registroExitoso && setValues(initialValues)} */}
+            </Form>
+          )}
+        </Formik>
+        <div className="m-4">
+          <h1 className="pb-4">------------ 0 ------------</h1>
+          <ModalLogSig />
+        </div>
+      </div>
     </div>
   );
 };
