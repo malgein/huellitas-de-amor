@@ -1,16 +1,17 @@
 import React from "react";
 import axios from "axios";
-
-import styles from "./registro.module.css";
+import Swal from 'sweetalert2'
+import styles from "./Registro.module.css";
 import FormInput from "../FormInput/FormInput";
 import { Button } from "@nextui-org/button";
+import { useNavigate } from "react-router-dom";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import validationSchema from "./Validaciones";
 import * as Yup from "yup";
 
 const Registro = () => {
-  // const [registroExitoso, setRegistroExitoso] = useState(false);
+  const [registroExitoso, setRegistroExitoso] = useState(false);
 
   const initialValues = {
     nombre: "",
@@ -28,13 +29,26 @@ const Registro = () => {
     axios
       .post("http://localhost:3001/usuario", values)
       .then((res) => {
-        // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito
-        alert("Usuario registrado con éxito");
-        // resetForm();
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Registro exitoso',
+          text: 'Usuario registrado con éxito',
+        });
+
+       
+         setRegistroExitoso(true);
+
+       
+        
+
       })
       .catch((err) => {
-        // Manejar errores, por ejemplo, mostrar un mensaje de error
-        alert("Hubo un error al registrar al usuario");
+        Swal.fire({
+          icon: 'error',
+          title: 'Error de registro',
+          text: 'Hubo un error al registrar al usuario',
+        });
       });
   };
 
@@ -54,7 +68,6 @@ const Registro = () => {
             <div>
               <FormInput label="Nombre" name="nombre" error={errors.nombre} />
             </div>
-
             <div>
               <FormInput
                 label="Apellido"
@@ -62,7 +75,6 @@ const Registro = () => {
                 error={errors.apellido}
               />
             </div>
-
             <div>
               <FormInput
                 label="Nacionalidad"
@@ -70,7 +82,6 @@ const Registro = () => {
                 error={errors.nacionalidad}
               />
             </div>
-
             <div>
               <FormInput
                 label="Localizacion"
@@ -78,7 +89,6 @@ const Registro = () => {
                 error={errors.localizacion}
               />
             </div>
-
             <div>
               <FormInput
                 label="Direccion"
@@ -86,7 +96,6 @@ const Registro = () => {
                 error={errors.direccion}
               />
             </div>
-
             <div>
               <FormInput
                 label="Telefono"
@@ -94,15 +103,12 @@ const Registro = () => {
                 error={errors.telefono}
               />
             </div>
-
             <div>
               <FormInput label="Acerca" name="acerca" error={errors.acerca} />
             </div>
-
             <div>
               <FormInput label="Email" name="email" error={errors.email} />
             </div>
-
             <div>
               <FormInput
                 label="Contraseña"
@@ -110,7 +116,6 @@ const Registro = () => {
                 error={errors.password}
               />
             </div>
-
             <Button
               type="submit"
               disabled={isSubmitting}
@@ -119,7 +124,6 @@ const Registro = () => {
             >
               Registrate
             </Button>
-
             {/* {registroExitoso && setValues(initialValues)} */}
           </Form>
         )}
