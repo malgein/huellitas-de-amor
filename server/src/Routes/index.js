@@ -16,7 +16,7 @@ const fillDonations = require("../controllers/fillDonations");
 const rateCasas = require("./routesRateCasas");
 //Todas las rutas del usuario
 const postDonaciones = require('./routesDonaciones')
-
+const postUsuario = require('./routesUsuario')
 
 
 router.use("/casaDeAdopcion", postCasaAdopcion);
