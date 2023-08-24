@@ -12,7 +12,7 @@ import confetti from "canvas-confetti";
 
 import iconMacho from "../../assets/macho.png";
 import iconHembra from "../../assets/hembra.png";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Detail() {
   const { id } = useParams();
@@ -147,11 +147,13 @@ export default function Detail() {
               </Button>
             )}
           </div>
+          {/* <Button>
               Volver
             </Button>
-              </Link>          
+              </Link>           */}
         </div>
       </div>
     </div>
+     
   );
 }

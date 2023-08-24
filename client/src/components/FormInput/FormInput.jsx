@@ -3,7 +3,7 @@ import { Field, ErrorMessage } from "formik";
 import { Input } from "@nextui-org/react";
 import styles from './FormInput.module.css'
 
-function FormInput({label,error,name,placeholder}) {
+function FormInput({label,error,name,placeholder,}) {
   return (
 		<div className={styles.FormInput}>
 			<Field
