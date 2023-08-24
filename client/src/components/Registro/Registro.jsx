@@ -128,6 +128,7 @@ const Registro = () => {
           </Form>
         )}
       </Formik>
+      {/*  */}
     </div>
   );
 };
