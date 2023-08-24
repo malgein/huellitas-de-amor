@@ -11,7 +11,7 @@ import validationSchema from "./Validaciones";
 import * as Yup from "yup";
 
 const Registro = () => {
-  const [registroExitoso, setRegistroExitoso] = useState(false);
+  //const [registroExitoso, setRegistroExitoso] = useState(false);
 
   const initialValues = {
     nombre: "",
