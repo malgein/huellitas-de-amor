@@ -17,6 +17,7 @@ export const EDIT_PETS = 'EDIT_PETS'
 export const DELETE_PET = 'DELETE_PET'
 export const EDIT_HOUSES = 'EDIT_HOUSES'
 export const DELETE_HOUSES = 'DELETE_HOUSES'
+export const MOD_COMPLETE_USER = 'MOD_COMPLETE_USER'
 
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = 'GET_USER'
@@ -252,4 +253,18 @@ export const eliminarImagenes = (imagenes) => (dispatch) => {
     payload: imagenes,
   })
 }
+
+export const modCompleteUser  = (id, updatedProperties) => {
+  const endpoint = `http://localhost:3001/usuario/${id}`;
+  console.log(updatedProperties)
+  return (dispatch) => {
+    axios.put(endpoint, updatedProperties).then(({ data }) => {
+      dispatch({
+        type: MOD_COMPLETE_USER,
+        payload: data,
+      });
+    });
+  };
+};
+
 

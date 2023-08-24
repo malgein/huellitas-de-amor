@@ -1,113 +1,7 @@
-// import React, {useState, useEffect} from 'react'
-// import {useSelector, useDispatch} from 'react-redux'
-// import { getUsers, editUser, deleteUsers} from '../../redux/actions'
-// import Sidebar from './Sidebar'
-// import Dashboardview from './DashboardView'
-// import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue} from "@nextui-org/react";
-// import {EditIcon} from "./EditIcon";
-// import { DeleteIcon } from './DeletIcon'
-// import {EyeIcon} from "./EyeIcon";
-// import Swal from 'sweetalert2'
-
-// function Users() {
-  
-//   const usuarios = useSelector((state) => state.usuarios)
-  
-//   const dispatch = useDispatch()
-
-//   const [userDeleted , setUserDeleted] = useState(true)
-  
-//   useEffect(() => {
-//     // if (userDeleted) {
-//       dispatch(getUsers());
-//       // setUserDeleted(false); // Restablecer userDeleted después de obtener usuarios
-//     // }
-//   }, [userDeleted, dispatch]);
-
-
-//   const handleDelete = (id) => {
-//     Swal.fire({
-//       title: 'Seguro que quieres eliminar al usuario?',
-//       showDenyButton: true,
-//       showCancelButton: true,
-//       confirmButtonText: 'Si',
-//       denyButtonText: `No`,
-//     }).then((result) => {
-//       /* Read more about isConfirmed, isDenied below */
-//       if (result.isConfirmed) {
-//         Swal.fire('Usuario borrado con exito', '', 'success')
-//         setUserDeleted(!userDeleted)
-//         dispatch(deleteUsers(id))
-//         console.log(userDeleted)
-//       } else if (result.isDenied) {
-//         Swal.fire('El usuario no ha sido borrado', '', 'info')
-//       }
-//     })
-//   }
-
-//   return (
-    
-//     <div className='flex overflow-scroll'>
-// 			<div className="flex overflow-scroll ">
-//         <div className="basis-[12%] h-[100vh]">
-//           {/* Necesario que para que se vea el sidebar en la gestion de los usuarios */}
-// 					<Sidebar />
-//         </div>
-//         <div className="basis-[88%] border overflow-scroll h-[100vh]">
-//            {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
-// 						<Dashboardview />
-// 					<div>
-//           <div className="flex justify-center">
-//       <div className="w-full px-4 py-2">
-//         <table className="min-w-full bg-white border border-gray-200">
-//           <thead>
-//             <tr className="bg-gray-100">
-//               <th className="py-2 px-4">Nombre</th>
-//               <th className="py-2 px-4">Apellido</th>
-//               <th className="py-2 px-4">Nacionalidad</th>
-//               <th className="py-2 px-4">Localización</th>
-//               <th className="py-2 px-4">Dirección</th>
-//               <th className="py-2 px-4">Teléfono</th>
-//               <th className="py-2 px-4">Email</th>
-//               <th className="py-2 px-4">Borrar Usuario</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {usuarios?.map((item) => (
-//               <tr key={item.id} className="border-b border-gray-200">
-//                 <td className="py-2 px-4">{item.nombre}</td>
-//                 <td className="py-2 px-4">{item.apellido}</td>
-//                 <td className="py-2 px-4">{item.nacionalidad}</td>
-//                 <td className="py-2 px-4">{item.localizacion}</td>
-//                 <td className="py-2 px-4">{item.direccion}</td>
-//                 <td className="py-2 px-4">{item.telefono}</td>
-//                 <td className="py-2 px-4">{item.email}</td>
-//                 <td className="py-2 px-4" onClick={() => handleDelete(item.id)}><DeleteIcon /></td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//           </div>
-//         </div>
-//       </div>
-// 		</div>
-//   )
-// }
-
-// export default Users
-
-
 import React, {useState, useEffect, useCallback} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { getUsers, editUser, deleteUsers} from '../../redux/actions'
+import { getUsers, editUser, deleteUsers, modCompleteUser} from '../../redux/actions'
 import Sidebar from './Sidebar'
-import Dashboardview from './DashboardView'
-
-import {EditIcon} from "./EditIcon";
-import { DeleteIcon } from './DeletIcon'
-import {EyeIcon} from "./EyeIcon";
 import Swal from 'sweetalert2'
 import {
   Table,
@@ -163,35 +57,99 @@ function Users() {
   const [userModified , setUserModified] = useState(true)
   
   useEffect(() => {
-    if (userModified) {
+    //if (userModified) {
       dispatch(getUsers());
-      setUserModified(false); // Restablecer userDeleted después de obtener usuarios
-    }
+      // setUserModified(false); // Restablecer userDeleted después de obtener usuarios
+    //}
   }, [userModified, dispatch]);
+
+  //Esta funcion puede ser modificada para cambiar cada propiedad del usuario
+  // const handleEdit = async(id) => {
+  //   console.log(id)
+  //   const { value: formValues } = await Swal.fire({
+  //     title: 'Introduce la propiedad y el valor que deseas modificar',
+  //     html:
+  //       '<input id="swal-input1" class="swal2-input">' +
+  //       '<input id="swal-input2" class="swal2-input">' ,
+  //     focusConfirm: false,
+  //     preConfirm: () => {
+  //       return [
+  //         document.getElementById('swal-input1').value,
+  //         document.getElementById('swal-input2').value,
+          
+  //       ]
+  //     }
+  //   })
+    
+  //   if (formValues) {
+  //     const result = {[formValues[0]] : formValues[1]}
+  //     console.log(result)
+  //     // const resultJson = JSON.stringify(result)
+  //     dispatch(editUser(id, result))
+  //     console.log(userModified)
+  //     Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
+  //     setUserModified(!userModified)
+  //   }
+  // }
 
   const handleEdit = async(id) => {
     console.log(id)
     const { value: formValues } = await Swal.fire({
-      title: 'Introduce la propiedad y el valor que deseas modificar',
+      title: 'Introduce los nuevos datos del usuario que deseas modificar',
       html:
-        '<input id="swal-input1" class="swal2-input">' +
-        '<input id="swal-input2" class="swal2-input">',
+        'Nombre del usuario ' +
+        '<input id="swal-input1" class="swal2-input"> </br> ' +
+        'Apellido del usuario' +
+        '<input id="swal-input2" class="swal2-input"> </br> ' +
+        'Nacionalidad del usuario ' +
+        '<input id="swal-input3" class="swal2-input"> </br> ' +
+        'Localizacion del usuario ' +
+        '<input id="swal-input4" class="swal2-input"> </br> ' +
+        'Direccion del usuario ' +
+        '<input id="swal-input5" class="swal2-input"> </br> ' +
+        'Telefono del usuario ' +
+        '<input id="swal-input6" class="swal2-input"> </br> ' +
+        'Detalles  del usuario ' +
+        '<input id="swal-input7" class="swal2-input"> </br> ' +
+        'Email del usuario ' +
+        '<input id="swal-input8" class="swal2-input"> </br> ' +
+        'Password del usuario ' +
+        '<input type="password" id="swal-input9" class="swal2-input"> </br> ' 
+        ,
       focusConfirm: false,
       preConfirm: () => {
         return [
           document.getElementById('swal-input1').value,
-          document.getElementById('swal-input2').value
+          document.getElementById('swal-input2').value,
+          document.getElementById('swal-input3').value,
+          document.getElementById('swal-input4').value,
+          document.getElementById('swal-input5').value,
+          document.getElementById('swal-input6').value,
+          document.getElementById('swal-input7').value,
+          document.getElementById('swal-input8').value,
+          document.getElementById('swal-input9').value,
         ]
       }
     })
     
     if (formValues) {
-      const result = {[formValues[0]] : formValues[1]}
+      const result = {
+        nombre: formValues[0],
+        apellido: formValues[1],
+        nacionalidad: formValues[2],
+        localizacion: formValues[3],
+        direccion: formValues[4],
+        telefono: parseInt(formValues[5]),
+        acerca: formValues[6],
+        email: formValues[7] ,
+        password : formValues[8]
+      }
       console.log(result)
-      // const resultJson = JSON.stringify(result)
-      dispatch(editUser(id, result))
-      setUserModified(true)
-      Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
+      dispatch(modCompleteUser(id, result))
+      // dispatch(editUser(id, result))
+      // console.log(userModified)
+      Swal.fire(`Propiedades del usuario cambiadas exitosamente`)
+      setUserModified(!userModified)
     }
   }
 
@@ -206,8 +164,8 @@ function Users() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire('Usuario borrado con exito', '', 'success')
-        setUserModified(true)
         dispatch(deleteUsers(id))
+        setUserModified(true)
         console.log(userModified)
       } else if (result.isDenied) {
         Swal.fire('El usuario no ha sido borrado', '', 'info')
@@ -493,8 +451,8 @@ function Users() {
         </div>
         <div className="basis-[88%] border overflow-scroll h-[100vh]">
           {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
-						<Dashboardview />
-					<div>
+						
+					<div className='mt-10'>
             {/* Soy la gestion de casas de adopcion */}
             {/* {console.log(casasDeAdopcion)} */}
             <Table
