@@ -1,15 +1,36 @@
 .divnav {
-  /* border: 2px solid yellow; */
   /* margin-top: 0px; */
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  width: 1000px;
+  width: 100%;
   /* color: #fff; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  margin: 20px auto;
+  margin-top: 0px;
   /* height: 1000px; */
+  border: 1px solid black;
+}
+
+.divcontainer {
+  width: 100%;
+  /* color: #fff; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px auto;
+  margin-top: 0px;
+  /* height: 1000px; */
+}
+
+.divsearchbar {
+  /* border: 3px solid red; */
+  margin: 20px auto;
+  margin-top: 0px;
 }
 
 .divlogo {
@@ -38,6 +59,33 @@
 
 .divlogin {
   margin-right: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.regis {
+  border: 1px solid #000000;
+  border-radius: 15px;
+  text-align: center;
+  text-decoration: none;
+  /* width: 120px;
+  height: 40px; */
+  padding: 10px;
+  /* margin: 20px auto; */
+}
+
+.iniciosesion {
+  border: 1px solid #000000;
+  border-radius: 15px;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  /* width: 120px;
+  height: 40px; */
 }
 
 .modal {
@@ -53,24 +101,25 @@
 }
 
 .modalContent {
-  /* background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  color: #000000; */
   background-color: #fefefe;
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
+  border-radius: 15px;
   width: 80%;
   max-width: 600px;
   color: #000000;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+  background-color: #ffaa00;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+  width: 100px;
 }
 
 .close:hover,
@@ -80,16 +129,17 @@
   cursor: pointer;
 }
 
-/* Estilos para el listado de notificaciones */
-/* Estilos para el listado de notificaciones */
-.notification-list {
+.notih2 {
+  font-weight: bold;
+}
+.notificationlist {
   list-style: none;
   padding: 0;
   margin: 20px 0;
   text-decoration: none;
 }
 
-.notification-list li {
+.notificationlist li {
   margin-bottom: 10px;
   list-style: none;
 }
@@ -103,7 +153,7 @@
   border-radius: 6px;
 }
 
-.notification-info {
+.notificationinfo {
   flex: 1;
   margin-right: 10px;
 }
@@ -112,16 +162,39 @@
   font-weight: bold;
 }
 
-.notification-time {
+.notificationtime {
   color: #888;
 }
 
-.notification-action {
-  background-color: #3498db;
-  color: white;
-  border: none;
+.notificationaction {
+  /* background-color: #3498db; */
+  color: #124c5f;
+  border: 1px solid #124c5f;
   padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
-  width: 50px;
+  width: 100px;
+}
+
+.agregar {
+  margin-right: 50px;
+  margin-left: 0px;
+  color: #124c5f;
+  font-weight: bold;
+  /* border: 1px solid #124c5f; */
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  /* width: 100px; */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.agregar:hover {
+  /* background-color: #333333; */
+  color: #000;
+}
+
+.fuent {
+  font-weight: bold;
+  color: #f9f9f9;
 }

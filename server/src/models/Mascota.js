@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       edad: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       sexo: {
@@ -23,11 +23,11 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       descripcion: {
-        type: DataTypes.STRING(250),
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       foto: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.JSON, // Cambiado a JSON para representar un array de URLs
         allowNull: false,
       },
       tamano: {

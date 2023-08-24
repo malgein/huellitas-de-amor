@@ -1,0 +1,86 @@
+.contenedor {
+  /* border: 1px solid red; */
+
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+
+  /* position: absolute;
+  top: 1800px;
+  left: 0; */
+  
+
+
+  /* align-content: center; */
+  /* justify-content: center; */
+}
+
+
+
+
+.footerinfo {
+  /* border: 1px solid green; */
+  display: flex;
+  align-items: center;
+  /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); */
+  height: 50%;
+  border-bottom: 1px solid #cccccc; /* Cambia el color y el grosor según tus preferencias */
+  padding-bottom: 5px;
+}
+
+.divlogo {
+  /* border: 2px solid pink; */
+  width: 100px;
+  height: 100px;
+  background-image: url("../../assets/LogoPrueba.jpg");
+  background-repeat: no-repeat;
+  background-size: 100px;
+  margin-left: 50px;
+}
+
+.footercontacto {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 150px;
+  margin-left: 200px;
+}
+
+.footercontacto section h4 {
+  font-weight: bold;
+}
+
+.footercontacto section p {
+  color: #888;
+}
+
+.footerredes {
+  /* border: 2px solid yellow; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  height: 50%;
+}
+
+.copy {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 50px;
+  font-weight: bold;
+}
+
+.redes {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin-right: 50px;
+}

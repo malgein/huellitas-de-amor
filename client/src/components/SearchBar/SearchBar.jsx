@@ -1,29 +1,50 @@
+import styles from "./SearchBar.module.css";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getPetsByName } from "../../redux/actions";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getPetByName } from "../../redux/actions";
+import { Input, Button } from "@nextui-org/react";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+
+  const mascotas = useSelector((state) => state.mascotas);
   const [nombre, setNombre] = useState("");
 
   const handleInputChange = (event) => {
-    const newNombre = event.target.value;
-    setNombre(newNombre);
+    setNombre(event.target.value);
+  };
 
-    dispatch(getDogsByName(newNombre));
-    history.push("/byname");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(getPetByName(nombre));
+    setNombre("");
   };
 
   return (
-    <form>
-      <input
+    <form className={styles.searchForm} onSubmit={handleSubmit}>
+      <Input
+        className="rounded-ss-sm"
+        isClearable
+        variant="bordered"
         type="text"
-        placeholder="Search by name..."
+        label="Buscar nombre de..."
+        onChange={handleInputChange}
+        value={nombre}
+        size="sm"
+      />
+      {/* <input
+        type="text"
+        className={styles.searchInput}
+        placeholder="Buscar nombre de..."
         value={nombre}
         onChange={handleInputChange}
-      />
+      /> */}
+      {/* <button type="submit" className={styles.submitButton} disabled={!nombre}>
+        Buscar
+      </button> */}
+      <Button type="submit" disabled={!nombre} color="warning" size="md">
+        Buscar
+      </Button>
     </form>
   );
 };

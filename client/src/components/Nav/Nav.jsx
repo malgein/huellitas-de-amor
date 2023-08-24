@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./nav.module.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-// import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
+import { useSelector, useDispatch } from "react-redux";
+import logoPrueba from "../../assets/LogoPrueba.jpg";
+
+import { Link, Button, Image } from "@nextui-org/react";
+// import Registro from "../Registro/Registro";
+import AvatarImg from "../AvatarImg/AvatarImg";
+
+// import { addToFavs, removeFromFavs } from "../../redux/actions";
 
 const Nav = () => {
   const location = useLocation();
+  //style
+
+  const mostarSearchBar = location.pathname === "/home";
   const [modalabierto, setModalAbierto] = useState(false);
 
   const abrirModal = () => {
@@ -16,76 +27,125 @@ const Nav = () => {
     setModalAbierto(false);
   };
 
-  return (
-    <div className={styles.divnav}>
-      <div className={styles.divlogo}>
-        {/* <img src="../../assets/LogoPrueba.jpg" alt="Imagen" /> */}
-        {/* <h1>Huellitas de amor</h1> */}
-      </div>
-      <div className={styles.nav}>
-        <Link to="/home">Home</Link>
-        <Link to="/account">Mi Perfil</Link>
-        <Link to="/notificaciones" onClick={abrirModal}>
-          Notificaciones
-        </Link>
-        {/* <button onClick={abrirModal}>Notificaciones</button> */}
-      </div>
-      <div className={styles.divlogin}>
-        <Link to="/login">Logout</Link>
-      </div>
+  //Por aqui unos cambios
 
-      
-      <div>
-      {location.pathname === "/home" && (
-        <div>
-          <h3>Aqui renderizo el searchbar</h3>
-          {/* <SearchBar /> */}
-          {/* <input value="text" type="name" placeholder="Buscar..." />
-          <button className={styles.agregar}>Agregar</button> */}
+  return (
+    //"flex flex-col justify-center border-b shadow-lg my-2 w-screen"
+    <div className="flex flex-col justify-center border-b shadow-lg w-screen">
+      <div className="flex justify-between gap-4 flex-row">
+        <div className="ml-2 flex items-center">
+          <Link href="/home">
+            <Image
+              width={100}
+              height={100}
+              alt="NextUI hero Image"
+              src={logoPrueba}
+            />
+           </Link>
         </div>
-      )}
+
+        <div className=" gap-20 flex flex-row justify-center items-center text-black">
+          <Link className="text-black" href="/home">
+            Inicio
+          </Link>
+          <Link href="/perfil" className="text-black">
+            Mi Perfil
+          </Link>
+
+          <Link
+            href="/notificaciones"
+            onClick={abrirModal}
+            className="text-black"
+          >
+            Notificaciones
+          </Link>
+
+          <div>
+            <Link href="/agregar">
+              <Button
+                className="border border-black text-black bg-white hover:bg-slate-100"
+                color="primary"
+              >
+                Crear Nueva Mascota
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* <div className="gap-4 flex flex-row items-center mr-4">
+          <Link href="/registro" className="text-black">
+            <Button
+              className="border border-black text-black bg-white hover:bg-slate-100  "
+              color="primary"
+            >
+              Registrarse
+            </Button>
+          </Link>
+          <Link to="/login">
+            <Button className="text-white bg-black">Iniciar sesión</Button>
+          </Link>
+          </div> */}
+
+
+        <div className="flex flex-row items-center">
+
+          {mostarSearchBar && (
+            <div className="mr-6">
+              <SearchBar />
+            </div>
+          )}
+          <div className="mr-9">
+            {" "}
+            <AvatarImg />
+          </div>
+        </div>
       </div>
 
       {modalabierto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
-            <h2>Notificaciones</h2>
-            <ul class={styles.notification_list}>
+            <h2 className={styles.notih2}>Notificaciones</h2>
+            <ul className={styles.notificationlist}>
               <li>
-                <div class={styles.notification}>
-                  <div class={styles.notification_info}>
-                    <span class={styles.notification_title}>
+                <div className={styles.notification}>
+                  <div className={styles.notificationinfo}>
+                    <span className={styles.notificationtitle}>
                       Nueva notificación 1
                     </span>
-                    <span class={styles.notification_time}>Hace 1 hora</span>
+                    <br />
+                    <span className={styles.notificationtime}>Hace 1 hora</span>
                   </div>
-                  <button class={styles.notification_action}>Ver</button>
+                  <button className={styles.notificationaction}>Ver</button>
                 </div>
               </li>
               <li>
-                <div class={styles.notification}>
-                  <div class={styles.notification_info}>
-                    <span class={styles.notification_title}>
+                <div className={styles.notification}>
+                  <div className={styles.notificationinfo}>
+                    <span className={styles.notificationtitle}>
                       Nueva notificación 2
                     </span>
-                    <span class={styles.notification_time}>Hace 3 hora</span>
+                    <br />
+                    <span className={styles.notificationtime}>Hace 3 hora</span>
                   </div>
-                  <button class={styles.notification_action}>Ver</button>
+                  <button className={styles.notificationaction}>Ver</button>
                 </div>
               </li>
               <li>
-                <div class={styles.notification}>
-                  <div class={styles.notification_info}>
-                    <span class={styles.notification_title}>
+                <div className={styles.notification}>
+                  <div className={styles.notificationinfo}>
+                    <span className={styles.notificationtitle}>
                       Nueva notificación 3
                     </span>
-                    <span class={styles.notification_time}>Hace 5 hora</span>
+                    <br />
+                    <span className={styles.notificationtime}>Hace 5 hora</span>
                   </div>
-                  <button class={styles.notification_action}>Ver</button>
+                  <button className={styles.notificationaction}>Ver</button>
                 </div>
               </li>
             </ul>
-            <button onClick={CerrarModal}>Cerrar</button>
+            <button className={styles.close} onClick={CerrarModal}>
+              Cerrar
+            </button>
           </div>
         </div>
       )}

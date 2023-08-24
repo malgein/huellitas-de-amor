@@ -4,12 +4,14 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
+
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
-  {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  }
+  `postgresql://postgres:Awr2N2134BUaWYRvT9AW@containers-us-west-203.railway.app:5914/railway`,
+  // `postgres://postgres:22511290@localhost/huellitas`,
+	{
+		logging: false, // set to console.log to see the raw SQL queries
+		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+	}
 );
 const basename = path.basename(__filename);
 
@@ -47,76 +49,98 @@ const {
   Donacion,
   Adopcion,
   Especie,
+  Favorito,
+  Rating,
 } = sequelize.models;
 
-Usuario.hasOne(TipoDeUsuario, {
-  through: "Usuario_TipoDeUsuario",
-  timestamps: false,
+//Usuarios --> Tipo de Usuarios
+Usuario.belongsTo(TipoDeUsuario, {
+  foreignKey: "tipoDeUsuarioId",
 });
-TipoDeUsuario.hasOne(Usuario, {
-  through: "Usuario_TipoDeUsuario",
-  timestamps: false,
-});
-
-Usuario.belongsToMany(Donacion, {
-  through: "Usuario_Donacion",
-  timestamps: false,
+TipoDeUsuario.hasMany(Usuario, {
+  foreignKey: "especieId",
 });
 
-Donacion.hasOne(Usuario, {
-  through: "Usuario_Donacion",
-  timestamps: false,
+//Donaciones --> Usuarios
+Donacion.belongsTo(Usuario, {
+  foreignKey: "usuarioId",
+});
+Usuario.hasMany(Donacion, {
+  foreignKey: "usuarioId",
 });
 
-Usuario.belongsToMany(Comentario, {
-  through: "Usuario_Comentario",
-  timestamps: false,
+//Comentarios --> Usuarios
+Comentario.belongsTo(Usuario, {
+  foreignKey: "usuarioId",
+});
+Usuario.hasMany(Comentario, {
+  foreignKey: "usuarioId",
 });
 
-Comentario.hasOne(Usuario, {
-  through: "Usuario_Comentario",
-  timestamps: false,
+//Adopciones --> Usuarios
+Adopcion.belongsTo(Usuario, {
+  foreignKey: "usuarioId",
+});
+Usuario.hasMany(Adopcion, {
+  foreignKey: "usuarioId",
+});
+//Lo comenté porque si no, cuando haces post de casa de adopción te pide un comentario como dato en el json.
+//Casa de Apciones --> Comentarios
+/* CasaDeAdopcion.belongsTo(Comentario, {
+  foreignKey: "comentarioId",
+});
+Comentario.hasMany(CasaDeAdopcion, {
+  foreignKey: "comentarioId",
+}); */
+
+//!Ratings --> Casa de Adopciones
+CasaDeAdopcion.hasMany(Rating,{foreignKey: "ratingId"});
+Rating.belongsTo(CasaDeAdopcion, { foreignKey: "ratingId" });
+//!Ratings --> Casa de Adopciones
+
+//Mascotas --> Casa de Adopciones
+Mascota.belongsTo(CasaDeAdopcion, {
+  foreignKey: "casaDeAdopcionId",
+});
+CasaDeAdopcion.hasMany(Mascota, {
+  foreignKey: "casaDeAdopcionId",
 });
 
-Usuario.belongsToMany(Adopcion, {
-  through: "Usuario_Adopcion",
-  timestamps: false,
+//Mascotas --> Especies
+Mascota.belongsTo(Especie, {
+  foreignKey: "especieId",
+});
+Especie.hasMany(Mascota, {
+  foreignKey: "especieId",
 });
 
-Adopcion.hasOne(Usuario, {
-  through: "Usuario_Adopcion",
-  timestamps: false,
+//Donaciones --> Casa de Adopciones
+Donacion.belongsTo(CasaDeAdopcion, {
+  foreignKey: "casaDeApocionId",
+});
+CasaDeAdopcion.hasMany(Donacion, {
+  foreignKey: "casaDeAdpocionId",
 });
 
-CasaDeAdopcion.hasOne(Comentario, {
-  through: "CasaDeAdopcion_Comentario",
-  timestamps: false,
-});
+//Usuarios -->  favoritos
+Favorito.belongsTo(Usuario, {
+  foreignKey: "favoritoId",
+}); //Un usuario puede tener muchos favoritos (1 a N)
 
-Comentario.belongsToMany(CasaDeAdopcion, {
-  through: "CasaDeAdopcion_Comentario",
-  timestamps: false,
-});
+Usuario.hasMany(Favorito ,
+  {foreignKey: 'usuarioId'
+});//
 
-CasaDeAdopcion.belongsToMany(Mascota, {
-  through: "CasaDeAdopcion_Mascota",
-  timestamps: false,
-});
+//Mascotas --> Favoritos
 
-Mascota.hasOne(CasaDeAdopcion, {
-  through: "CasaDeAdopcion_Mascota",
-  timestamps: false,
-});
+Favorito.belongsTo(Mascota, {
+  foreignKey: "favoritoId",
+}); //Un usuario puede tener muchos favoritos (1 a N)
 
-CasaDeAdopcion.belongsToMany(Donacion, {
-  through: "CasaDeAdopcion_Donacion",
-  timestamps: false,
-});
+Mascota.hasMany(Favorito ,
+  {foreignKey: 'mascotaId'
+});//
 
-Donacion.hasOne(CasaDeAdopcion, {
-  through: "CasaDeAdopcion_Donacion",
-  timestamps: false,
-});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
