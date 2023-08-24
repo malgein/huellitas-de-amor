@@ -138,7 +138,6 @@ export default function Detail() {
                 className="bg-blue-500 text-white hover:bg-blue-600 "
                 onPress={handleConfetti}
               >
-
                 Adóptame
               </Button>
             ) : (
@@ -147,9 +146,9 @@ export default function Detail() {
               </Button>
             )}
           </div>
-              Volver
-            </Button>
-              </Link>          
+          <Link>
+            <Button>Volver</Button>
+          </Link>
         </div>
       </div>
     </div>
