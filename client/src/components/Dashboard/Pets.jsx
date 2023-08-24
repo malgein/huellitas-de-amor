@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import Sidebar from './Sidebar'
-import Dashboardview from './DashboardView'
 import { useSelector, useDispatch } from 'react-redux'
 import { getMascotas, deletePets, editPets } from '../../redux/actions'
 import Swal from 'sweetalert2'
@@ -382,8 +381,7 @@ function Pets() {
         </div>
         <div className="basis-[88%] border overflow-scroll h-[100vh]">
           {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
-						<Dashboardview />
-					<div>
+					<div className='mt-10'>
             {/* Soy la gestion de casas de adopcion */}
             {/* {console.log(casasDeAdopcion)} */}
             <Table
