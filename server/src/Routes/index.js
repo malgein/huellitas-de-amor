@@ -9,14 +9,14 @@ const getPets = require("../controllers/getPets");
 const postCasaAdopcion = require("./routesCasaDeAdopcion");
 const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 const postSendEmail = require ('../controllers/postSendEmail');
-const postUsuario = require("./routesUsuario");
+
 const crearUsuario = require("../controllers/crearUsuario");
 const postMercadoPago = require("../controllers/postMercadoPago");
 const fillDonations = require("../controllers/fillDonations");
 const rateCasas = require("./routesRateCasas");
 //Todas las rutas del usuario
 const postDonaciones = require('./routesDonaciones')
-
+const postUsuario = require('./routesUsuario')
 
 
 router.use("/casaDeAdopcion", postCasaAdopcion);
