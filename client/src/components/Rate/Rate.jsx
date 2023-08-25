@@ -30,20 +30,26 @@ const Rate = () => {
 		useEffect(() => {
 			updateAverageRating();
 		}, [casaDeAdopcionId]);
-  return (
-		<div>
+	return (
+		<div
+			className={styles.horizontalRating} /* Use the correct CSS module class */
+			style={{
+				direction: "ltr",
+				fontFamily: "sans-serif",
+				touchAction: "none",
+			}}>
 			<Rating
-				className={styles.Rate}
 				value={averageRating}
 				onChange={handleRatingChange}
 				transition
 				fillColorArray={["#f14f45", "#f16c45", "#f18845", "#f1b345", "#f1d045"]}
-				emptyIcon={<MdFavoriteBorder size={25} />}
-				fillIcon={<MdFavorite size={25} />}
-				emptyStyle={{ direction: "rtl" }}
-				style={{ flexDirection: "row" }}
+				emptyIcon={
+					<MdFavoriteBorder className={styles.horizontalStars} size={25} />
+				}
+				fillIcon={<MdFavorite className={styles.horizontalStars} size={25} />}
 			/>
 		</div>
+
 	);
 }
 

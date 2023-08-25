@@ -1,3 +1,4 @@
+
 {
   "name": "huellitas-de-amor",
   "private": true,
@@ -14,6 +15,7 @@
     "@react-email/render": "^0.0.7",
     "axios": "^1.4.0",
     "canvas-confetti": "^1.6.0",
+    "firebase": "^10.1.0",
     "formik": "^2.4.3",
     "framer-motion": "^10.15.2",
     "nodemailer": "^6.9.4",
