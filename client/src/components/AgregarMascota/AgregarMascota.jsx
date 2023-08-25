@@ -68,17 +68,18 @@ const AgregarMascota = () => {
   		dispatch(addMascota(nuevaMascota));
 		dispatch(limpiarImagenes())
 		localStorage.removeItem("formData");
-		  Swal.fire({
+		Swal.fire({
 				tittle: "MASCOTA AGREGADA",
 				text: "La mascota se ha agregado satisfactoriamente",
 				icon: "success",
 				buttons: "OK",
 			});
-			Navigate("/Home");
+	  Navigate("/Home");
 	};
 
 	const handleFormChange = (values) => {
 		localStorage.setItem("formData", JSON.stringify(values));
+		// localStorage.setItem("imagenes",JSON.stringify(imagenes))
 	};
 
 	const handleClickImages = async(clickedImage) => {
@@ -88,8 +89,7 @@ const AgregarMascota = () => {
 		/* console.log(updatedImages) */
 	} 
 
-	const storedData = localStorage.getItem("formData");
-
+	const storedData = localStorage.getItem("formData") 
 	const tamañoOptions = ["Pequeño", "Mediano", "Grande"];
 	return (
 		<div className={styles.formContainer}>
@@ -99,8 +99,8 @@ const AgregarMascota = () => {
 				onSubmit={handleSubmit}>
 				{({ isSubmitting, errors, values }) => (
 					<div className={styles.form}>
-						{setMascota(values)}
-						<Form onChange={() => handleFormChange(values)}>
+						{/* {setMascota(values)} */}
+						<Form onChange={handleFormChange(values)}>
 							<div className={styles.tittle}>
 								<h1>Agrega una nueva mascota</h1>
 							</div>
@@ -162,13 +162,13 @@ const AgregarMascota = () => {
 									className={
 										errors.tamano ? styles.selectRed : styles.selectGreen
 									}>
-									<div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'>
-										<label
+									<div >
+										{/* <label
 											className='block font-medium  dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none
 							w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small'
 											htmlFor='tamano'>
 											Tamaño:
-										</label> 
+										</label>  */}
 										<Field
 											className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start  justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled text-medium'
 											as='select'
