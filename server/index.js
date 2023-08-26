@@ -10,6 +10,6 @@ conn.sync({
   server.listen(PORT, () => {
     fillPets();
     // fillHomes()
-    console.log("%s listening at 3001"); // eslint-disable-line no-console
+    console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
   });
 });
