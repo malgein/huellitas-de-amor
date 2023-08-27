@@ -10,7 +10,7 @@ function FormInput({label,error,name,placeholder,}) {
 				as={Input}
 				label={label}
 				variant='bordered'
-				placeholder={`${placeholder} de la mascota`}
+				placeholder={`${placeholder}...`}
 				type='text'
 				id={name}
 				name={name}

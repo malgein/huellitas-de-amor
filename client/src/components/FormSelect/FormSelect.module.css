@@ -1,0 +1,58 @@
+.selectRed {
+	background-color: white;
+	width: 200px;
+	height: 55px;
+	top: 328px;
+	left: 503px;
+	border-radius: 12px;
+	margin-bottom: 20px;
+	border-color: red;
+	margin-bottom: 5px;
+	margin-top: 20px;
+	/* position: absolute; */
+
+}
+.select {
+    background-color: hsl(240, 6%, 90%);
+	position: relative;
+	width: 100%;
+	display: inline-flex;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
+	border-width: 2px;
+	border-color: #edf2f7;
+	min-height: 2.5rem;
+	border-radius: 0.375rem;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 0;
+	transition-property: background-color;
+	transition-duration: 0.15s;
+	height: 3.5rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+    font-size: 1rem;
+     border-radius: 12px;
+    border-width: 2px
+}
+
+.select:hover {
+	border-color: #cbd5e0;
+}
+.select:focus {
+	border-color: #e53e3e;
+}
+.selectGreen {
+	background-color: green;
+	width: 200px;
+	height: 55px;
+	top: 328px;
+	left: 503px;
+	border-radius: 12px;
+	margin-bottom: 20px;
+	border-color: green;
+	margin-bottom: 5px;
+	margin-top: 20px;
+}

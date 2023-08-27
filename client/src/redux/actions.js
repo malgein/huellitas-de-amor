@@ -33,11 +33,12 @@ export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
 
 export const EDIT_USER = 'EDIT_USER';
-
-const ENDPOINT = "https://huellitas-de-amor-production.up.railway.app/mascotas/";
-const ENDPOINT_FILTER = "https://huellitas-de-amor-production.up.railway.app/mascotas/filtro";
-const ENDPOINTNAME2 = "https://huellitas-de-amor-production.up.railway.app/mascotas/nombre?nombre=";
-const ENDPOINTNAME = "https://huellitas-de-amor-production.up.railway.app/mascotas?name=";
+const basename = "https://huellitas-de-amor-production.up.railway.app";
+// const basename = "http://localhost:3001";
+const ENDPOINT = `${basename}/mascotas`
+const ENDPOINT_FILTER = `${basename}/mascotas/filtro`
+const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`
+const ENDPOINTNAME = `${basename}/mascotas?name=`
 
 
 
@@ -124,7 +125,7 @@ export const addMascota = (Mascota) => {
 
 export const getUsers = () => async(dispatch) => {
   try{
-    const response =  await axios.get('https://huellitas-de-amor-production.up.railway.app/usuario')
+    const response =  await axios.get(`${basename}/usuario`)
     dispatch({
       type: GET_USERS,
       payload: response.data
@@ -136,7 +137,7 @@ export const getUsers = () => async(dispatch) => {
 
 export const getAllHomes = () => async(dispatch) => {
   try{
-    const response =  await axios.get('https://huellitas-de-amor-production.up.railway.app/casaDeAdopcion')
+    const response =  await axios.get(`${basename}/casaDeAdopcion`)
     dispatch({
       type: GET_ALL_HOMES,
       payload: response.data
@@ -148,7 +149,7 @@ export const getAllHomes = () => async(dispatch) => {
 
 export const getDonations = () => async(dispatch) => {
   try{
-    const response =  await axios.get('https://huellitas-de-amor-production.up.railway.app/donaciones/')
+    const response =  await axios.get(`${basename}/donaciones`)
     dispatch({
       type: GET_ALL_DONATIONS,
       payload: response.data
@@ -159,7 +160,7 @@ export const getDonations = () => async(dispatch) => {
 }
 
 export const editUser = (id, updatedData)  => {
-  const endpoint = `https://huellitas-de-amor-production.up.railway.app/usuario/${id}`;
+  const endpoint = `${basename}/usuario/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -172,7 +173,7 @@ export const editUser = (id, updatedData)  => {
 } 
 
 export const deleteUsers = (id) => {
-  const endpoint = `https://huellitas-de-amor-production.up.railway.app/usuario/${id}`;
+  const endpoint = `${basename}/usuario/${id}`;
    return (dispatch) => {
       axios.delete(endpoint).then(({ data }) => {
          return dispatch({
@@ -185,7 +186,7 @@ export const deleteUsers = (id) => {
 
 
 export const editPets = (id, updatedData)  => {
-  const endpoint = `https://huellitas-de-amor-production.up.railway.app/mascotas/${id}`;
+  const endpoint = `${basename}/mascotas/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -198,7 +199,7 @@ export const editPets = (id, updatedData)  => {
 } 
 
 export const deletePets = (id) => {
-  const endpoint = `https://huellitas-de-amor-production.up.railway.app/mascotas/${id}`;
+  const endpoint = `${basename}/mascotas/${id}`;
    return (dispatch) => {
       axios.delete(endpoint).then(({ data }) => {
          return dispatch({
@@ -210,7 +211,7 @@ export const deletePets = (id) => {
 }
 
 export const editHouses = (id, updatedData) => {
-  const endpoint = `https://huellitas-de-amor-production.up.railway.app/casaDeAdopcion/${id}`;
+  const endpoint = `${basename}/casaDeAdopcion/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -223,7 +224,7 @@ export const editHouses = (id, updatedData) => {
 }
 
 export const deleteHouses = (id) => {
-  const endpoint = `https://huellitas-de-amor-production.up.railway.app/casaDeAdopcion/${id}`;
+  const endpoint = `${basename}/casaDeAdopcion/${id}`;
    return (dispatch) => {
       axios.delete(endpoint).then(({ data }) => {
          return dispatch({
@@ -255,7 +256,7 @@ export const eliminarImagenes = (imagenes) => (dispatch) => {
 }
 
 export const modCompleteUser  = (id, updatedProperties) => {
-  const endpoint = `https://huellitas-de-amor-production.up.railway.app/usuario/${id}`;
+  const endpoint = `${basename}/usuario/${id}`;
   console.log(updatedProperties)
   return (dispatch) => {
     axios.put(endpoint, updatedProperties).then(({ data }) => {
