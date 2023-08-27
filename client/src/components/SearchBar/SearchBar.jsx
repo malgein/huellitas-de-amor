@@ -31,6 +31,7 @@ const SearchBar = () => {
       confirmButtonText: "OK",
     });
 
+    
 
   };
 
