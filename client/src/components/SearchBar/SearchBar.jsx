@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPetByName } from "../../redux/actions";
 import { Input, Button } from "@nextui-org/react";
+import Swal from "sweetalert2";
+
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -18,7 +20,20 @@ const SearchBar = () => {
     event.preventDefault();
     dispatch(getPetByName(nombre));
     setNombre("");
+
+    
+    Swal.fire({
+      title: "Búsqueda completada",
+      text: mascotas.length > 0
+        ? `Se han encontrado  mascota/s con el nombre "${nombre}".`
+        : `No se encontraron mascotas con el nombre "${nombre}".`,
+      icon: mascotas.length > 0 ? "success" : "info",
+      confirmButtonText: "OK",
+    });
+
+
   };
+
 
   return (
     <form className={styles.searchForm} onSubmit={handleSubmit}>
