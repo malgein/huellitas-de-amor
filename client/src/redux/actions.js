@@ -41,11 +41,6 @@ const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
 
 
 
-const handleError = (dispatch, errorType, error) => {
-  console.error(error);
-  dispatch({ type: errorType, payload: error.message });
-};
-
 
 export const getPetById = (id) => async (dispatch) => {
   try {
