@@ -5,6 +5,7 @@ const fillHomes = require('../utils/fillHomes')
 const getAllHomes = require('../controllers/getAllHomes')
 const modHouseById = require('../controllers/modHouseById')
 const deleteHouseAdoptionById = require('../controllers/deleteHouseAdoption')
+const postRatings=require("../controllers/postRatings")
 
 router.post("/", async (req, res) => {
   try {
@@ -69,5 +70,9 @@ router.delete("/:id", async (req, res) => {
     return res.status(500).json({ mensaje: "Error en el servidor" });
   }
 });
+
+router.post("/:id/ratings", postRatings)
+
+
 
 module.exports = router;

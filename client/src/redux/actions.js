@@ -33,11 +33,12 @@ export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
 
 export const EDIT_USER = 'EDIT_USER';
-
-const ENDPOINT = "http://localhost:3001/mascotas/";
-const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
-const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
-const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
+const basename = "https://huellitas-de-amor-production.up.railway.app";
+// const basename = "http://localhost:3001";
+const ENDPOINT = `${basename}/mascotas`
+const ENDPOINT_FILTER = `${basename}/mascotas/filtro`
+const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`
+const ENDPOINTNAME = `${basename}/mascotas?name=`
 
 
 
@@ -119,7 +120,7 @@ export const addMascota = (Mascota) => {
 
 export const getUsers = () => async(dispatch) => {
   try{
-    const response =  await axios.get('http://localhost:3001/usuario')
+    const response =  await axios.get(`${basename}/usuario`)
     dispatch({
       type: GET_USERS,
       payload: response.data
@@ -131,7 +132,7 @@ export const getUsers = () => async(dispatch) => {
 
 export const getAllHomes = () => async(dispatch) => {
   try{
-    const response =  await axios.get('http://localhost:3001/casaDeAdopcion')
+    const response =  await axios.get(`${basename}/casaDeAdopcion`)
     dispatch({
       type: GET_ALL_HOMES,
       payload: response.data
@@ -143,7 +144,7 @@ export const getAllHomes = () => async(dispatch) => {
 
 export const getDonations = () => async(dispatch) => {
   try{
-    const response =  await axios.get('http://localhost:3001/donaciones/')
+    const response =  await axios.get(`${basename}/donaciones`)
     dispatch({
       type: GET_ALL_DONATIONS,
       payload: response.data
@@ -154,7 +155,7 @@ export const getDonations = () => async(dispatch) => {
 }
 
 export const editUser = (id, updatedData)  => {
-  const endpoint = `http://localhost:3001/usuario/${id}`;
+  const endpoint = `${basename}/usuario/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -167,7 +168,7 @@ export const editUser = (id, updatedData)  => {
 } 
 
 export const deleteUsers = (id) => {
-  const endpoint = `http://localhost:3001/usuario/${id}`;
+  const endpoint = `${basename}/usuario/${id}`;
    return (dispatch) => {
       axios.delete(endpoint).then(({ data }) => {
          return dispatch({
@@ -180,7 +181,7 @@ export const deleteUsers = (id) => {
 
 
 export const editPets = (id, updatedData)  => {
-  const endpoint = `http://localhost:3001/mascotas/${id}`;
+  const endpoint = `${basename}/mascotas/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -193,7 +194,7 @@ export const editPets = (id, updatedData)  => {
 } 
 
 export const deletePets = (id) => {
-  const endpoint = `http://localhost:3001/mascotas/${id}`;
+  const endpoint = `${basename}/mascotas/${id}`;
    return (dispatch) => {
       axios.delete(endpoint).then(({ data }) => {
          return dispatch({
@@ -205,7 +206,7 @@ export const deletePets = (id) => {
 }
 
 export const editHouses = (id, updatedData) => {
-  const endpoint = `http://localhost:3001/casaDeAdopcion/${id}`;
+  const endpoint = `${basename}/casaDeAdopcion/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -218,7 +219,7 @@ export const editHouses = (id, updatedData) => {
 }
 
 export const deleteHouses = (id) => {
-  const endpoint = `http://localhost:3001/casaDeAdopcion/${id}`;
+  const endpoint = `${basename}/casaDeAdopcion/${id}`;
    return (dispatch) => {
       axios.delete(endpoint).then(({ data }) => {
          return dispatch({
@@ -250,7 +251,7 @@ export const eliminarImagenes = (imagenes) => (dispatch) => {
 }
 
 export const modCompleteUser  = (id, updatedProperties) => {
-  const endpoint = `http://localhost:3001/usuario/${id}`;
+  const endpoint = `${basename}/usuario/${id}`;
   console.log(updatedProperties)
   return (dispatch) => {
     axios.put(endpoint, updatedProperties).then(({ data }) => {
