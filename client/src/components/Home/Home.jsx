@@ -12,7 +12,8 @@ import Paginated from "../Paginated/Paginated";
 
 import { Button, Image } from "@nextui-org/react";
 import imagenHome from "../../assets/imageUno.png";
-import imagenDos from "../../assets/gata.jpg";
+import imageDos from "../../assets/gata.jpg";
+// import imagenDos from "../../assets/gata.jpg";
 // import Rate from "../Rate/Rate";
 
 export default function Home() {
@@ -56,30 +57,37 @@ export default function Home() {
 
   //h-screen w-screen
   return (
-    <div className="border-2 mx-[50px] flex justify-center items-center flex-col">
-      <div className="border-2 border-black flex flex-row h-[550px] mt-8">
-        <div className=" w-[600px]  ">
-          <div className="relative">
-            <Image
-              width={600}
-              height={500}
-              alt="NextUI hero Image"
-              src={imagenHome}
-              className=" mr-2 "
-            />
-            <div className="border-2 border-red absolute top-11 left-40 rotate-120 ">
+    <div className="md:flex sm:text-center x-[50px] flex justify-center items-center flex-col">
+      <div className="md:flex sm:text-center flex flex-row h-[550px] mt-12">
+        <div className="relative w-[600px]  ">
+          <div className="md:flex">
+            <div className="md:shrink-0">
               <Image
-                width={250}
-                height={200}
+                width={600}
+                height={500}
                 alt="NextUI hero Image"
-                src={imagenDos}
-                className="rounded-tl-lg rounded-br-lg rotate-120"
+                src={imagenHome}
+                className=" relative mr-2"
               />
             </div>
+
+            <div className="absolute left-[200px] top-[58px]">
+              <Image width={230} src={imageDos} className="-rotate-12" />
+            </div>
+
+            {/* <div className="border-2 border-black absolute top-20 left-40 w-[250px] h-[300px]   rounded-br-lg -rotate-12">
+              <Image
+                width={200}
+                // height={200}
+                alt="NextUI hero Image"
+                src={imagenDos}
+                className="rounded-tl-lg rounded-br-lg  "
+              />
+            </div> */}
           </div>
         </div>
-        <div className="border-2 border-red w-[600px] text-start ml-2">
-          <h1 className="my-8">ADOPTAME</h1>
+        <div className="w-[600px] text-start ml-8">
+          <h1 className="my-12">ADOPTAME</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
             itaque tempora ex in assumenda qui cum, commodi veritatis quidem,

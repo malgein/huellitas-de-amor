@@ -16,13 +16,13 @@ const Registro = () => {
   const initialValues = {
     nombre: "",
     apellido: "",
-    nacionalidad: "",
-    localizacion: "",
-    direccion: "",
-    telefono: "",
-    acerca: "",
     email: "",
     password: "",
+    // nacionalidad: "",
+    // localizacion: "",
+    // direccion: "",
+    // telefono: "",
+    // acerca: "",
   };
   const basename = "https://huellitas-de-amor-production.up.railway.app";
   // const basename = "http://localhost:3001";
@@ -79,6 +79,22 @@ const Registro = () => {
             </div>
             <div>
               <FormInput
+                placeholder="Email"
+                label="Email"
+                name="email"
+                error={errors.email}
+              />
+            </div>
+            <div>
+              <FormInput
+                placeholder="Contraseña"
+                label="Contraseña"
+                name="password"
+                error={errors.password}
+              />
+            </div>
+            {/* <div>
+              <FormInput
                 label="Nacionalidad"
                 name="nacionalidad"
                 error={errors.nacionalidad}
@@ -116,23 +132,8 @@ const Registro = () => {
                 name="acerca"
                 error={errors.acerca}
               />
-            </div>
-            <div>
-              <FormInput
-                placeholder="Email"
-                label="Email"
-                name="email"
-                error={errors.email}
-              />
-            </div>
-            <div>
-              <FormInput
-                placeholder="Contraseña"
-                label="Contraseña"
-                name="password"
-                error={errors.password}
-              />
-            </div>
+            </div> */}
+           
             <Button
               type="submit"
               disabled={isSubmitting}

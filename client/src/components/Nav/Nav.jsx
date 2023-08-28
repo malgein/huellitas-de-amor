@@ -3,29 +3,45 @@ import styles from "./nav.module.css";
 // import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
-import { useSelector, useDispatch } from "react-redux";
-import logoPrueba from "../../assets/LogoPrueba.jpg";
+import Notificaciones from "../Notificaciones/Notificaciones";
 
-import { Link, Button, Image } from "@nextui-org/react";
-// import Registro from "../Registro/Registro";
+import logoPrueba from "../../assets/LogoPrueba.jpg";
+import {
+  Link,
+  Button,
+  Image,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
 import AvatarImg from "../AvatarImg/AvatarImg";
 
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 
 const Nav = () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [size, setSize] = React.useState("md");
+  const sizes = ["2xl"];
+
   const location = useLocation();
   //style
 
   const mostarSearchBar = location.pathname === "/home";
   const [modalabierto, setModalAbierto] = useState(false);
 
-  const abrirModal = () => {
-    setModalAbierto(true);
+  const handleOpen = (size) => {
+    setSize(size);
+    onOpen();
   };
 
-  const CerrarModal = () => {
-    setModalAbierto(false);
-  };
+  // const abrirModal = () => {
+  //   setModalAbierto(true);
+  // };
+
+  // const CerrarModal = () => {
+  //   setModalAbierto(false);
+  // };
 
   //Por aqui unos cambios
 
@@ -34,31 +50,46 @@ const Nav = () => {
     <div className="flex flex-col justify-center border-b shadow-lg w-screen">
       <div className="flex justify-between gap-4 flex-row">
         <div className="ml-2 flex items-center">
-          <Link href="/home">
+          <Link href="/">
             <Image
               width={100}
               height={100}
               alt="NextUI hero Image"
               src={logoPrueba}
             />
-           </Link>
+          </Link>
         </div>
 
         <div className=" gap-20 flex flex-row justify-center items-center text-black">
-          <Link className="text-black" href="/home">
+          <Link className="text-black" href="/">
             Inicio
           </Link>
           <Link href="/perfil" className="text-black">
             Mi Perfil
           </Link>
 
-          <Link
+          <div className="flex flex-wrap justify-center gap-3">
+            {sizes.map((size) => (
+              <Link
+                // href="/notificaciones"
+                color="primary"
+                variant="solid"
+                key={size}
+                onPress={() => handleOpen(size)}
+                className="text-black"
+              >
+                Notificaciones
+              </Link>
+            ))}
+          </div>
+
+          {/* <Link
             href="/notificaciones"
             onClick={abrirModal}
             className="text-black"
           >
             Notificaciones
-          </Link>
+          </Link> */}
 
           {/* <div>
             <Link href="/agregar">
@@ -72,9 +103,7 @@ const Nav = () => {
           </div> */}
         </div>
 
-
         <div className="flex flex-row items-center">
-
           {mostarSearchBar && (
             <div className="mr-6">
               <SearchBar />
@@ -85,56 +114,13 @@ const Nav = () => {
             <AvatarImg />
           </div>
         </div>
-      </div>
 
-      {modalabierto && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <h2 className={styles.notih2}>Notificaciones</h2>
-            <ul className={styles.notificationlist}>
-              <li>
-                <div className={styles.notification}>
-                  <div className={styles.notificationinfo}>
-                    <span className={styles.notificationtitle}>
-                      Nueva notificación 1
-                    </span>
-                    <br />
-                    <span className={styles.notificationtime}>Hace 1 hora</span>
-                  </div>
-                  <button className={styles.notificationaction}>Ver</button>
-                </div>
-              </li>
-              <li>
-                <div className={styles.notification}>
-                  <div className={styles.notificationinfo}>
-                    <span className={styles.notificationtitle}>
-                      Nueva notificación 2
-                    </span>
-                    <br />
-                    <span className={styles.notificationtime}>Hace 3 hora</span>
-                  </div>
-                  <button className={styles.notificationaction}>Ver</button>
-                </div>
-              </li>
-              <li>
-                <div className={styles.notification}>
-                  <div className={styles.notificationinfo}>
-                    <span className={styles.notificationtitle}>
-                      Nueva notificación 3
-                    </span>
-                    <br />
-                    <span className={styles.notificationtime}>Hace 5 hora</span>
-                  </div>
-                  <button className={styles.notificationaction}>Ver</button>
-                </div>
-              </li>
-            </ul>
-            <button className={styles.close} onClick={CerrarModal}>
-              Cerrar
-            </button>
-          </div>
-        </div>
-      )}
+        <Modal size={size} isOpen={isOpen} onOpenChange={onOpenChange}>
+          <ModalContent className="flex flex-col items-center ">
+            <Notificaciones />
+          </ModalContent>
+        </Modal>
+      </div>
     </div>
   );
 };
