@@ -5,12 +5,16 @@ const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
-  // `postgresql://postgres:Awr2N2134BUaWYRvT9AW@containers-us-west-203.railway.app:5914/railway`,
-  `postgres://postgres:admin@localhost/huellitas`,
-  {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  }
+
+
+  // `postgresql://postgres:devZjxigFLUOiHZBcQxh@containers-us-west-127.railway.app:6739/railway`,
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
+
+	{
+		logging: false, // set to console.log to see the raw SQL queries
+		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+	}
+
 );
 const basename = path.basename(__filename);
 
@@ -92,10 +96,12 @@ Comentario.hasMany(CasaDeAdopcion, {
   foreignKey: "comentarioId",
 }); */
 
-//!Ratings --> Casa de Adopciones
-CasaDeAdopcion.hasMany(Rating, { foreignKey: "ratingId" });
-Rating.belongsTo(CasaDeAdopcion, { foreignKey: "ratingId" });
-//!Ratings --> Casa de Adopciones
+
+// //!Ratings --> Casa de Adopciones
+// CasaDeAdopcion.hasMany(Rating,{foreignKey: "ratingId"});
+// Rating.belongsTo(CasaDeAdopcion, { foreignKey: "ratingId" });
+// //!Ratings --> Casa de Adopciones
+
 
 //Mascotas --> Casa de Adopciones
 Mascota.belongsTo(CasaDeAdopcion, {

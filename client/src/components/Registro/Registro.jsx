@@ -24,10 +24,12 @@ const Registro = () => {
     email: "",
     password: "",
   };
+  const basename = "https://huellitas-de-amor-production.up.railway.app";
+  // const basename = "http://localhost:3001";
 
   const onSubmit = (values) => {
     axios
-      .post("http://localhost:3001/usuario", values)
+      .post(`${basename}/usuario`, values)
       .then((res) => {
         Swal.fire({
           icon: "success",
@@ -63,31 +65,32 @@ const Registro = () => {
               <FormInput
                 label="Nombre"
                 name="nombre"
-                placeholder="Ingrese su nombre"
                 error={errors.nombre}
+                placeholder="Nombre"
               />
             </div>
             <div>
               <FormInput
                 label="Apellido"
                 name="apellido"
-                placeholder="Ingrese su apellido"
                 error={errors.apellido}
+                placeholder="Apellido"
               />
             </div>
             <div>
               <FormInput
                 label="Nacionalidad"
                 name="nacionalidad"
-                // placeholder="Ingrese su nacionalidad"
                 error={errors.nacionalidad}
+                placeholder="Nacionalidad"
               />
             </div>
             <div>
               <FormInput
                 label="Localizacion"
-                name="Ingrese su ubicacion"
+                name="localizacion"
                 error={errors.localizacion}
+                placeholder="Localizacion"
               />
             </div>
             <div>
@@ -95,6 +98,7 @@ const Registro = () => {
                 label="Direccion"
                 name="direccion"
                 error={errors.direccion}
+                placeholder="Direccion"
               />
             </div>
             <div>
@@ -102,24 +106,30 @@ const Registro = () => {
                 label="Telefono"
                 name="telefono"
                 error={errors.telefono}
+                placeholder="Telefono"
               />
             </div>
             <div>
-              <FormInput label="Acerca" name="acerca" error={errors.acerca} />
+              <FormInput
+                placeholder="Acerca"
+                label="Acerca"
+                name="acerca"
+                error={errors.acerca}
+              />
             </div>
             <div>
               <FormInput
+                placeholder="Email"
                 label="Email"
                 name="email"
-                placeholder="juan@gmail.com"
                 error={errors.email}
               />
             </div>
             <div>
               <FormInput
+                placeholder="Contraseña"
                 label="Contraseña"
                 name="password"
-                placeholder="Ingrese una contraseña"
                 error={errors.password}
               />
             </div>
