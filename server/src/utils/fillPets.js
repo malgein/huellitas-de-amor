@@ -9,11 +9,7 @@ const fillPets = async () => {
   if (!DB) {
     console.log('Creando BD')
     try {
-  // console.log(res)
-      //Esta linea de codigo borra la tabla para asegurarse que no se vuelva a rescribir la informacion que le estamos a punto de pasar
-      // await Mascota.sync({ force: true }); // Esto elimina y recrea la tabla para llenar los datos
 
-      // Llena la tabla con los datos de allPets que al final son los datos de data.js es decir todas las mascotas
       await Mascota.bulkCreate(allPets);
       console.log(allPets)
 // console.log(res)
