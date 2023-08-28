@@ -1,40 +1,50 @@
 import React from "react";
 import axios from "axios";
-
-import styles from "./registro.module.css";
+import Swal from "sweetalert2";
+import styles from "./Registro.module.css";
 import FormInput from "../FormInput/FormInput";
 import { Button } from "@nextui-org/button";
+import { useNavigate } from "react-router-dom";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import validationSchema from "./Validaciones";
 import * as Yup from "yup";
 
 const Registro = () => {
-  // const [registroExitoso, setRegistroExitoso] = useState(false);
+  //const [registroExitoso, setRegistroExitoso] = useState(false);
 
   const initialValues = {
     nombre: "",
     apellido: "",
-    nacionalidad: "",
-    localizacion: "",
-    direccion: "",
-    telefono: "",
-    acerca: "",
     email: "",
     password: "",
+    // nacionalidad: "",
+    // localizacion: "",
+    // direccion: "",
+    // telefono: "",
+    // acerca: "",
   };
+  const basename = "https://huellitas-de-amor-production.up.railway.app";
+  // const basename = "http://localhost:3001";
 
   const onSubmit = (values) => {
     axios
-      .post("http://localhost:3001/usuario", values)
+      .post(`${basename}/usuario`, values)
       .then((res) => {
-        // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito
-        alert("Usuario registrado con éxito");
-        // resetForm();
+        Swal.fire({
+          icon: "success",
+          title: "Registro exitoso",
+          text: "Usuario registrado con éxito",
+        });
+
+        setRegistroExitoso(true);
       })
       .catch((err) => {
-        // Manejar errores, por ejemplo, mostrar un mensaje de error
-        alert("Hubo un error al registrar al usuario");
+        Swal.fire({
+          icon: "error",
+          title: "Error de registro",
+          text: "Hubo un error al registrar al usuario",
+        });
       });
   };
 
@@ -52,65 +62,78 @@ const Registro = () => {
               <h1>Registrate</h1>
             </div>
             <div>
-              <FormInput label="Nombre" name="nombre" error={errors.nombre} />
+              <FormInput
+                label="Nombre"
+                name="nombre"
+                error={errors.nombre}
+                placeholder="Nombre"
+              />
             </div>
-
             <div>
               <FormInput
                 label="Apellido"
                 name="apellido"
                 error={errors.apellido}
+                placeholder="Apellido"
               />
             </div>
-
             <div>
               <FormInput
-                label="Nacionalidad"
-                name="nacionalidad"
-                error={errors.nacionalidad}
+                placeholder="Email"
+                label="Email"
+                name="email"
+                error={errors.email}
               />
             </div>
-
             <div>
               <FormInput
-                label="Localizacion"
-                name="localizacion"
-                error={errors.localizacion}
-              />
-            </div>
-
-            <div>
-              <FormInput
-                label="Direccion"
-                name="direccion"
-                error={errors.direccion}
-              />
-            </div>
-
-            <div>
-              <FormInput
-                label="Telefono"
-                name="telefono"
-                error={errors.telefono}
-              />
-            </div>
-
-            <div>
-              <FormInput label="Acerca" name="acerca" error={errors.acerca} />
-            </div>
-
-            <div>
-              <FormInput label="Email" name="email" error={errors.email} />
-            </div>
-
-            <div>
-              <FormInput
+                placeholder="Contraseña"
                 label="Contraseña"
                 name="password"
                 error={errors.password}
               />
             </div>
-
+            {/* <div>
+              <FormInput
+                label="Nacionalidad"
+                name="nacionalidad"
+                error={errors.nacionalidad}
+                placeholder="Nacionalidad"
+              />
+            </div>
+            <div>
+              <FormInput
+                label="Localizacion"
+                name="localizacion"
+                error={errors.localizacion}
+                placeholder="Localizacion"
+              />
+            </div>
+            <div>
+              <FormInput
+                label="Direccion"
+                name="direccion"
+                error={errors.direccion}
+                placeholder="Direccion"
+              />
+            </div>
+            <div>
+              <FormInput
+                label="Telefono"
+                name="telefono"
+                error={errors.telefono}
+                placeholder="Telefono"
+              />
+            </div>
+            <div>
+              <FormInput
+                placeholder="Acerca"
+                label="Acerca"
+                name="acerca"
+                error={errors.acerca}
+              />
+            </div> */}
+           
             <Button
               type="submit"
               disabled={isSubmitting}
@@ -119,11 +142,11 @@ const Registro = () => {
             >
               Registrate
             </Button>
-
             {/* {registroExitoso && setValues(initialValues)} */}
           </Form>
         )}
       </Formik>
+      {/*  */}
     </div>
   );
 };

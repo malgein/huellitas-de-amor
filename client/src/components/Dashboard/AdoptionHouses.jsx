@@ -42,7 +42,6 @@
 
 import React, {useEffect, useCallback, useState} from 'react'
 import Sidebar from './Sidebar'
-import Dashboardview from './DashboardView'
 import { getAllHomes, editHouses, deleteHouses } from '../../redux/actions'
 import {useSelector , useDispatch} from 'react-redux'
 import {
@@ -82,8 +81,8 @@ const statusOptions = [
   {name: "Paused", uid: "paused"},
   {name: "Vacation", uid: "vacation"},
 ];
-//!Esto es lo que hace que se vean los campos
-const INITIAL_VISIBLE_COLUMNS = ["nombreDeOng", "nombreDeContacto", "telefono", "actions"];
+//!Esto muestra las columnas que se ven al inicio
+const INITIAL_VISIBLE_COLUMNS = ["nombreDeOng", "nombreDeContacto", "telefono", "actions", "email", "id"];
 
 function AdoptionHouses() {
 
@@ -91,14 +90,14 @@ function AdoptionHouses() {
 
   const dispatch = useDispatch()
 
-  const [houseDeleted , setHouseDeleted] = useState(true)
+  const [houseModified , setHouseModified] = useState(true)
 
   useEffect(() => {
-    if(houseDeleted){
+    if(houseModified){
       dispatch(getAllHomes())
-      setHouseDeleted(false)
+      setHouseModified(false)
     }
-  },[houseDeleted, dispatch])
+  },[houseModified, dispatch])
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -111,13 +110,40 @@ function AdoptionHouses() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire('casa de adopcion borrada con exito', '', 'success')
-        setHouseDeleted(!houseDeleted)
+        setHouseModified(!houseModified)
         dispatch(deleteHouses(id))
-        console.log(houseDeleted)
+        console.log(houseModified)
       } else if (result.isDenied) {
         Swal.fire('La casa de adopcion no ha sido borrada', '', 'info')
       }
     })
+  }
+
+  //Funcion que modifica cualquier propiedad de casas de adopcion
+  const handleEdit = async(id) => {
+    console.log(id)
+    const { value: formValues } = await Swal.fire({
+      title: 'Introduce la propiedad y el valor que deseas modificar',
+      html:
+        '<input id="swal-input1" class="swal2-input">' +
+        '<input id="swal-input2" class="swal2-input">',
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById('swal-input1').value,
+          document.getElementById('swal-input2').value
+        ]
+      }
+    })
+    
+    if (formValues) {
+      const result = {[formValues[0]] : formValues[1]}
+      console.log(result)
+      // const resultJson = JSON.stringify(result)
+      dispatch(editHouses(id, result))
+      setHouseModified(true)
+      Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
+    }
   }
 
   const columns = [
@@ -194,7 +220,7 @@ function AdoptionHouses() {
         return (
           <User
             avatarProps={{radius: "lg", src: user.avatar}}
-            description={user.email}
+            description={user.nombreDeOng}
             name={cellValue}
           >
             {user.email}
@@ -204,18 +230,18 @@ function AdoptionHouses() {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">{user.team}</p>
+            <p className="text-bold text-tiny capitalize text-default-400">{user.nombreDeContacto}</p>
           </div>
         );
-      case "status":
+      case "telefono":
         return (
-          <Chip className="capitalize" color={statusColorMap[user.status]} size="sm" variant="flat">
+          <Chip className="capitalize" color={statusColorMap[user.telefono]} size="sm" variant="flat">
             {cellValue}
           </Chip>
         );
       case "actions":
         return (
-          <div className="relative flex justify-end items-center gap-2">
+          <div className="relative flex justify-end items-center gap-2 ">
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
@@ -223,10 +249,10 @@ function AdoptionHouses() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Dynamic Actions">
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
+                <DropdownItem>Detalle</DropdownItem>
+                <DropdownItem onClick={() => handleEdit(user.id)}>Editar</DropdownItem>
                 //!Aqui se borra y arriba se edita y se detalla
-                <DropdownItem  color="danger" className="text-danger" onClick={() => handleDelete(user.id)}>Delete</DropdownItem>
+                <DropdownItem  color="danger" className="text-danger" onClick={() => handleDelete(user.id)}>Borrar</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -274,7 +300,7 @@ function AdoptionHouses() {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
+            placeholder="Busca por nombre..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}
@@ -282,7 +308,7 @@ function AdoptionHouses() {
           />
           <div className="flex gap-3">
             <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
+              {/* <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
                   Status
                 </Button>
@@ -300,12 +326,12 @@ function AdoptionHouses() {
                     {capitalize(status.name)}
                   </DropdownItem>
                 ))}
-              </DropdownMenu>
+              </DropdownMenu> */}
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
-                  Columns
+                  Columnas
                 </Button>
               </DropdownTrigger>
               <DropdownMenu
@@ -324,15 +350,15 @@ function AdoptionHouses() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<PlusIcon />}>
+            {/* <Button color="primary" endContent={<PlusIcon />}>
               Add New
-            </Button>
+            </Button> */}
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {casasDeAdopcion.length} users</span>
+          <span className="text-default-400 text-small">Total {casasDeAdopcion.length} Casas de adopcion</span>
           <label className="flex items-center text-default-400 text-small">
-            Rows per page:
+            Filas por pagina:
             <select
               className="bg-transparent outline-none text-default-400 text-small"
               onChange={onRowsPerPageChange}
@@ -361,7 +387,7 @@ function AdoptionHouses() {
         <span className="w-[30%] text-small text-default-400">
           {selectedKeys === "all"
             ? "All items selected"
-            : `${selectedKeys.size} of ${filteredItems.length} selected`}
+            : `${selectedKeys.size} de ${filteredItems.length} seleccionado`}
         </span>
         <Pagination
           isCompact
@@ -374,10 +400,10 @@ function AdoptionHouses() {
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
           <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
-            Previous
+            Previo
           </Button>
           <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
-            Next
+            Siguiente
           </Button>
         </div>
       </div>
@@ -385,17 +411,15 @@ function AdoptionHouses() {
   }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div>
-       <div className='flex overflow-scroll'>
+    <div >
+       <div className='flex overflow-scroll '>
 			<div className="flex overflow-scroll ">
         <div className="basis-[12%] h-[100vh]">
           {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
 					<Sidebar />
         </div>
         <div className="basis-[88%] border overflow-scroll h-[100vh]">
-          {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
-						<Dashboardview />
-					<div>
+					<div className='mt-10'>
             {/* Soy la gestion de casas de adopcion */}
             {/* {console.log(casasDeAdopcion)} */}
             <Table
@@ -422,11 +446,11 @@ function AdoptionHouses() {
             allowsSorting={column.sortable}
           >
             {/* {column.name} */}
-            {column.nombreDeOng}
+            {column.name}
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No users found"} items={sortedItems}>
+      <TableBody emptyContent={"No Se encontraron casas de adopcion"} items={sortedItems}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}

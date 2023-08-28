@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPetById } from "../../redux/actions";
 
@@ -12,9 +12,11 @@ import confetti from "canvas-confetti";
 
 import iconMacho from "../../assets/macho.png";
 import iconHembra from "../../assets/hembra.png";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Detail() {
   const { id } = useParams();
+  const { user } = useAuth();
 
   const handleConfetti = () => {
     confetti({});
@@ -130,16 +132,29 @@ export default function Detail() {
             </div>
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
-            <Button
-              radius="full"
-              className="bg-blue-500 text-white hover:bg-blue-600 "
-              onPress={handleConfetti}
-            >
-              Adóptame
-            </Button>
+            {user ? (
+              <Button
+                radius="full"
+                className="bg-blue-500 text-white hover:bg-blue-600 "
+                onPress={handleConfetti}
+              >
+                Adóptame
+              </Button>
+            ) : (
+              <Link to="/registro">
+                <Button radius="full" color="primary">
+                  Adóptame
+                </Button>cd
+              </Link>
+            )}
           </div>
+          <Link>
+            <Button>Volver</Button>
+          </Link>
         </div>
+
       </div>
     </div>
+     
   );
 }

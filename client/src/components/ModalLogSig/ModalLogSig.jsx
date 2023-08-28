@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
+import { Button } from "@nextui-org/react";
+import google from "../../assets/google.png";
 
 export default function ModalLogSig() {
   const [user, setUser] = useState({
@@ -29,7 +31,7 @@ export default function ModalLogSig() {
   const handleGoogleSignin = async () => {
     try {
       await loginWithGoogle();
-      navigate("/home");
+      navigate("#");
     } catch (error) {
       setError(error.message);
     }
@@ -104,12 +106,10 @@ export default function ModalLogSig() {
           </a>
         </div>
       </form> */}
-      <button
-        onClick={handleGoogleSignin}
-        className="bg-slate-50 hover:bg-slate-200 text-black  shadow rounded border-2 border-gray-300 py-2 px-4 w-full"
-      >
+      <Button onClick={handleGoogleSignin} className="w-full">
+        <img src={google} className="w-6 h-6" alt="" />
         Google login
-      </button>
+      </Button>
       <p className="my-4 text-sm flex justify-between px-3">
         ¿No tienes Cuenta?
         <Link to="/registro" className="text-blue-700 hover:text-blue-900">

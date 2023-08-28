@@ -1,11 +1,12 @@
 const PathRoutes = {
-  AGREGAR: "/agregar",
-  HOME: "/home",
+  // LANDINGPAGE: "/",
+  HOME: "/",
   FILTER: "/mascotas",
-  DETAIL: "/detail/:id",
-  LANDINGPAGE: "/",
   PERFIL: "/perfil",
+  DETAIL: "/detail/:id",
+  AGREGAR: "/agregar",
   REGISTRO: "/registro",
+  NOTIFICACION: "/notificaciones",
 
   //Ruta para el dashboard principal
   DASHBOARD: "/dashboard",

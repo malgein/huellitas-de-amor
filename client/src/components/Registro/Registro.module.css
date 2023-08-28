@@ -1,0 +1,33 @@
+.formcontainer {
+  /* border: 1px solid red; */
+  width: 519px;
+  height: auto;
+  border: 1px solid #ffffff;
+  border-radius: 15px;
+  /* background: linear-gradient(180deg, #ffb0cb 0%, #ffee93 100%); */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  gap: 20px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.tittle {
+  color: #000;
+  /* font-family: Telex; */
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: auto;
+  height: 61.881px;
+  flex-shrink: 0;
+  fill: #ffee93;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  /* position: absolute; */
+  top: auto;
+}
