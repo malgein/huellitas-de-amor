@@ -20,7 +20,7 @@ const Dashboard = () => {
 						<h1>Bienvenido Admind</h1>
 						<h1>Nombre del admin</h1>
 						<h1>Correo del admin</h1>
-						<h1>Hola mundo</h1>
+						<h1>Hola mundo 2</h1>
           </div>
         </div>
       </div>
