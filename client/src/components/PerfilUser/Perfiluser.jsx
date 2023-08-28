@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 // import styles from "./perfil.module.css";
 import { Link, Button, Image } from "@nextui-org/react";
 import fotoPerfil from "../../assets/fotoPerfil.jpg";
+import EditarPerfil from "../EditarPerfil/EditarPerfil";
 
 const Perfil = () => {
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+
+  const toggleFormulario = () => {
+    setMostrarFormulario(!mostrarFormulario);
+  };
   return (
     <div className="border-2 flex flex-col max-w-3xl rounded-2xl shadow-lg  ml-2">
       <div className="flex flex-row items-center gap-5 ml-2 mt-2">
@@ -39,11 +45,13 @@ const Perfil = () => {
         <p className=" text-slate-400">Redes sociales: @juanperez</p>
       </div>
       <div className="mb-3 ml-2">
-        <Button color="primary" variant="solid">
+        <Button color="primary" variant="solid" onClick={toggleFormulario}>
           Editar perfil
         </Button>
         {/* <button>Editar Perfil</button> */}
       </div>
+
+      {mostrarFormulario && <EditarPerfil />}
     </div>
   );
 };

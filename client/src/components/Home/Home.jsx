@@ -11,8 +11,8 @@ import FilterMascotas from "../FilterButtons/FilterButtons";
 import Paginated from "../Paginated/Paginated";
 
 import { Button, Image } from "@nextui-org/react";
-import imagenHome from "../../assets/banner1.png";
-import imagenDos from "../../assets/imagenMascota2-min.jpg";
+import imagenHome from "../../assets/imageUno.png";
+import imagenDos from "../../assets/gata.jpg";
 // import Rate from "../Rate/Rate";
 
 export default function Home() {
@@ -30,7 +30,7 @@ export default function Home() {
     ? mascotas.slice(indexOfFirstPet, indexOfLastPet)
     : [mascotas];
 
-    const [sortPets, setSortPets] = useState([]);
+  const [sortPets, setSortPets] = useState([]);
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -51,13 +51,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(getMascotas());    
+    dispatch(getMascotas());
   }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
 
   //h-screen w-screen
   return (
-    <div className=" mx-[50px] flex justify-center items-center flex-col">
-      <div className="flex flex-row h-[400px] mt-2">
+    <div className="border-2 mx-[50px] flex justify-center items-center flex-col">
+      <div className="border-2 border-black flex flex-row h-[550px] mt-8">
         <div className=" w-[600px]  ">
           <div className="relative">
             <Image
@@ -65,20 +65,21 @@ export default function Home() {
               height={500}
               alt="NextUI hero Image"
               src={imagenHome}
-              className="mt-4 mr-2 "
+              className=" mr-2 "
             />
-            <div className="absolute top-11 left-40">
+            <div className="border-2 border-red absolute top-11 left-40 rotate-120 ">
               <Image
                 width={250}
-                height={300}
+                height={200}
                 alt="NextUI hero Image"
                 src={imagenDos}
+                className="rounded-tl-lg rounded-br-lg rotate-120"
               />
             </div>
           </div>
         </div>
-        <div className="w-[600px] text-start ml-2">
-          <h1 className="my-2">ADOPTAME</h1>
+        <div className="border-2 border-red w-[600px] text-start ml-2">
+          <h1 className="my-8">ADOPTAME</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
             itaque tempora ex in assumenda qui cum, commodi veritatis quidem,
@@ -102,7 +103,7 @@ export default function Home() {
           {/* {" "} */}
           <Sorts />
         </div>
-        
+
         <div>
           <FilterMascotas />
         </div>
@@ -116,7 +117,6 @@ export default function Home() {
         <section className=" m-0 h-[100%]  w-screen bg-white p-0 flex flex-grow items-center justify-center">
           <div className="bg-white w-[90%] h-[90%] ">
             <div className="flex flex-col">
-
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
                 {currentPet
                   .filter((mascota) => mascota && mascota.nombre)
@@ -148,6 +148,5 @@ export default function Home() {
         </section>
       </div>
     </div>
-  );}
-
-
+  );
+}

@@ -60,7 +60,7 @@ const Nav = () => {
             Notificaciones
           </Link>
 
-          <div>
+          {/* <div>
             <Link href="/agregar">
               <Button
                 className="border border-black text-black bg-white hover:bg-slate-100"
@@ -69,22 +69,8 @@ const Nav = () => {
                 Crear Nueva Mascota
               </Button>
             </Link>
-          </div>
-        </div>
-
-        {/* <div className="gap-4 flex flex-row items-center mr-4">
-          <Link href="/registro" className="text-black">
-            <Button
-              className="border border-black text-black bg-white hover:bg-slate-100  "
-              color="primary"
-            >
-              Registrarse
-            </Button>
-          </Link>
-          <Link to="/login">
-            <Button className="text-white bg-black">Iniciar sesión</Button>
-          </Link>
           </div> */}
+        </div>
 
 
         <div className="flex flex-row items-center">

@@ -56,9 +56,9 @@ function App() {
           />
 
         </Routes>
-        <div>{location.pathname !== "/home" && <Footer />}</div>
+        {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
       </AuthProvider>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

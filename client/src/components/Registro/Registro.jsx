@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import styles from "./Registro.module.css";
 import FormInput from "../FormInput/FormInput";
 import { Button } from "@nextui-org/button";
@@ -29,25 +29,19 @@ const Registro = () => {
     axios
       .post("http://localhost:3001/usuario", values)
       .then((res) => {
-
         Swal.fire({
-          icon: 'success',
-          title: 'Registro exitoso',
-          text: 'Usuario registrado con éxito',
+          icon: "success",
+          title: "Registro exitoso",
+          text: "Usuario registrado con éxito",
         });
 
-       
-         setRegistroExitoso(true);
-
-       
-        
-
+        setRegistroExitoso(true);
       })
       .catch((err) => {
         Swal.fire({
-          icon: 'error',
-          title: 'Error de registro',
-          text: 'Hubo un error al registrar al usuario',
+          icon: "error",
+          title: "Error de registro",
+          text: "Hubo un error al registrar al usuario",
         });
       });
   };
@@ -66,12 +60,18 @@ const Registro = () => {
               <h1>Registrate</h1>
             </div>
             <div>
-              <FormInput label="Nombre" name="nombre" error={errors.nombre} />
+              <FormInput
+                label="Nombre"
+                name="nombre"
+                placeholder="Ingrese su nombre"
+                error={errors.nombre}
+              />
             </div>
             <div>
               <FormInput
                 label="Apellido"
                 name="apellido"
+                placeholder="Ingrese su apellido"
                 error={errors.apellido}
               />
             </div>
@@ -79,13 +79,14 @@ const Registro = () => {
               <FormInput
                 label="Nacionalidad"
                 name="nacionalidad"
+                // placeholder="Ingrese su nacionalidad"
                 error={errors.nacionalidad}
               />
             </div>
             <div>
               <FormInput
                 label="Localizacion"
-                name="localizacion"
+                name="Ingrese su ubicacion"
                 error={errors.localizacion}
               />
             </div>
@@ -107,12 +108,18 @@ const Registro = () => {
               <FormInput label="Acerca" name="acerca" error={errors.acerca} />
             </div>
             <div>
-              <FormInput label="Email" name="email" error={errors.email} />
+              <FormInput
+                label="Email"
+                name="email"
+                placeholder="juan@gmail.com"
+                error={errors.email}
+              />
             </div>
             <div>
               <FormInput
                 label="Contraseña"
                 name="password"
+                placeholder="Ingrese una contraseña"
                 error={errors.password}
               />
             </div>
