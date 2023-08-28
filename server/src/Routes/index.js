@@ -7,7 +7,7 @@ const getPetByName = require("../controllers/getPetsByName");
 const filtradoMascotas = require("../controllers/filtradoMascotas");
 const getPets = require("../controllers/getPets");
 const postCasaAdopcion = require("./routesCasaDeAdopcion");
-const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
+// const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 const postSendEmail = require ('../controllers/postSendEmail');
 
 const crearUsuario = require("../controllers/crearUsuario");
