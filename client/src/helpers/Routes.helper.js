@@ -1,6 +1,6 @@
 const PathRoutes = {
-  LANDINGPAGE: "/",
-  HOME: "/home",
+  // LANDINGPAGE: "/",
+  HOME: "/",
   FILTER: "/mascotas",
   PERFIL: "/perfil",
   DETAIL: "/detail/:id",

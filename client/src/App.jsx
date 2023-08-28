@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { Routes, Route, useLocation } from "react-router-dom";
-import Landing from "./components/Landing/Landing";
+// import Landing from "./components/Landing/Landing";
 import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
 import Perfil from "./components/PerfilUser/Perfiluser";
@@ -16,20 +16,19 @@ import { AuthProvider } from "./context/AuthContext";
 import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
 import Registro from "./components/Registro/Registro";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Pets from './components/Dashboard/Pets';
-import Users from './components/Dashboard/Users';
-import AdoptionHouses from './components/Dashboard/AdoptionHouses';
-import Donations from './components/Dashboard/Donations';
-
+import Pets from "./components/Dashboard/Pets";
+import Users from "./components/Dashboard/Users";
+import AdoptionHouses from "./components/Dashboard/AdoptionHouses";
+import Donations from "./components/Dashboard/Donations";
 
 function App() {
   const location = useLocation();
   return (
     <>
       <AuthProvider>
-        {location.pathname !== "/" && <Nav />}
+        {location.pathname !== "/home" && <Nav />}
         <Routes>
-          <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} />
+          {/* <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} /> */}
           <Route path={PathRoutes.HOME} element={<Home />} />
           <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
           <Route path={PathRoutes.PERFIL} element={<Perfil />} />
@@ -54,7 +53,6 @@ function App() {
             path={PathRoutes.DASHBOARD_DONACIONES}
             element={<Donations />}
           />
-
         </Routes>
         {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
       </AuthProvider>
@@ -63,9 +61,7 @@ function App() {
   );
 }
 
-
 export default App;
-
 
 // import "./App.css";
 
@@ -95,7 +91,6 @@ export default App;
 // // import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
 // import { AuthProvider } from "./context/authContext";
 // import Registro from "./components/Registro/Registro";
-
 
 // function App() {
 //   const location = useLocation();
@@ -135,4 +130,3 @@ export default App;
 // }
 
 // export default App;
-
