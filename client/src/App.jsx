@@ -24,10 +24,12 @@ import AdoptionHouses from "./components/Dashboard/AdoptionHouses";
 import Donations from "./components/Dashboard/Donations";
 
 
+
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./context/AuthContext";
 
 import Notificaciones from "./components/Notificaciones/Notificaciones";
+
 
 function App() {
   const location = useLocation();
@@ -42,9 +44,7 @@ function App() {
           <Route path={PathRoutes.PERFIL} element={<Perfil />} />
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-
           <Route path={PathRoutes.REGISTRO} element={<Registro />}></Route>
-          <Route path={PathRoutes.LOGIN} element={<Login />}></Route>
 
           {/* <Route
             path={PathRoutes.NOTIFICACION}
@@ -71,7 +71,7 @@ function App() {
           />
         </Routes>
         {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
-        
+
         <Footer />
       </AuthProvider>
     </>

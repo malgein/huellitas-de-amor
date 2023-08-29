@@ -10,6 +10,7 @@ import ModalLogSig from "../ModalLogSig/ModalLogSig";
 import PathRoutes from "../../helpers/Routes.helper";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function AvatarImg() {
   const { user, logout } = useAuth();
