@@ -19,12 +19,8 @@ import Pets from "./components/Dashboard/Pets";
 import Users from "./components/Dashboard/Users";
 import AdoptionHouses from "./components/Dashboard/AdoptionHouses";
 import Donations from "./components/Dashboard/Donations";
-<<<<<<< HEAD
-import Login from "./components/Login/Login";
-import { AuthProvider } from "./context/authContext";
-=======
 import Notificaciones from "./components/Notificaciones/Notificaciones";
->>>>>>> origin/qa
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   const location = useLocation();
@@ -39,16 +35,12 @@ function App() {
           <Route path={PathRoutes.PERFIL} element={<Perfil />} />
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-
           <Route path={PathRoutes.REGISTRO} element={<Registro />}></Route>
-<<<<<<< HEAD
-          <Route path={PathRoutes.LOGIN} element={<Login />}></Route>
-=======
+
           {/* <Route
             path={PathRoutes.NOTIFICACION}
             element={<Notificaciones />}
           ></Route> */}
->>>>>>> origin/qa
 
           {/* Componente dashboard  */}
           <Route path={PathRoutes.DASHBOARD} element={<Dashboard />} />
@@ -68,7 +60,7 @@ function App() {
           />
         </Routes>
         {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
-        
+
         <Footer />
       </AuthProvider>
     </>
