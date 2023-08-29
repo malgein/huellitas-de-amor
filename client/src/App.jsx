@@ -15,12 +15,16 @@ import Footer from "./components/Footer/Footer";
 import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
 import Registro from "./components/Registro/Registro";
 import Dashboard from "./components/Dashboard/Dashboard";
+
+import CasaDeAdopcion from "./components/CasaDeAdopcion/CasaDeAdopcion";
+
 import Pets from "./components/Dashboard/Pets";
 import Users from "./components/Dashboard/Users";
 import AdoptionHouses from "./components/Dashboard/AdoptionHouses";
 import Donations from "./components/Dashboard/Donations";
+import { AuthProvider } from "./context/authContext";
 import Notificaciones from "./components/Notificaciones/Notificaciones";
-import { AuthProvider } from "./context/AuthContext";
+
 
 function App() {
   const location = useLocation();
@@ -42,6 +46,8 @@ function App() {
             element={<Notificaciones />}
           ></Route> */}
 
+
+          <Route path={PathRoutes.CASADETAIL} element={<CasaDeAdopcion/>}></Route>
           {/* Componente dashboard  */}
           <Route path={PathRoutes.DASHBOARD} element={<Dashboard />} />
           {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
