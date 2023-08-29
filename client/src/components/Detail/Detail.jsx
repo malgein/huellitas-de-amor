@@ -156,10 +156,13 @@ export default function Detail() {
               <Link to="/registro">
                 <Button radius="full" color="primary">
                   Adóptame
-                </Button>
+                </Button>cd
               </Link>
             )}
           </div>
+          <Link>
+            <Button>Volver</Button>
+          </Link>
         </div>
 
       </div>

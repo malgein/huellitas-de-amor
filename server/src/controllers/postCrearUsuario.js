@@ -1,11 +1,11 @@
 const { Usuario } = require("../db");
 
-const crearUsuario = async ({
+const postCrearUsuario = async ({
   nombre,
   password,
   apellido,
   nacionalidad,
-  localizacion,
+  ubicacion,
   direccion,
   telefono,
   acerca,
@@ -17,7 +17,7 @@ const crearUsuario = async ({
       !password ||
       !apellido ||
       !nacionalidad ||
-      !localizacion ||
+      !ubicacion ||
       !direccion ||
       !telefono ||
       !acerca ||
@@ -30,7 +30,7 @@ const crearUsuario = async ({
       password,
       apellido,
       nacionalidad,
-      localizacion,
+      ubicacion,
       direccion,
       telefono,
       acerca,
@@ -48,4 +48,4 @@ const crearUsuario = async ({
   }
 };
 
-module.exports = crearUsuario;
+module.exports = postCrearUsuario;

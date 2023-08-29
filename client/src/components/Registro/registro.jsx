@@ -24,8 +24,8 @@ const Registro = () => {
     // telefono: "",
     // acerca: "",
   };
-  // const basename = "https://huellitas-de-amor-production.up.railway.app";
-  const basename = "http://localhost:3001";
+  const basename = "https://huellitas-de-amor-production.up.railway.app";
+  // const basename = "http://localhost:3001";
 
   const onSubmit = (values) => {
     axios
