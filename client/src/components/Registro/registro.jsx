@@ -133,7 +133,7 @@ const Registro = () => {
                 error={errors.acerca}
               />
             </div> */}
-
+           
             <Button
               type="submit"
               disabled={isSubmitting}
