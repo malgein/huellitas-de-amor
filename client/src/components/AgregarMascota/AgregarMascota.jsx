@@ -35,12 +35,13 @@ const AgregarMascota = () => {
 	const dispatch = useDispatch();
 	const Navigate = useNavigate();
 	const imagenes = useSelector((state) => state.imagenes);
+	const dispatchRedux=(mascota)=>{	const nuevaMascota = { ...mascota };
+	nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
+	dispatch(addMascota(nuevaMascota));
+	dispatch(limpiarImagenes());}
 
 	const handleSubmit = (mascota) => {
-		const nuevaMascota = { ...mascota };
-		nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
-		dispatch(addMascota(nuevaMascota));
-		dispatch(limpiarImagenes());
+		dispatchRedux(mascota);	
 		localStorage.removeItem("formData");
 		Swal.fire({
 			tittle: "MASCOTA AGREGADA",

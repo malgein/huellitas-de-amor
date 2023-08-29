@@ -6,10 +6,14 @@ const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
 
+<<<<<<< HEAD
+   `postgresql://postgres:devZjxigFLUOiHZBcQxh@containers-us-west-127.railway.app:6739/railway`,
+  //`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
 
+=======
   // `postgresql://postgres:devZjxigFLUOiHZBcQxh@containers-us-west-127.railway.app:6739/railway`,
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
-
+>>>>>>> 3c3bb3cd87ba9c53e25a983ce4e0917cbde9063b
 	{
 		logging: false, // set to console.log to see the raw SQL queries
 		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -53,7 +57,7 @@ const {
   Adopcion,
   Especie,
   Favorito,
-  Rating,
+ 
 } = sequelize.models;
 
 //Usuarios --> Tipo de Usuarios
