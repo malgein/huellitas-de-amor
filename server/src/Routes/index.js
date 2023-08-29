@@ -10,7 +10,7 @@ const postCasaAdopcion = require("./routesCasaDeAdopcion");
 const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 const postSendEmail = require("../controllers/postSendEmail");
 
-const crearUsuario = require("../controllers/crearUsuario");
+const postCrearUsuario = require("../controllers/postCrearUsuario");
 const postMercadoPago = require("../controllers/postMercadoPago");
 const fillDonations = require("../controllers/fillDonations");
 
@@ -22,7 +22,7 @@ router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fill", fillDonations);
 router.use("/donaciones", postDonaciones);
-router.use("/usuario", postUsuario);
+router.use("/usuario", postCrearUsuario);
 
 
 router.use("/mascotas", mascotas);
