@@ -16,9 +16,9 @@ const validationSchema = Yup.object({
     .min(5, "El nacionalidad debe tener al menos 5 caracteres")
     .max(15, "El nacionalidad no puede tener más de 15 caracteres"),
 
-  localizacion: Yup.string()
+  ubicacion: Yup.string()
     .required("Por favor, proporciona tu ubicación")
-    .min(5, "El localización debe tener al menos 5 caracteres")
+    .min(4, "El localización debe tener al menos 4 caracteres")
     .max(15, "El localización no puede tener más de 15 caracteres"),
 
   direccion: Yup.string()
