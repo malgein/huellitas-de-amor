@@ -27,14 +27,16 @@ export const GET_ALL_DONATIONS = 'GET_DONATIONS'
 export const ADD_MASCOTA = "ADD_MASCOTA";
 export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
-
 export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
-
+export const GET_CASA_BY_ID = "GET_CASA_BY_ID";
 
 export const EDIT_USER = 'EDIT_USER';
+
 //const basename = "https://huellitas-de-amor-production.up.railway.app";
- const basename = "http://localhost:3001";
+
+const basename = "http://localhost:3001";
+
 const ENDPOINT = `${basename}/mascotas`
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`
@@ -51,6 +53,15 @@ export const getPetById = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getCasaById = (id) => async (dispatch) => {
+  try {
+    const {data} = await axios.get(`${basename}/casaDeAdopcion/${id}`)
+    dispatch({type: GET_CASA_BY_ID, payload: data})
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 //Guardo todas las mascotas
 export const getMascotas = () => async (dispatch) => {

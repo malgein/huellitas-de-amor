@@ -5,16 +5,19 @@ import logoPrueba from "../../assets/LogoPrueba.jpg";
 
 const Footer = () => {
   return (
-    <div className=" flex flex-col mt-6 mb-0">
+    <div className=" flex flex-col mb-0">
       <div className="flex flex-row  items-center gap-20 h-24">
         <div className="ml-20">
-          <Image
-            width={90}
-            height={90}
-            alt="NextUI hero Image"
-            // src="../../assets/LogoPrueba.jpg"
-            src={logoPrueba}
-          />
+          <Link href="/">
+            <Image
+              width={90}
+              height={90}
+              alt="NextUI hero Image"
+              // src="../../assets/LogoPrueba.jpg"
+              src={logoPrueba}
+            />
+          </Link>
+
         </div>
         <div className="flex flex-row justify-center gap-20 ml-20 border-b-2">
           <section>
@@ -23,7 +26,9 @@ const Footer = () => {
           </section>
           <section className="ml-20">
             <h4>Contacto</h4>
-            <p>✉ Huellitasdemaor@gmail.com</p>
+            <p>
+              ✉ <a href="mailto:Huellitasdemaor@gmail.com">Huellitasdemaor@gmail.com</a>
+            </p>
             <p>📞 16572345</p>
           </section>
         </div>
@@ -32,9 +37,15 @@ const Footer = () => {
       <div className="flex flex-row justify-between items-center h-16 ">
         <div className="ml-4">©2023, All right reserved.</div>
         <div className="mr-4 flex flex-row  items-center  gap-4 ">
-          <i className="fab fa-facebook-square"></i>
-          <i className="fab fa-instagram-square"></i>
-          <i className="fab fa-twitter-square"></i>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-facebook-square"></i>
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-instagram-square"></i>
+          </a>
+          <a href="https://twitter.com/?lang=es" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-twitter-square"></i>
+          </a>
         </div>
       </div>
     </div>

@@ -5,7 +5,8 @@ const fillHomes = require('../utils/fillHomes')
 const getAllHomes = require('../controllers/getAllHomes')
 const modHouseById = require('../controllers/modHouseById')
 const deleteHouseAdoptionById = require('../controllers/deleteHouseAdoption')
-const postRatings=require("../controllers/postRatings")
+const postRatings=require("../controllers/postRatings");
+const getCasaById = require("../controllers/getCasaById");
 
 router.post("/", async (req, res) => {
   try {
@@ -58,6 +59,16 @@ router.patch("/:id", async (req, res) => {
     return res.status(200).json(houseId);
   } catch (error) {
     return res.status(500).json({ mensaje: "Error en el servidor" });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const petId = await getCasaById(id);
+    res.status(200).json(petId);
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message });
   }
 });
 
