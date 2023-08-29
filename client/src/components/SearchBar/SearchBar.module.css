@@ -1,0 +1,33 @@
+.searchForm {
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  padding: 3px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  flex-grow: 1;
+}
+
+.submitButton {
+  padding: 4px 8px;
+  background-color: #030d17;
+  color: #e90b0b;
+  border: 2px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  color: gray;
+  cursor: not-allowed;
+}
+
+
+.submitButton:not(:disabled) {
+  background-color: #4caf50; 
+  color: white; 
+}

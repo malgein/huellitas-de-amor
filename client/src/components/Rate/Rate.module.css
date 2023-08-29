@@ -1,0 +1,13 @@
+.Rate{
+    display:inline-block;
+    /* flex-direction: row; */
+}
+.horizontalRating {
+  display: flex; /* Use flexbox to horizontally align items */
+  align-items: center; /* Center the items vertically */
+  justify-content: center; /* Center the items horizontally */
+}
+.horizontalStars {
+  display: inline-block; /* Display stars inline */
+  margin-right: 5px; /* Add some spacing between stars */
+}
