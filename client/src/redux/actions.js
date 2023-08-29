@@ -33,19 +33,14 @@ export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
 
 export const EDIT_USER = 'EDIT_USER';
-const basename = "https://huellitas-de-amor-production.up.railway.app";
-// const basename = "http://localhost:3001";
+// const basename = "https://huellitas-de-amor-production.up.railway.app";
+const basename = "http://localhost:3001";
 const ENDPOINT = `${basename}/mascotas`
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`
 const ENDPOINTNAME = `${basename}/mascotas?name=`
 
 
-
-const handleError = (dispatch, errorType, error) => {
-  console.error(error);
-  dispatch({ type: errorType, payload: error.message });
-};
 
 
 export const getPetById = (id) => async (dispatch) => {
