@@ -3,6 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 
+
 export default function Donar (){
 
   const [preferenceId, setPreferenceId] = useState(null);
@@ -17,6 +18,7 @@ export default function Donar (){
           quantity: 1,
           //currency_id: "ARS"
         });
+
 
         const {id} = response.data;
         return id;
