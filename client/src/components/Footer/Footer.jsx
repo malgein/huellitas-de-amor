@@ -5,7 +5,7 @@ import logoPrueba from "../../assets/LogoPrueba.jpg";
 
 const Footer = () => {
   return (
-    <div className=" flex flex-col mt-6 mb-0">
+    <div className=" flex flex-col mb-0">
       <div className="flex flex-row  items-center gap-20 h-24">
         <div className="ml-20">
           <Image

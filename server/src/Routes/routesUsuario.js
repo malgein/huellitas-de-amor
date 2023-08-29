@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const crearUsuario = require("../controllers/crearUsuario");
+const crearUsuario = require("../controllers/postCrearUsuario");
 //controlador que llena la bd de usuarios para prueba
 const llenarUsuario = require('../utils/llenarUsuario')
 const getUsers = require('../controllers/getUsers')

@@ -8,21 +8,20 @@ const filtradoMascotas = require("../controllers/filtradoMascotas");
 const getPets = require("../controllers/getPets");
 const postCasaAdopcion = require("./routesCasaDeAdopcion");
 const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
-const postSendEmail = require ('../controllers/postSendEmail');
+const postSendEmail = require("../controllers/postSendEmail");
 
 const crearUsuario = require("../controllers/crearUsuario");
 const postMercadoPago = require("../controllers/postMercadoPago");
 const fillDonations = require("../controllers/fillDonations");
 
 //Todas las rutas del usuario
-const postDonaciones = require('./routesDonaciones')
-const postUsuario = require('./routesUsuario')
-
+const postDonaciones = require("./routesDonaciones");
+const postUsuario = require("./routesUsuario");
 
 router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fill", fillDonations);
-router.use('/donaciones', postDonaciones)
+router.use("/donaciones", postDonaciones);
 router.use("/usuario", postUsuario);
 
 
@@ -32,8 +31,7 @@ router.get("/nombre", getPetByName);
 router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
-router.post("/create_preference", postMercadoPago)
-
+router.post("/create_preference", postMercadoPago);
 
 // router.post("/", crearUsuario);
 

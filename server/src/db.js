@@ -4,8 +4,8 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-
 const sequelize = new Sequelize(
+
 
   // `postgresql://postgres:devZjxigFLUOiHZBcQxh@containers-us-west-127.railway.app:6739/railway`,
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
@@ -14,6 +14,7 @@ const sequelize = new Sequelize(
 		logging: false, // set to console.log to see the raw SQL queries
 		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 	}
+
 );
 const basename = path.basename(__filename);
 
@@ -95,10 +96,12 @@ Comentario.hasMany(CasaDeAdopcion, {
   foreignKey: "comentarioId",
 }); */
 
+
 // //!Ratings --> Casa de Adopciones
 // CasaDeAdopcion.hasMany(Rating,{foreignKey: "ratingId"});
 // Rating.belongsTo(CasaDeAdopcion, { foreignKey: "ratingId" });
 // //!Ratings --> Casa de Adopciones
+
 
 //Mascotas --> Casa de Adopciones
 Mascota.belongsTo(CasaDeAdopcion, {
@@ -129,9 +132,7 @@ Favorito.belongsTo(Usuario, {
   foreignKey: "favoritoId",
 }); //Un usuario puede tener muchos favoritos (1 a N)
 
-Usuario.hasMany(Favorito ,
-  {foreignKey: 'usuarioId'
-});//
+Usuario.hasMany(Favorito, { foreignKey: "usuarioId" }); //
 
 //Mascotas --> Favoritos
 
@@ -139,10 +140,7 @@ Favorito.belongsTo(Mascota, {
   foreignKey: "favoritoId",
 }); //Un usuario puede tener muchos favoritos (1 a N)
 
-Mascota.hasMany(Favorito ,
-  {foreignKey: 'mascotaId'
-});//
-
+Mascota.hasMany(Favorito, { foreignKey: "mascotaId" }); //
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
