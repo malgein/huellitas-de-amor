@@ -12,6 +12,7 @@ import {
 const FilterMascotas = () => {
   const dispatch = useDispatch();
   const mascotas = useSelector((state) => state.mascotas);
+  const [order, setOrder] = useState([]);
 
   const initialState = {
     edad: "",
@@ -31,11 +32,13 @@ const FilterMascotas = () => {
     };
     setFilters(newFilters);
     dispatch(applyFilters(newFilters)); // Aplicar filtros automáticamente
+    setOrder(...order, newFilters);
   };
 
   const handleResetFilters = () => {
     setFilters(initialState); // Resetear a estado inicial
     dispatch(applyFilters(initialState));
+    setOrder(...order, initialState);
   };
 
   const options = {
@@ -86,4 +89,3 @@ const FilterMascotas = () => {
 };
 
 export default FilterMascotas;
-
