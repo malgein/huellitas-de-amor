@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, {useState, useEffect} from 'react'
 // import {useSelector, useDispatch} from 'react-redux'
 // import { getUsers, editUser, deleteUsers} from '../../redux/actions'
@@ -107,6 +108,13 @@ import { EditIcon } from "./EditIcon";
 import { DeleteIcon } from "./DeletIcon";
 import { EyeIcon } from "./EyeIcon";
 import Swal from "sweetalert2";
+=======
+import React, {useState, useEffect, useCallback} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import { getUsers, editUser, deleteUsers, modCompleteUser} from '../../redux/actions'
+import Sidebar from './Sidebar'
+import Swal from 'sweetalert2'
+>>>>>>> 1db4cc080286133954ff8ccfdd6154e589acc411
 import {
   Table,
   TableHeader,
@@ -169,22 +177,76 @@ function Users() {
   const [userModified, setUserModified] = useState(true);
 
   useEffect(() => {
-    if (userModified) {
+    //if (userModified) {
       dispatch(getUsers());
-      setUserModified(false); // Restablecer userDeleted después de obtener usuarios
-    }
+      // setUserModified(false); // Restablecer userDeleted después de obtener usuarios
+    //}
   }, [userModified, dispatch]);
 
+<<<<<<< HEAD
   const handleEdit = async (id) => {
     console.log(id);
     const { value: formValues } = await Swal.fire({
       title: "Introduce la propiedad y el valor que deseas modificar",
+=======
+  //Esta funcion puede ser modificada para cambiar cada propiedad del usuario
+  // const handleEdit = async(id) => {
+  //   console.log(id)
+  //   const { value: formValues } = await Swal.fire({
+  //     title: 'Introduce la propiedad y el valor que deseas modificar',
+  //     html:
+  //       '<input id="swal-input1" class="swal2-input">' +
+  //       '<input id="swal-input2" class="swal2-input">' ,
+  //     focusConfirm: false,
+  //     preConfirm: () => {
+  //       return [
+  //         document.getElementById('swal-input1').value,
+  //         document.getElementById('swal-input2').value,
+          
+  //       ]
+  //     }
+  //   })
+    
+  //   if (formValues) {
+  //     const result = {[formValues[0]] : formValues[1]}
+  //     console.log(result)
+  //     // const resultJson = JSON.stringify(result)
+  //     dispatch(editUser(id, result))
+  //     console.log(userModified)
+  //     Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
+  //     setUserModified(!userModified)
+  //   }
+  // }
+
+  const handleEdit = async(id) => {
+    console.log(id)
+    const { value: formValues } = await Swal.fire({
+      title: 'Introduce los nuevos datos del usuario que deseas modificar',
+>>>>>>> 1db4cc080286133954ff8ccfdd6154e589acc411
       html:
-        '<input id="swal-input1" class="swal2-input">' +
-        '<input id="swal-input2" class="swal2-input">',
+        'Nombre del usuario ' +
+        '<input id="swal-input1" class="swal2-input"> </br> ' +
+        'Apellido del usuario' +
+        '<input id="swal-input2" class="swal2-input"> </br> ' +
+        'Nacionalidad del usuario ' +
+        '<input id="swal-input3" class="swal2-input"> </br> ' +
+        'Localizacion del usuario ' +
+        '<input id="swal-input4" class="swal2-input"> </br> ' +
+        'Direccion del usuario ' +
+        '<input id="swal-input5" class="swal2-input"> </br> ' +
+        'Telefono del usuario ' +
+        '<input id="swal-input6" class="swal2-input"> </br> ' +
+        'Detalles  del usuario ' +
+        '<input id="swal-input7" class="swal2-input"> </br> ' +
+        'Email del usuario ' +
+        '<input id="swal-input8" class="swal2-input"> </br> ' +
+        'Password del usuario ' +
+        '<input type="password" id="swal-input9" class="swal2-input"> </br> ' 
+        ,
       focusConfirm: false,
       preConfirm: () => {
         return [
+<<<<<<< HEAD
           document.getElementById("swal-input1").value,
           document.getElementById("swal-input2").value,
         ];
@@ -198,6 +260,39 @@ function Users() {
       dispatch(editUser(id, result));
       setUserModified(true);
       Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`);
+=======
+          document.getElementById('swal-input1').value,
+          document.getElementById('swal-input2').value,
+          document.getElementById('swal-input3').value,
+          document.getElementById('swal-input4').value,
+          document.getElementById('swal-input5').value,
+          document.getElementById('swal-input6').value,
+          document.getElementById('swal-input7').value,
+          document.getElementById('swal-input8').value,
+          document.getElementById('swal-input9').value,
+        ]
+      }
+    })
+    
+    if (formValues) {
+      const result = {
+        nombre: formValues[0],
+        apellido: formValues[1],
+        nacionalidad: formValues[2],
+        localizacion: formValues[3],
+        direccion: formValues[4],
+        telefono: parseInt(formValues[5]),
+        acerca: formValues[6],
+        email: formValues[7] ,
+        password : formValues[8]
+      }
+      console.log(result)
+      dispatch(modCompleteUser(id, result))
+      // dispatch(editUser(id, result))
+      // console.log(userModified)
+      Swal.fire(`Propiedades del usuario cambiadas exitosamente`)
+      setUserModified(!userModified)
+>>>>>>> 1db4cc080286133954ff8ccfdd6154e589acc411
     }
   };
 
@@ -211,10 +306,17 @@ function Users() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+<<<<<<< HEAD
         Swal.fire("Usuario borrado con exito", "", "success");
         setUserModified(true);
         dispatch(deleteUsers(id));
         console.log(userModified);
+=======
+        Swal.fire('Usuario borrado con exito', '', 'success')
+        dispatch(deleteUsers(id))
+        setUserModified(true)
+        console.log(userModified)
+>>>>>>> 1db4cc080286133954ff8ccfdd6154e589acc411
       } else if (result.isDenied) {
         Swal.fire("El usuario no ha sido borrado", "", "info");
       }
@@ -527,6 +629,7 @@ function Users() {
   }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
   return (
+<<<<<<< HEAD
     <div>
       <div className="flex overflow-scroll ">
         <div className="flex overflow-scroll ">
@@ -582,6 +685,57 @@ function Users() {
                 </TableBody>
               </Table>
             </div>
+=======
+    <div >
+       <div className='flex overflow-scroll '>
+			<div className="flex overflow-scroll ">
+        <div className="basis-[12%] h-[100vh]">
+          {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
+					<Sidebar />
+        </div>
+        <div className="basis-[88%] border overflow-scroll h-[100vh]">
+          {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
+						
+					<div className='mt-10'>
+            {/* Soy la gestion de casas de adopcion */}
+            {/* {console.log(casasDeAdopcion)} */}
+            <Table
+      aria-label="Example table with custom cells, pagination and sorting"
+      isHeaderSticky
+      bottomContent={bottomContent}
+      bottomContentPlacement="outside"
+      classNames={{
+        wrapper: "max-h-[382px]",
+      }}
+      selectedKeys={selectedKeys}
+      selectionMode="multiple"
+      sortDescriptor={sortDescriptor}
+      topContent={topContent}
+      topContentPlacement="outside"
+      onSelectionChange={setSelectedKeys}
+      onSortChange={setSortDescriptor}
+    >
+      <TableHeader columns={headerColumns}>
+        {(column) => (
+          <TableColumn
+            key={column.uid}
+            align={column.uid === "actions" ? "center" : "start"}
+            allowsSorting={column.sortable}
+          >
+            {/* {column.name} */}
+            {column.name}
+          </TableColumn>
+        )}
+      </TableHeader>
+      <TableBody emptyContent={"No Se encontraron Usuarios"} items={sortedItems}>
+        {(item) => (
+          <TableRow key={item.id}>
+            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+>>>>>>> 1db4cc080286133954ff8ccfdd6154e589acc411
           </div>
         </div>
       </div>

@@ -42,7 +42,6 @@
 
 import React, {useEffect, useCallback, useState} from 'react'
 import Sidebar from './Sidebar'
-import Dashboardview from './DashboardView'
 import { getAllHomes, editHouses, deleteHouses } from '../../redux/actions'
 import {useSelector , useDispatch} from 'react-redux'
 import {
@@ -420,9 +419,7 @@ function AdoptionHouses() {
 					<Sidebar />
         </div>
         <div className="basis-[88%] border overflow-scroll h-[100vh]">
-          {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
-						<Dashboardview />
-					<div>
+					<div className='mt-10'>
             {/* Soy la gestion de casas de adopcion */}
             {/* {console.log(casasDeAdopcion)} */}
             <Table
