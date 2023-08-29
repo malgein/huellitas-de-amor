@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -14,12 +14,26 @@ import { Link } from "react-router-dom";
 import iconMacho from "../../assets/macho.png";
 import iconHembra from "../../assets/hembra.png";
 
+import { logicalDeletePet } from "../../redux/actions";
+
+
+
+
+
 export default function Detail() {
   const { id } = useParams();
+  
+  const currentUser = useSelector((state) => state.currentUser);
+  console.log(currentUser);
 
   const handleConfetti = () => {
     confetti({});
   };
+  const handleAdopcion =() => {
+    dispatch(logicalDeletePet(id,currentUser.id ));
+    handleConfetti();
+    
+  }
 
   const dispatch = useDispatch();
 
@@ -29,6 +43,7 @@ export default function Detail() {
   }, [dispatch, id]);
 
   const mascota = useSelector((state) => state.petDetail);
+  const isAdopted = useSelector((state) => state.petDetail.adoptado);
 
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
@@ -58,12 +73,13 @@ export default function Detail() {
                 ))}
             </Carousel>
           )}
-          <Badge
-            className="absolute top-[-12px] right-[-110px] text-lg text-white"
-            content="En Adopcion"
-            color="success"
+         <Badge
+            className={`absolute top-[-12px] right-[-110px] text-lg text-white ${isAdopted ? "text-uppercase font-bold" : ""}`}
+            content={isAdopted ? "Adoptado" : "En Adopcion"}
+            color={isAdopted ? "danger" : "success"}
             size="lx"
           ></Badge>
+
         </div>
         <div className="p-4 ">
           <div className="flex items-center mb-2">
@@ -132,15 +148,15 @@ export default function Detail() {
             </div>
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
-            <Button
-              radius="full"
-              className="bg-blue-500 text-white hover:bg-blue-600 "
-              onPress={handleConfetti}
-            >
-              Adóptame
-            </Button>
+          <Button
+    radius="full"
+    className="bg-blue-500 text-white hover:bg-blue-600"
+    onClick={handleAdopcion}
+>
+    Adóptame
+</Button>
           </div>
-          <Link>
+          <Link to = "/home">
           <Button
               radius="full"
               className="bg-blue-500 text-white hover:bg-blue-600 "
@@ -155,3 +171,4 @@ export default function Detail() {
     </div>
   );
 }
+

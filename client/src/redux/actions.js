@@ -28,6 +28,9 @@ export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
 export const EDIT_USER = 'EDIT_USER';
 
+export const LOGICAL_DELETE_PET = 'LOGICAL_DELETE_PET';
+
+
 const ENDPOINT = "http://localhost:3001/mascotas/";
 const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
 const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
@@ -233,4 +236,26 @@ export const limpiarImagenes = () => {
     payload: imagenes,
   }
 }
+export const logicalDeletePet = (id, modUserById) => async (dispatch) => {
+  try {
+    const updatedData = {
+      active: false,
+      adoptedBy: modUserById,
+    };
+    const response = await axios.patch(`${ENDPOINT}${id}`, updatedData);
+    
+    if (response.status === 200) {
+      dispatch({
+        type: LOGICAL_DELETE_PET,
+        payload: id,
+      });
+      alert("Mascota Adoptada.");
+    } else {
+      throw new Error('No se puede Adoptar la Mascota.');
+    }
+
+  } catch (error) {
+    console.error("Error al adoptar la mascota:", error);
+  }
+};
 

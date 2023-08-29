@@ -35,6 +35,7 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "autoprefixer": "^10.4.15",
+    "esbuild": "^0.19.2",
     "install": "^0.13.0",
     "npm": "^9.8.1",
     "postcss": "^8.4.27",

@@ -19,6 +19,7 @@ import {
   DELETE_HOUSES,
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
+  LOGICAL_DELETE_PET,
 } from "./actions";
 
 const initialState = {
@@ -125,9 +126,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
     case LIMPIAR_IMAGENES: 
       return {...state, imagenes: []}
+      case LOGICAL_DELETE_PET:
+        return {
+          ...state,
+          mascotas: state.mascotas.map((mascota) => {
+            if (mascota.id === useActionData.payload ?
+              { ...mascota, active: false } : mascota);
+          }),}
     default:
       return { ...state };
-  }
-};
+
+            
+        }
+       
+        };
+        
+
+
 
 export default rootReducer;
