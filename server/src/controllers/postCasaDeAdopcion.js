@@ -8,7 +8,7 @@ const postCasaDeAdopcion = async ({
   telefono,
 }) => {
   try {
-    if (!id || !nombreDeOng || !nombreDeContacto || !email || !telefono) {
+    if (!nombreDeOng || !nombreDeContacto || !email || !telefono) {
       return { status: 401, message: "Faltan datos" };
     }
 
