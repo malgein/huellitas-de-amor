@@ -37,9 +37,15 @@ const Footer = () => {
       <div className="flex flex-row justify-between items-center h-16 ">
         <div className="ml-4">©2023, All right reserved.</div>
         <div className="mr-4 flex flex-row  items-center  gap-4 ">
-          <i className="fab fa-facebook-square"></i>
-          <i className="fab fa-instagram-square"></i>
-          <i className="fab fa-twitter-square"></i>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-facebook-square"></i>
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-instagram-square"></i>
+          </a>
+          <a href="https://twitter.com/?lang=es" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-twitter-square"></i>
+          </a>
         </div>
       </div>
     </div>
