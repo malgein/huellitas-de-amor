@@ -18,6 +18,14 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
       nacionalidad: {
         type: DataTypes.STRING(50),
         allowNull: false,
@@ -36,14 +44,6 @@ module.exports = (sequelize) => {
       },
       acerca: {
         type: DataTypes.TEXT(50),
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      password: {
-        type: DataTypes.STRING(50),
         allowNull: false,
       },
     },

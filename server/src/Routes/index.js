@@ -10,7 +10,7 @@ const postCasaAdopcion = require("./routesCasaDeAdopcion");
 const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 const postSendEmail = require("../controllers/postSendEmail");
 
-const crearUsuario = require("../controllers/crearUsuario");
+// const postCrearUsuario = require("../controllers/postCrearUsuario");
 const postMercadoPago = require("../controllers/postMercadoPago");
 const fillDonations = require("../controllers/fillDonations");
 // const rateCasas = require("./routesRateCasas");

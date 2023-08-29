@@ -2,39 +2,25 @@ const { Usuario } = require("../db");
 
 const postCrearUsuario = async ({
   nombre,
-  password,
   apellido,
-  nacionalidad,
-  ubicacion,
-  direccion,
-  telefono,
-  acerca,
   email,
+  password,
+
+  // nacionalidad,
+  // ubicacion,
+  // direccion,
+  // telefono,
+  // acerca,
 }) => {
   try {
-    if (
-      !nombre ||
-      !password ||
-      !apellido ||
-      !nacionalidad ||
-      !ubicacion ||
-      !direccion ||
-      !telefono ||
-      !acerca ||
-      !email
-    ) {
+    if (!nombre || !apellido || !password || !email) {
       return { status: 401, message: "Faltan datos" };
     }
     const nuevoUsuario = await Usuario.create({
       nombre,
-      password,
       apellido,
-      nacionalidad,
-      ubicacion,
-      direccion,
-      telefono,
-      acerca,
       email,
+      password,
     });
     console.log(nuevoUsuario);
     return nuevoUsuario;
