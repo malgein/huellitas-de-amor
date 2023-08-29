@@ -20,6 +20,7 @@ import Pets from './components/Dashboard/Pets';
 import Users from './components/Dashboard/Users';
 import AdoptionHouses from './components/Dashboard/AdoptionHouses';
 import Donations from './components/Dashboard/Donations';
+import CasaDeAdopcion from "./components/CasaDeAdopcion/CasaDeAdopcion";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
 
           <Route path={PathRoutes.REGISTRO} element={<Registro />}></Route>
 
+          <Route path={PathRoutes.CASADETAIL} element={<CasaDeAdopcion/>}></Route>
           {/* Componente dashboard  */}
           <Route path={PathRoutes.DASHBOARD} element={<Dashboard />} />
           {/* Subruta de dashboard que gestiona las mascotas para ek admin */}

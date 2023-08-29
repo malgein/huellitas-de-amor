@@ -6,6 +6,8 @@ const PathRoutes = {
   DETAIL: "/detail/:id",
   AGREGAR: "/agregar",
   REGISTRO: "/registro",
+  
+  CASADETAIL: "/casaDeAdopcion/:id",
 
   //Ruta para el dashboard principal
   DASHBOARD: "/dashboard",

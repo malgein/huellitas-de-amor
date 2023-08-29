@@ -5,7 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getPetById } from "../../redux/actions";
+import { getCasaById, getPetById } from "../../redux/actions";
 
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
@@ -13,6 +13,7 @@ import confetti from "canvas-confetti";
 import iconMacho from "../../assets/macho.png";
 import iconHembra from "../../assets/hembra.png";
 import { useAuth } from "../../context/AuthContext";
+import PathRoutes from "../../helpers/Routes.helper";
 
 export default function Detail() {
   const { id } = useParams();
@@ -23,13 +24,22 @@ export default function Detail() {
   };
 
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(getPetById(id));
+    
   }, [dispatch, id]);
 
-  const mascota = useSelector((state) => state.petDetail);
-
+  const mascota = useSelector((state) => state.petDetail);  
+  
+  useEffect(() => {
+    if(mascota.casaDeAdopcionId){
+      dispatch(getCasaById(mascota.casaDeAdopcionId))
+    }
+  }, [dispatch, mascota.casaDeAdopcionId])
+  
+  const casa = useSelector((state) => state.casasDeAdopcion) 
+ 
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
@@ -124,11 +134,13 @@ export default function Detail() {
             </div>
             <div className="pl-4">
               <p className="text-gray-500">Posteado por:</p>
+              <Link to={PathRoutes.CASADETAIL.replace(":id", casa.id)}>
               <p className="text-black font-semibold">
-                {mascota.casaDeAdopcionId === null
-                  ? "Casa de Adopcion Pokeamigos"
-                  : mascota.casaDeAdopcionId}
+                {casa.nombreDeOng === null
+                  ? "Casa de Adopcion"
+                  : casa.nombreDeOng}
               </p>
+              </Link>
             </div>
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
