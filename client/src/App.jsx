@@ -25,7 +25,6 @@ import Donations from "./components/Dashboard/Donations";
 import { AuthProvider } from "./context/authContext";
 import Notificaciones from "./components/Notificaciones/Notificaciones";
 
-
 function App() {
   const location = useLocation();
   return (
@@ -46,8 +45,10 @@ function App() {
             element={<Notificaciones />}
           ></Route> */}
 
-
-          <Route path={PathRoutes.CASADETAIL} element={<CasaDeAdopcion/>}></Route>
+          <Route
+            path={PathRoutes.CASADETAIL}
+            element={<CasaDeAdopcion />}
+          ></Route>
           {/* Componente dashboard  */}
           <Route path={PathRoutes.DASHBOARD} element={<Dashboard />} />
           {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
