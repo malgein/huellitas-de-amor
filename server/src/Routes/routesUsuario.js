@@ -2,19 +2,11 @@ const { Router } = require("express");
 const router = Router();
 const crearUsuario = require("../controllers/postCrearUsuario");
 //controlador que llena la bd de usuarios para prueba
-<<<<<<< HEAD
-const llenarUsuario = require('../utils/llenarUsuario')
-const getUsers = require('../controllers/getUsers')
-const modUserById = require('../controllers/modUsersById')
-const deleteUsersById = require('../controllers/deleteUsersById')
-const modCompleteUser = require('../controllers/modCompleteUser')
-=======
 const llenarUsuario = require("../utils/llenarUsuario");
 const getUsers = require("../controllers/getUsers");
 const modUserById = require("../controllers/modUsersById");
 const deleteUsersById = require("../controllers/deleteUsersById");
 const modCompleteUser = require("../controllers/modCompleteUser");
->>>>>>> jossydev
 
 router.post("/", async (req, res) => {
   try {
@@ -25,50 +17,17 @@ router.post("/", async (req, res) => {
     res.status(error.status || 500).json({ message: error.message });
   }
 });
-<<<<<<< HEAD
- 
-//controlador que funciona con propositos de llenar la base de datos con datos de usuario para testeo
-router.get('/fill',  async (req, res) => {
-  try {
-		//Esta linea de codigo borra la tabla para asegurarse que no se vuelva a rescribir la informacion que le estamos a punto de pasar
-    
-=======
 
 //controlador que funciona con propositos de llenar la base de datos con datos de usuario para testeo
 router.get("/fill", async (req, res) => {
   try {
     //Esta linea de codigo borra la tabla para asegurarse que no se vuelva a rescribir la informacion que le estamos a punto de pasar
->>>>>>> jossydev
 
     // Llena la tabla con los datos de users que al final son los datos de data.js es decir todas los usuarios
     // await Usuario.bulkCreate(allUsers);
 
     //Llama llenarUsuario que usa un metodo de sequelize llamado bulkCreate que llena la la base de datos con data de usuarios validos
 
-<<<<<<< HEAD
-    console.log(llenarUsuario)
-    const getFill = () => llenarUsuario()
-    
-     getFill()
-
-    res.status(200).json({ message: 'Datos de usuarios llenados exitosamente' });
-  } catch (error) {
-    console.error('Error al llenar los datos:', error);
-    res.status(500).json({ error: 'Error al llenar los datos de los usuarios' });
-  }
-})
-
-//Ruta que me trae todos los usuarios de la base de datos necesario para la gestion de usuarios en el componente admin
-router.get('/', async(req,res) => {
-  try{
-    const data = await getUsers()
-
-    return res.status(200).json(data)
-  }catch(error){
-    res.status(500).json({message: error.message})
-  }
-})
-=======
     console.log(llenarUsuario);
     const getFill = () => llenarUsuario();
 
@@ -95,20 +54,13 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
->>>>>>> jossydev
 
 router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-<<<<<<< HEAD
-    const response = req.body
-    console.log(response)
-    const userId =  await modUserById(id, response);
-=======
     const response = req.body;
     console.log(response);
     const userId = await modUserById(id, response);
->>>>>>> jossydev
     return res.status(200).json(userId);
   } catch (error) {
     return res.status(500).json({ mensaje: "Error en el servidor" });
@@ -118,11 +70,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-<<<<<<< HEAD
-    const userId =  await deleteUsersById(id);
-=======
     const userId = await deleteUsersById(id);
->>>>>>> jossydev
     return res.status(200).json(userId);
   } catch (error) {
     return res.status(500).json({ mensaje: "Error en el servidor" });
@@ -132,23 +80,13 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-<<<<<<< HEAD
-    const response = req.body
-    console.log(response)
-    const userId =  await modCompleteUser(id, response);
-=======
     const response = req.body;
     console.log(response);
     const userId = await modCompleteUser(id, response);
->>>>>>> jossydev
     return res.status(200).json(userId);
   } catch (error) {
     return res.status(500).json({ mensaje: "Error en el servidor" });
   }
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> jossydev
 module.exports = router;
