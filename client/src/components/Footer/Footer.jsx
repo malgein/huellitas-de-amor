@@ -26,7 +26,9 @@ const Footer = () => {
           </section>
           <section className="ml-20">
             <h4>Contacto</h4>
-            <p>✉ Huellitasdemaor@gmail.com</p>
+            <p>
+              ✉ <a href="mailto:Huellitasdemaor@gmail.com">Huellitasdemaor@gmail.com</a>
+            </p>
             <p>📞 16572345</p>
           </section>
         </div>
