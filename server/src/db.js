@@ -53,7 +53,7 @@ const {
   Adopcion,
   Especie,
   Favorito,
-  Rating,
+ 
 } = sequelize.models;
 
 //Usuarios --> Tipo de Usuarios

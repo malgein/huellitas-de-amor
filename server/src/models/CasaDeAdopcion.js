@@ -26,11 +26,11 @@ module.exports = (sequelize) => {
 				allowNull: false,
 			},
 			rating: {
-				type: DataTypes.NUMBER,
+				type: DataTypes.FLOAT,
 				default: 0,
 			},
 			ratings: {
-				type: DataTypes.ARRAY(DataTypes.NUMBER),
+				type: DataTypes.ARRAY(DataTypes.FLOAT),
 				default: [],
 			},
 		},
