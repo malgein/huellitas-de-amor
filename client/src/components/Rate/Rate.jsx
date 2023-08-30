@@ -5,16 +5,16 @@ import styles from "./Rate.module.css";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import axios from "axios";
 
-const Rate = ({rating}) => {
+const Rate = () => {
 	// const basename = "https://huellitas-de-amor-production.up.railway.app";
 	const basename = "http://localhost:3001";
 	const { casaDeAdopcionId } = useParams();
 	
-	const endPoint = `${basename}/casaDeAdopcion/${casaDeAdopcionId}/ratings`;
+	const endPoint = `${basename}/casaDeAdopcion/${casaDeAdopcionId}`;
 	
 	const handleRatingChange = async (newRating) => {
 		try {
-			await axios.post(endPoint, { rating: newRating });
+			await axios.post(`${endPoint}/ratings`, { rating: newRating });
 		} catch (error) {
 			console.error("Error al obtener la data", error);
 		}
