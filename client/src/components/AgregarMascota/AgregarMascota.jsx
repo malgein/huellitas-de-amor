@@ -35,21 +35,44 @@ const AgregarMascota = () => {
 	const dispatch = useDispatch();
 	const Navigate = useNavigate();
 	const imagenes = useSelector((state) => state.imagenes);
-	const dispatchRedux=(mascota)=>{	const nuevaMascota = { ...mascota };
-	nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
-	dispatch(addMascota(nuevaMascota));
-	dispatch(limpiarImagenes());}
+	const dispatchRedux = (mascota) => {
+		const nuevaMascota = { ...mascota };
+		nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
+		dispatch(addMascota(nuevaMascota));
+		Navigate("/");
+		dispatch(limpiarImagenes());
+	};
 
 	const handleSubmit = (mascota) => {
-		dispatchRedux(mascota);	
-		localStorage.removeItem("formData");
 		Swal.fire({
-			tittle: "MASCOTA AGREGADA",
-			text: "La mascota se ha agregado satisfactoriamente",
-			icon: "success",
-			buttons: "OK",
+			title: "¿Deseas agregar a la siguiente mascota?",
+			showDenyButton: true,
+			showCancelButton: false,
+			confirmButtonText: "Agregar",
+			denyButtonText: `No`,
+		}).then((result) => {
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				Swal.fire(
+					"Felicidades, esperamos que consiga un hogar muy pronto",
+					"",
+					"success"
+				);
+				dispatchRedux(mascota);
+			} else if (result.isDenied) {
+				Swal.fire("La mascaota no ha sido agregada", "", "info");
+			}
 		});
-		Navigate("/Home");
+
+		// dispatchRedux(mascota);
+		// localStorage.removeItem("formData");
+		// Swal.fire({
+		// 	tittle: "MASCOTA AGREGADA",
+		// 	text: "La mascota se ha agregado satisfactoriamente",
+		// 	icon: "success",
+		// 	buttons: "OK",
+		// });
+		// Navigate("/Home");
 	};
 
 	const handleFormChange = (values) => {
@@ -139,7 +162,6 @@ const AgregarMascota = () => {
 										error={errors.tamano}
 										optionArray={tamañoOptions}
 									/>
-									
 								</div>
 								<div>
 									<FormSelect
@@ -150,8 +172,6 @@ const AgregarMascota = () => {
 										optionArray={sexoOptions}
 									/>
 								</div>
-								
-								
 							</div>
 							<div>
 								<SubirImagenes
