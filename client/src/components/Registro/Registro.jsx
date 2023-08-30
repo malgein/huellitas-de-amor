@@ -27,30 +27,6 @@ const Registro = () => {
   // const basename = "https://huellitas-de-amor-production.up.railway.app";
   const basename = "http://localhost:3001";
 
-
-
-
-  // const onSubmit = (values) => {
-  //   axios
-  //     .post(`${basename}/usuario`, values)
-  //     .then((res) => {
-  //       Swal.fire({
-  //         icon: "success",
-  //         title: "Registro exitoso",
-  //         text: "Usuario registrado con éxito",
-  //       });
-
-  //       setRegistroExitoso(true);
-  //     })
-  //     .catch((err) => {
-  //       Swal.fire({
-  //         icon: "error",
-  //         title: "Error de registro",
-  //         text: "Hubo un error al registrar al usuario",
-  //       });
-  //     });
-  // };
-
   const onSubmit = (values) => {
     axios
       .post(`${basename}/usuario`, values)
@@ -60,8 +36,6 @@ const Registro = () => {
           title: "Registro exitoso",
           text: "Usuario registrado con éxito",
         });
-
-        setRegistroExitoso(true);
       })
       .catch((err) => {
         Swal.fire({
@@ -117,47 +91,7 @@ const Registro = () => {
                 error={errors.password}
               />
             </div>
-            {/* <div>
-              <FormInput
-                label="Nacionalidad"
-                name="nacionalidad"
-                error={errors.nacionalidad}
-                placeholder="Nacionalidad"
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Localizacion"
-                name="localizacion"
-                error={errors.localizacion}
-                placeholder="Localizacion"
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Direccion"
-                name="direccion"
-                error={errors.direccion}
-                placeholder="Direccion"
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Telefono"
-                name="telefono"
-                error={errors.telefono}
-                placeholder="Telefono"
-              />
-            </div>
-            <div>
-              <FormInput
-                placeholder="Acerca"
-                label="Acerca"
-                name="acerca"
-                error={errors.acerca}
-              />
-            </div> */}
-           
+
             <Button
               type="submit"
               disabled={isSubmitting}

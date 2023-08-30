@@ -2,17 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
-<<<<<<< HEAD
-import { useState } from 'react';
-import axios from 'axios';
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
-
-
-export default function Donar (){
-
-=======
 export default function Donar() {
->>>>>>> 3c3bb3cd87ba9c53e25a983ce4e0917cbde9063b
   const [preferenceId, setPreferenceId] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState("Otros"); // Establece un valor predeterminado
   const [customPrice, setCustomPrice] = useState("");
@@ -26,11 +16,6 @@ export default function Donar() {
       const basename = "http://localhost:3001";
       const ENDPOINT = `${basename}/create_preference`;
 
-<<<<<<< HEAD
-
-        const {id} = response.data;
-        return id;
-=======
       const response = await axios.post(ENDPOINT, {
         description: "Donacion para Mascotas",
         price: price,
@@ -40,7 +25,6 @@ export default function Donar() {
 
       const { id } = response.data;
       return id;
->>>>>>> 3c3bb3cd87ba9c53e25a983ce4e0917cbde9063b
     } catch (error) {
       console.log(error);
     }
