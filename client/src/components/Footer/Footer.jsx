@@ -29,7 +29,9 @@ const Footer = () => {
             <p>
               ✉ <a href="mailto:Huellitasdemaor@gmail.com">Huellitasdemaor@gmail.com</a>
             </p>
-            <p>📞 16572345</p>
+            <p>
+              📞 <a href="tel:16572345">16572345</a>
+            </p>
           </section>
         </div>
       </div>
