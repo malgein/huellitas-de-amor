@@ -14,7 +14,11 @@
     "@react-email/render": "^0.0.7",
     "axios": "^1.4.0",
     "canvas-confetti": "^1.6.0",
+<<<<<<< HEAD
     "firebase": "^10.3.0",
+=======
+
+>>>>>>> 9744f48aa9eed0006a15e616be911bc353e970b1
     "formik": "^2.4.3",
     "framer-motion": "^10.15.2",
     "nodemailer": "^6.9.4",
