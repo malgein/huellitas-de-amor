@@ -22,7 +22,8 @@ import {
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
   ELIMINAR_IMAGENES,
-  MOD_COMPLETE_USER
+  MOD_COMPLETE_USER,
+  GET_CASA_BY_ID
 } from "./actions";
 
 const initialState = {
@@ -53,6 +54,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         mascotas: payload,
+      };
+    case GET_CASA_BY_ID:
+      return{
+        ...state,
+        casasDeAdopcion: payload,
       };
 
     case FILTERS_ERROR:
