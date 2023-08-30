@@ -5,15 +5,24 @@ const postCrearUsuario = async ({
   apellido,
   email,
   password,
-
-  // nacionalidad,
-  // ubicacion,
-  // direccion,
-  // telefono,
-  // acerca,
+  nacionalidad,
+  ubicacion,
+  direccion,
+  telefono,
+  acerca,
 }) => {
   try {
-    if (!nombre || !apellido || !password || !email) {
+    if (
+      !nombre ||
+      !apellido ||
+      !email ||
+      !password ||
+      !nacionalidad ||
+      !ubicacion ||
+      !direccion ||
+      !telefono ||
+      !acerca
+    ) {
       return { status: 401, message: "Faltan datos" };
     }
     const nuevoUsuario = await Usuario.create({
@@ -21,6 +30,11 @@ const postCrearUsuario = async ({
       apellido,
       email,
       password,
+      nacionalidad,
+      ubicacion,
+      direccion,
+      telefono,
+      acerca,
     });
     console.log(nuevoUsuario);
     return nuevoUsuario;

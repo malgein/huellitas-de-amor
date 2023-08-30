@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import styles from "./Registro.module.css";
 import FormInput from "../FormInput/FormInput";
 import { Button } from "@nextui-org/button";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import validationSchema from "./Validaciones";
@@ -18,33 +18,45 @@ const Registro = () => {
     apellido: "",
     email: "",
     password: "",
-    // nacionalidad: "",
-    // localizacion: "",
-    // direccion: "",
-    // telefono: "",
-    // acerca: "",
+    nacionalidad: "",
+    ubicacion: "",
+    direccion: "",
+    telefono: "",
+    acerca: "",
   };
   // const basename = "https://huellitas-de-amor-production.up.railway.app";
   const basename = "http://localhost:3001";
 
+  // const onSubmit = (values) => {
+  //   axios
+  //     .post(`${basename}/usuario`, values)
+  //     .then((res) => {
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: "Registro exitoso",
+  //         text: "Usuario registrado con éxito",
+  //       });
+
+  //       // setRegistroExitoso(true);
+  //     })
+  //     .catch((err) => {
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Error de registro",
+  //         text: "Hubo un error al registrar al usuario",
+  //       });
+  //     });
+  // };
+
   const onSubmit = (values) => {
     axios
+      // .post("http://localhost:3001/usuario", values)
       .post(`${basename}/usuario`, values)
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          title: "Registro exitoso",
-          text: "Usuario registrado con éxito",
-        });
-
-        setRegistroExitoso(true);
+        alert("Usuario registrado con éxito");
       })
       .catch((err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Error de registro",
-          text: "Hubo un error al registrar al usuario",
-        });
+        alert("Hubo un error al registrar al usuario");
       });
   };
 
@@ -56,7 +68,7 @@ const Registro = () => {
         onSubmit={onSubmit}
         // enableReinitialize={true}
       >
-        {({ isSubmitting, errors, values, setValues }) => (
+        {({ isSubmitting, errors }) => (
           <Form>
             <div className={styles.tittle}>
               <h1>Registrate</h1>
@@ -93,7 +105,7 @@ const Registro = () => {
                 error={errors.password}
               />
             </div>
-            {/* <div>
+            <div>
               <FormInput
                 label="Nacionalidad"
                 name="nacionalidad"
@@ -103,10 +115,10 @@ const Registro = () => {
             </div>
             <div>
               <FormInput
-                label="Localizacion"
-                name="localizacion"
-                error={errors.localizacion}
-                placeholder="Localizacion"
+                label="Ubicación"
+                name="ubicacion"
+                error={errors.ubicacion}
+                placeholder="ubicacion"
               />
             </div>
             <div>
@@ -128,12 +140,12 @@ const Registro = () => {
             <div>
               <FormInput
                 placeholder="Acerca"
-                label="Acerca"
+                label="Acerca de ti"
                 name="acerca"
                 error={errors.acerca}
               />
-            </div> */}
-           
+            </div>
+
             <Button
               type="submit"
               disabled={isSubmitting}

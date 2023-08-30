@@ -3,16 +3,23 @@ import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
 import { Button } from "@nextui-org/button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import axios from "axios";
 
-const EditarPerfil = () => {
+const EditarPerfil = ({ initialValor, onSubmit }) => {
   // const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [datos, setDatos] = useState({
     nombre: "",
     apellido: "",
+    email: "",
+    password: "",
     nacionalidad: "",
-    AcercaDe: "",
-    // ...otros campos
+    ubicacion: "",
+    direccion: "",
+    telefono: "",
+    acerca: "",
   });
+
+  console.log("Aqui datos", datos);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,24 +29,42 @@ const EditarPerfil = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Enviar los datos actualizados al servidor o almacenarlos localmente.
-    console.log("Datos actualizados:", datos);
-    // Cierra el formulario de edición después de guardar.
-    //Estado para controlar si se muestra o no.
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Enviar los datos actualizados al servidor o almacenarlos localmente.
+  //   console.log("Datos actualizados:", datos);
+  //   // Cierra el formulario de edición después de guardar.
+  //   //Estado para controlar si se muestra o no.
+  // };
 
   const initialValues = {
     nombre: "",
     apellido: "",
+    email: "",
+    password: "",
     nacionalidad: "",
     ubicacion: "",
     direccion: "",
     telefono: "",
     acerca: "",
-    email: "",
-    password: "",
+  };
+  console.log("Aqui datos", initialValues);
+
+  const basename = "http://localhost:3001";
+
+  const handleSubmit = async (values) => {
+    try {
+      // Realiza una solicitud PUT al backend para actualizar el perfil
+      const response = await axios.put(`${basename}/${userId}`, values);
+
+      if (response.status === 200) {
+        console.log("Perfil actualizado con éxito");
+        // Puedes redirigir al usuario a su perfil nuevamente o mostrar un mensaje de éxito
+      }
+    } catch (error) {
+      console.error("Error al actualizar el perfil:", error);
+      // Maneja el error de alguna manera (mostrar un mensaje de error, etc.)
+    }
   };
 
   return (
@@ -86,7 +111,7 @@ const EditarPerfil = () => {
                 label="Ubicación"
                 name=" ubicacion"
                 placeholder="Ubicación"
-                values="datos.nombre"
+                values="datos.ubicacion"
                 onChange={handleChange}
               />
             </div>
@@ -95,6 +120,8 @@ const EditarPerfil = () => {
                 label="Direccion"
                 name="direccion"
                 placeholder="Direccion"
+                values="datos.direccion"
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -102,6 +129,8 @@ const EditarPerfil = () => {
                 label="Telefono"
                 name="telefono"
                 placeholder="Telefono"
+                values="datos.telefono"
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -109,16 +138,26 @@ const EditarPerfil = () => {
                 placeholder="Realiza una descripción..."
                 label="Acerca De:"
                 name="acerca"
+                values="datos.acerca"
+                onChange={handleChange}
               />
             </div>
             <div>
-              <FormInput placeholder="Email" label="Email" name="email" />
+              <FormInput
+                placeholder="Email"
+                label="Email"
+                name="email"
+                values="datos.email"
+                onChange={handleChange}
+              />
             </div>
             <div>
               <FormInput
                 placeholder="Contraseña"
                 label="Contraseña"
                 name="password"
+                values="datos.password"
+                onChange={handleChange}
               />
             </div>
             <Button
@@ -135,40 +174,6 @@ const EditarPerfil = () => {
       {/*  */}
     </div>
   );
-  //     <form onSubmit={handleSubmit}>
-  //       <div>
-  //         <label htmlFor="nombre">Nombre:</label>
-  //         <input
-  //           type="text"
-  //           id="nombre"
-  //           name="nombre"
-  //           value={datos.nombre}
-  //           onChange={handleChange}
-  //         />
-  //       </div>
-  //       <div>
-  //         <label htmlFor="apellido">Apellido:</label>
-  //         <input
-  //           type="text"
-  //           id="apellido"
-  //           name="apellido"
-  //           value={datos.apellido}
-  //           onChange={handleChange}
-  //         />
-  //       </div>
-  //       <div>
-  //         <label htmlFor="apellido">Apellido:</label>
-  //         <input
-  //           type="text"
-  //           id="apellido"
-  //           name="apellido"
-  //           value={datos.apellido}
-  //           onChange={handleChange}
-  //         />
-  //       </div>
-  //       {/* Repite este patrón para otros campos */}
-  //       <button type="submit">Guardar Cambios</button>
-  //     </form>
 };
 
 export default EditarPerfil;
