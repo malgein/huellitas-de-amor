@@ -11,7 +11,6 @@ import validationSchema from "./Validaciones";
 import * as Yup from "yup";
 
 const Registro = () => {
-  //const [registroExitoso, setRegistroExitoso] = useState(false);
 
   const initialValues = {
     nombre: "",
@@ -25,6 +24,7 @@ const Registro = () => {
     acerca: "",
   };
   // const basename = "https://huellitas-de-amor-production.up.railway.app";
+
   const basename = "http://localhost:3001";
 
   // const onSubmit = (values) => {
@@ -37,7 +37,7 @@ const Registro = () => {
   //         text: "Usuario registrado con éxito",
   //       });
 
-  //       // setRegistroExitoso(true);
+  //       setRegistroExitoso(true);
   //     })
   //     .catch((err) => {
   //       Swal.fire({
@@ -50,8 +50,8 @@ const Registro = () => {
 
   const onSubmit = (values) => {
     axios
-      // .post("http://localhost:3001/usuario", values)
-      .post(`${basename}/usuario`, values)
+      .post("http://localhost:3001/usuario", values)
+      // .post(`${basename}/usuario`, values)
       .then((res) => {
         alert("Usuario registrado con éxito");
       })
@@ -118,7 +118,7 @@ const Registro = () => {
                 label="Ubicación"
                 name="ubicacion"
                 error={errors.ubicacion}
-                placeholder="ubicacion"
+                placeholder="Ubicación"
               />
             </div>
             <div>

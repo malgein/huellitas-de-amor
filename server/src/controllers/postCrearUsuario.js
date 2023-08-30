@@ -14,14 +14,28 @@ const postCrearUsuario = async ({
   try {
     if (
       !nombre ||
+<<<<<<< HEAD
       !apellido ||
       !email ||
       !password ||
+=======
+
+      !apellido ||
+      !password ||
+      !email ||
+
+>>>>>>> 0a6fbaac86367c091bc1aa60d71cf76e73d0e95e
       !nacionalidad ||
       !ubicacion ||
       !direccion ||
       !telefono ||
+<<<<<<< HEAD
       !acerca
+=======
+
+      !acerca
+
+>>>>>>> 0a6fbaac86367c091bc1aa60d71cf76e73d0e95e
     ) {
       return { status: 401, message: "Faltan datos" };
     }

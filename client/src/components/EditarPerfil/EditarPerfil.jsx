@@ -40,31 +40,17 @@ const EditarPerfil = ({ initialValor, onSubmit }) => {
   const initialValues = {
     nombre: "",
     apellido: "",
+
     email: "",
     password: "",
+
     nacionalidad: "",
     ubicacion: "",
     direccion: "",
     telefono: "",
     acerca: "",
-  };
-  console.log("Aqui datos", initialValues);
 
-  const basename = "http://localhost:3001";
 
-  const handleSubmit = async (values) => {
-    try {
-      // Realiza una solicitud PUT al backend para actualizar el perfil
-      const response = await axios.put(`${basename}/${userId}`, values);
-
-      if (response.status === 200) {
-        console.log("Perfil actualizado con éxito");
-        // Puedes redirigir al usuario a su perfil nuevamente o mostrar un mensaje de éxito
-      }
-    } catch (error) {
-      console.error("Error al actualizar el perfil:", error);
-      // Maneja el error de alguna manera (mostrar un mensaje de error, etc.)
-    }
   };
 
   return (
