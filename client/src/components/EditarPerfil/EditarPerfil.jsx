@@ -9,9 +9,15 @@ const EditarPerfil = () => {
   const [datos, setDatos] = useState({
     nombre: "",
     apellido: "",
+
+    email: "",
+    password: "",
     nacionalidad: "",
-    AcercaDe: "",
-    // ...otros campos
+    ubicacion: "",
+    direccion: "",
+    telefono: "",
+    acerca: "",
+
   });
 
   const handleChange = (e) => {
@@ -33,13 +39,17 @@ const EditarPerfil = () => {
   const initialValues = {
     nombre: "",
     apellido: "",
+
+    email: "",
+    password: "",
+
     nacionalidad: "",
     ubicacion: "",
     direccion: "",
     telefono: "",
     acerca: "",
-    email: "",
-    password: "",
+
+
   };
 
   return (
