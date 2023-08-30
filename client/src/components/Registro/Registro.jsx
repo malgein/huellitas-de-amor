@@ -6,56 +6,41 @@ import FormInput from "../FormInput/FormInput";
 import { Button } from "@nextui-org/button";
 import { useNavigate } from "react-router-dom";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import validationSchema from "./Validaciones";
 import * as Yup from "yup";
 
 const Registro = () => {
-
   const initialValues = {
     nombre: "",
     apellido: "",
     email: "",
     password: "",
-    nacionalidad: "",
-    ubicacion: "",
-    direccion: "",
-    telefono: "",
-    acerca: "",
+    // nacionalidad: "",
+    // ubicacion: "",
+    // direccion: "",
+    // telefono: "",
+    // acerca: "",
   };
   // const basename = "https://huellitas-de-amor-production.up.railway.app";
-  // const basename = "http://localhost:3001";
-
-  // const onSubmit = (values) => {
-  //   axios
-  //     .post(`${basename}/usuario`, values)
-  //     .then((res) => {
-  //       Swal.fire({
-  //         icon: "success",
-  //         title: "Registro exitoso",
-  //         text: "Usuario registrado con éxito",
-  //       });
-
-  //       setRegistroExitoso(true);
-  //     })
-  //     .catch((err) => {
-  //       Swal.fire({
-  //         icon: "error",
-  //         title: "Error de registro",
-  //         text: "Hubo un error al registrar al usuario",
-  //       });
-  //     });
-  // };
+  const basename = "http://localhost:3001";
 
   const onSubmit = (values) => {
     axios
-      .post("http://localhost:3001/usuario", values)
-      // .post(`${basename}/usuario`, values)
+      .post(`${basename}/usuario`, values)
       .then((res) => {
-        alert("Usuario registrado con éxito");
+        Swal.fire({
+          icon: "success",
+          title: "Registro exitoso",
+          text: "Usuario registrado con éxito",
+        });
       })
       .catch((err) => {
-        alert("Hubo un error al registrar al usuario");
+        Swal.fire({
+          icon: "error",
+          title: "Error de registro",
+          text: "Hubo un error al registrar al usuario",
+        });
       });
   };
 
@@ -67,7 +52,7 @@ const Registro = () => {
         onSubmit={onSubmit}
         // enableReinitialize={true}
       >
-        {({ isSubmitting, errors, values, setValues }) => (
+        {({ isSubmitting, errors, values, resetForm }) => (
           <Form>
             <div className={styles.tittle}>
               <h1>Registrate</h1>
@@ -104,7 +89,7 @@ const Registro = () => {
                 error={errors.password}
               />
             </div>
-            <div>
+            {/* <div>
               <FormInput
                 label="Nacionalidad"
                 name="nacionalidad"
@@ -143,7 +128,7 @@ const Registro = () => {
                 name="acerca"
                 error={errors.acerca}
               />
-            </div>
+            </div> */}
 
             <Button
               type="submit"
