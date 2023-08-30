@@ -22,7 +22,7 @@ import Pets from "./components/Dashboard/Pets";
 import Users from "./components/Dashboard/Users";
 import AdoptionHouses from "./components/Dashboard/AdoptionHouses";
 import Donations from "./components/Dashboard/Donations";
-import { AuthProvider } from "./context/authContext";
+import { AuthProvider } from "./context/AuthContext";
 import Notificaciones from "./components/Notificaciones/Notificaciones";
 
 
@@ -40,11 +40,6 @@ function App() {
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
           <Route path={PathRoutes.REGISTRO} element={<Registro />}></Route>
-
-          {/* <Route
-            path={PathRoutes.NOTIFICACION}
-            element={<Notificaciones />}
-          ></Route> */}
 
 
           <Route path={PathRoutes.CASADETAIL} element={<CasaDeAdopcion/>}></Route>
