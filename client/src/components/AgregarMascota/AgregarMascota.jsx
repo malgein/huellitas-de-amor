@@ -4,45 +4,21 @@ import * as Yup from "yup";
 import { Button } from "@nextui-org/react";
 import styles from "./AgregarMascota.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addMascota, limpiarImagenes } from "../../redux/actions";
+import {
+	addMascota,
+	eliminarImagenes,
+	limpiarImagenes,
+} from "../../redux/actions";
 import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
+import FormSelect from "../FormSelect/FormSelect";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SubirImagenes from "../SubirImagenes/SubirImagenes";
+import agregarMascotaSchema from "../../Schemas/agregarMascotaSchema";
 
-const validationSchema = Yup.object().shape({
-	nombre: Yup.string()
-		.min(3, "Debe poseer mínimo 3 caracteres ")
-		.max(50, "Debe poseer máximo 50 caracteres")
-		.required("Campo requerido"),
-	especie: Yup.string()
-		.min(3, "Debe poseer mínimo 3 caracteres ")
-		.max(50, "Debe poseer máximo 50 caracteres")
-		.required("Campo requerido"),
-	edad: Yup.number("La edad debe ser un número positivo")
-		.min(0, "La edad debe ser mayor o igual a 0")
-		.required("Campo requerido")
-		.positive()
-		.integer("La edad debe ser un número positivo"),
-	tamano: Yup.string().required("Campo requerido"),
-	peso: Yup.number()
-		.min(1, "El peso debe ser mayor o igual a 0")
-		.required("Campo requerido"),
-	descripcion: Yup.string()
-		.min(3, "Debe poseer mínimo 3 caracteres ")
+const validationSchema = agregarMascotaSchema;
 
-		.required("Campo requerido"),
-	/* foto: Yup.string()
-
-		.url("Debe ser una URL válida")
-		.required("Campo requerido"), */
-	raza: Yup.string()
-		.min(3, "Debe poseer mínimo 3 caracteres ")
-		.max(50, "Debe poseer máximo 50 caracteres")
-		.required("Campo requerido"),
-	sexo: Yup.string().required("Campo requerido"),
-});
 const AgregarMascota = () => {
 	const [mascota, setMascota] = useState({
 		nombre: "",
@@ -55,35 +31,65 @@ const AgregarMascota = () => {
 		raza: "",
 		sexo: "",
 	});
-	
-	const dispatch=useDispatch()
-	const Navigate = useNavigate()
-	const imagenes = useSelector((state) => state.imagenes)
+
+	const dispatch = useDispatch();
+	const Navigate = useNavigate();
+	const imagenes = useSelector((state) => state.imagenes);
+	const dispatchRedux = (mascota) => {
+		const nuevaMascota = { ...mascota };
+		nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
+		dispatch(addMascota(nuevaMascota));
+		Navigate("/");
+		dispatch(limpiarImagenes());
+	};
 
 	const handleSubmit = (mascota) => {
-		const nuevaMascota = { ...mascota };
-  		nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
-		/* console.log(nuevaMascota.foto) */
-  		dispatch(addMascota(nuevaMascota));
-		/* dispatch(addMascota(mascota)); */
-		dispatch(limpiarImagenes())
-		localStorage.removeItem("formData");
-		  Swal.fire({
-				tittle: "MASCOTA AGREGADA",
-				text: "La mascota se ha agregado satisfactoriamente",
-				icon: "success",
-				buttons: "OK",
-			});
-			Navigate("/Home");
+		Swal.fire({
+			title: "¿Deseas agregar a la siguiente mascota?",
+			showDenyButton: true,
+			showCancelButton: false,
+			confirmButtonText: "Agregar",
+			denyButtonText: `No`,
+		}).then((result) => {
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				Swal.fire(
+					"Felicidades, esperamos que consiga un hogar muy pronto",
+					"",
+					"success"
+				);
+				dispatchRedux(mascota);
+			} else if (result.isDenied) {
+				Swal.fire("La mascaota no ha sido agregada", "", "info");
+			}
+		});
+
+		// dispatchRedux(mascota);
+		// localStorage.removeItem("formData");
+		// Swal.fire({
+		// 	tittle: "MASCOTA AGREGADA",
+		// 	text: "La mascota se ha agregado satisfactoriamente",
+		// 	icon: "success",
+		// 	buttons: "OK",
+		// });
+		// Navigate("/Home");
 	};
 
 	const handleFormChange = (values) => {
 		localStorage.setItem("formData", JSON.stringify(values));
+		// localStorage.setItem("imagenes",JSON.stringify(imagenes))
+	};
+
+	const handleClickImages = async (clickedImage) => {
+		console.log(clickedImage);
+		const updatedImages = imagenes.filter((image) => image !== clickedImage);
+		dispatch(eliminarImagenes(updatedImages));
+		/* console.log(updatedImages) */
 	};
 
 	const storedData = localStorage.getItem("formData");
-
 	const tamañoOptions = ["Pequeño", "Mediano", "Grande"];
+	const sexoOptions = ["Macho", "Hembra"];
 	return (
 		<div className={styles.formContainer}>
 			<Formik
@@ -92,8 +98,7 @@ const AgregarMascota = () => {
 				onSubmit={handleSubmit}>
 				{({ isSubmitting, errors, values }) => (
 					<div className={styles.form}>
-						{setMascota(values)}
-						<Form onChange={() => handleFormChange(values)}>
+						<Form onChange={handleFormChange(values)}>
 							<div className={styles.tittle}>
 								<h1>Agrega una nueva mascota</h1>
 							</div>
@@ -130,9 +135,6 @@ const AgregarMascota = () => {
 									error={errors.peso}
 								/>
 							</div>
-							{/* <div>
-								<FormInput label='Foto' name='foto' error={errors.foto} />
-							</div> */}
 							<div>
 								<FormInput
 									label='Raza'
@@ -151,87 +153,43 @@ const AgregarMascota = () => {
 							</div>
 
 							<div className={styles.selectContainer}>
-								<div
-									className={
-										errors.tamano ? styles.selectRed : styles.selectGreen
-									}>
-									{/* <div className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled'> */}
-									<div>
-										{/* <label
-											className='block font-medium  dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none
-							w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small' */}
-										{/* htmlFor='tamano'>
-											Tamaño:
-										</label> */}
-										<Field
-											className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start  justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled text-medium'
-											as='select'
-											label='Tamaño'
-											variant='bordered'
-											id='tamano'
-											name='tamano'
-											placeholder='Tamaño'
-											errorMessage={
-												<ErrorMessage name='tamano' component='div' />
-											}
-											// validationState={validationSchema}
-										>
-											<option value=''>Tamaño</option>
-											{tamañoOptions.map((option) => (
-												<option
-													className='w-full h-full font-normal !bg-transparent outline-none placeholder:text-foreground-500 text-small'
-													key={option}
-													value={option}>
-													{option}
-												</option>
-											))}
-										</Field>
-									</div>
-									<ErrorMessage
-										className='text-tiny text-danger'
+								{console.log(tamañoOptions)}
+								<div>
+									<FormSelect
+										label='Tamaño'
 										name='tamano'
-										component='div'
+										placeholder='Tamaño'
+										error={errors.tamano}
+										optionArray={tamañoOptions}
 									/>
 								</div>
-								<div
-									className={
-										errors.sexo ? styles.selectRed : styles.selectGreen
-									}>
-									<div>
-										{/* <label
-											className='block font-medium 
-										
-										 dark:text-danger-500 text-tiny will-change-auto origin-top-left transition-all !duration-200 !ease-[cubic-bezier(0,0,0.2,1)] motion-reduce:transition-none'
-											htmlFor='tamano'>
-											Sexo:
-										</label> */}
-										<Field
-											className='relative w-full inline-flex shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 group-data-[focus=true]:border-danger transition-colors motion-reduce:transition-none h-14 py-2 is-filled font-large'
-											// label='Sexo'
-											as='select'
-											id='sexo'
-											name='sexo'>
-											<option value=''>Sexo</option>
-											<option value='Macho'>Macho</option>
-											<option value='Hembra'>Hembra</option>
-										</Field>
-									</div>
-									<ErrorMessage
-										className='text-tiny text-danger'
+								<div>
+									<FormSelect
+										label='Sexo'
 										name='sexo'
-										component='div'
+										placeholder='Sexo'
+										error={errors.sexo}
+										optionArray={sexoOptions}
 									/>
 								</div>
 							</div>
 							<div>
-                 <SubirImagenes setImagenes={(imagenes) => setMascota({ ...mascota, foto: imagenes })}/>
-								{console.log(imagenes)}
+								<SubirImagenes
+									setImagenes={(imagenes) =>
+										setMascota({ ...mascota, foto: imagenes })
+									}
+								/>
 							</div>
 							<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center'>
 								{imagenes &&
 									imagenes.map((imag) => {
 										return (
-											<img src={imag} alt='' className='h-[80px] m-[15px]' />
+											<img
+												onClick={() => handleClickImages(imag)}
+												src={imag}
+												alt=''
+												className='h-[80px] m-[15px]'
+											/>
 										);
 									})}
 							</div>

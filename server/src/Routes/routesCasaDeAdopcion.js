@@ -6,6 +6,12 @@ const getAllHomes = require('../controllers/getAllHomes')
 const modHouseById = require('../controllers/modHouseById')
 const deleteHouseAdoptionById = require('../controllers/deleteHouseAdoption')
 
+const postRatings = require("../controllers/postRatings")
+
+
+const getCasaById = require("../controllers/getCasaById");
+
+
 router.post("/", async (req, res) => {
   try {
     const response = req.body;
@@ -41,7 +47,7 @@ router.get('/fill', async (req, res) => {
 router.get('/', async(req,res) => {
   try{
     const data = await getAllHomes()
-
+  
     return res.status(200).json(data)
   }catch(error){
     res.status(500).json({message: error.message})
@@ -60,6 +66,16 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const petId = await getCasaById(id);
+    res.status(200).json(petId);
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message });
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -69,5 +85,10 @@ router.delete("/:id", async (req, res) => {
     return res.status(500).json({ mensaje: "Error en el servidor" });
   }
 });
+
+router.post("/:id/ratings", postRatings)
+
+
+
 
 module.exports = router;

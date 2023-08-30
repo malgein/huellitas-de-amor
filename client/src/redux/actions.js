@@ -11,33 +11,28 @@ export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const ORDER_BY_AGE = "ORDER_BY_AGE";
 export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
 
-export const GET_ALL_HOMES = 'GET_ALL_HOMES'
-export const DELETE_USERS = 'DELETE_USERS'
-export const EDIT_PETS = 'EDIT_PETS'
-export const DELETE_PET = 'DELETE_PET'
-export const EDIT_HOUSES = 'EDIT_HOUSES'
-export const DELETE_HOUSES = 'DELETE_HOUSES'
+
+export const GET_ALL_HOMES = "GET_ALL_HOMES";
+export const DELETE_USERS = "DELETE_USERS";
+export const EDIT_PETS = "EDIT_PETS";
+export const DELETE_PET = "DELETE_PET";
+export const EDIT_HOUSES = "EDIT_HOUSES";
+export const DELETE_HOUSES = "DELETE_HOUSES";
+export const MOD_COMPLETE_USER = "MOD_COMPLETE_USER";
 
 //tipo de action que me trae todos los usuarios
-export const GET_USERS = 'GET_USER'
+export const GET_USERS = "GET_USER";
 
-export const GET_ALL_DONATIONS = 'GET_DONATIONS'
+export const GET_ALL_DONATIONS = "GET_DONATIONS";
+
 
 export const ADD_MASCOTA = "ADD_MASCOTA";
 export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
 export const EDIT_USER = 'EDIT_USER';
 
-export const LOGICAL_DELETE_PET = 'LOGICAL_DELETE_PET';
 
 
-const ENDPOINT = "http://localhost:3001/mascotas/";
-const ENDPOINT_FILTER = "http://localhost:3001/mascotas/filtro";
-const ENDPOINTNAME2 = "http://localhost:3001/mascotas/nombre?nombre=";
-const ENDPOINTNAME = "http://localhost:3001/mascotas?name=";
-
-
-///Get de mascotas por id
 export const getPetById = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(ENDPOINT + `/${id}`);
@@ -47,11 +42,22 @@ export const getPetById = (id) => async (dispatch) => {
   }
 };
 
+export const getCasaById = (id) => async (dispatch) => {
+  try {
+    const {data} = await axios.get(`${basename}/casaDeAdopcion/${id}`)
+    dispatch({type: GET_CASA_BY_ID, payload: data})
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 //Guardo todas las mascotas
 export const getMascotas = () => async (dispatch) => {
   try {
     const response = await axios.get(ENDPOINT);
-   dispatch({type: FETCHING_MASCOTAS, payload: response.data});
+
+    dispatch({ type: FETCHING_MASCOTAS, payload: response.data });
+
   } catch (error) {
     console.log(error);
   }
@@ -71,16 +77,20 @@ export const getPetByName = (nombre) => async (dispatch) => {
 export const applyFilters = (filters) => {
   return (dispatch, getState) => {
     // const BACKEND_URL = "http://localhost:3001";
-    axios.get(`${ENDPOINT_FILTER}`, { params: filters })
-			.then((response) => {
-				dispatch({
-					type: APPLY_FILTERS,
-					payload: response.data,
-				});
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+
+
+    axios
+      .get(`${ENDPOINT_FILTER}`, { params: filters })
+      .then((response) => {
+        dispatch({
+          type: APPLY_FILTERS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
   };
 };
 
@@ -104,8 +114,9 @@ export const addMascota = (Mascota) => {
   return async () => {
     try {
       const response = await axios.post(`${ENDPOINT}/`, Mascota);
-      return alert("Mascota creada con éxito.")
-        
+
+      return alert("Mascota creada con éxito.");
+
     } catch (error) {
       console.log(error);
     }
@@ -113,44 +124,46 @@ export const addMascota = (Mascota) => {
 };
 
 
-export const getUsers = () => async(dispatch) => {
-  try{
-    const response =  await axios.get('http://localhost:3001/usuario')
+
+export const getUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${basename}/usuario`);
     dispatch({
       type: GET_USERS,
-      payload: response.data
-    })
-  } catch(error){
-    handleError(dispatch, GET_USERS, error)
+      payload: response.data,
+    });
+  } catch (error) {
+    handleError(dispatch, GET_USERS, error);
   }
-}
+};
 
-export const getAllHomes = () => async(dispatch) => {
-  try{
-    const response =  await axios.get('http://localhost:3001/casaDeAdopcion')
+export const getAllHomes = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${basename}/casaDeAdopcion`);
     dispatch({
       type: GET_ALL_HOMES,
-      payload: response.data
-    })
-  } catch(error){
-    handleError(dispatch, GET_ALL_HOMES, error)
+      payload: response.data,
+    });
+  } catch (error) {
+    handleError(dispatch, GET_ALL_HOMES, error);
   }
-}
+};
 
-export const getDonations = () => async(dispatch) => {
-  try{
-    const response =  await axios.get('http://localhost:3001/donaciones/')
+export const getDonations = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${basename}/donaciones`);
     dispatch({
       type: GET_ALL_DONATIONS,
-      payload: response.data
-    })
-  } catch(error){
-    handleError(dispatch, GET_ALL_DONATIONS, error)
+      payload: response.data,
+    });
+  } catch (error) {
+    handleError(dispatch, GET_ALL_DONATIONS, error);
   }
-}
+};
 
-export const editUser = (id, updatedData)  => {
-  const endpoint = `http://localhost:3001/usuario/${id}`;
+export const editUser = (id, updatedData) => {
+
+  const endpoint = `${basename}/usuario/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -160,23 +173,22 @@ export const editUser = (id, updatedData)  => {
       });
     });
   };
-} 
+};
 
 export const deleteUsers = (id) => {
-  const endpoint = `http://localhost:3001/usuario/${id}`;
-   return (dispatch) => {
-      axios.delete(endpoint).then(({ data }) => {
-         return dispatch({
-            type: DELETE_USERS,
-            payload: data,
+  const endpoint = `${basename}/usuario/${id}`;
+  return (dispatch) => {
+    axios.delete(endpoint).then(({ data }) => {
+      return dispatch({
+        type: DELETE_USERS,
+        payload: data,
       });
-      });
-   };
-}
+    });
+  };
+};
 
-
-export const editPets = (id, updatedData)  => {
-  const endpoint = `http://localhost:3001/mascotas/${id}`;
+export const editPets = (id, updatedData) => {
+  const endpoint = `${basename}/mascotas/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -186,22 +198,22 @@ export const editPets = (id, updatedData)  => {
       });
     });
   };
-} 
+};
 
 export const deletePets = (id) => {
-  const endpoint = `http://localhost:3001/mascotas/${id}`;
-   return (dispatch) => {
-      axios.delete(endpoint).then(({ data }) => {
-         return dispatch({
-            type: DELETE_PET,
-            payload: data,
+  const endpoint = `${basename}/mascotas/${id}`;
+  return (dispatch) => {
+    axios.delete(endpoint).then(({ data }) => {
+      return dispatch({
+        type: DELETE_PET,
+        payload: data,
       });
-      });
-   };
-}
+    });
+  };
+};
 
-export const editHouses = (id) => {
-  const endpoint = `http://localhost:3001/casaDeAdopcion/${id}`;
+export const editHouses = (id, updatedData) => {
+  const endpoint = `${basename}/casaDeAdopcion/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -210,52 +222,42 @@ export const editHouses = (id) => {
         payload: data,
       });
     });
-  }; 
-}
+  };
+};
 
 export const deleteHouses = (id) => {
-  const endpoint = `http://localhost:3001/casaDeAdopcion/${id}`;
-   return (dispatch) => {
-      axios.delete(endpoint).then(({ data }) => {
-         return dispatch({
-            type: DELETE_USERS,
-            payload: data,
+  const endpoint = `${basename}/casaDeAdopcion/${id}`;
+  return (dispatch) => {
+    axios.delete(endpoint).then(({ data }) => {
+      return dispatch({
+        type: DELETE_USERS,
+        payload: data,
       });
-      });
-   };
-}
+    });
+  };
+};
 export const subirImagenes = (imagenes) => (dispatch) => {
   return dispatch({
     type: SUBIR_IMAGENES,
     payload: imagenes,
-  })
-}
+  });
+};
 export const limpiarImagenes = () => {
   return {
     type: LIMPIAR_IMAGENES,
     payload: imagenes,
   }
 }
-export const logicalDeletePet = (id, modUserById) => async (dispatch) => {
-  try {
-    const updatedData = {
-      active: false,
-      adoptedBy: modUserById,
-    };
-    const response = await axios.patch(`${ENDPOINT}${id}`, updatedData);
-    
-    if (response.status === 200) {
+
+export const modCompleteUser = (id, updatedProperties) => {
+  const endpoint = `${basename}/usuario/${id}`;
+  console.log(updatedProperties);
+  return (dispatch) => {
+    axios.put(endpoint, updatedProperties).then(({ data }) => {
       dispatch({
-        type: LOGICAL_DELETE_PET,
-        payload: id,
+        type: MOD_COMPLETE_USER,
+        payload: data,
       });
-      alert("Mascota Adoptada.");
-    } else {
-      throw new Error('No se puede Adoptar la Mascota.');
-    }
-
-  } catch (error) {
-    console.error("Error al adoptar la mascota:", error);
-  }
+    });
+  };
 };
-

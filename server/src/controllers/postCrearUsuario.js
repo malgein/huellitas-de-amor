@@ -1,11 +1,11 @@
 const { Usuario } = require("../db");
 
-const crearUsuario = async ({
+const postCrearUsuario = async ({
   nombre,
   password,
   apellido,
   nacionalidad,
-  localizacion,
+  ubicacion,
   direccion,
   telefono,
   acerca,
@@ -14,14 +14,18 @@ const crearUsuario = async ({
   try {
     if (
       !nombre ||
-      !password ||
+
       !apellido ||
+      !password ||
+      !email ||
+
       !nacionalidad ||
-      !localizacion ||
+      !ubicacion ||
       !direccion ||
       !telefono ||
-      !acerca ||
-      !email
+
+      !acerca
+
     ) {
       return { status: 401, message: "Faltan datos" };
     }
@@ -30,7 +34,7 @@ const crearUsuario = async ({
       password,
       apellido,
       nacionalidad,
-      localizacion,
+      ubicacion,
       direccion,
       telefono,
       acerca,
@@ -48,4 +52,4 @@ const crearUsuario = async ({
   }
 };
 
-module.exports = crearUsuario;
+module.exports = postCrearUsuario;
