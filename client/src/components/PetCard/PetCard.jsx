@@ -28,7 +28,7 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
   };
 
   return (<Link to={PathRoutes.DETAIL.replace(":id", id)}>
-    <Card className="py-4 h-full card hover:scale-105 hover:shadow-md">
+    <Card className="py-4 h-full card border hover:scale-105 hover:shadow-md">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <div className="flex flex-row">
           <div>
