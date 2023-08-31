@@ -39,7 +39,7 @@ const Footer = () => {
                 
               </a>    <i className="fas fa-map-marker-alt"></i>
             </h4> 
-            <p>Del mundo</p>
+            <p>en el mundo</p>
           </section>
           <section className="ml-20">
             <h4>Contacto</h4>
