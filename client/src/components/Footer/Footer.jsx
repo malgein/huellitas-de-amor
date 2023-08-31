@@ -4,6 +4,15 @@ import logoPrueba from "../../assets/LogoPrueba.jpg";
 // import styles from "./footer.module.css";
 
 const Footer = () => {
+
+  const latitude = -35.1598605;
+  const longitude = -58.2345151;
+
+  // Construir la URL de Google Maps con las coordenadas
+  const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+
+
   return (
     <div className=" flex flex-col mb-0">
       <div className="flex flex-row  items-center gap-20 h-24">
@@ -21,7 +30,14 @@ const Footer = () => {
         </div>
         <div className="flex flex-row justify-center gap-20 ml-20 border-b-2">
           <section>
-            <h4>Ubicación</h4>
+            <h4>
+              <a
+                href={googleMapsUrl}
+                target="_blank"
+              >
+                Ubicación
+              </a>
+            </h4>
             <p>Del mundo</p>
           </section>
           <section className="ml-20">
@@ -30,7 +46,8 @@ const Footer = () => {
               ✉ <a href="mailto:Huellitasdemaor@gmail.com">Huellitasdemaor@gmail.com</a>
             </p>
             <p>
-              📞 <a href="tel:16572345">16572345</a>
+              <a href="tel:16572345">16572345     </a>
+              <i className="fab fa-whatsapp-square"></i>
             </p>
           </section>
         </div>
