@@ -5,8 +5,8 @@ import logoPrueba from "../../assets/LogoPrueba.jpg";
 
 const Footer = () => {
 
-  const latitude = -35.1598605;
-  const longitude = -58.2345151;
+  const latitude = -35.1673333;
+  const longitude = -58.2400684;
 
   // Construir la URL de Google Maps con las coordenadas
   const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
