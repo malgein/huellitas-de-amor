@@ -27,14 +27,14 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
     setIsOpen(false);
   };
 
-  return (
+  return (<Link to={PathRoutes.DETAIL.replace(":id", id)}>
     <Card className="py-4 h-full">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <div className="flex flex-row">
           <div>
-            <Link to={PathRoutes.DETAIL.replace(":id", id)}>
+            
               <p className="uppercase font-bold text-lg">{nombre}</p>
-            </Link>
+           
             <small className="text-default-500">{edad} años</small>
             <br />
             <small className="text-default-500">{peso} kg</small>
@@ -74,6 +74,7 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
         </div>
       </CardBody>
     </Card>
+     </Link>
   );
 }
 
