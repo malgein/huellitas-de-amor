@@ -14,7 +14,7 @@ const Footer = () => {
 
 
   return (
-    <div className="border-t-2 border-gray-300 pt-4">
+    <div className="border-t-2 border-gray-300 pt-4 ">
       <div className=" flex flex-col mb-0" >
         <div className="flex flex-row  items-center gap-20 h-24">
           <div className="ml-20">
@@ -40,7 +40,7 @@ const Footer = () => {
 
                 </a>    <i className="fas fa-map-marker-alt"></i>
               </h4>
-              <p>en mundo</p>
+              <p>en el mundo</p>
             </section>
             <section className="ml-20">
               <h4>Contacto</h4>
