@@ -36,8 +36,9 @@ const Footer = () => {
                 target="_blank"
               >
                 Ubicación
-              </a>
-            </h4>
+                
+              </a>    <i className="fas fa-map-marker-alt"></i>
+            </h4> 
             <p>Del mundo</p>
           </section>
           <section className="ml-20">
