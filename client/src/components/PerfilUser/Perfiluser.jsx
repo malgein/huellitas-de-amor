@@ -154,7 +154,7 @@ const Perfil = () => {
                 </h1>
 
                 <p className="text-slate-500 font-light mt-0">
-                  Cali, Colombia{usuario.ubicacion}
+                  {usuario.ubicacion}
                 </p>
               </div>
             </div>

@@ -1,18 +1,14 @@
-//
-
 import React, { useState, useEffect } from "react";
-import FormInput from "../FormInput/FormInput";
-import FormTextarea from "../FormTextarea/FormTextarea";
-import { Button } from "@nextui-org/button";
-import { Formik, Form } from "formik";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 
 const EditarPerfil = () => {
-  const { userId } = useParams(); // Asegúrate de tener el userId desde React Router
+  const { userId } = useParams();
+  console.log("userId:", userId);
 
-  const initialValues = {
+  const [userData, setUserData] = useState({
+    id: userId,
     nombre: "",
     apellido: "",
     email: "",
@@ -22,160 +18,120 @@ const EditarPerfil = () => {
     direccion: "",
     telefono: "",
     acerca: "",
+  });
+
+  useEffect(() => {
+    // Cargar los datos del usuario desde el backend cuando el componente se monta
+    axios.get(`http://localhost:3001/perfil/${userId}`).then((response) => {
+      setUserData(response.data);
+    });
+  }, [userId]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
   };
 
-  // const [userData, setUserData] = useState(initialValues);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  // useEffect(() => {
-  //   // Obtener los datos del usuario del backend y establecerlos en el estado
-  //   if (userId) {
-  //     axios
-  //       .get(`http://localhost:3001/perfil/${userId}`)
-  //       .then((response) => {
-  //         setUserData(response.data || initialValues); // Usar initialValues si no hay datos disponibles
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error al obtener los datos del usuario:", error);
-  //       });
-  //   }
-  // }, []);
-
-  // console.log("aqui user data", userData);
-
-  // const onSubmit = (values) => {
-  //   // Clonar los datos para evitar referencias circulares
-  //   const clonedData = JSON.parse(JSON.stringify(values));
-
-  //   axios
-  //     .put(`http://localhost:3001/usuario/${userId}`, clonedData)
-  //     .then((response) => {
-  //       Swal.fire(
-  //         "Éxito",
-  //         "Los cambios se guardaron correctamente.",
-  //         "success"
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error al actualizar los datos del usuario:", error);
-  //       Swal.fire("Error", "No se pudieron guardar los cambios.", "error");
-  //       console.log(error);
-  //     });
-  // };
-
-  const onSubmit = async (values) => {
-    // Clonar los datos para evitar referencias circulares
-    // const clonedData = JSON.parse(JSON.stringify(values));
-    try {
-      await axios
-        .put(`http://localhost:3001/usuario/${userId}`, values)
-        .then((response) => {
-          Swal.fire(
-            "Éxito",
-            "Los cambios se guardaron correctamente.",
-            "success"
-          );
-        });
-    } catch (error) {
-      console.error("Error al actualizar los datos del usuario:", error);
-      Swal.fire("Error", "No se pudieron guardar los cambios.", "error");
-      console.log(error);
-    }
+    // Enviar los datos actualizados al backend
+    axios
+      .put(`http://localhost:3001/usuario/${userId}`, userData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
-    <div className="flex flex-col items-center">
-      {/* <form action="">
-        <label htmlFor=""></label>
-        <input type="text" />
-      </form> */}
-      <Formik
-        initialValues={initialValues} // Rellenar el formulario con los datos del usuario
-        onSubmit={onSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form onSubmit={onSubmit}>
-            <div>
-              <FormInput label="Nombre" name="nombre" placeholder="Nombre" />
-            </div>
-            <div>
-              <FormInput
-                label="Apellido"
-                name="apellido"
-                placeholder="Apellido"
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Nacionalidad"
-                name="nacionalidad"
-                placeholder="Nacionalidad"
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Ubicación"
-                name="ubicacion"
-                placeholder="Ubicación"
-                values="datos.ubicacion"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Direccion"
-                name="direccion"
-                placeholder="Direccion"
-                values="datos.direccion"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Telefono"
-                name="telefono"
-                placeholder="Telefono"
-                values="datos.telefono"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <FormTextarea
-                placeholder="Realiza una descripción..."
-                label="Acerca De:"
-                name="acerca"
-                values="datos.acerca"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <FormInput
-                placeholder="Email"
-                label="Email"
-                name="email"
-                values="datos.email"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <FormInput
-                placeholder="Contraseña"
-                label="Contraseña"
-                name="password"
-                values="datos.password"
-                onChange={handleChange}
-              />
-            </div>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="border border-black text-black hover:bg-slate-100 mt-8 bg-inherit mb-4"
-              size="lg"
-            >
-              Guardar Cambios
-            </Button>
-          </Form>
-        )}
-      </Formik>
+    <div className="border border-black flex flex-col items-center h-[300px]">
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="nombre">Nombre:</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          value={userData.nombre}
+          onChange={handleInputChange}
+          className="flex flex-col"
+        />
+
+        <label htmlFor="apellido">Apellido:</label>
+        <input
+          type="text"
+          id="apellido"
+          name="apellido"
+          value={userData.apellido}
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={userData.email}
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="password">Contraseña:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={userData.password}
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="nacionalidad">Nacionalidad:</label>
+        <input
+          type="text"
+          id="nacionalidad"
+          name="nacionalidad"
+          value={userData.nacionalidad}
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="ubicacion">Ubicación:</label>
+        <input
+          type="text"
+          id="ubicacion"
+          name="ubicacion"
+          value={userData.ubicacion}
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="direccion">Dirección:</label>
+        <input
+          type="text"
+          id="direccion"
+          name="direccion"
+          value={userData.direccion}
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="telefono">Teléfono:</label>
+        <input
+          type="text"
+          id="telefono"
+          name="telefono"
+          value={userData.telefono}
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="acerca">Acerca de mí:</label>
+        <textarea
+          id="acerca"
+          name="acerca"
+          value={userData.acerca}
+          onChange={handleInputChange}
+        ></textarea>
+
+        <button type="submit">Guardar Cambios</button>
+      </form>
     </div>
   );
 };
