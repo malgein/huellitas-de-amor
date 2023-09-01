@@ -12,8 +12,8 @@ import confetti from "canvas-confetti";
 
 import iconMacho from "../../assets/macho.png";
 import iconHembra from "../../assets/hembra.png";
-import { useAuth } from "../../context/AuthContext";
 import PathRoutes from "../../helpers/Routes.helper";
+import { useAuth } from "../../../../server/src/context/AuthContext";
 
 export default function Detail() {
   const { id } = useParams();
@@ -24,22 +24,21 @@ export default function Detail() {
   };
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(getPetById(id));
-    
   }, [dispatch, id]);
 
-  const mascota = useSelector((state) => state.petDetail);  
-  
+  const mascota = useSelector((state) => state.petDetail);
+
   useEffect(() => {
-    if(mascota.casaDeAdopcionId){
-      dispatch(getCasaById(mascota.casaDeAdopcionId))
+    if (mascota.casaDeAdopcionId) {
+      dispatch(getCasaById(mascota.casaDeAdopcionId));
     }
-  }, [dispatch, mascota.casaDeAdopcionId])
-  
-  const casa = useSelector((state) => state.casasDeAdopcion) 
- 
+  }, [dispatch, mascota.casaDeAdopcionId]);
+
+  const casa = useSelector((state) => state.casasDeAdopcion);
+
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
@@ -135,11 +134,11 @@ export default function Detail() {
             <div className="pl-4">
               <p className="text-gray-500">Posteado por:</p>
               <Link to={PathRoutes.CASADETAIL.replace(":id", casa.id)}>
-              <p className="text-black font-semibold">
-                {casa.nombreDeOng === null
-                  ? "Casa de Adopcion"
-                  : casa.nombreDeOng}
-              </p>
+                <p className="text-black font-semibold">
+                  {casa.nombreDeOng === null
+                    ? "Casa de Adopcion"
+                    : casa.nombreDeOng}
+                </p>
               </Link>
             </div>
           </div>
@@ -156,7 +155,8 @@ export default function Detail() {
               <Link to="/registro">
                 <Button radius="full" color="primary">
                   Adóptame
-                </Button>cd
+                </Button>
+                cd
               </Link>
             )}
           </div>
@@ -164,9 +164,7 @@ export default function Detail() {
             <Button>Volver</Button>
           </Link>
         </div>
-
       </div>
     </div>
-     
   );
 }
