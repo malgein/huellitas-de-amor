@@ -12,6 +12,7 @@ export const ORDER_BY_AGE = "ORDER_BY_AGE";
 export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
 
 export const GET_ALL_HOMES = "GET_ALL_HOMES";
+export const GET_CASA_BY_ID = "GET_CASA_BY_ID";
 export const DELETE_USERS = "DELETE_USERS";
 export const EDIT_PETS = "EDIT_PETS";
 export const DELETE_PET = "DELETE_PET";
@@ -24,21 +25,21 @@ export const GET_USERS = "GET_USER";
 
 export const GET_ALL_DONATIONS = "GET_DONATIONS";
 
-
 export const ADD_MASCOTA = "ADD_MASCOTA";
 export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
 export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
+export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
+export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
 
 export const EDIT_USER = "EDIT_USER";
-// const basename = "https://huellitas-de-amor-production.up.railway.app";
-const basename = "http://localhost:3001";
+const basename = "https://huellitas-de-amor-production.up.railway.app";
+// const basename = "http://localhost:3001";
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
 const ENDPOINTNAME = `${basename}/mascotas?name=`;
-
 
 export const getPetById = (id) => async (dispatch) => {
   try {
@@ -51,12 +52,12 @@ export const getPetById = (id) => async (dispatch) => {
 
 export const getCasaById = (id) => async (dispatch) => {
   try {
-    const {data} = await axios.get(`${basename}/casaDeAdopcion/${id}`)
-    dispatch({type: GET_CASA_BY_ID, payload: data})
+    const { data } = await axios.get(`${basename}/casaDeAdopcion/${id}`);
+    dispatch({ type: GET_CASA_BY_ID, payload: data });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 //Guardo todas las mascotas
 export const getMascotas = () => async (dispatch) => {
@@ -254,7 +255,6 @@ export const limpiarImagenes = () => {
     payload: imagenes,
   };
 };
-
 export const eliminarImagenes = (imagenes) => (dispatch) => {
   return dispatch({
     /* console.log(imagenes) */
@@ -262,7 +262,6 @@ export const eliminarImagenes = (imagenes) => (dispatch) => {
     payload: imagenes,
   });
 };
-
 export const modCompleteUser = (id, updatedProperties) => {
   const endpoint = `${basename}/usuario/${id}`;
   console.log(updatedProperties);
@@ -274,4 +273,21 @@ export const modCompleteUser = (id, updatedProperties) => {
       });
     });
   };
+};
+export const logicalDeletePet = (id) => async (dispatch) => {
+  try {
+    await axios.put(`${ENDPOINT}/${id}`, { isDeleted: true }); // Marcamos la mascota como borrada
+    dispatch({ type: LOGICAL_DELETE_PET, payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};
+//manejamos el estado y la visualizacion de la mascota (nacho)
+export const changePetStatus = (id, estado, visible) => async (dispatch) => {
+  try {
+    await axios.put(`${ENDPOINT}/${id}/estado`, { estado, visible }); // Cambiar el estado y la visibilidad de la mascota
+    dispatch({ type: CHANGE_PET_STATUS, payload: { id, estado, visible } });
+  } catch (error) {
+    console.log(error);
+  }
 };
