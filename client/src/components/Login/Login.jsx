@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import styles from "./Registro.module.css";
+import styles from "./registro.module.css";
 import FormInput from "../FormInput/FormInput";
 import { Button } from "@nextui-org/button";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
-import validationSchema from "./Validaciones";
+// import validationSchema from "./Validaciones";
 import * as Yup from "yup";
 
-const Registro = () => {
+const Login = () => {
   const { id } = useParams();
   const [formData, setFormData] = useState({
     nombre: "",
@@ -43,7 +43,7 @@ const Registro = () => {
   };
 
   const dispatchRedux = () => {
-    Navigate("/login");
+    Navigate("/");
   };
   // const basename = "https://huellitas-de-amor-production.up.railway.app";
   const basename = "http://localhost:3001";
@@ -54,18 +54,18 @@ const Registro = () => {
     axios
       .post(`${basename}/usuario`, values)
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          title: "Registro exitoso",
-          text: "Usuario registrado con éxito",
-        });
+        // Swal.fire({
+        //   icon: "success",
+        //   title: "Registro exitoso",
+        //   text: "Usuario registrado con éxito",
+        // });
         dispatchRedux();
       })
       .catch((err) => {
         Swal.fire({
           icon: "error",
           title: "Error de registro",
-          text: "Hubo un error al registrar al usuario",
+          text: "Hubo un error al iniciar sesión",
         });
       });
   };
@@ -74,35 +74,16 @@ const Registro = () => {
     <div className={styles.formcontainer}>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        // validationSchema={validationSchema}
         onSubmit={onSubmit}
         // enableReinitialize={true}
       >
         {({ isSubmitting, errors, values, resetForm }) => (
           <Form>
             <div className={styles.tittle}>
-              <h1>Registrate</h1>
+              <h1>Iniciar sesión</h1>
             </div>
-            <div>
-              <FormInput
-                label="Nombre"
-                name="nombre"
-                error={errors.nombre}
-                placeholder="Nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Apellido"
-                name="apellido"
-                error={errors.apellido}
-                placeholder="Apellido"
-                value={formData.apellido}
-                onChange={handleChange}
-              />
-            </div>
+
             <div>
               <FormInput
                 placeholder="Email"
@@ -130,7 +111,7 @@ const Registro = () => {
               className="border border-black text-black hover:bg-slate-100 mt-8 bg-inherit "
               size="lg"
             >
-              Registrate
+              Iniciar Sesión
             </Button>
             {/* {registroExitoso && setValues(initialValues)} */}
           </Form>
@@ -141,4 +122,4 @@ const Registro = () => {
   );
 };
 
-export default Registro;
+export default Login;
