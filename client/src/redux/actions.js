@@ -34,8 +34,8 @@ export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
 export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
 
 export const EDIT_USER = "EDIT_USER";
-const basename = "https://huellitas-de-amor-production.up.railway.app";
-// const basename = "http://localhost:3001";
+// const basename = "https://huellitas-de-amor-production.up.railway.app";
+const basename = "http://localhost:3001";
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
@@ -65,7 +65,6 @@ export const getMascotas = () => async (dispatch) => {
     const response = await axios.get(ENDPOINT);
 
     dispatch({ type: FETCHING_MASCOTAS, payload: response.data });
-
   } catch (error) {
     console.log(error);
   }
@@ -85,7 +84,6 @@ export const getPetByName = (nombre) => async (dispatch) => {
 export const applyFilters = (filters) => {
   return (dispatch, getState) => {
     // const BACKEND_URL = "http://localhost:3001";
-
 
     axios
       .get(`${ENDPOINT_FILTER}`, { params: filters })
@@ -123,14 +121,11 @@ export const addMascota = (Mascota) => {
       const response = await axios.post(`${ENDPOINT}/`, Mascota);
 
       return alert("Mascota creada con éxito.");
-
     } catch (error) {
       console.log(error);
     }
   };
 };
-
-
 
 export const getUsers = () => async (dispatch) => {
   try {
@@ -169,7 +164,6 @@ export const getDonations = () => async (dispatch) => {
 };
 
 export const editUser = (id, updatedData) => {
-
   const endpoint = `${basename}/usuario/${id}`;
 
   return (dispatch) => {

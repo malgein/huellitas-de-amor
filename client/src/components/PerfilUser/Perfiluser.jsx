@@ -13,16 +13,11 @@ import {
 import fotoPerfil from "../../assets/fotoPerfil.jpg";
 import EditarPerfil from "../EditarPerfil/EditarPerfil";
 import axios from "axios";
-<<<<<<< HEAD
-import { useEffect } from "react";
-=======
 import { useParams } from "react-router-dom";
 import SubirImagenes from "../SubirImagenes/SubirImagenes";
 import { useSelector } from "react-redux";
->>>>>>> qa
 
 const Perfil = () => {
-  const [EsOpen, setEsOpen] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const sizes = ["2xl"];
@@ -42,55 +37,6 @@ const Perfil = () => {
 
   const handleEliminarImagenPerfil = () => {
     setPerfil({ ...perfil, imagenPerfil: "" });
-  };
-
-  const [perfil, setPerfil] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    password: "",
-    nacionalidad: "",
-    ubicacion: "",
-    direccion: "",
-    telefono: "",
-    acerca: "",
-  });
-
-  useEffect(() => {
-    // Simula cargar los datos del perfil desde el servidor
-    const cargarPerfil = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/perfil"); // Cambia la URL según tu servidor
-        if (response.status === 200) {
-          setPerfil(response.data);
-        }
-      } catch (error) {
-        console.error("Error al cargar el perfil:", error);
-      }
-    };
-
-    cargarPerfil();
-  }, []);
-
-
-  const handleSubmit = async (values) => {
-    try {
-      // Realiza una solicitud PUT al backend para actualizar el perfil
-      const response = await axios.put("http://localhost:3001/perfil", values); // Cambia la URL según tu servidor
-
-      if (response.status === 200) {
-        console.log("Perfil actualizado con éxito");
-
-        // Actualiza el estado del perfil con los nuevos datos
-        setPerfil(values);
-
-        // Cierra el modal de edición
-        setEsOpen(false);
-      }
-    } catch (error) {
-      console.error("Error al actualizar el perfil:", error);
-      // Maneja el error de alguna manera (mostrar un mensaje de error, etc.)
-    }
   };
 
   const handleOpen = (size) => {
@@ -171,30 +117,6 @@ const Perfil = () => {
               />
             )}
 
-<<<<<<< HEAD
-          <div className="flex flex-wrap justify-center gap-3">
-            {sizes.map((size) => (
-              <Button
-                color="primary"
-                variant="solid"
-                key={size}
-                onPress={() => handleOpen(size)}
-                onClick={() => setEsOpen(true)}
-              >
-                Editar perfil
-              </Button>
-            ))}
-          </div>
-
-          <Modal size={size} isOpen={isOpen} onOpenChange={() => setEsOpen(false)}>
-            <ModalContent>
-              <ModalHeader className="flex flex-col gap-1">
-                Actualizar Perfil
-              </ModalHeader>
-              <EditarPerfil onSubmit={handleSubmit} initialValor={perfil} />
-            </ModalContent>
-          </Modal>
-=======
             <div className="flex flex-col ml-3 max-w-sm mx-auto rounded-xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 absolute bottom-[-110px] left-0">
               <div className="border-4 border-white rounded-full w-[180px]">
                 {perfil.imagenPerfil && (
@@ -244,7 +166,6 @@ const Perfil = () => {
             </h2>
             <p>{usuario.acerca}</p>
           </div>
->>>>>>> qa
 
           <div className="flex flex-row items-center justify-center h-[100px] mt-10 gap-10">
             <div className=" ">

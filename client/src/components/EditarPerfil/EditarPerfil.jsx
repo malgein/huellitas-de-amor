@@ -4,42 +4,6 @@ import React, { useState, useEffect } from "react";
 import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
 import { Button } from "@nextui-org/button";
-<<<<<<< HEAD
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import axios from "axios";
-
-const EditarPerfil = ({ initialValor, onSubmit }) => {
-  // const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [datos, setDatos] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    password: "",
-    nacionalidad: "",
-    ubicacion: "",
-    direccion: "",
-    telefono: "",
-    acerca: "",
-  });
-
-  console.log("Aqui datos", datos);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDatos({
-      ...datos,
-      [name]: value,
-    });
-  };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Enviar los datos actualizados al servidor o almacenarlos localmente.
-  //   console.log("Datos actualizados:", datos);
-  //   // Cierra el formulario de edición después de guardar.
-  //   //Estado para controlar si se muestra o no.
-  // };
-=======
 import { Formik, Form } from "formik";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -47,7 +11,6 @@ import { useParams } from "react-router-dom";
 
 const EditarPerfil = () => {
   const { userId } = useParams(); // Asegúrate de tener el userId desde React Router
->>>>>>> qa
 
   const initialValues = {
     nombre: "",
@@ -153,11 +116,8 @@ const EditarPerfil = () => {
                 label="Ubicación"
                 name="ubicacion"
                 placeholder="Ubicación"
-<<<<<<< HEAD
                 values="datos.ubicacion"
                 onChange={handleChange}
-=======
->>>>>>> qa
               />
             </div>
             <div>
