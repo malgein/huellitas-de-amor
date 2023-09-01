@@ -2,7 +2,7 @@ const { Usuario } = require("../db");
 
 // Controlador para actualizar el perfil de usuario
 const actualizarPerfil = async (req, res) => {
-  const { id } = req.params; // Obtén el ID de la solicitud desde los parámetros
+  const { id } = req.params;
   const updatedData = req.body; // Datos actualizados enviados por el cliente
 
   try {
@@ -23,7 +23,21 @@ const actualizarPerfil = async (req, res) => {
     usuario.telefono = updatedData.telefono;
     usuario.acerca = updatedData.acerca;
 
-    await usuario.save(); // Guarda los cambios en la base de datos
+    // await usuario.save(); // Guarda los cambios en la base de datos
+    await Usuario.update(
+      {
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        email: usuario.email,
+        password: usuario.password,
+        nacionalidad: usuario.nacionalidad,
+        ubicacion: usuario.ubicacion,
+        direccion: usuario.direccion,
+        telefono: usuario.telefono,
+        acerca: usuario.acerca,
+      },
+      { where: { id } }
+    );
 
     res.status(200).json({ message: "Perfil actualizado con éxito" });
   } catch (error) {

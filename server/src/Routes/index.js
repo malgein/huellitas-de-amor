@@ -18,22 +18,24 @@ const fillDonations = require("../controllers/fillDonations");
 //const rateCasas = require("./routesRateCasas");
 
 //Todas las rutas del usuario
+
 const postDonaciones = require("./routesDonaciones");
 const postCrearUsuario = require("./routesUsuario");
+const getUsersId = require("../controllers/getUsersId");
+// const { getUsersId } = require("./routesUsuario");
+
 
 // const postUsuario = require("../controllers/postCrearUsuario");
 // const { perfilActualizado } = require("./routesEditarPerfil");
 const { actualizarPerfil } = require("../controllers/putEditarPerfil");
-
+router.get("/perfil/:id", getUsersId);
 router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fill", fillDonations);
 router.use("/donaciones", postDonaciones);
-router.use("/usuario", postCrearUsuario);
+router.use("/usuario", postUsuario);
 
-//router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
 
-// router.put("/usuario/:id", perfilActualizado);
 router.put("/usuario/:id", actualizarPerfil);
 
 // router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
@@ -47,6 +49,7 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
+
 
 // router.post("/", crearUsuario);
 

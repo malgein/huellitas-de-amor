@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const crearUsuario = require("../controllers/postCrearUsuario");
+const getUsersId = require("../controllers/getUsersId");
 //controlador que llena la bd de usuarios para prueba
 const llenarUsuario = require("../utils/llenarUsuario");
 const getUsers = require("../controllers/getUsers");
@@ -88,5 +89,20 @@ router.put("/:id", async (req, res) => {
     return res.status(500).json({ mensaje: "Error en el servidor" });
   }
 });
+
+//Probando obtener usuario por ID
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const usuario = await getUsersId(id);
+
+//     // if (!usuario) {
+//     //   return res.status(404).json({ mensaje: "Usuario no encontrado" });
+//     // }
+//     return res.status(200).json(usuario);
+//   } catch (error) {
+//     return res.status(500).json({ mensaje: "Error en el servidor" });
+//   }
+// });
 
 module.exports = router;

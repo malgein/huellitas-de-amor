@@ -1,85 +1,107 @@
-import React, { useState } from "react";
+//
+
+import React, { useState, useEffect } from "react";
 import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
 import { Button } from "@nextui-org/button";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const EditarPerfil = () => {
-  // const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [datos, setDatos] = useState({
-    nombre: "",
-    apellido: "",
-
-    email: "",
-    password: "",
-    nacionalidad: "",
-    ubicacion: "",
-    direccion: "",
-    telefono: "",
-    acerca: "",
-
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDatos({
-      ...datos,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Enviar los datos actualizados al servidor o almacenarlos localmente.
-    console.log("Datos actualizados:", datos);
-    // Cierra el formulario de edición después de guardar.
-    //Estado para controlar si se muestra o no.
-  };
+  const { userId } = useParams(); // Asegúrate de tener el userId desde React Router
 
   const initialValues = {
     nombre: "",
     apellido: "",
-
     email: "",
     password: "",
-
     nacionalidad: "",
     ubicacion: "",
     direccion: "",
     telefono: "",
     acerca: "",
+  };
 
+  // const [userData, setUserData] = useState(initialValues);
 
+  // useEffect(() => {
+  //   // Obtener los datos del usuario del backend y establecerlos en el estado
+  //   if (userId) {
+  //     axios
+  //       .get(`http://localhost:3001/perfil/${userId}`)
+  //       .then((response) => {
+  //         setUserData(response.data || initialValues); // Usar initialValues si no hay datos disponibles
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error al obtener los datos del usuario:", error);
+  //       });
+  //   }
+  // }, []);
+
+  // console.log("aqui user data", userData);
+
+  // const onSubmit = (values) => {
+  //   // Clonar los datos para evitar referencias circulares
+  //   const clonedData = JSON.parse(JSON.stringify(values));
+
+  //   axios
+  //     .put(`http://localhost:3001/usuario/${userId}`, clonedData)
+  //     .then((response) => {
+  //       Swal.fire(
+  //         "Éxito",
+  //         "Los cambios se guardaron correctamente.",
+  //         "success"
+  //       );
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error al actualizar los datos del usuario:", error);
+  //       Swal.fire("Error", "No se pudieron guardar los cambios.", "error");
+  //       console.log(error);
+  //     });
+  // };
+
+  const onSubmit = async (values) => {
+    // Clonar los datos para evitar referencias circulares
+    // const clonedData = JSON.parse(JSON.stringify(values));
+    try {
+      await axios
+        .put(`http://localhost:3001/usuario/${userId}`, values)
+        .then((response) => {
+          Swal.fire(
+            "Éxito",
+            "Los cambios se guardaron correctamente.",
+            "success"
+          );
+        });
+    } catch (error) {
+      console.error("Error al actualizar los datos del usuario:", error);
+      Swal.fire("Error", "No se pudieron guardar los cambios.", "error");
+      console.log(error);
+    }
   };
 
   return (
     <div className="flex flex-col items-center">
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        // enableReinitialize={true}
+      <form action="">
+        <label htmlFor=""></label>
+        <input type="text" />
+      </form>
+      {/* <Formik
+        initialValues={initialValues} // Rellenar el formulario con los datos del usuario
+        onSubmit={onSubmit}
       >
-        {({ isSubmitting, values }) => (
-          <Form onSubmit={handleSubmit}>
-            {/* <div>
-              <h1>Registrate</h1>
-            </div> */}
+        {({ isSubmitting }) => (
+          <Form onSubmit={onSubmit}>
             <div>
-              <FormInput
-                label="Nombre"
-                name="nombre"
-                placeholder="Nombre"
-                values="datos.nombre"
-                onChange={handleChange}
-              />
+              <FormInput label="Nombre" name="nombre" placeholder="Nombre" />
             </div>
             <div>
               <FormInput
                 label="Apellido"
                 name="apellido"
                 placeholder="Apellido"
-                values="datos.apellido"
-                onChange={handleChange}
               />
             </div>
             <div>
@@ -87,17 +109,13 @@ const EditarPerfil = () => {
                 label="Nacionalidad"
                 name="nacionalidad"
                 placeholder="Nacionalidad"
-                values="datos.nacionalidad"
-                onChange={handleChange}
               />
             </div>
             <div>
               <FormInput
                 label="Ubicación"
-                name=" ubicacion"
+                name="ubicacion"
                 placeholder="Ubicación"
-                values="datos.nombre"
-                onChange={handleChange}
               />
             </div>
             <div>
@@ -141,44 +159,9 @@ const EditarPerfil = () => {
             </Button>
           </Form>
         )}
-      </Formik>
-      {/*  */}
+      </Formik> */}
     </div>
   );
-  //     <form onSubmit={handleSubmit}>
-  //       <div>
-  //         <label htmlFor="nombre">Nombre:</label>
-  //         <input
-  //           type="text"
-  //           id="nombre"
-  //           name="nombre"
-  //           value={datos.nombre}
-  //           onChange={handleChange}
-  //         />
-  //       </div>
-  //       <div>
-  //         <label htmlFor="apellido">Apellido:</label>
-  //         <input
-  //           type="text"
-  //           id="apellido"
-  //           name="apellido"
-  //           value={datos.apellido}
-  //           onChange={handleChange}
-  //         />
-  //       </div>
-  //       <div>
-  //         <label htmlFor="apellido">Apellido:</label>
-  //         <input
-  //           type="text"
-  //           id="apellido"
-  //           name="apellido"
-  //           value={datos.apellido}
-  //           onChange={handleChange}
-  //         />
-  //       </div>
-  //       {/* Repite este patrón para otros campos */}
-  //       <button type="submit">Guardar Cambios</button>
-  //     </form>
 };
 
 export default EditarPerfil;

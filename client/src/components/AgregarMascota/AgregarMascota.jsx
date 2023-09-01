@@ -1,4 +1,16 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { Button } from "@nextui-org/react";
+import styles from "./AgregarMascota.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addMascota,
+  eliminarImagenes,
+  limpiarImagenes,
+} from "../../redux/actions";
+
 import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
 import { Button } from "@nextui-org/button";
@@ -7,133 +19,200 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const EditarPerfil = () => {
-	const { userId } = useParams(); // Asegúrate de tener el userId desde React Router
 
-	const initialValues = {
-		nombre: "",
-		apellido: "",
-		email: "",
-		password: "",
-		nacionalidad: "",
-		ubicacion: "",
-		direccion: "",
-		telefono: "",
-		acerca: "",
-	};
+const AgregarMascota = () => {
+  const [mascota, setMascota] = useState({
+    nombre: "",
+    especie: "",
+    edad: 0,
+    tamano: "",
+    peso: 0,
+    descripcion: "",
+    foto: [],
+    raza: "",
+    sexo: "",
+  });
 
-	const [userData, setUserData] = useState(initialValues);
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
+  const imagenes = useSelector((state) => state.imagenes);
+  const dispatchRedux = (mascota) => {
+    const nuevaMascota = { ...mascota };
+    nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
+    dispatch(addMascota(nuevaMascota));
+    Navigate("/");
+    dispatch(limpiarImagenes());
+  };
 
-	useEffect(() => {
-		// Obtener los datos del usuario del backend y establecerlos en el estado
-		if (userId) {
-			axios
-				.get(`http://localhost:3001/perfil/${userId}`)
-				.then((response) => {
-					setUserData(response.data || initialValues); // Usar initialValues si no hay datos disponibles
-				})
-				.catch((error) => {
-					console.error("Error al obtener los datos del usuario:", error);
-				});
-		}
-	}, []);
+  const handleSubmit = (mascota) => {
+    Swal.fire({
+      title: "¿Deseas agregar a la siguiente mascota?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Agregar",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire(
+          "Felicidades, esperamos que consiga un hogar muy pronto",
+          "",
+          "success"
+        );
+        localStorage.removeItem("formData");
+        dispatchRedux(mascota);
+      } else if (result.isDenied) {
+        Swal.fire("La mascaota no ha sido agregada", "", "info");
+      }
+    });
 
-	console.log("aqui user data", userData);
+    // dispatchRedux(mascota);
+    // localStorage.removeItem("formData");
+    // Swal.fire({
+    // 	tittle: "MASCOTA AGREGADA",
+    // 	text: "La mascota se ha agregado satisfactoriamente",
+    // 	icon: "success",
+    // 	buttons: "OK",
+    // });
+    // Navigate("/Home");
+  };
 
-	const onSubmit = (values) => {
-		// Clonar los datos para evitar referencias circulares
-		// const clonedData = JSON.parse(JSON.stringify(values));
+  const handleFormChange = (values) => {
+    localStorage.setItem("formData", JSON.stringify(values));
+    // localStorage.setItem("imagenes",JSON.stringify(imagenes))
+  };
 
-		axios
-			.put(`http://localhost:3001/usuario/${userId}`, values)
-			.then((response) => {
-				Swal.fire(
-					"Éxito",
-					"Los cambios se guardaron correctamente.",
-					"success"
-				);
-			})
-			.catch((error) => {
-				console.error("Error al actualizar los datos del usuario:", error);
-				Swal.fire("Error", "No se pudieron guardar los cambios.", "error");
-				console.log(error);
-			});
-	};
+  const handleClickImages = async (clickedImage) => {
+    console.log(clickedImage);
+    const updatedImages = imagenes.filter((image) => image !== clickedImage);
+    dispatch(eliminarImagenes(updatedImages));
+    /* console.log(updatedImages) */
+  };
 
-	return (
-		<div className='flex flex-col items-center'>
-			<Formik
-				initialValues={userData} // Rellenar el formulario con los datos del usuario
-				onSubmit={onSubmit}>
-				{({ isSubmitting, values }) => (
-					<Form onSubmit={onSubmit}>
-						<div>
-							<FormInput label='Nombre' name='nombre' placeholder='Nombre' />
-						</div>
-						<div>
-							<FormInput
-								label='Apellido'
-								name='apellido'
-								placeholder='Apellido'
-							/>
-						</div>
-						<div>
-							<FormInput
-								label='Nacionalidad'
-								name='nacionalidad'
-								placeholder='Nacionalidad'
-							/>
-						</div>
-						<div>
-							<FormInput
-								label='Ubicación'
-								name='ubicacion'
-								placeholder='Ubicación'
-							/>
-						</div>
-						<div>
-							<FormInput
-								label='Direccion'
-								name='direccion'
-								placeholder='Direccion'
-							/>
-						</div>
-						<div>
-							<FormInput
-								label='Telefono'
-								name='telefono'
-								placeholder='Telefono'
-							/>
-						</div>
-						<div>
-							<FormTextarea
-								placeholder='Realiza una descripción...'
-								label='Acerca De:'
-								name='acerca'
-							/>
-						</div>
-						<div>
-							<FormInput placeholder='Email' label='Email' name='email' />
-						</div>
-						<div>
-							<FormInput
-								placeholder='Contraseña'
-								label='Contraseña'
-								name='password'
-							/>
-						</div>
-						<Button
-							type='submit'
-							disabled={isSubmitting}
-							className='border border-black text-black hover:bg-slate-100 mt-8 bg-inherit mb-4'
-							size='lg'>
-							Guardar Cambios
-						</Button>
-					</Form>
-				)}
-			</Formik>
-		</div>
-	);
+  const storedData = localStorage.getItem("formData");
+  const tamañoOptions = ["Pequeño", "Mediano", "Grande"];
+  const sexoOptions = ["Macho", "Hembra"];
+  return (
+    <div className={styles.formContainer}>
+      <Formik
+        initialValues={storedData ? JSON.parse(storedData) : mascota}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, errors, values }) => (
+          <div className={styles.form}>
+            <Form onChange={handleFormChange(values)}>
+              <div className={styles.tittle}>
+                <h1>Agrega una nueva mascota</h1>
+              </div>
+              <div>
+                <FormInput
+                  label="Nombre"
+                  name="nombre"
+                  placeholder="Nombre"
+                  error={errors.nombre}
+                />
+              </div>
+              {console.log(localStorage)}
+              <div>
+                <FormInput
+                  label="Especie"
+                  name="especie"
+                  error={errors.especie}
+                  placeholder="Especie"
+                />
+              </div>
+              <div>
+                <FormInput
+                  label="Edad"
+                  placeholder="Edad"
+                  name="edad"
+                  error={errors.edad}
+                />
+              </div>
+              <div>
+                <FormInput
+                  label="Peso"
+                  placeholder="Peso"
+                  name="peso"
+                  error={errors.peso}
+                />
+              </div>
+              <div>
+                <FormInput
+                  label="Raza"
+                  placeholder="Raza"
+                  name="raza"
+                  error={errors.raza}
+                />
+              </div>
+              <div>
+                <FormTextarea
+                  label="Descripción"
+                  name="descripcion"
+                  placeholder="Descripción"
+                  error={errors.descripcion}
+                />
+              </div>
+
+              <div className={styles.selectContainer}>
+                {console.log(tamañoOptions)}
+                <div>
+                  <FormSelect
+                    label="Tamaño"
+                    name="tamano"
+                    placeholder="Tamaño"
+                    error={errors.tamano}
+                    optionArray={tamañoOptions}
+                  />
+                </div>
+                <div>
+                  <FormSelect
+                    label="Sexo"
+                    name="sexo"
+                    placeholder="Sexo"
+                    error={errors.sexo}
+                    optionArray={sexoOptions}
+                  />
+                </div>
+              </div>
+              <div>
+                <SubirImagenes
+                  setImagenes={(imagenes) =>
+                    setMascota({ ...mascota, foto: imagenes })
+                  }
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+                {imagenes &&
+                  imagenes.map((imag) => {
+                    return (
+                      <img
+                        onClick={() => handleClickImages(imag)}
+                        src={imag}
+                        alt=""
+                        className="h-[80px] m-[15px]"
+                      />
+                    );
+                  })}
+              </div>
+              <div className={styles.button}>
+                <Button
+                  type="submit"
+                  color="primary"
+                  disabled={isSubmitting}
+                  size="lg"
+                >
+                  Enviar
+                </Button>
+              </div>
+            </Form>
+          </div>
+        )}
+      </Formik>
+    </div>
+  );
+
 };
 
-export default EditarPerfil;
+export default AgregarMascota;
