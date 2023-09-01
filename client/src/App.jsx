@@ -25,7 +25,10 @@ import AdoptionHouses from "./components/Dashboard/AdoptionHouses";
 import Donations from "./components/Dashboard/Donations";
 import Notificaciones from "./components/Notificaciones/Notificaciones";
 
+
+
 import { AuthProvider } from "../../server/src/context/AuthContext";
+
 
 
 function App() {
@@ -43,7 +46,7 @@ function App() {
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
           <Route path={PathRoutes.REGISTRO} element={<Registro />}></Route>
-          <Route path={PathRoutes.LOGIN} element={<Login />}></Route>
+          {/* <Route path={PathRoutes.LOGIN} element={<Login />}></Route> */}
 
           <Route
             path={PathRoutes.CASADETAIL}
