@@ -22,9 +22,10 @@ import {
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
   LOGICAL_DELETE_PET,
-  ELIMINAR_IMAGENES,
+  ELIMINAR_IMAGENES, 
   MOD_COMPLETE_USER,
-  GET_CASA_BY_ID
+  GET_CASA_BY_ID,
+  CHANGE_PET_STATUS
 } from "./actions";
 
 const initialState = {
@@ -180,7 +181,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
         return { 
           ...state 
         };
-  }
-};
+  
+      case LOGICAL_DELETE_PET:
+      const updatedMascotas = state.mascotas.map((mascota) =>
+      mascota.id === payload ? { ...mascota, isDeleted: true } : mascota
+  );
+  return {
+    ...state,
+    mascotas: updatedMascotas,
+  };
+  case CHANGE_PET_STATUS:
+  const { id, estado, visible } = payload;
+  const estadoMascotas = state.mascotas.map((mascota) =>
+    mascota.id === id ? { ...mascota, estado, visible } : mascota
+  );
+  return { ...state, mascotas: estadoMascotas };
 
+};
+};
 export default rootReducer;
