@@ -3,7 +3,6 @@ import axios from "axios";
 export const GET_PET_BY_ID = "GET_PET_BY_ID";
 export const GET_PET_BY_NAME = "GET_PET_BY_NAME";
 export const GET_MASCOTAS = "GET_MASCOTAS";
-export const GET_CASA_BY_ID = "GET_CASA_BY_ID,";
 
 //hice el axtions para el filtrado (Nacho)
 export const APPLY_FILTERS = "APPLY_FILTERS";
@@ -13,6 +12,7 @@ export const ORDER_BY_AGE = "ORDER_BY_AGE";
 export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
 
 export const GET_ALL_HOMES = "GET_ALL_HOMES";
+export const GET_CASA_BY_ID = "GET_CASA_BY_ID";
 export const DELETE_USERS = "DELETE_USERS";
 export const EDIT_PETS = "EDIT_PETS";
 export const DELETE_PET = "DELETE_PET";
@@ -20,31 +20,25 @@ export const EDIT_HOUSES = "EDIT_HOUSES";
 export const DELETE_HOUSES = "DELETE_HOUSES";
 export const MOD_COMPLETE_USER = "MOD_COMPLETE_USER";
 
-
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = "GET_USER";
 
-
 export const GET_ALL_DONATIONS = "GET_DONATIONS";
-
 
 export const ADD_MASCOTA = "ADD_MASCOTA";
 export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
 export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
-
+export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
+export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
 
 export const EDIT_USER = "EDIT_USER";
-// const basename = "https://huellitas-de-amor-production.up.railway.app";
-const basename = "http://localhost:3001";
+const basename = "https://huellitas-de-amor-production.up.railway.app";
+// const basename = "http://localhost:3001";
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
 const ENDPOINTNAME = `${basename}/mascotas?name=`;
-
-
-
-
 
 export const getPetById = (id) => async (dispatch) => {
   try {
@@ -70,7 +64,6 @@ export const getMascotas = () => async (dispatch) => {
     const response = await axios.get(ENDPOINT);
 
     dispatch({ type: FETCHING_MASCOTAS, payload: response.data });
-    dispatch({ type: FETCHING_MASCOTAS, payload: response.data });
   } catch (error) {
     console.log(error);
   }
@@ -91,17 +84,6 @@ export const applyFilters = (filters) => {
   return (dispatch, getState) => {
     // const BACKEND_URL = "http://localhost:3001";
 
-    axios
-      .get(`${ENDPOINT_FILTER}`, { params: filters })
-      .then((response) => {
-        dispatch({
-          type: APPLY_FILTERS,
-          payload: response.data,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
     axios
       .get(`${ENDPOINT_FILTER}`, { params: filters })
       .then((response) => {
@@ -147,26 +129,15 @@ export const addMascota = (Mascota) => {
 export const getUsers = () => async (dispatch) => {
   try {
     const response = await axios.get(`${basename}/usuario`);
-export const getUsers = () => async (dispatch) => {
-  try {
-    const response = await axios.get(`${basename}/usuario`);
     dispatch({
       type: GET_USERS,
       payload: response.data,
     });
   } catch (error) {
     handleError(dispatch, GET_USERS, error);
-      payload: response.data,
-    });
-  } catch (error) {
-    handleError(dispatch, GET_USERS, error);
   }
 };
-};
 
-export const getAllHomes = () => async (dispatch) => {
-  try {
-    const response = await axios.get(`${basename}/casaDeAdopcion`);
 export const getAllHomes = () => async (dispatch) => {
   try {
     const response = await axios.get(`${basename}/casaDeAdopcion`);
@@ -176,17 +147,9 @@ export const getAllHomes = () => async (dispatch) => {
     });
   } catch (error) {
     handleError(dispatch, GET_ALL_HOMES, error);
-      payload: response.data,
-    });
-  } catch (error) {
-    handleError(dispatch, GET_ALL_HOMES, error);
   }
 };
-};
 
-export const getDonations = () => async (dispatch) => {
-  try {
-    const response = await axios.get(`${basename}/donaciones`);
 export const getDonations = () => async (dispatch) => {
   try {
     const response = await axios.get(`${basename}/donaciones`);
@@ -196,15 +159,9 @@ export const getDonations = () => async (dispatch) => {
     });
   } catch (error) {
     handleError(dispatch, GET_ALL_DONATIONS, error);
-      payload: response.data,
-    });
-  } catch (error) {
-    handleError(dispatch, GET_ALL_DONATIONS, error);
   }
 };
-};
 
-export const editUser = (id, updatedData) => {
 export const editUser = (id, updatedData) => {
   const endpoint = `${basename}/usuario/${id}`;
 
@@ -217,15 +174,9 @@ export const editUser = (id, updatedData) => {
     });
   };
 };
-};
 
 export const deleteUsers = (id) => {
   const endpoint = `${basename}/usuario/${id}`;
-  return (dispatch) => {
-    axios.delete(endpoint).then(({ data }) => {
-      return dispatch({
-        type: DELETE_USERS,
-        payload: data,
   return (dispatch) => {
     axios.delete(endpoint).then(({ data }) => {
       return dispatch({
@@ -236,7 +187,6 @@ export const deleteUsers = (id) => {
   };
 };
 
-export const editPets = (id, updatedData) => {
 export const editPets = (id, updatedData) => {
   const endpoint = `${basename}/mascotas/${id}`;
 
@@ -249,7 +199,6 @@ export const editPets = (id, updatedData) => {
     });
   };
 };
-};
 
 export const deletePets = (id) => {
   const endpoint = `${basename}/mascotas/${id}`;
@@ -258,15 +207,7 @@ export const deletePets = (id) => {
       return dispatch({
         type: DELETE_PET,
         payload: data,
-  return (dispatch) => {
-    axios.delete(endpoint).then(({ data }) => {
-      return dispatch({
-        type: DELETE_PET,
-        payload: data,
       });
-    });
-  };
-});
     });
   };
 };
@@ -283,16 +224,9 @@ export const editHouses = (id, updatedData) => {
     });
   };
 };
-  };
-};
 
 export const deleteHouses = (id) => {
   const endpoint = `${basename}/casaDeAdopcion/${id}`;
-  return (dispatch) => {
-    axios.delete(endpoint).then(({ data }) => {
-      return dispatch({
-        type: DELETE_USERS,
-        payload: data,
   return (dispatch) => {
     axios.delete(endpoint).then(({ data }) => {
       return dispatch({
@@ -302,15 +236,10 @@ export const deleteHouses = (id) => {
     });
   };
 };
-    });
-  };
-};
 export const subirImagenes = (imagenes) => (dispatch) => {
   return dispatch({
     type: SUBIR_IMAGENES,
     payload: imagenes,
-  });
-};
   });
 };
 export const limpiarImagenes = () => {
@@ -319,9 +248,6 @@ export const limpiarImagenes = () => {
     payload: imagenes,
   };
 };
-  };
-};
-
 export const eliminarImagenes = (imagenes) => (dispatch) => {
   return dispatch({
     /* console.log(imagenes) */
@@ -329,10 +255,6 @@ export const eliminarImagenes = (imagenes) => (dispatch) => {
     payload: imagenes,
   });
 };
-  });
-};
-
-export const modCompleteUser = (id, updatedProperties) => {
 export const modCompleteUser = (id, updatedProperties) => {
   const endpoint = `${basename}/usuario/${id}`;
   console.log(updatedProperties);
@@ -344,4 +266,21 @@ export const modCompleteUser = (id, updatedProperties) => {
       });
     });
   };
+};
+export const logicalDeletePet = (id) => async (dispatch) => {
+  try {
+    await axios.put(`${ENDPOINT}/${id}`, { isDeleted: true }); // Marcamos la mascota como borrada
+    dispatch({ type: LOGICAL_DELETE_PET, payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};
+//manejamos el estado y la visualizacion de la mascota (nacho)
+export const changePetStatus = (id, estado, visible) => async (dispatch) => {
+  try {
+    await axios.put(`${ENDPOINT}/${id}/estado`, { estado, visible }); // Cambiar el estado y la visibilidad de la mascota
+    dispatch({ type: CHANGE_PET_STATUS, payload: { id, estado, visible } });
+  } catch (error) {
+    console.log(error);
+  }
 };
