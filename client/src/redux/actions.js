@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_PET_BY_ID = "GET_PET_BY_ID";
 export const GET_PET_BY_NAME = "GET_PET_BY_NAME";
 export const GET_MASCOTAS = "GET_MASCOTAS";
+export const GET_CASA_BY_ID = "GET_CASA_BY_ID,";
 
 //hice el axtions para el filtrado (Nacho)
 export const APPLY_FILTERS = "APPLY_FILTERS";
@@ -19,10 +20,13 @@ export const EDIT_HOUSES = "EDIT_HOUSES";
 export const DELETE_HOUSES = "DELETE_HOUSES";
 export const MOD_COMPLETE_USER = "MOD_COMPLETE_USER";
 
+
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = "GET_USER";
 
+
 export const GET_ALL_DONATIONS = "GET_DONATIONS";
+
 
 export const ADD_MASCOTA = "ADD_MASCOTA";
 export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
@@ -30,18 +34,15 @@ export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
 export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
 
-export const GET_CASA_BY_ID = "GET_CASA_BY_ID";
-
-export const EDIT_USER = 'EDIT_USER';
-
-//const basename = "https://huellitas-de-amor-production.up.railway.app";
-
+export const EDIT_USER = "EDIT_USER";
+// const basename = "https://huellitas-de-amor-production.up.railway.app";
 const basename = "http://localhost:3001";
+const ENDPOINT = `${basename}/mascotas`;
+const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
+const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
+const ENDPOINTNAME = `${basename}/mascotas?name=`;
 
-const ENDPOINT = `${basename}/mascotas`
-const ENDPOINT_FILTER = `${basename}/mascotas/filtro`
-const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`
-const ENDPOINTNAME = `${basename}/mascotas?name=`
+
 
 
 
@@ -56,17 +57,19 @@ export const getPetById = (id) => async (dispatch) => {
 
 export const getCasaById = (id) => async (dispatch) => {
   try {
-    const {data} = await axios.get(`${basename}/casaDeAdopcion/${id}`)
-    dispatch({type: GET_CASA_BY_ID, payload: data})
+    const { data } = await axios.get(`${basename}/casaDeAdopcion/${id}`);
+    dispatch({ type: GET_CASA_BY_ID, payload: data });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 //Guardo todas las mascotas
 export const getMascotas = () => async (dispatch) => {
   try {
     const response = await axios.get(ENDPOINT);
+
+    dispatch({ type: FETCHING_MASCOTAS, payload: response.data });
     dispatch({ type: FETCHING_MASCOTAS, payload: response.data });
   } catch (error) {
     console.log(error);
@@ -87,6 +90,18 @@ export const getPetByName = (nombre) => async (dispatch) => {
 export const applyFilters = (filters) => {
   return (dispatch, getState) => {
     // const BACKEND_URL = "http://localhost:3001";
+
+    axios
+      .get(`${ENDPOINT_FILTER}`, { params: filters })
+      .then((response) => {
+        dispatch({
+          type: APPLY_FILTERS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     axios
       .get(`${ENDPOINT_FILTER}`, { params: filters })
       .then((response) => {
@@ -121,6 +136,7 @@ export const addMascota = (Mascota) => {
   return async () => {
     try {
       const response = await axios.post(`${ENDPOINT}/`, Mascota);
+
       return alert("Mascota creada con éxito.");
     } catch (error) {
       console.log(error);
@@ -131,15 +147,26 @@ export const addMascota = (Mascota) => {
 export const getUsers = () => async (dispatch) => {
   try {
     const response = await axios.get(`${basename}/usuario`);
+export const getUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${basename}/usuario`);
     dispatch({
       type: GET_USERS,
       payload: response.data,
     });
   } catch (error) {
     handleError(dispatch, GET_USERS, error);
+      payload: response.data,
+    });
+  } catch (error) {
+    handleError(dispatch, GET_USERS, error);
   }
 };
+};
 
+export const getAllHomes = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${basename}/casaDeAdopcion`);
 export const getAllHomes = () => async (dispatch) => {
   try {
     const response = await axios.get(`${basename}/casaDeAdopcion`);
@@ -149,9 +176,17 @@ export const getAllHomes = () => async (dispatch) => {
     });
   } catch (error) {
     handleError(dispatch, GET_ALL_HOMES, error);
+      payload: response.data,
+    });
+  } catch (error) {
+    handleError(dispatch, GET_ALL_HOMES, error);
   }
 };
+};
 
+export const getDonations = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${basename}/donaciones`);
 export const getDonations = () => async (dispatch) => {
   try {
     const response = await axios.get(`${basename}/donaciones`);
@@ -161,9 +196,15 @@ export const getDonations = () => async (dispatch) => {
     });
   } catch (error) {
     handleError(dispatch, GET_ALL_DONATIONS, error);
+      payload: response.data,
+    });
+  } catch (error) {
+    handleError(dispatch, GET_ALL_DONATIONS, error);
   }
 };
+};
 
+export const editUser = (id, updatedData) => {
 export const editUser = (id, updatedData) => {
   const endpoint = `${basename}/usuario/${id}`;
 
@@ -176,9 +217,15 @@ export const editUser = (id, updatedData) => {
     });
   };
 };
+};
 
 export const deleteUsers = (id) => {
   const endpoint = `${basename}/usuario/${id}`;
+  return (dispatch) => {
+    axios.delete(endpoint).then(({ data }) => {
+      return dispatch({
+        type: DELETE_USERS,
+        payload: data,
   return (dispatch) => {
     axios.delete(endpoint).then(({ data }) => {
       return dispatch({
@@ -189,6 +236,7 @@ export const deleteUsers = (id) => {
   };
 };
 
+export const editPets = (id, updatedData) => {
 export const editPets = (id, updatedData) => {
   const endpoint = `${basename}/mascotas/${id}`;
 
@@ -201,6 +249,7 @@ export const editPets = (id, updatedData) => {
     });
   };
 };
+};
 
 export const deletePets = (id) => {
   const endpoint = `${basename}/mascotas/${id}`;
@@ -209,7 +258,15 @@ export const deletePets = (id) => {
       return dispatch({
         type: DELETE_PET,
         payload: data,
+  return (dispatch) => {
+    axios.delete(endpoint).then(({ data }) => {
+      return dispatch({
+        type: DELETE_PET,
+        payload: data,
       });
+    });
+  };
+});
     });
   };
 };
@@ -226,9 +283,16 @@ export const editHouses = (id, updatedData) => {
     });
   };
 };
+  };
+};
 
 export const deleteHouses = (id) => {
   const endpoint = `${basename}/casaDeAdopcion/${id}`;
+  return (dispatch) => {
+    axios.delete(endpoint).then(({ data }) => {
+      return dispatch({
+        type: DELETE_USERS,
+        payload: data,
   return (dispatch) => {
     axios.delete(endpoint).then(({ data }) => {
       return dispatch({
@@ -238,16 +302,23 @@ export const deleteHouses = (id) => {
     });
   };
 };
+    });
+  };
+};
 export const subirImagenes = (imagenes) => (dispatch) => {
   return dispatch({
     type: SUBIR_IMAGENES,
     payload: imagenes,
   });
 };
+  });
+};
 export const limpiarImagenes = () => {
   return {
     type: LIMPIAR_IMAGENES,
     payload: imagenes,
+  };
+};
   };
 };
 
@@ -258,7 +329,10 @@ export const eliminarImagenes = (imagenes) => (dispatch) => {
     payload: imagenes,
   });
 };
+  });
+};
 
+export const modCompleteUser = (id, updatedProperties) => {
 export const modCompleteUser = (id, updatedProperties) => {
   const endpoint = `${basename}/usuario/${id}`;
   console.log(updatedProperties);

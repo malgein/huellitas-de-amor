@@ -13,7 +13,21 @@ const postCrearUsuario = async ({
   // acerca,
 }) => {
   try {
+<<<<<<< HEAD
     if (!nombre || !apellido || !password || !email) {
+=======
+    if (
+      !nombre ||
+      !apellido ||
+      !password ||
+      !email
+      // !nacionalidad ||
+      // !ubicacion ||
+      // !direccion ||
+      // !telefono ||
+      // !acerca
+    ) {
+>>>>>>> 0e368b0710ff932123d375a7c2302470571c3276
       return { status: 401, message: "Faltan datos" };
     }
     const nuevoUsuario = await Usuario.create({
@@ -21,6 +35,14 @@ const postCrearUsuario = async ({
       apellido,
       email,
       password,
+<<<<<<< HEAD
+=======
+      // nacionalidad,
+      // ubicacion,
+      // direccion,
+      // telefono,
+      // acerca,
+>>>>>>> 0e368b0710ff932123d375a7c2302470571c3276
     });
     console.log(nuevoUsuario);
     return nuevoUsuario;
