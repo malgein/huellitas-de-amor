@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
+import { useAuth } from "../../../../server/src/context/AuthContext";
 
 export default function ModalLogSig() {
   const [user, setUser] = useState({
