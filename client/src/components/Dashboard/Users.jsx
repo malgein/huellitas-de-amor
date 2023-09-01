@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { getUsers, editUser, deleteUsers, modCompleteUser} from '../../redux/actions'
+import PathRoutes from "../../helpers/Routes.helper";
+import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar'
 import Swal from 'sweetalert2'
 import {
@@ -35,7 +37,7 @@ const statusColorMap = {
 // const columns = [
 //   {name: "NOMBRE", uid: "nombre"},
 //   {name: "NACIONALIDAD", uid: "nacionalidad"},
-//   {name: "LOCALIZACION", uid: "localizacion"},
+//   {name: "ubicacion", uid: "ubicacion"},
 //   {name: "ACTIONS", uid: "actions"},
 // ];
 
@@ -45,7 +47,7 @@ const statusOptions = [
   {name: "Vacation", uid: "vacation"},
 ];
 //!Esto muestra las columnas que se ven al inicio
-const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre","apellido", "nacionalidad",  "localizacion", "direccion", "telefono",  "acerca", "actions"];
+const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre","apellido", "nacionalidad",  "ubicacion", "direccion", "telefono",  "acerca", "actions"];
 
 
 function Users() {
@@ -53,6 +55,8 @@ function Users() {
   const usuarios= useSelector((state) => state.usuarios)
 
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   const [userModified , setUserModified] = useState(true)
   
@@ -103,7 +107,7 @@ function Users() {
         '<input id="swal-input2" class="swal2-input"> </br> ' +
         'Nacionalidad del usuario ' +
         '<input id="swal-input3" class="swal2-input"> </br> ' +
-        'Localizacion del usuario ' +
+        'ubicacion del usuario ' +
         '<input id="swal-input4" class="swal2-input"> </br> ' +
         'Direccion del usuario ' +
         '<input id="swal-input5" class="swal2-input"> </br> ' +
@@ -132,25 +136,59 @@ function Users() {
       }
     })
     
-    if (formValues) {
-      const result = {
-        nombre: formValues[0],
-        apellido: formValues[1],
-        nacionalidad: formValues[2],
-        localizacion: formValues[3],
-        direccion: formValues[4],
-        telefono: parseInt(formValues[5]),
-        acerca: formValues[6],
-        email: formValues[7] ,
-        password : formValues[8]
-      }
-      console.log(result)
+    const result = {
+      nombre: formValues[0],
+      apellido: formValues[1],
+      nacionalidad: formValues[2],
+      ubicacion: formValues[3],
+      direccion: formValues[4],
+      telefono: parseInt(formValues[5]),
+      acerca: formValues[6],
+      email: formValues[7] ,
+      password : formValues[8]
+    }
+
+    if (formValues[0]==='' || formValues[1]==='' || formValues[2]==='' || formValues[3]==='' || formValues[4]==='' || formValues[5]==='' || formValues[6]==='' || formValues[7]==='' || formValues[8]==='' ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'No se pudo modificar el usuario',
+        text: 'No puedes dejar campos en blanco!',
+      })
+    }  else if( isNaN(result.telefono)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'No se pudo modificar el usuario',
+        text: 'el telefono del usuario debe ser expresado en numeros enteros',
+      })
+    } else if( formValues[5].charAt(0) === '0') {
+      Swal.fire({
+        icon: 'error',
+        title: 'No se pudo modificar el usuario',
+        text: 'el telefono del usuario no debe empezar por 0',
+      })
+      
+    } else if(formValues[5].length > 9) {
+      Swal.fire({
+        icon: 'error',
+        title: 'No se pudo modificar el usuario',
+        text: 'el telefono del usuario no debe exceder los 9 digitos',
+      })
+     }  else {
+      console.log(result.telefono.length)
       dispatch(modCompleteUser(id, result))
       // dispatch(editUser(id, result))
       // console.log(userModified)
-      Swal.fire(`Propiedades del usuario cambiadas exitosamente`)
+      Swal.fire({
+        icon: 'success',
+        text:'Modificacion exitosa!'
+        }
+      )
       setUserModified(!userModified)
     }
+  }
+
+  const handleNavigate = (id) => {
+    navigate(PathRoutes.DETAILUSER.replace(":id", id))
   }
 
   const handleDelete = (id) => {
@@ -178,7 +216,7 @@ function Users() {
     {name: "NOMBRE", uid: "nombre", sortable: true},
     {name: "APELLIDO", uid: "apellido", sortable: true},
     {name: "NACIONALIDAD", uid: "nacionalidad", sortable: true},
-    {name: "LOCALIZACION", uid: "localizacion", sortable: true},
+    {name: "ubicacion", uid: "ubicacion", sortable: true},
     {name: "DIRECCION", uid: "direccion", sortable: true},
     {name: "TELEFONO", uid: "telefono" , sortable: true},
     // {name: "EMAIL", uid: "email", sortable: true},
@@ -280,7 +318,7 @@ function Users() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Dynamic Actions">
-                <DropdownItem>Detalle</DropdownItem>
+                <DropdownItem onClick={() => handleNavigate(user.id)}>Detalle</DropdownItem>
                 <DropdownItem onClick={() => handleEdit(user.id)}>Editar</DropdownItem>
                 //!Aqui se borra y arriba se edita y se detalla
                 <DropdownItem  color="danger" className="text-danger" onClick={() => handleDelete(user.id)}>Borrar</DropdownItem>
@@ -483,7 +521,7 @@ function Users() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No Se encontraron Usuarios"} items={sortedItems}>
+      <TableBody emptyContent={"No se encontraron Usuarios"} items={sortedItems}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}

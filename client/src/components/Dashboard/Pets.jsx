@@ -1,7 +1,9 @@
 import React, {useState, useEffect, useCallback} from 'react'
+import { Link, useNavigate } from "react-router-dom";
+import PathRoutes from "../../helpers/Routes.helper";
 import Sidebar from './Sidebar'
 import { useSelector, useDispatch } from 'react-redux'
-import { getMascotas, deletePets, editPets } from '../../redux/actions'
+import { getMascotas, deletePets, modCompletePet } from '../../redux/actions'
 import Swal from 'sweetalert2'
 import {
   Table,
@@ -50,6 +52,8 @@ function Pets() {
 
   const [petModified , setPetModified] = useState(true)
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     if(petModified){
       dispatch(getMascotas())
@@ -77,31 +81,132 @@ function Pets() {
     })
   }
   
+  // const handleEdit = async(id) => {
+  //   console.log(id)
+  //   const { value: formValues } = await Swal.fire({
+  //     title: 'Introduce la propiedad y el valor que deseas modificar',
+  //     html:
+  //       '<input id="swal-input1" class="swal2-input">' +
+  //       '<input id="swal-input2" class="swal2-input">',
+  //     focusConfirm: false,
+  //     preConfirm: () => {
+  //       return [
+  //         document.getElementById('swal-input1').value,
+  //         document.getElementById('swal-input2').value
+  //       ]
+  //     }
+  //   })
+    
+  //   if (formValues) {
+  //     const result = {[formValues[0]] : formValues[1]}
+  //     console.log(result)
+  //     // const resultJson = JSON.stringify(result)
+  //     dispatch(editPets(id, result))
+  //     setPetModified(true)
+  //     Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
+  //   }
+  // }
+
+  const handleNavigate = (id) => {
+    navigate(PathRoutes.DETAIL.replace(":id", id))
+  }
+
   const handleEdit = async(id) => {
     console.log(id)
     const { value: formValues } = await Swal.fire({
-      title: 'Introduce la propiedad y el valor que deseas modificar',
+      title: 'Introduce los nuevos datos de la mascota que deseas modificar',
       html:
-        '<input id="swal-input1" class="swal2-input">' +
-        '<input id="swal-input2" class="swal2-input">',
+        'Nombre de la mascota' +
+        '<input id="swal-input1" class="swal2-input"> </br> ' +
+        'Edad de la mascota' +
+        '<input id="swal-input2" class="swal2-input"> </br> ' +
+        'Sexo de la mascota </br>' +
+        '</br>' +
+        '<input type="radio" id="swal-input3" value="Macho"  name="sexo"> ' +
+        'Macho ' +
+        '<input type="radio" id="swal-input4" value="Hembra" name="sexo">  ' +
+        'Hembra </br>' +
+        '</br>' +
+        'Descripcion de la mascota ' +
+        '<input id="swal-input5" class="swal2-input"> </br> ' +
+        'Url de la foto de la mascota ' +
+        '<input id="swal-input6" class="swal2-input"> </br> ' +
+        'Tamaño de la mascota </br>' +
+        '</br>' +
+        '<input type="radio" id="swal-input7" value="Pequeño" name="tamano"> ' +
+        'Pequeño ' +
+        '<input type="radio" id="swal-input8" value="Mediano" name="tamano"> ' +
+        'Mediano ' +
+        '<input type="radio" id="swal-input9" value="Grande" name="tamano">  ' +
+        'Grande </br>' +
+        '</br>' +
+        'Raza de la mascota ' +
+        '<input id="swal-input10" class="swal2-input"> </br> ' +
+        'Peso de la mascota ' +
+        '<input id="swal-input11" class="swal2-input"> </br> ' ,
       focusConfirm: false,
       preConfirm: () => {
         return [
           document.getElementById('swal-input1').value,
-          document.getElementById('swal-input2').value
+          document.getElementById('swal-input2').value,
+          document.getElementById('swal-input3'),
+          document.getElementById('swal-input4'),
+          document.getElementById('swal-input5').value,
+          document.getElementById('swal-input6').value,
+          document.getElementById('swal-input7'),
+          document.getElementById('swal-input8'),
+          document.getElementById('swal-input9'),
+          document.getElementById('swal-input10').value,
+          document.getElementById('swal-input11').value
         ]
       }
     })
     
-    if (formValues) {
-      const result = {[formValues[0]] : formValues[1]}
+    const result = {
+      nombre: formValues[0],
+      edad: parseInt(formValues[1]),
+      sexo: formValues[2].checked ? formValues[2].value :  formValues[3].value,
+      descripcion: formValues[4],
+      foto: [`${formValues[5]}`],
+      tamano: formValues[6].checked ? formValues[6].value : formValues[7].checked ? formValues[7].value : formValues[8].checked && formValues[8].value,
+      raza: formValues[9],
+      peso: parseFloat(formValues[10]) ,
+    }
+
+    if (formValues[0]==='' || formValues[1]==='' || formValues[2]==='' || formValues[3]==='' || formValues[4]==='' || formValues[5]==='' || formValues[6]==='' || formValues[7]==='' || formValues[8]==='' || formValues[9]==='' || formValues[10]==='') {
+      // console.log(formValues[3].value)
+      Swal.fire({
+        icon: 'error',
+        title: 'No se pudo modificar la mascota',
+        text: 'No puedes dejar campos en blanco!',
+      })
+    } else if( isNaN(result.edad)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'No se pudo modificar la mascota',
+        text: 'La edad de la mascota debe ser expresada en numeros enteros',
+      })
+    } else if( isNaN(result.peso)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'No se pudo modificar la mascota',
+        text: 'El peso de la mascota debe ser expresada en numeros enteros',
+      })
+    } else {
+     
       console.log(result)
-      // const resultJson = JSON.stringify(result)
-      dispatch(editPets(id, result))
-      setPetModified(true)
-      Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
+      dispatch(modCompletePet(id, result))
+  
+      // console.log(userModified)
+      Swal.fire({
+        icon: 'success',
+        text:'Modificacion exitosa!'
+        }
+      )
+      setPetModified(!petModified)
     }
   }
+
 
   const columns = [
     {name: "ID", uid: "id", sortable: true},
@@ -209,7 +314,7 @@ function Pets() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Dynamic Actions">
-                <DropdownItem>Detalle</DropdownItem>
+                  <DropdownItem onClick={() => handleNavigate(user.id)}>Detalle</DropdownItem>
                 <DropdownItem onClick={() => handleEdit(user.id)}>Editar</DropdownItem>
                 //!Aqui se borra y arriba se edita y se detalla
                 <DropdownItem  color="danger" className="text-danger" onClick={() => handleDelete(user.id)}>Borrar</DropdownItem>
@@ -412,7 +517,7 @@ function Pets() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No Se encontraron Mascotas"} items={sortedItems}>
+      <TableBody emptyContent={"No se encontraron Mascotas"} items={sortedItems}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}

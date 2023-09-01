@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      localizacion: {
+      ubicacion: {
         type: DataTypes.STRING(50),
         allowNull: false,
       },

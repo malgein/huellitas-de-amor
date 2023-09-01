@@ -20,6 +20,8 @@ import Pets from './components/Dashboard/Pets';
 import Users from './components/Dashboard/Users';
 import AdoptionHouses from './components/Dashboard/AdoptionHouses';
 import Donations from './components/Dashboard/Donations';
+import DetailUser from "./components/Dashboard/DetailUser";
+import DetailHouse from "./components/Dashboard/detailHouse";
 
 
 function App() {
@@ -55,6 +57,8 @@ function App() {
             element={<Donations />}
           />
 
+          <Route path={PathRoutes.DETAILUSER} element={<DetailUser />} />
+          <Route path={PathRoutes.DETAILHOUSE} element={<DetailHouse/>} />
         </Routes>
         <div>{location.pathname !== "/home" && <Footer />}</div>
       </AuthProvider>

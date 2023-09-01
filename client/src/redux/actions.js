@@ -18,6 +18,8 @@ export const DELETE_PET = 'DELETE_PET'
 export const EDIT_HOUSES = 'EDIT_HOUSES'
 export const DELETE_HOUSES = 'DELETE_HOUSES'
 export const MOD_COMPLETE_USER = 'MOD_COMPLETE_USER'
+export const MOD_COMPLETE_PET = 'MOD_COMPLETE_PET'
+export const MOD_COMPLETE_HOUSE = 'MOD_COMPLETE_HOUSE'
 
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = 'GET_USER'
@@ -33,8 +35,8 @@ export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
 
 export const EDIT_USER = 'EDIT_USER';
-const basename = "https://huellitas-de-amor-production.up.railway.app";
-// const basename = "http://localhost:3001";
+// const basename = "https://huellitas-de-amor-production.up.railway.app";
+const basename = "http://localhost:3001";
 const ENDPOINT = `${basename}/mascotas`
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`
@@ -262,6 +264,32 @@ export const modCompleteUser  = (id, updatedProperties) => {
     axios.put(endpoint, updatedProperties).then(({ data }) => {
       dispatch({
         type: MOD_COMPLETE_USER,
+        payload: data,
+      });
+    });
+  };
+};
+
+export const modCompletePet  = (id, updatedProperties) => {
+  const endpoint = `${basename}/mascotas/${id}`;
+  console.log(updatedProperties)
+  return (dispatch) => {
+    axios.put(endpoint, updatedProperties).then(({ data }) => {
+      dispatch({
+        type: MOD_COMPLETE_PET,
+        payload: data,
+      });
+    });
+  };
+};
+
+export const modCompleteHouse  = (id, updatedProperties) => {
+  const endpoint = `${basename}/casaDeAdopcion/${id}`;
+  console.log(updatedProperties)
+  return (dispatch) => {
+    axios.put(endpoint, updatedProperties).then(({ data }) => {
+      dispatch({
+        type: MOD_COMPLETE_HOUSE,
         payload: data,
       });
     });

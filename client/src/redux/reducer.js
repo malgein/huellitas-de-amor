@@ -22,10 +22,14 @@ import {
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
   ELIMINAR_IMAGENES,
-  MOD_COMPLETE_USER
+  MOD_COMPLETE_USER,
+  MOD_COMPLETE_PET,
+  MOD_COMPLETE_HOUSE
 } from "./actions";
 
 const initialState = {
+  userDetail: [],
+  houseDetail: [],
   petDetail: [],
   loading: false,
   mascotas: [],
@@ -137,6 +141,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case MOD_COMPLETE_USER:
       console.log(payload)
       return { ...state};
+      case MOD_COMPLETE_PET:
+      console.log(payload)
+      return { ...state};
+      case MOD_COMPLETE_HOUSE:
+        console.log(payload)
+        return { ...state};
     default:
       return { ...state };
   }

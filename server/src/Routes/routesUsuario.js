@@ -7,6 +7,7 @@ const getUsers = require('../controllers/getUsers')
 const modUserById = require('../controllers/modUsersById')
 const deleteUsersById = require('../controllers/deleteUsersById')
 const modCompleteUser = require('../controllers/modCompleteUser')
+const getUserById = require('../controllers/getUserById')
 
 router.post("/", async (req, res) => {
   try {
@@ -80,6 +81,16 @@ router.put("/:id", async (req, res) => {
     const response = req.body
     console.log(response)
     const userId =  await modCompleteUser(id, response);
+    return res.status(200).json(userId);
+  } catch (error) {
+    return res.status(500).json({ mensaje: "Error en el servidor" });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId =  await getUserById(id);
     return res.status(200).json(userId);
   } catch (error) {
     return res.status(500).json({ mensaje: "Error en el servidor" });
