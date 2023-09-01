@@ -23,9 +23,13 @@ import Pets from "./components/Dashboard/Pets";
 import Users from "./components/Dashboard/Users";
 import AdoptionHouses from "./components/Dashboard/AdoptionHouses";
 import Donations from "./components/Dashboard/Donations";
-import { AuthProvider } from "./context/AuthContext";
 import Notificaciones from "./components/Notificaciones/Notificaciones";
-// import Login from "./components/Login/Login";
+
+
+
+import { AuthProvider } from "../../server/src/context/AuthContext";
+
+
 
 function App() {
   const location = useLocation();
