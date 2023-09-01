@@ -6,7 +6,7 @@ const PathRoutes = {
   DETAIL: "/detail/:id",
   AGREGAR: "/agregar",
   REGISTRO: "/registro",
-  LOGIN: "/login",
+  // LOGIN: "/login",
   CASADETAIL: "/casaDeAdopcion/:id",
   NOTIFICACION: "/notificaciones",
 
