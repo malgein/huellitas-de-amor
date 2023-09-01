@@ -13,6 +13,8 @@ export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
 
 
 export const GET_ALL_HOMES = "GET_ALL_HOMES";
+export const GET_CASA_BY_ID = "GET_CASA_BY_ID";
+
 export const DELETE_USERS = "DELETE_USERS";
 export const EDIT_PETS = "EDIT_PETS";
 export const DELETE_PET = "DELETE_PET";
