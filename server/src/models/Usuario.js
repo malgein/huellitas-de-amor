@@ -18,26 +18,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      nacionalidad: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-      },
-      ubicacion: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-      },
-      direccion: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-      },
-      telefono: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      acerca: {
-        type: DataTypes.TEXT(50),
-        allowNull: false,
-      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -45,6 +25,26 @@ module.exports = (sequelize) => {
       password: {
         type: DataTypes.STRING(50),
         allowNull: false,
+      },
+      nacionalidad: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+      },
+      ubicacion: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+      },
+      direccion: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+      },
+      telefono: {
+        type: DataTypes.STRING(15),
+        allowNull: true,
+      },
+      acerca: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
       },
     },
     { timestamps: false }

@@ -51,7 +51,6 @@ const {
   Adopcion,
   Especie,
   Favorito,
- 
 } = sequelize.models;
 
 //Usuarios --> Tipo de Usuarios
@@ -94,12 +93,10 @@ Comentario.hasMany(CasaDeAdopcion, {
   foreignKey: "comentarioId",
 }); */
 
-
 // //!Ratings --> Casa de Adopciones
 // CasaDeAdopcion.hasMany(Rating,{foreignKey: "ratingId"});
 // Rating.belongsTo(CasaDeAdopcion, { foreignKey: "ratingId" });
 // //!Ratings --> Casa de Adopciones
-
 
 //Mascotas --> Casa de Adopciones
 Mascota.belongsTo(CasaDeAdopcion, {

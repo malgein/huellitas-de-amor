@@ -43,11 +43,6 @@ function App() {
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
           <Route path={PathRoutes.REGISTRO} element={<Registro />}></Route>
 
-          {/* <Route
-            path={PathRoutes.NOTIFICACION}
-            element={<Notificaciones />}
-          ></Route> */}
-
 
           <Route path={PathRoutes.CASADETAIL} element={<CasaDeAdopcion/>}></Route>
           {/* Componente dashboard  */}
