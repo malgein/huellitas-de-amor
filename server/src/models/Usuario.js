@@ -62,7 +62,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       acerca: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: true,
 >>>>>>> 0e368b0710ff932123d375a7c2302470571c3276
       },
