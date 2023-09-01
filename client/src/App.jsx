@@ -25,7 +25,7 @@ import AdoptionHouses from "./components/Dashboard/AdoptionHouses";
 import Donations from "./components/Dashboard/Donations";
 import { AuthProvider } from "./context/AuthContext";
 import Notificaciones from "./components/Notificaciones/Notificaciones";
-import Login from "./components/Login/Login";
+// import Login from "./components/Login/Login";
 
 function App() {
   const location = useLocation();
@@ -42,7 +42,7 @@ function App() {
           <Route path={PathRoutes.DETAIL} element={<Detail />} />
           <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
           <Route path={PathRoutes.REGISTRO} element={<Registro />}></Route>
-          <Route path={PathRoutes.LOGIN} element={<Login />}></Route>
+          {/* <Route path={PathRoutes.LOGIN} element={<Login />}></Route> */}
 
           <Route
             path={PathRoutes.CASADETAIL}
