@@ -21,7 +21,8 @@ import {
   DELETE_HOUSES,
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
-  ELIMINAR_IMAGENES,
+  LOGICAL_DELETE_PET,
+  ELIMINAR_IMAGENES, 
   MOD_COMPLETE_USER,
   GET_CASA_BY_ID,
 } from "./actions";
@@ -180,5 +181,4 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
   }
 };
-
 export default rootReducer;
