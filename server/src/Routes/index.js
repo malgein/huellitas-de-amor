@@ -24,7 +24,6 @@ const postCrearUsuario = require("./routesUsuario");
 const getUsersId = require("../controllers/getUsersId");
 // const { getUsersId } = require("./routesUsuario");
 
-
 // const postUsuario = require("../controllers/postCrearUsuario");
 // const { perfilActualizado } = require("./routesEditarPerfil");
 const { actualizarPerfil } = require("../controllers/putEditarPerfil");
@@ -34,7 +33,6 @@ router.post("/email", postSendEmail);
 router.get("/fill", fillDonations);
 router.use("/donaciones", postDonaciones);
 router.use("/usuario", postUsuario);
-
 
 router.put("/usuario/:id", actualizarPerfil);
 
@@ -49,7 +47,6 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
-
 
 // router.post("/", crearUsuario);
 
