@@ -35,15 +35,10 @@ const Registro = () => {
     apellido: "",
     email: "",
     password: "",
-    // nacionalidad: "",
-    // localizacion: "",
-    // direccion: "",
-    // telefono: "",
-    // acerca: "",
   };
 
   const dispatchRedux = () => {
-    Navigate("/login");
+    Navigate("/");
   };
   // const basename = "https://huellitas-de-amor-production.up.railway.app";
   const basename = "http://localhost:3001";

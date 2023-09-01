@@ -84,7 +84,11 @@ const EditarPerfil = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <Formik
+      <form action="">
+        <label htmlFor=""></label>
+        <input type="text" />
+      </form>
+      {/* <Formik
         initialValues={initialValues} // Rellenar el formulario con los datos del usuario
         onSubmit={onSubmit}
       >
@@ -155,7 +159,7 @@ const EditarPerfil = () => {
             </Button>
           </Form>
         )}
-      </Formik>
+      </Formik> */}
     </div>
   );
 };
