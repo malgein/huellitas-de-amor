@@ -6,11 +6,29 @@ import FormInput from "../FormInput/FormInput";
 import { Button } from "@nextui-org/button";
 import { useNavigate } from "react-router-dom";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import validationSchema from "./Validaciones";
 import * as Yup from "yup";
 
 const Registro = () => {
+  const { id } = useParams();
+  const [formData, setFormData] = useState({
+    nombre: "",
+    apellido: "",
+    email: "",
+    password: "",
+  });
+
+  const Navigate = useNavigate();
+  // const history = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const initialValues = {
     nombre: "",
@@ -22,6 +40,9 @@ const Registro = () => {
     direccion: "",
     telefono: "",
     acerca: "",
+  };
+  const dispatchRedux = () => {
+    Navigate("/");
   };
   // const basename = "https://huellitas-de-amor-production.up.railway.app";
 
@@ -54,7 +75,15 @@ const Registro = () => {
       .post("http://localhost:3001/usuario", values)
       // .post(`${basename}/usuario`, values)
       .then((res) => {
+<<<<<<< HEAD
         alert("Usuario registrado con éxito");
+=======
+        Swal.fire({
+          icon: "success",
+          title: "Registro exitoso",
+          text: "Usuario registrado con éxito",
+        });
+>>>>>>> origin/qa
       })
       .catch((err) => {
         alert("Hubo un error al registrar al usuario");
@@ -69,7 +98,7 @@ const Registro = () => {
         onSubmit={onSubmit}
         // enableReinitialize={true}
       >
-        {({ isSubmitting, errors, values, setValues }) => (
+        {({ isSubmitting, errors, values, resetForm }) => (
           <Form>
             <div className={styles.tittle}>
               <h1>Registrate</h1>
@@ -106,6 +135,7 @@ const Registro = () => {
                 error={errors.password}
               />
             </div>
+<<<<<<< HEAD
             <div>
               <FormInput
                 label="Nacionalidad"
@@ -146,6 +176,8 @@ const Registro = () => {
                 error={errors.acerca}
               />
             </div>
+=======
+>>>>>>> origin/qa
 
             <Button
               type="submit"

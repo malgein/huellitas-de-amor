@@ -64,7 +64,7 @@ const Nav = () => {
           <Link className="text-black" href="/">
             Inicio
           </Link>
-          <Link href="/perfil" className="text-black">
+          <Link href="/perfil/${id}" className="text-black">
             Mi Perfil
           </Link>
 

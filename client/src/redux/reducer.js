@@ -21,9 +21,10 @@ import {
   DELETE_HOUSES,
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
-  ELIMINAR_IMAGENES,
+  LOGICAL_DELETE_PET,
+  ELIMINAR_IMAGENES, 
   MOD_COMPLETE_USER,
-  GET_CASA_BY_ID
+  GET_CASA_BY_ID,
 } from "./actions";
 
 const initialState = {
@@ -35,12 +36,11 @@ const initialState = {
   usuarios: [],
   casasDeAdopcion: [],
   donaciones: [],
-  imagenes: []
+  imagenes: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-
     case FETCHING_MASCOTAS:
       return {
         ...state,
@@ -56,7 +56,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         mascotas: payload,
       };
     case GET_CASA_BY_ID:
-      return{
+      return {
         ...state,
         casasDeAdopcion: payload,
       };
@@ -68,21 +68,21 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case GET_MASCOTAS:
-      return { 
+      return {
         ...state,
-        mascotas: payload
+        mascotas: payload,
       };
 
     case GET_PET_BY_ID:
-      return { 
-        ...state, 
-        petDetail: payload 
+      return {
+        ...state,
+        petDetail: payload,
       };
 
     case GET_PET_BY_NAME:
-      return { 
-        ...state, 
-        mascotas: payload 
+      return {
+        ...state,
+        mascotas: payload,
       };
 
     case ORDER_BY_WEIGHT:
@@ -104,82 +104,81 @@ const rootReducer = (state = initialState, { type, payload }) => {
         mascotas: sortedByAge,
       };
 
-      case GET_USERS:
-        return{
-          ...state,
-          usuarios: payload
-        };
+    case GET_USERS:
+      return {
+        ...state,
+        usuarios: payload,
+      };
 
-      case GET_ALL_HOMES:
-        return{
-          ...state,
-          casasDeAdopcion:payload
-        };
+    case GET_ALL_HOMES:
+      return {
+        ...state,
+        casasDeAdopcion: payload,
+      };
 
-      case GET_ALL_DONATIONS:
-        return{
-          ...state,
-          donaciones: payload
-        };
+    case GET_ALL_DONATIONS:
+      return {
+        ...state,
+        donaciones: payload,
+      };
 
-      case EDIT_USER:
-        return { 
-          ...state
-        };  
-    
-      case DELETE_USERS:
-        return { 
-          ...state
-        };    
-      
-      case EDIT_PETS:
-        return { 
-          ...state
-        }; 
-          
-      case DELETE_PET:
-        return { 
-          ...state
-        }; 
-      
-      case EDIT_HOUSES:
-        return { 
-          ...state
-        }; 
+    case EDIT_USER:
+      return {
+        ...state,
+      };
 
-      case DELETE_HOUSES:
-        return { 
-          ...state
-        }; 
+    case DELETE_USERS:
+      return {
+        ...state,
+      };
 
-      case SUBIR_IMAGENES:
-        return {
-          ...state, 
-          imagenes: payload
-        };
+    case EDIT_PETS:
+      return {
+        ...state,
+      };
 
-      case LIMPIAR_IMAGENES: 
-        return {
-          ...state, 
-          imagenes: []
-        };
-    
-      case ELIMINAR_IMAGENES:
-        return {
-          ...state, 
-          imagenes: payload
-        };
-    
-      case MOD_COMPLETE_USER:
-        return { 
-          ...state
-        };
-      
-      default:
-        return { 
-          ...state 
-        };
+    case DELETE_PET:
+      return {
+        ...state,
+      };
+
+    case EDIT_HOUSES:
+      return {
+        ...state,
+      };
+
+    case DELETE_HOUSES:
+      return {
+        ...state,
+      };
+
+    case SUBIR_IMAGENES:
+      return {
+        ...state,
+        imagenes: payload,
+      };
+
+    case LIMPIAR_IMAGENES:
+      return {
+        ...state,
+        imagenes: [],
+      };
+
+    case ELIMINAR_IMAGENES:
+      return {
+        ...state,
+        imagenes: payload,
+      };
+
+    case MOD_COMPLETE_USER:
+      return {
+        ...state,
+      };
+
+    default:
+      return {
+        ...state,
+      };
   }
 };
-
 export default rootReducer;

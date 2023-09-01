@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCasaById, getMascotas } from "../../redux/actions";
-import { Carousel } from "react-responsive-carousel";
-import PetCard from "../PetCard/PetCard";
+import { getCasaById } from "../../redux/actions";
 
 export default function CasaDeAdopcion() {
   const { id } = useParams();
@@ -84,6 +82,9 @@ export default function CasaDeAdopcion() {
                 />
               </div> */}
             </div>
+          </div>
+          <div>
+            <Rate rating={casa.rating} id={id} />
           </div>
         </section>
       </div>
