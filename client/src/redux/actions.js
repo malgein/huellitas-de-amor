@@ -10,7 +10,9 @@ export const FILTERS_ERROR = "FILTERS_ERROR";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const ORDER_BY_AGE = "ORDER_BY_AGE";
 export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
-
+export const MOD_COMPLETE_USER = 'MOD_COMPLETE_USER'
+export const MOD_COMPLETE_PET = 'MOD_COMPLETE_PET'
+export const MOD_COMPLETE_HOUSE = 'MOD_COMPLETE_HOUSE'
 export const GET_ALL_HOMES = "GET_ALL_HOMES";
 export const GET_CASA_BY_ID = "GET_CASA_BY_ID";
 export const DELETE_USERS = "DELETE_USERS";
@@ -18,7 +20,8 @@ export const EDIT_PETS = "EDIT_PETS";
 export const DELETE_PET = "DELETE_PET";
 export const EDIT_HOUSES = "EDIT_HOUSES";
 export const DELETE_HOUSES = "DELETE_HOUSES";
-export const MOD_COMPLETE_USER = "MOD_COMPLETE_USER";
+
+
 
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = "GET_USER";
@@ -32,6 +35,16 @@ export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
 export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
 
+
+// const basename = "https://huellitas-de-amor-production.up.railway.app";
+// const basename = "http://localhost:3001";
+
+const handleError = (dispatch, errorType, error) => {
+  console.error(error);
+  dispatch({ type: errorType, payload: error.message });
+};
+
+
 export const EDIT_USER = "EDIT_USER";
 const basename = "https://huellitas-de-amor-production.up.railway.app";
 // const basename = "http://localhost:3001";
@@ -39,6 +52,7 @@ const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
 const ENDPOINTNAME = `${basename}/mascotas?name=`;
+
 
 export const getPetById = (id) => async (dispatch) => {
   try {
@@ -267,6 +281,36 @@ export const modCompleteUser = (id, updatedProperties) => {
     });
   };
 };
+
+
+export const modCompletePet  = (id, updatedProperties) => {
+  const endpoint = `${basename}/mascotas/${id}`;
+  console.log(updatedProperties)
+  return (dispatch) => {
+    axios.put(endpoint, updatedProperties).then(({ data }) => {
+      dispatch({
+        type: MOD_COMPLETE_PET,
+        payload: data,
+      });
+    });
+  };
+};
+
+export const modCompleteHouse  = (id, updatedProperties) => {
+  const endpoint = `${basename}/casaDeAdopcion/${id}`;
+  console.log(updatedProperties)
+  return (dispatch) => {
+    axios.put(endpoint, updatedProperties).then(({ data }) => {
+      dispatch({
+        type: MOD_COMPLETE_HOUSE,
+        payload: data,
+      });
+    });
+  };
+};
+
+
+
 export const logicalDeletePet = (id) => async (dispatch) => {
   try {
     await axios.put(`${ENDPOINT}/${id}`, { isDeleted: true }); // Marcamos la mascota como borrada
@@ -284,3 +328,4 @@ export const changePetStatus = (id, estado, visible) => async (dispatch) => {
     console.log(error);
   }
 };
+

@@ -27,17 +27,19 @@ export default function Detail() {
 
   const mascota = useSelector((state) => state.petDetail);
 
+
+
   useEffect(() => {
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
     }
-  }, [dispatch, mascota.casaDeAdopcionId]);
+  }}, [dispatch, mascota.casaDeAdopcionId]);
 
-  if (!mascota) {
-    return <p> Aguarde unos Instantes...</p>;
-  }
+  // if (!mascota) {
+  //   return <p> Aguarde unos Instantes...</p>;
+  // }
 
   
   // const handleConfetti = () => {
