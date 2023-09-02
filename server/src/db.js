@@ -59,7 +59,7 @@ Usuario.belongsTo(TipoDeUsuario, {
   foreignKey: "tipoDeUsuarioId",
 });
 TipoDeUsuario.hasMany(Usuario, {
-  foreignKey: "especieId",
+  foreignKey: "tipoDeUsuarioId",
 });
 
 //Donaciones --> Usuarios
