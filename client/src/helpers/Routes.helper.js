@@ -2,13 +2,12 @@ const PathRoutes = {
   // LANDINGPAGE: "/",
   HOME: "/",
   FILTER: "/mascotas",
-  PERFIL: "/perfil",
+  PERFIL: "/perfil/:id",
   DETAIL: "/detail/:id",
   AGREGAR: "/agregar",
   REGISTRO: "/registro",
-  
+  // LOGIN: "/login",
   CASADETAIL: "/casaDeAdopcion/:id",
-
   NOTIFICACION: "/notificaciones",
 
   //Ruta para el dashboard principal
@@ -21,6 +20,9 @@ const PathRoutes = {
   DASHBOARD_CASAS_DE_ADOPCION: "/dashboard/casas-de-adopcion",
   //subruta para el dashboard de casas de adopcion
   DASHBOARD_DONACIONES: "/dashboard/donaciones",
+
+  DETAILUSER: "/detail-user/:id",
+  DETAILHOUSE: "/detail-house-of-adoption/:id",
 };
 
 export default PathRoutes;

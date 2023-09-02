@@ -22,7 +22,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+
       password: {
+
         type: DataTypes.STRING(50),
         allowNull: false,
       },
@@ -43,7 +45,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       acerca: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: true,
       },
     },
