@@ -10,12 +10,10 @@ const postCasaAdopcion = require("./routesCasaDeAdopcion");
 // const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 const postSendEmail = require("../controllers/postSendEmail");
-// const crearUsuario = require("../controllers/postCrearUsuario");
 const postMercadoPago = require("../controllers/postMercadoPago");
 const fillDonations = require("../controllers/fillDonations");
 
-// const rateCasas = require("./routesRateCasas");
-//Todas las rutas del usuario
+// const rateCasas = require("./routesRateCasas")
 const fillPets = require('../utils/fillPets')
 // const postDonaciones = require('./routesDonaciones')
 const postUsuario = require('./routesUsuario')
@@ -29,11 +27,12 @@ const postUsuario = require('./routesUsuario')
 const postDonaciones = require("./routesDonaciones");
 const postCrearUsuario = require("./routesUsuario");
 const getUsersId = require("../controllers/getUsersId");
-// const { getUsersId } = require("./routesUsuario");
-// router.get("/fill", fillPets);
-// router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
 
-// const postUsuario = require("../controllers/postCrearUsuario");
+// router.get("/fill", fillPets);
+
+
+
+
 // const { perfilActualizado } = require("./routesEditarPerfil");
 const { actualizarPerfil } = require("../controllers/putEditarPerfil");
 
@@ -46,7 +45,7 @@ router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fill", fillDonations);
 // router.use("/donaciones", postDonaciones);
-// router.use("/usuario", postUsuario);
+router.use("/usuario", postUsuario);
 
 router.put("/usuario/:id", actualizarPerfil);
 

@@ -46,7 +46,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM('Adoptado', 'En adopción', 'En Proceso'),
         defaultValue: 'En adopción',
         allowNull: false
-    },
+      },
 
     },
     {

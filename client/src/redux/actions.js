@@ -36,8 +36,6 @@ export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
 export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
 
 
-// const basename = "https://huellitas-de-amor-production.up.railway.app";
-// const basename = "http://localhost:3001";
 
 const handleError = (dispatch, errorType, error) => {
   console.error(error);

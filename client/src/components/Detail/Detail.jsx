@@ -36,16 +36,18 @@ export default function Detail() {
   useEffect(() => {
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
+    }
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
     }
-  }}, [dispatch, mascota.casaDeAdopcionId]);
+  }, [dispatch, mascota.casaDeAdopcionId]);
 
   // if (!mascota) {
   //   return <p> Aguarde unos Instantes...</p>;
   // }
 
   
+
   const handleConfetti = () => {
     confetti({});
   };
