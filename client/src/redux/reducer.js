@@ -181,12 +181,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
       case LOGICAL_DELETE_PET:
         console.log("LOGICAL_DELETE_PET llamado con payload:", payload);
-  return {
-    ...state,
-    mascotas: state.mascotas.map(mascota =>
-      mascota.id === payload ? { ...mascota, estado: "En Proceso" } : mascota
-    )
-  };
+        return {
+            ...state,
+            mascotas: state.mascotas.map(mascota =>
+                mascota.id === payload ? { ...mascota, estado: "En adopción" } : mascota
+            )
+        };
+    
 
   }
 };

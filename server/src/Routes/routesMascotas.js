@@ -25,16 +25,13 @@ router.get("/filtro", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const allPets = await getPets();
-    //Linea modificada con efectos de prueba
-    return res.status(200).json(allPets);
-    //Siguientes dos lineas agregadas para probar data en nuestra ruta
-    // const results = data
-    // return res.status(200).json(results);
+      const allPets = await getPets();
+      return res.status(200).json(allPets);
   } catch (error) {
-    res.status(error.status || 500).json({ message: error.message });
+      return res.status(500).json({ message: error.message });
   }
 });
+
 //http://localhost:3001/mascotas/nombre?nombre=pepe
 router.get("/nombre", async (req, res) => {
   try {
