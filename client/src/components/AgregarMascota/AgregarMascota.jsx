@@ -1,8 +1,6 @@
-
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Button } from "@nextui-org/react";
 import styles from "./AgregarMascota.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,11 +12,9 @@ import {
 import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
 import { Button } from "@nextui-org/button";
-import { Formik, Form } from "formik";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
 
 const AgregarMascota = () => {
   const [mascota, setMascota] = useState({
@@ -212,7 +208,6 @@ const AgregarMascota = () => {
       </Formik>
     </div>
   );
-
 };
 
 export default AgregarMascota;

@@ -2,17 +2,21 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCasaById } from "../../redux/actions";
+import { Carousel } from "react-responsive-carousel";
+import Rate from "../Rate/Rate";
+import { getMascotas } from "../../redux/actions";
+import PetCard from "../PetCard/PetCard";
 
 export default function CasaDeAdopcion() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const pet = useSelector((state) => state.mascotas);
 
   useEffect(() => {
     dispatch(getCasaById(id));
     dispatch(getMascotas());
   }, [dispatch, id]);
 
+  const pet = useSelector((state) => state.mascotas);
   const casa = useSelector((state) => state.casasDeAdopcion);
   return (
     <div>
@@ -42,10 +46,11 @@ export default function CasaDeAdopcion() {
           <p>Contáctanos: </p>
           <p>{casa.email}</p>
           <p>{casa.telefono}</p>
-          <div class="h-20 flex flex-col justify-end">
-            <div class="flex flex-col items-center">
-              <div class="flex-1"></div>
-              <p class="p-4">Maps:</p>
+          <div className="h-20 flex flex-col justify-end">
+            <div className="flex flex-col items-center">
+              <div className="flex-1"></div>
+              <p className="p-4">Maps:</p>
+              <div></div>
             </div>
           </div>
         </div>
@@ -83,9 +88,7 @@ export default function CasaDeAdopcion() {
               </div> */}
             </div>
           </div>
-          <div>
-            <Rate rating={casa.rating} id={id} />
-          </div>
+          <div>{/* <Rate rating={casa.rating} id={id} /> */}</div>
         </section>
       </div>
     </div>

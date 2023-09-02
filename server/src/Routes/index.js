@@ -24,7 +24,7 @@ const postCrearUsuario = require("./routesUsuario");
 const getUsersId = require("../controllers/getUsersId");
 // const { getUsersId } = require("./routesUsuario");
 
-// const postUsuario = require("../controllers/postCrearUsuario");
+const postUsuario = require("../controllers/postCrearUsuario");
 // const { perfilActualizado } = require("./routesEditarPerfil");
 const { actualizarPerfil } = require("../controllers/putEditarPerfil");
 router.get("/perfil/:id", getUsersId);
