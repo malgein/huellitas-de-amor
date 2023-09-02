@@ -35,9 +35,9 @@ const statusColorMap = {
 };
 //esto es para darle color al fondo de los estados(Nacho)
 const estadoColorMap = {
-  'adoptado': 'danger',    // Rojo
-  'en adopción': 'success', // Verde
-  'en proceso': 'warning',  // Amarillo
+  'Adoptado': 'danger',    // Rojo
+  'En Adopción': 'success', // Verde
+  'En Proceso': 'warning',  // Amarillo
 };
 
 
@@ -213,6 +213,14 @@ function Pets() {
       setPetModified(!petModified)
     }
   }
+  //Funcion para el cambio de estado de la mascota
+  const cambioDeEstado = (id, currentStatus) => {
+    const newStatus = currentStatus === 'Adoptado' ? 'En Adopción' : 'Adoptado';
+    dispatch(editPets(id, {estado: newStatus}));
+    setPetModified(true);
+    Swal.fire('Estado actualizado', `La mascota ha sido ${newStatus}`, 'success');
+};
+
 
 
   const columns = [
@@ -309,15 +317,25 @@ function Pets() {
         //esto lo puse para darle el Estilo al estado (Nacho)
         case "estado":
           return (
-            <Chip
-              className="capitalize"
-              color={estadoColorMap[cellValue]}
-              size="sm"
-              variant="flat"
-            >
-              {cellValue}
-            </Chip>
+              <div className="flex items-center gap-2">
+                  <Chip
+                      className="capitalize"
+                      color={estadoColorMap[cellValue]}
+                      size="sm"
+                      variant="flat"
+                  >
+                      {cellValue}
+                  </Chip>
+                  <Button 
+                      size="mini" 
+                      onClick={() => cambioDeEstado(user.id, cellValue)}
+                  >
+                      {cellValue === 'Adoptado' ? 'En Adopción' : 'Adoptado'}
+                  </Button>
+              </div>
           );
+      
+          
         
   
       case "sexo":

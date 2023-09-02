@@ -96,12 +96,12 @@ router.put("/:id/estado", async (req, res) => {
     const { id } = req.params;
     const { estado, visible } = req.body;
 
-    const updatedPet = await modPetById(id, { estado, visible });
+    const result = await modPetById(id, { estado, visible });
     
-    if (updatedPet) {
-      return res.status(200).json(updatedPet);
+    if (result.error) {
+      return res.status(404).json({ mensaje: result.mensaje });
     } else {
-      return res.status(404).json({ mensaje: "Mascota no encontrada" });
+      return res.status(200).json(result);
     }
   } catch (error) {
     return res.status(500).json({ mensaje: "Error en el servidor" });

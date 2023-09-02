@@ -36,12 +36,17 @@ const getUsersId = require("../controllers/getUsersId");
 // const postUsuario = require("../controllers/postCrearUsuario");
 // const { perfilActualizado } = require("./routesEditarPerfil");
 const { actualizarPerfil } = require("../controllers/putEditarPerfil");
+
+const modPetById = require("../controllers/modPetById");
+
+
 router.get("/perfil/:id", getUsersId);
+
 router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fill", fillDonations);
-router.use("/donaciones", postDonaciones);
-router.use("/usuario", postUsuario);
+// router.use("/donaciones", postDonaciones);
+// router.use("/usuario", postUsuario);
 
 router.put("/usuario/:id", actualizarPerfil);
 
@@ -57,6 +62,7 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
+router.put("/:id/estado", modPetById)
 
 // router.post("/", crearUsuario);
 

@@ -310,22 +310,26 @@ export const modCompleteHouse  = (id, updatedProperties) => {
 };
 
 
-
-export const logicalDeletePet = (id) => async (dispatch) => {
+export const logicalDeletePet = (id, estado) => async (dispatch) => {
   try {
-    await axios.put(`${ENDPOINT}/${id}`, { isDeleted: true }); // Marcamos la mascota como borrada
+    await axios.put(`${ENDPOINT}/${id}/estado`, { estado }); // Marcamos la mascota como borrada
+    console.log("Respuesta del servidor:", response.data);
     dispatch({ type: LOGICAL_DELETE_PET, payload: id });
   } catch (error) {
     console.log(error);
   }
 };
 //manejamos el estado y la visualizacion de la mascota (nacho)
-export const changePetStatus = (id, estado, visible) => async (dispatch) => {
-  try {
-    await axios.put(`${ENDPOINT}/${id}/estado`, { estado, visible }); // Cambiar el estado y la visibilidad de la mascota
-    dispatch({ type: CHANGE_PET_STATUS, payload: { id, estado, visible } });
-  } catch (error) {
-    console.log(error);
-  }
-};
+
+
+// export const changePetStatus = (id, estado, visible) => async (dispatch) => {
+//   try {
+//     await axios.put(`${ENDPOINT}/${id}/estado`, { estado, visible }); // Cambiar el estado y la visibilidad de la mascota
+//     dispatch({ type: CHANGE_PET_STATUS, payload: { id, estado, visible } });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+
 
