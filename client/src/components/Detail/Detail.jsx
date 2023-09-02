@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
+=======
+import React, {  useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom"
+>>>>>>> origin/qa
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -15,10 +20,13 @@ import iconHembra from "../../assets/hembra.png";
 import PathRoutes from "../../helpers/Routes.helper";
 import { useAuth } from "../../../../server/src/context/AuthContext";
 
+
 export default function Detail() {
   const { id } = useParams();
   const { user } = useAuth();
   const dispatch = useDispatch();
+  const [adopcionEnProgreso, setAdopcionEnProgreso] =useState (false)
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getPetById(id));
@@ -26,6 +34,8 @@ export default function Detail() {
 
   const mascota = useSelector((state) => state.petDetail);
 
+
+
   useEffect(() => {
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
@@ -33,12 +43,13 @@ export default function Detail() {
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
     }
-  }, [dispatch, mascota.casaDeAdopcionId]);
+  }}, [dispatch, mascota.casaDeAdopcionId]);
 
-  if (!mascota) {
-    return <p> Aguarde unos Instantes...</p>;
-  }
+  // if (!mascota) {
+  //   return <p> Aguarde unos Instantes...</p>;
+  // }
 
+<<<<<<< HEAD
   // const handleConfetti = () => {
   //   confetti({});
   // };
@@ -51,12 +62,36 @@ export default function Detail() {
   //   dispatch(logicalDeletePet(id)); // Marca la mascota como borrada
   //   // Agregar aquí cualquier otra lógica que necesites después del borrado
   // };
+=======
+  
+  const handleConfetti = () => {
+    confetti({});
+  };
+  
+  const handleAdoption = () => {
+   setAdopcionEnProgreso(true);
+   dispatch(logicalDeletePet(id, "En Proceso"));
+   
+   
+    
+    handleConfetti();
+    navigate("/")
+  };
+  
+>>>>>>> origin/qa
 
   const casa = useSelector((state) => state.casasDeAdopcion);
+<<<<<<< HEAD
   const isAdopted = mascota.estado === "adoptado";
   const isInProcess = mascota.estado === "en proceso";
   const isAvailableForAdoption = mascota.estado === "en Adopción";
 
+=======
+  const isAdopted = mascota.estado === "Adoptado";
+  const isInProcess = mascota.estado === "En Proceso"
+  const isAvailableForAdoption = mascota.estado === "En Adopción";
+ 
+>>>>>>> origin/qa
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
@@ -92,7 +127,7 @@ export default function Detail() {
             content={
               isAdopted
                 ? "Adoptado"
-                : isInProcess
+                : adopcionEnProgreso
                 ? "En Proceso"
                 : isAvailableForAdoption
                 ? "En Adopción"
@@ -101,7 +136,7 @@ export default function Detail() {
             color={
               isAdopted
                 ? "danger"
-                : isInProcess
+                : adopcionEnProgreso
                 ? "warning"
                 : isAvailableForAdoption
                 ? "success"
@@ -179,6 +214,7 @@ export default function Detail() {
             </div>
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
+<<<<<<< HEAD
             {user ? (
               <StateControlButton
                 id={id}
@@ -197,8 +233,35 @@ export default function Detail() {
           <Link>
             <Button>Volver</Button>
           </Link>
+=======
+          {user ? (
+    <Button 
+        onClick={handleAdoption}
+        id={id}
+        currentState={mascota.estado}
+        user={user}
+    >
+        Adóptame
+    </Button>
+) : (
+    <Link to="/registro">
+        <Button radius="full" color="primary">
+            Adóptame
+        </Button>
+    </Link>
+)}
+               </div>
+        
+        <Link to="/">
+          <Button>Volver</Button>
+        </Link>
+>>>>>>> origin/qa
         </div>
       </div>
     </div>
-  );
-}
+
+     
+
+)};
+
+

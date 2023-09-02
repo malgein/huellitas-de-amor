@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -9,15 +10,13 @@ import {
   eliminarImagenes,
   limpiarImagenes,
 } from "../../redux/actions";
+
 import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
-import FormSelect from "../FormSelect/FormSelect";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import SubirImagenes from "../SubirImagenes/SubirImagenes";
-import agregarMascotaSchema from "../../Schemas/agregarMascotaSchema";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const validationSchema = agregarMascotaSchema;
 
 const AgregarMascota = () => {
   const [mascota, setMascota] = useState({
@@ -211,6 +210,7 @@ const AgregarMascota = () => {
       </Formik>
     </div>
   );
+
 };
 
 export default AgregarMascota;
