@@ -30,6 +30,7 @@ export default function Detail() {
   useEffect(() => {
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
+    }
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
     }
@@ -40,18 +41,18 @@ export default function Detail() {
   }
 
   
-  // const handleConfetti = () => {
-  //   confetti({});
-  // };
+  const handleConfetti = () => {
+    confetti({});
+  };
   
-  // const handleAdopcion = () => {
-  //   dispatch(logicalDeletePet(id));
-  //   handleConfetti();
-  // };
-  // const handleBorrado = () => {
-  //   dispatch(logicalDeletePet(id)); // Marca la mascota como borrada
-  //   // Agregar aquí cualquier otra lógica que necesites después del borrado
-  // };
+  const handleAdopcion = () => {
+    dispatch(logicalDeletePet(id));
+    handleConfetti();
+  };
+  const handleBorrado = () => {
+    dispatch(logicalDeletePet(id)); // Marca la mascota como borrada
+    // Agregar aquí cualquier otra lógica que necesites después del borrado
+  };
 
 
   
@@ -183,19 +184,22 @@ export default function Detail() {
             </div>
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
-          {user ? (
+            <button
+              onClick={isAdopted ? handleBorrado : handleAdopcion}
+            >Adoptame</button>
+            {/* {user ? (
               <StateControlButton
                 id={id}
                 currentState={mascota.estado}
-                user={user}
-              />
+               user={ user } />
+    
             ) : (
               <Link to="/registro">
                 <Button radius="full" color="primary">
                   Adóptame
                 </Button>
             </Link>
-          )}
+          )} */}
         </div>
         
         <Link>
