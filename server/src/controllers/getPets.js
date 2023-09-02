@@ -15,9 +15,9 @@ const { Mascota } = require("../db");
 const getPets = async () => {
   try {
     const allPets = await Mascota.findAll({
-      where: {
-        estado: 'En Adopción'
-      }
+      // where: {
+      //   estado: 'En Adopción'
+      // }
     });
     return allPets;
 

@@ -36,7 +36,7 @@ const statusColorMap = {
 //esto es para darle color al fondo de los estados(Nacho)
 const estadoColorMap = {
   'Adoptado': 'danger',    // Rojo
-  'En Adopción': 'success', // Verde
+  'En adopción': 'success', // Verde
   'En Proceso': 'warning',  // Amarillo
 };
 
@@ -215,7 +215,7 @@ function Pets() {
   }
   //Funcion para el cambio de estado de la mascota
   const cambioDeEstado = (id, currentStatus) => {
-    const newStatus = currentStatus === 'Adoptado' ? 'En Adopción' : 'Adoptado';
+    const newStatus = currentStatus === 'Adoptado' ? 'En adopción' : 'Adoptado';
     dispatch(editPets(id, {estado: newStatus}));
     setPetModified(true);
     Swal.fire('Estado actualizado', `La mascota ha sido ${newStatus}`, 'success');
@@ -330,7 +330,7 @@ function Pets() {
                       size="mini" 
                       onClick={() => cambioDeEstado(user.id, cellValue)}
                   >
-                      {cellValue === 'Adoptado' ? 'En Adopción' : 'Adoptado'}
+                      {cellValue === 'Adoptado' ? 'En adopción' : 'Adoptado'}
                   </Button>
               </div>
           );
