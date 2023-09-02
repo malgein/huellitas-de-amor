@@ -55,6 +55,8 @@ export default function Home() {
     dispatch(getMascotas());
   }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
 
+ // Esta es la lógica de filtrado: vamos a mostrar solo las mascotas que estan 'En adopcion' (nacho)
+  const mascotasFiltradas = currentPet.filter(mascota => mascota.estado === 'En adopción');
   //h-screen w-screen
   return (
     <div className="md:flex sm:text-center x-[50px] flex justify-center items-center flex-col">
@@ -126,9 +128,8 @@ export default function Home() {
           <div className="bg-white w-[90%] h-[90%] ">
             <div className="flex flex-col">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
-                {currentPet
-                  .filter((mascota) => mascota && mascota.nombre)
-                  .map((mascota) => (
+                {mascotasFiltradas.map((mascota) => (//aca hago llamo a la constante asi no se muestran las cards.(nacho)
+                
                     <div key={mascota.id}>
                       <PetCard
                         key={mascota.id}

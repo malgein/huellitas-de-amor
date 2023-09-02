@@ -3,7 +3,9 @@ const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const fillHomes = require("./src/utils/fillHomes.js");
 const fillPets = require("./src/utils/fillPets.js");
-const PORT = process.env.PORT || 3001;
+
+const PORT =  process.env.PORT ||3001;
+
 // Syncing all the models at once.
 
 conn

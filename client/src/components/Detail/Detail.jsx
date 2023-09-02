@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -19,6 +20,8 @@ export default function Detail() {
   const { id } = useParams();
   const { user } = useAuth();
   const dispatch = useDispatch();
+  const [adopcionEnProgreso, setAdopcionEnProgreso] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getPetById(id));
@@ -89,7 +92,7 @@ export default function Detail() {
             content={
               isAdopted
                 ? "Adoptado"
-                : isInProcess
+                : adopcionEnProgreso
                 ? "En Proceso"
                 : isAvailableForAdoption
                 ? "En Adopción"
@@ -98,7 +101,7 @@ export default function Detail() {
             color={
               isAdopted
                 ? "danger"
-                : isInProcess
+                : adopcionEnProgreso
                 ? "warning"
                 : isAvailableForAdoption
                 ? "success"
@@ -176,7 +179,7 @@ export default function Detail() {
             </div>
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
-            {/* {user ? (
+            {user ? (
               <StateControlButton
                 id={id}
                 currentState={mascota.estado}
@@ -188,7 +191,7 @@ export default function Detail() {
                   Adóptame
                 </Button>
               </Link>
-            )} */}
+            )}
           </div>
 
           <Link>

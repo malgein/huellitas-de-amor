@@ -3,7 +3,7 @@ const { Usuario } = require("../db.js");
 const modCompleteUser = async (id, updatedData) => {
 
   try {
-    // Buscamos la mascota por su ID en la base de datos
+    // Buscamos el usuario por su ID en la base de datos
     const usuario = await Usuario.findByPk(id);
 
     if (!usuario) {
