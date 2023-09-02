@@ -28,9 +28,8 @@ const { actualizarPerfil } = require("../controllers/putEditarPerfil");
 router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fill", fillDonations);
-router.use("/donaciones", postDonaciones);
-router.use("/usuario", postUsuario);
-
+// router.use("/donaciones", postDonaciones);
+// router.use("/usuario", postUsuario);
 
 //router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
 
@@ -48,7 +47,6 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
-
 
 // router.post("/", crearUsuario);
 

@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -20,7 +20,6 @@ export default function Detail() {
   const { user } = useAuth();
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(getPetById(id));
   }, [dispatch, id]);
@@ -30,6 +29,7 @@ export default function Detail() {
   useEffect(() => {
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
+    }
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
     }
@@ -39,11 +39,10 @@ export default function Detail() {
     return <p> Aguarde unos Instantes...</p>;
   }
 
-  
   // const handleConfetti = () => {
   //   confetti({});
   // };
-  
+
   // const handleAdopcion = () => {
   //   dispatch(logicalDeletePet(id));
   //   handleConfetti();
@@ -53,13 +52,11 @@ export default function Detail() {
   //   // Agregar aquí cualquier otra lógica que necesites después del borrado
   // };
 
-
-  
   const casa = useSelector((state) => state.casasDeAdopcion);
   const isAdopted = mascota.estado === "adoptado";
   const isInProcess = mascota.estado === "en proceso";
   const isAvailableForAdoption = mascota.estado === "en Adopción";
- 
+
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
@@ -112,7 +109,6 @@ export default function Detail() {
             }
             size="lx"
           ></Badge>
-
         </div>
         <div className="p-4 ">
           <div className="flex items-center mb-2">
@@ -183,7 +179,7 @@ export default function Detail() {
             </div>
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
-          {user ? (
+            {user ? (
               <StateControlButton
                 id={id}
                 currentState={mascota.estado}
@@ -194,13 +190,13 @@ export default function Detail() {
                 <Button radius="full" color="primary">
                   Adóptame
                 </Button>
-            </Link>
-          )}
-        </div>
-        
-        <Link>
-          <Button>Volver</Button>
-        </Link>
+              </Link>
+            )}
+          </div>
+
+          <Link>
+            <Button>Volver</Button>
+          </Link>
         </div>
       </div>
     </div>
