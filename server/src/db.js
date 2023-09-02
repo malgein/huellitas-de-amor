@@ -5,7 +5,10 @@ const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
+    //!Para usar la base de datos Remota:
+
   // `postgresql://postgres:devZjxigFLUOiHZBcQxh@containers-us-west-127.railway.app:6739/railway`,
+  //!Para usar la base de datos local
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
   {
     logging: false, // set to console.log to see the raw SQL queries
