@@ -1,4 +1,4 @@
-import { auth } from "../../../server/src/firebase/credenciales"
+import { auth } from "../firebase/credenciales";
 import { createContext, useContext, useState, useEffect } from "react";
 
 import {
