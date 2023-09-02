@@ -13,7 +13,7 @@ conn
   .then(() => {
     server.listen(PORT, () => {
       fillPets();
-      fillHomes()
+      fillHomes();
       console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
     });
   });

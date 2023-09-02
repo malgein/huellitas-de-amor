@@ -4,7 +4,6 @@ export const GET_PET_BY_ID = "GET_PET_BY_ID";
 export const GET_PET_BY_NAME = "GET_PET_BY_NAME";
 export const GET_MASCOTAS = "GET_MASCOTAS";
 
-
 //hice el axtions para el filtrado (Nacho)
 export const APPLY_FILTERS = "APPLY_FILTERS";
 export const FILTERS_ERROR = "FILTERS_ERROR";
@@ -31,17 +30,15 @@ export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
 export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
-export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS "
+export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
 
-export const EDIT_USER = 'EDIT_USER';
-// const basename = "https://huellitas-de-amor-production.up.railway.app";
-const basename = "http://localhost:3001";
+export const EDIT_USER = "EDIT_USER";
+const basename = "https://huellitas-de-amor-production.up.railway.app";
+// const basename = "http://localhost:3001";
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
 const ENDPOINTNAME = `${basename}/mascotas?name=`;
-
-
 
 export const getPetById = (id) => async (dispatch) => {
   try {
@@ -249,8 +246,8 @@ export const limpiarImagenes = () => {
   return {
     type: LIMPIAR_IMAGENES,
     payload: imagenes,
-  }
-}
+  };
+};
 export const eliminarImagenes = (imagenes) => (dispatch) => {
   return dispatch({
     /* console.log(imagenes) */
@@ -280,6 +277,7 @@ export const logicalDeletePet = (id, estado) => async (dispatch) => {
   }
 };
 //manejamos el estado y la visualizacion de la mascota (nacho)
+
 // export const changePetStatus = (id, estado, visible) => async (dispatch) => {
 //   try {
 //     await axios.put(`${ENDPOINT}/${id}/estado`, { estado, visible }); // Cambiar el estado y la visibilidad de la mascota
@@ -288,4 +286,5 @@ export const logicalDeletePet = (id, estado) => async (dispatch) => {
 //     console.log(error);
 //   }
 // };
+
 
