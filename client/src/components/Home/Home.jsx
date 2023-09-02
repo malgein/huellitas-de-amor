@@ -55,12 +55,14 @@ export default function Home() {
     dispatch(getMascotas());
   }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
 
- // Esta es la lógica de filtrado: vamos a mostrar solo las mascotas que estan 'En adopcion' (nacho)
-  const mascotasFiltradas = currentPet.filter(mascota => mascota.estado === 'En adopción');
+  // Esta es la lógica de filtrado: vamos a mostrar solo las mascotas que estan 'En adopcion' (nacho)
+  const mascotasFiltradas = currentPet.filter(
+    (mascota) => mascota.estado === "En adopción"
+  );
   //h-screen w-screen
   return (
-    <div className="x-[50px] flex justify-center items-center flex-col border border-black w-[1500px] mx-auto ">
-      <div className="border-4 border-black flex flex-row h-[550px] mt-12 mx-auto">
+    <div className="x-[50px] flex justify-center items-center flex-col w-[1500px] mx-auto ">
+      <div className="flex flex-row  h-[550px] mt-12 mx-auto">
         <div className="relative w-[600px]  ">
           <div className="md:flex">
             <div className="md:shrink-0">
@@ -76,16 +78,6 @@ export default function Home() {
             <div className="absolute left-[200px] top-[58px]">
               <Image width={230} src={imageDos} className="-rotate-12" />
             </div>
-
-            {/* <div className="border-2 border-black absolute top-20 left-40 w-[250px] h-[300px]   rounded-br-lg -rotate-12">
-              <Image
-                width={200}
-                // height={200}
-                alt="NextUI hero Image"
-                src={imagenDos}
-                className="rounded-tl-lg rounded-br-lg  "
-              />
-            </div> */}
           </div>
         </div>
         <div className="w-[600px] text-start ml-8">
@@ -126,10 +118,12 @@ export default function Home() {
       <div className="flex bg-white w-[100%] mt-4">
         <section className=" m-0 h-[100%]  w-screen bg-white p-0 flex flex-grow items-center justify-center">
           <div className="bg-white w-[90%] h-[90%] ">
-            <div className="flex flex-col">
+            <div className=" flex flex-col">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
-                {mascotasFiltradas.map((mascota) => (//aca hago llamo a la constante asi no se muestran las cards.(nacho)
-                
+                {mascotasFiltradas.map(
+                  (
+                    mascota //aca hago llamo a la constante asi no se muestran las cards.(nacho)
+                  ) => (
                     <div key={mascota.id}>
                       <PetCard
                         key={mascota.id}
@@ -142,7 +136,8 @@ export default function Home() {
                         peso={mascota.peso}
                       />
                     </div>
-                  ))}
+                  )
+                )}
               </div>
               <div className="pt-[20px] flex justify-center">
                 <Paginated
