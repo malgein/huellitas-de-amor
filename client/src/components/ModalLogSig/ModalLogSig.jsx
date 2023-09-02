@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
+import { useAuth } from "../../../../server/src/context/AuthContext";
 
 export default function ModalLogSig() {
   const [user, setUser] = useState({
@@ -110,6 +110,7 @@ export default function ModalLogSig() {
         <img src={google} className="w-6 h-6" alt="" />
         Google login
       </Button>
+
       <p className="my-4 text-sm flex justify-between px-3">
         ¿No tienes Cuenta?
         <Link to="/registro" className="text-blue-700 hover:text-blue-900">

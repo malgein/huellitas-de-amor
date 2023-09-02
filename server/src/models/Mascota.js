@@ -42,9 +42,16 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
+      estado: {
+        type: DataTypes.ENUM('Adoptado', 'En adopción', 'En Proceso'),
+        defaultValue: 'En adopción',
+        allowNull: false
+      },
+
     },
     {
       timestamps: false,
     }
+    
   );
 };

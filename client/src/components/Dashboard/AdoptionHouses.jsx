@@ -1,48 +1,8 @@
-// import React, {useEffect} from 'react'
-// import Sidebar from './Sidebar'
-// import Dashboardview from './DashboardView'
-// import { getAllHomes } from '../../redux/actions'
-// import {useSelector , useDispatch} from 'react-redux'
-
-
-
-// function AdoptionHouses() {
-
-//   const casasDeAdopcion = useSelector(state => state.casasDeAdopcion)
-
-//   const dispatch = useDispatch()
-
-//   useEffect(() => {
-//     dispatch(getAllHomes())
-//   },[dispatch])
-
-//   return (
-//     <div>
-//        <div className='flex overflow-scroll'>
-// 			<div className="flex overflow-scroll ">
-//         <div className="basis-[12%] h-[100vh]">
-//           {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
-// 					<Sidebar />
-//         </div>
-//         <div className="basis-[88%] border overflow-scroll h-[100vh]">
-//           {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
-// 						<Dashboardview />
-// 					<div>
-//             Soy la gestion de casas de adopcion
-//             {console.log(casasDeAdopcion)}
-//           </div>
-//         </div>
-//       </div>
-// 		</div>
-//     </div>
-//   )
-// }
-
-// export default AdoptionHouses
-
 import React, {useEffect, useCallback, useState} from 'react'
+import { Link, useNavigate } from "react-router-dom";
+import PathRoutes from "../../helpers/Routes.helper";
 import Sidebar from './Sidebar'
-import { getAllHomes, editHouses, deleteHouses } from '../../redux/actions'
+import { getAllHomes, modCompleteHouse, deleteHouses } from '../../redux/actions'
 import {useSelector , useDispatch} from 'react-redux'
 import {
   Table,
@@ -92,6 +52,8 @@ function AdoptionHouses() {
 
   const [houseModified , setHouseModified] = useState(true)
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     if(houseModified){
       dispatch(getAllHomes())
@@ -119,30 +81,69 @@ function AdoptionHouses() {
     })
   }
 
+  const handleNavigate = (id) => {
+    navigate(PathRoutes.DETAILHOUSE.replace(":id", id))
+  }
+
   //Funcion que modifica cualquier propiedad de casas de adopcion
   const handleEdit = async(id) => {
     console.log(id)
     const { value: formValues } = await Swal.fire({
-      title: 'Introduce la propiedad y el valor que deseas modificar',
+      title: 'Introduce los nuevos datos de la casa de adopcion que deseas modificar',
       html:
-        '<input id="swal-input1" class="swal2-input">' +
-        '<input id="swal-input2" class="swal2-input">',
+      'Foto de la casa de adopcion </br>' +
+      '<input id="swal-input1"  class="swal2-input" placeholder="Introduce el url de la imagen" required> </br> </br>' +
+      'Nombre de la Organizacion </br>' +
+      '<input id="swal-input2" class="swal2-input" placeholder="Introduce el nombre..."> </br> </br>' +
+      'Nombre del contacto </br>' +
+      '<input id="swal-input3" class="swal2-input" placeholder="Nombre de contacto...">  </br> </br>' +
+      'Email del contacto </br>' +
+      '<input id="swal-input4" class="swal2-input" placeholder="@mail.com"> </br> </br>' +
+      'Telefono de la Organizacion</br> ' +
+      '<input id="swal-input5" class="swal2-input" placeholder="Telefono de la organizacion"> </br> </br>' +
+      'Ubicacion de la casa de adopcion </br >' +
+      '<input id="swal-input6" class="swal2-input" placeholder="Ubicacion de la organizacion"> </br> ' ,
       focusConfirm: false,
       preConfirm: () => {
-        return [
+
+        // if(document.getElementById('swal-input1').value=== ''){
+        //   return  Swal.fire(`No puedes dejar el primer campo en blanco`)
+        // } else
+         return [
           document.getElementById('swal-input1').value,
-          document.getElementById('swal-input2').value
+          document.getElementById('swal-input2').value,
+          document.getElementById('swal-input3').value,
+          document.getElementById('swal-input4').value,
+          document.getElementById('swal-input5').value,
+          document.getElementById('swal-input6').value
         ]
       }
     })
     
-    if (formValues) {
-      const result = {[formValues[0]] : formValues[1]}
+    if (formValues[0]!=='' && formValues[1]!=='' && formValues[2]!=='' && formValues[3]!=='' && formValues[4]!=='' && formValues[5]!=='') {
+      const result = {
+        foto : [`${formValues[0]}`],
+        nombreDeOng: formValues[1],
+        nombreDeContacto: formValues[2],
+        email: formValues[3],
+        telefono: formValues[4],
+        ubicacion: formValues[5],
+      }
       console.log(result)
       // const resultJson = JSON.stringify(result)
-      dispatch(editHouses(id, result))
+      dispatch(modCompleteHouse(id, result))
       setHouseModified(true)
-      Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
+      Swal.fire({
+        icon: 'success',
+        text:'Modificacion exitosa!'
+        }
+      )
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'No se pudo modificar la casa de adopcion',
+        text: 'No puedes dejar campos en blanco!',
+      })
     }
   }
 
@@ -153,7 +154,7 @@ function AdoptionHouses() {
     {name: "CONTACTO", uid: "nombreDeContacto", sortable: true},
     {name: "TELEFONO", uid: "telefono", sortable: true},
     {name: "EMAIL", uid: "email"},
-    // {name: "STATUS", uid: "status", sortable: true},
+    // {name: "UBICACION", uid: "ubicacion", sortable: true},
     {name: "ACTIONS", uid: "actions"},
   ];  
 
@@ -219,11 +220,12 @@ function AdoptionHouses() {
       case "nombreDeOng":
         return (
           <User
-            avatarProps={{radius: "lg", src: user.avatar}}
-            description={user.nombreDeOng}
+          //AQUI va la imagen del usuario o de la casa de adopcion
+            avatarProps={{radius: "lg", src: user.foto}}
+            description={user.ubicacion}
             name={cellValue}
           >
-            {user.email}
+            {user.ubicacion}
           </User>
         );
       case "nombreDeContacto":
@@ -249,7 +251,7 @@ function AdoptionHouses() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Dynamic Actions">
-                <DropdownItem>Detalle</DropdownItem>
+                <DropdownItem onClick={() => handleNavigate(user.id)}>Detalle</DropdownItem>
                 <DropdownItem onClick={() => handleEdit(user.id)}>Editar</DropdownItem>
                 //!Aqui se borra y arriba se edita y se detalla
                 <DropdownItem  color="danger" className="text-danger" onClick={() => handleDelete(user.id)}>Borrar</DropdownItem>

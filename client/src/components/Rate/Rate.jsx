@@ -1,46 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import {useParams} from 'react-router-dom'
-import {Rating} from 'react-simple-star-rating'
-import styles from './Rate.module.css'
-import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Rating } from "react-simple-star-rating";
+import styles from "./Rate.module.css";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import axios from "axios";
 
-const Rate = () => {
-  
-  const [averageRating, setAverageRating] = useState(0);
-  const endPoint = "http://localhost:3001/rate/";
-  const { casaDeAdopcionId }= useParams();
-		const handleRatingChange = async (newRating) => {
-			try {
-				await axios.post(endPoint, { rating: newRating });
-				updateAverageRating();
-			} catch (error) {
-				console.error("Error al obtener la data", error);
-			}
-		};
+const Rate = ({id, rating}) => {
+	const basename = "https://huellitas-de-amor-production.up.railway.app";
+	// const basename = "http://localhost:3001";
+	// const { casaDeAdopcionId } = useParams();
+	console.log(id)
+	const endPoint = `${basename}/casaDeAdopcion/${id}`;
+	console.log(endPoint)
+	const handleRatingChange = async (newRating) => {
+		try {
+			await axios.post(`${endPoint}/ratings`, { rating: newRating });
+		} catch (error) {
+			console.error("Error al obtener la data", error);
+		}
+	};
+console.log(rating)
+	// 	const [ratingView, setRatingView] = useState(0);
+	const ratingProp= useState(rating);
+	
 
-		const updateAverageRating = async () => {
-			try {
-				const response = await axios.get(endPoint).data.average.toFixed(2);
-				setAverageRating(response);
-			} catch (error) {
-				console.error("Error al obtener la data", error);
-			}
-		};
 
-		useEffect(() => {
-			updateAverageRating();
-		}, [casaDeAdopcionId]);
 	return (
 		<div
-			className={styles.horizontalRating} /* Use the correct CSS module class */
+			className={styles.horizontalRating}
 			style={{
 				direction: "ltr",
 				fontFamily: "sans-serif",
 				touchAction: "none",
 			}}>
 			<Rating
-				value={averageRating}
-				onChange={handleRatingChange}
+				initialValue={ratingProp}
+				// onChange={handleRatingChange}
+				onClick={handleRatingChange}
 				transition
 				fillColorArray={["#f14f45", "#f16c45", "#f18845", "#f1b345", "#f1d045"]}
 				emptyIcon={
@@ -49,8 +45,8 @@ const Rate = () => {
 				fillIcon={<MdFavorite className={styles.horizontalStars} size={25} />}
 			/>
 		</div>
-
 	);
-}
+	
+};
 
 export default Rate;

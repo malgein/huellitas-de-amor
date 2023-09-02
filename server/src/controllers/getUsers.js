@@ -9,7 +9,7 @@ const getUsers = async () => {
 		if(!users) return {status: 404, message: "No existen usuarios"}
 		return users
 	}catch(error){
-		return error
+		return error.message
 	}
 }
 
