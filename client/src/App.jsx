@@ -66,10 +66,8 @@ function App() {
             element={<Donations />}
           />
 
-
           <Route path={PathRoutes.DETAILUSER} element={<DetailUser />} />
-          <Route path={PathRoutes.DETAILHOUSE} element={<DetailHouse/>} />
-
+          <Route path={PathRoutes.DETAILHOUSE} element={<DetailHouse />} />
         </Routes>
         {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
 
