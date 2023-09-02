@@ -5,11 +5,6 @@ const crearUsuario = require("../controllers/postCrearUsuario");
 // const getUsersId = require("../controllers/getUsersId");
 
 //controlador que llena la bd de usuarios para prueba
-
-
-
-
-
 const llenarUsuario = require("../utils/llenarUsuario");
 const getUsers = require("../controllers/getUsers");
 const modUserById = require("../controllers/modUsersById");
