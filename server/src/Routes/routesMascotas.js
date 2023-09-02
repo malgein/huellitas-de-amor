@@ -90,6 +90,23 @@ router.delete("/:id", async (req, res) => {
     return res.status(500).json({ mensaje: "Error en el servidor" });
   }
 });
+//Esta ruta es para actualizar el estado y la visibilidad de una mascota(nacho)
+router.put("/:id/estado", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { estado, visible } = req.body;
+
+    const updatedPet = await modPetById(id, { estado, visible });
+    
+    if (updatedPet) {
+      return res.status(200).json(updatedPet);
+    } else {
+      return res.status(404).json({ mensaje: "Mascota no encontrada" });
+    }
+  } catch (error) {
+    return res.status(500).json({ mensaje: "Error en el servidor" });
+  }
+});
 
 router.get('/fill', async(req, res) => {
   try {

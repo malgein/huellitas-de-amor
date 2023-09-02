@@ -5,6 +5,7 @@ import PathRoutes from "../../helpers/Routes.helper";
 import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar'
 import Swal from 'sweetalert2'
+
 import {
   Table,
   TableHeader,
@@ -22,17 +23,17 @@ import {
   User,
   Pagination,
 } from "@nextui-org/react";
-import {VerticalDotsIcon} from "./VerticalDotsIcon";
-import {SearchIcon} from "./SearchIcon";
-import {ChevronDownIcon} from "./ChevronDownIcon";
+import { VerticalDotsIcon } from "./VerticalDotsIcon";
+import { SearchIcon } from "./SearchIcon";
+import { ChevronDownIcon } from "./ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
-import {capitalize} from "./Accesory";
+import { capitalize } from "./Accesory";
 
 const statusColorMap = {
   active: "success",
   paused: "danger",
   vacation: "warning",
-}
+};
 
 // const columns = [
 //   {name: "NOMBRE", uid: "nombre"},
@@ -42,28 +43,30 @@ const statusColorMap = {
 // ];
 
 const statusOptions = [
-  {name: "Active", uid: "active"},
-  {name: "Paused", uid: "paused"},
-  {name: "Vacation", uid: "vacation"},
+  { name: "Active", uid: "active" },
+  { name: "Paused", uid: "paused" },
+  { name: "Vacation", uid: "vacation" },
 ];
 //!Esto muestra las columnas que se ven al inicio
+
 const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre","apellido", "nacionalidad",  "ubicacion", "direccion", "telefono",  "acerca", "actions"];
 
 
 function Users() {
+  const usuarios = useSelector((state) => state.usuarios);
 
-  const usuarios= useSelector((state) => state.usuarios)
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  const [userModified, setUserModified] = useState(true);
+
 
   const navigate = useNavigate()
-
-  const [userModified , setUserModified] = useState(true)
   
+
   useEffect(() => {
     //if (userModified) {
-      dispatch(getUsers());
-      // setUserModified(false); // Restablecer userDeleted después de obtener usuarios
+    dispatch(getUsers());
+    // setUserModified(false); // Restablecer userDeleted después de obtener usuarios
     //}
   }, [userModified, dispatch]);
 
@@ -80,11 +83,11 @@ function Users() {
   //       return [
   //         document.getElementById('swal-input1').value,
   //         document.getElementById('swal-input2').value,
-          
+
   //       ]
   //     }
   //   })
-    
+
   //   if (formValues) {
   //     const result = {[formValues[0]] : formValues[1]}
   //     console.log(result)
@@ -96,30 +99,31 @@ function Users() {
   //   }
   // }
 
-  const handleEdit = async(id) => {
-    console.log(id)
+  const handleEdit = async (id) => {
+    console.log(id);
     const { value: formValues } = await Swal.fire({
-      title: 'Introduce los nuevos datos del usuario que deseas modificar',
+      title: "Introduce los nuevos datos del usuario que deseas modificar",
       html:
-        'Nombre del usuario ' +
+        "Nombre del usuario " +
         '<input id="swal-input1" class="swal2-input"> </br> ' +
-        'Apellido del usuario' +
+        "Apellido del usuario" +
         '<input id="swal-input2" class="swal2-input"> </br> ' +
-        'Nacionalidad del usuario ' +
+        "Nacionalidad del usuario " +
         '<input id="swal-input3" class="swal2-input"> </br> ' +
+
         'ubicacion del usuario ' +
+
         '<input id="swal-input4" class="swal2-input"> </br> ' +
-        'Direccion del usuario ' +
+        "Direccion del usuario " +
         '<input id="swal-input5" class="swal2-input"> </br> ' +
-        'Telefono del usuario ' +
+        "Telefono del usuario " +
         '<input id="swal-input6" class="swal2-input"> </br> ' +
-        'Detalles  del usuario ' +
+        "Detalles  del usuario " +
         '<input id="swal-input7" class="swal2-input"> </br> ' +
-        'Email del usuario ' +
+        "Email del usuario " +
         '<input id="swal-input8" class="swal2-input"> </br> ' +
-        'Password del usuario ' +
-        '<input type="password" id="swal-input9" class="swal2-input"> </br> ' 
-        ,
+        "Password del usuario " +
+        '<input type="password" id="swal-input9" class="swal2-input"> </br> ',
       focusConfirm: false,
       preConfirm: () => {
         return [
@@ -184,8 +188,9 @@ function Users() {
         }
       )
       setUserModified(!userModified)
+
     }
-  }
+  };
 
   const handleNavigate = (id) => {
     navigate(PathRoutes.DETAILUSER.replace(":id", id))
@@ -193,25 +198,26 @@ function Users() {
 
   const handleDelete = (id) => {
     Swal.fire({
-      title: 'Seguro que quieres eliminar al usuario?',
+      title: "Seguro que quieres eliminar al usuario?",
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Si',
+      confirmButtonText: "Si",
       denyButtonText: `No`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Usuario borrado con exito', '', 'success')
-        dispatch(deleteUsers(id))
-        setUserModified(true)
-        console.log(userModified)
+        Swal.fire("Usuario borrado con exito", "", "success");
+        dispatch(deleteUsers(id));
+        setUserModified(true);
+        console.log(userModified);
       } else if (result.isDenied) {
-        Swal.fire('El usuario no ha sido borrado', '', 'info')
+        Swal.fire("El usuario no ha sido borrado", "", "info");
       }
-    })
-  }
+    });
+  };
 
   const columns = [
+
     {name: "ID", uid: "id", sortable: true},
     {name: "NOMBRE", uid: "nombre", sortable: true},
     {name: "APELLIDO", uid: "apellido", sortable: true},
@@ -220,13 +226,15 @@ function Users() {
     {name: "DIRECCION", uid: "direccion", sortable: true},
     {name: "TELEFONO", uid: "telefono" , sortable: true},
     // {name: "EMAIL", uid: "email", sortable: true},
-    {name: "ACERCA", uid: "acerca", sortable: true},
-    {name: "ACTIONS", uid: "actions"},
-  ];  
+    { name: "ACERCA", uid: "acerca", sortable: true },
+    { name: "ACTIONS", uid: "actions" },
+  ];
 
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
-  const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));
+  const [visibleColumns, setVisibleColumns] = React.useState(
+    new Set(INITIAL_VISIBLE_COLUMNS)
+  );
   const [statusFilter, setStatusFilter] = React.useState("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState({
@@ -240,7 +248,9 @@ function Users() {
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
 
-    return columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
+    return columns.filter((column) =>
+      Array.from(visibleColumns).includes(column.uid)
+    );
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
@@ -248,13 +258,16 @@ function Users() {
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
-        user.nombre.toLowerCase().includes(filterValue.toLowerCase()),
+        user.nombre.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
     //Para modificar el estado del usuario
-    if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
+    if (
+      statusFilter !== "all" &&
+      Array.from(statusFilter).length !== statusOptions.length
+    ) {
       filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.status),
+        Array.from(statusFilter).includes(user.status)
       );
     }
 
@@ -287,8 +300,8 @@ function Users() {
       case "nombre":
         return (
           <User
-          //aqui va la foto de la mascota
-            avatarProps={{radius: "lg", src: user.foto}}
+            //aqui va la foto de la mascota
+            avatarProps={{ radius: "lg", src: user.foto }}
             description={user.email}
             name={cellValue}
           >
@@ -299,12 +312,19 @@ function Users() {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">{user.raza}</p>
+            <p className="text-bold text-tiny capitalize text-default-400">
+              {user.raza}
+            </p>
           </div>
         );
       case "sexo":
         return (
-          <Chip className="capitalize" color={statusColorMap[user.sexo]} size="sm" variant="flat">
+          <Chip
+            className="capitalize"
+            color={statusColorMap[user.sexo]}
+            size="sm"
+            variant="flat"
+          >
             {cellValue}
           </Chip>
         );
@@ -320,8 +340,15 @@ function Users() {
               <DropdownMenu aria-label="Dynamic Actions">
                 <DropdownItem onClick={() => handleNavigate(user.id)}>Detalle</DropdownItem>
                 <DropdownItem onClick={() => handleEdit(user.id)}>Editar</DropdownItem>
+
                 //!Aqui se borra y arriba se edita y se detalla
-                <DropdownItem  color="danger" className="text-danger" onClick={() => handleDelete(user.id)}>Borrar</DropdownItem>
+                <DropdownItem
+                  color="danger"
+                  className="text-danger"
+                  onClick={() => handleDelete(user.id)}
+                >
+                  Borrar
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -357,10 +384,10 @@ function Users() {
     }
   }, []);
 
-  const onClear = useCallback(()=>{
-    setFilterValue("")
-    setPage(1)
-  },[])
+  const onClear = useCallback(() => {
+    setFilterValue("");
+    setPage(1);
+  }, []);
 
   const topContent = React.useMemo(() => {
     return (
@@ -399,7 +426,10 @@ function Users() {
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button
+                  endContent={<ChevronDownIcon className="text-small" />}
+                  variant="flat"
+                >
                   Columnas
                 </Button>
               </DropdownTrigger>
@@ -425,7 +455,9 @@ function Users() {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {usuarios.length} Usuarios</span>
+          <span className="text-default-400 text-small">
+            Total {usuarios.length} Usuarios
+          </span>
           <label className="flex items-center text-default-400 text-small">
             Filas por pagina:
             <select
@@ -468,10 +500,20 @@ function Users() {
           onChange={setPage}
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
+          <Button
+            isDisabled={pages === 1}
+            size="sm"
+            variant="flat"
+            onPress={onPreviousPage}
+          >
             Previo
           </Button>
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
+          <Button
+            isDisabled={pages === 1}
+            size="sm"
+            variant="flat"
+            onPress={onNextPage}
+          >
             Siguiente
           </Button>
         </div>
@@ -481,60 +523,61 @@ function Users() {
 
   return (
     <div >
-       <div className='flex overflow-scroll '>
-			<div className="flex overflow-scroll ">
-        <div className="basis-[12%] h-[100vh]">
-          {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
-					<Sidebar />
-        </div>
-        <div className="basis-[88%] border overflow-scroll h-[100vh]">
-          {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
-						
-					<div className='mt-10'>
-            {/* Soy la gestion de casas de adopcion */}
-            {/* {console.log(casasDeAdopcion)} */}
-            <Table
-      aria-label="Example table with custom cells, pagination and sorting"
-      isHeaderSticky
-      bottomContent={bottomContent}
-      bottomContentPlacement="outside"
-      classNames={{
-        wrapper: "max-h-[382px]",
-      }}
-      selectedKeys={selectedKeys}
-      selectionMode="multiple"
-      sortDescriptor={sortDescriptor}
-      topContent={topContent}
-      topContentPlacement="outside"
-      onSelectionChange={setSelectedKeys}
-      onSortChange={setSortDescriptor}
-    >
-      <TableHeader columns={headerColumns}>
-        {(column) => (
-          <TableColumn
-            key={column.uid}
-            align={column.uid === "actions" ? "center" : "start"}
-            allowsSorting={column.sortable}
-          >
-            {/* {column.name} */}
-            {column.name}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody emptyContent={"No se encontraron Usuarios"} items={sortedItems}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
-          </div>
-        </div>
-      </div>
-		</div>
-    </div>
-  )
+    <div className='flex overflow-scroll '>
+   <div className="flex overflow-scroll ">
+     <div className="basis-[12%] h-[100vh]">
+       {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
+       <Sidebar />
+     </div>
+     <div className="basis-[88%] border overflow-scroll h-[100vh]">
+       {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
+         
+       <div className='mt-10'>
+         {/* Soy la gestion de casas de adopcion */}
+         {/* {console.log(casasDeAdopcion)} */}
+         <Table
+   aria-label="Example table with custom cells, pagination and sorting"
+   isHeaderSticky
+   bottomContent={bottomContent}
+   bottomContentPlacement="outside"
+   classNames={{
+     wrapper: "max-h-[382px]",
+   }}
+   selectedKeys={selectedKeys}
+   selectionMode="multiple"
+   sortDescriptor={sortDescriptor}
+   topContent={topContent}
+   topContentPlacement="outside"
+   onSelectionChange={setSelectedKeys}
+   onSortChange={setSortDescriptor}
+ >
+   <TableHeader columns={headerColumns}>
+     {(column) => (
+       <TableColumn
+         key={column.uid}
+         align={column.uid === "actions" ? "center" : "start"}
+         allowsSorting={column.sortable}
+       >
+         {/* {column.name} */}
+         {column.name}
+       </TableColumn>
+     )}
+   </TableHeader>
+   <TableBody emptyContent={"No se encontraron Usuarios"} items={sortedItems}>
+     {(item) => (
+       <TableRow key={item.id}>
+         {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+       </TableRow>
+     )}
+   </TableBody>
+ </Table>
+       </div>
+     </div>
+   </div>
+ </div>
+ </div>
+
+  );
 }
 
-export default Users
+export default Users;

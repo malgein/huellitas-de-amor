@@ -4,10 +4,6 @@ const { Mascota } = require('../db');
 const allPets = require('./dataPets'); 
 
 const fillPets = async (req, res) => {
-// console.log(res)
-  // const DB = await Mascota.count();
-  // if (!DB) {
-  //   console.log('Creando BD')
     try {
 
       await Mascota.bulkCreate(allPets);
@@ -17,15 +13,7 @@ const fillPets = async (req, res) => {
         res.status(200).json({ message: 'Datos de mascotas llenados exitosamente' });
       } else {
         res.status(400).json({Error: 'No existe el modelo mascota en la base de datos'})
-      }
-      
-      // res
-			// 	? res
-			// 			.status(200)
-			// 			.json({ message: "Datos de mascotas llenados exitosamente" })
-      // 	: console.log('el objeto es undefined');
-      // console.log('DB CREADA')
-      
+      } 
     } catch (error) {
       console.error('Error al llenar los datos:', error);
       res.status(500).json({ error: 'Error al llenar los datos de mascotas' });

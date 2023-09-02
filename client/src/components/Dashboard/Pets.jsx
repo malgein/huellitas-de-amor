@@ -33,6 +33,13 @@ const statusColorMap = {
   Hembra: "danger",
   // vacation: "warning",
 };
+//esto es para darle color al fondo de los estados(Nacho)
+const estadoColorMap = {
+  'adoptado': 'danger',    // Rojo
+  'en adopción': 'success', // Verde
+  'en proceso': 'warning',  // Amarillo
+};
+
 
 //Aqui piuedo colocar la disponibilidad de la mascota adoptada, en busca de un hogar
 const statusOptions = [
@@ -41,7 +48,7 @@ const statusOptions = [
   {name: "Vacation", uid: "vacation"},
 ];
 //!Esto muestra las columnas que se ven al inicio
-const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre", "raza","sexo", "edad",  "tamano", "peso", "actions"];
+const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre", "raza","sexo", "edad",  "tamano", "peso","estado", "actions"];
 
 
 function Pets() {
@@ -216,6 +223,7 @@ function Pets() {
     {name: "EDAD", uid: "edad", sortable: true},
     {name: "PESO", uid: "peso", sortable: true},
     // {name: "STATUS", uid: "status", sortable: true},
+    {name: "ESTADO", uid: "estado", sorteable: true},//hice esta linea para que se vea en la tabla (nacho)
     {name: "TAMANO", uid: "tamano" , sortable: true},
     {name: "ACTIONS", uid: "actions"},
   ];  
@@ -298,6 +306,20 @@ function Pets() {
             <p className="text-bold text-tiny capitalize text-default-400">{user.raza}</p>
           </div>
         );
+        //esto lo puse para darle el Estilo al estado (Nacho)
+        case "estado":
+          return (
+            <Chip
+              className="capitalize"
+              color={estadoColorMap[cellValue]}
+              size="sm"
+              variant="flat"
+            >
+              {cellValue}
+            </Chip>
+          );
+        
+  
       case "sexo":
         return (
           <Chip className="capitalize" color={statusColorMap[user.sexo]} size="sm" variant="flat">
@@ -487,9 +509,30 @@ function Pets() {
         <div className="basis-[88%] border overflow-scroll h-[100vh]">
           {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
 					<div className='mt-10'>
-            {/* Soy la gestion de casas de adopcion */}
-            {/* {console.log(casasDeAdopcion)} */}
-            <Table
+           <div className="flex">
+                {mascotas.map((mascota) => (
+                  <div
+                    key={mascota.id}
+                    className={`p-4 rounded-lg shadow-md mb-4 ${
+                      // Aplicar colores de fondo según el estado de la mascota
+                      mascota.estado === "en Adopción"
+                        ? "bg-blue-200"
+                        : mascota.estado === "en proceso"
+                        ? "bg-yellow-200"
+                        : mascota.estado === "adoptado"
+                        ? "bg-green-200"
+                        : "bg-gray-200" // Color predeterminado si el estado no coincide
+                    }`}>
+                          </div>
+    ))}
+  </div>
+</div>
+                      
+                
+                  
+
+                    
+<Table
       aria-label="Example table with custom cells, pagination and sorting"
       isHeaderSticky
       bottomContent={bottomContent}
@@ -512,7 +555,6 @@ function Pets() {
             align={column.uid === "actions" ? "center" : "start"}
             allowsSorting={column.sortable}
           >
-            {/* {column.name} */}
             {column.name}
           </TableColumn>
         )}
@@ -525,12 +567,14 @@ function Pets() {
         )}
       </TableBody>
     </Table>
-          </div>
+  </div>
+
         </div>
       </div>
 		</div>
-    </div>
-  )
-}
+  );
+                
+  
+        }
 
-export default Pets
+export default Pets;

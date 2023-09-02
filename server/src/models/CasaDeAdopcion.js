@@ -6,12 +6,14 @@ module.exports = (sequelize) => {
 		{
 			id: {
 				type: DataTypes.INTEGER,
+				autoIncrement: true,
 				allowNull: false,
 				primaryKey: true,
 			},
 			foto: {
-				type: DataTypes.JSON, // Cambiado a JSON para representar un array de URLs
-        allowNull: false,
+
+				type: DataTypes.JSON,
+				allowNull: false
 			},
 			nombreDeOng: {
 				type: DataTypes.STRING(50),
@@ -30,17 +32,18 @@ module.exports = (sequelize) => {
 				allowNull: false,
 			},
 			rating: {
-				type: DataTypes.INTEGER,
+
+				type: DataTypes.FLOAT,
 				default: 0,
 			},
 			ratings: {
-				type: DataTypes.ARRAY(DataTypes.INTEGER),
+				type: DataTypes.ARRAY(DataTypes.FLOAT),
 				default: [],
 			},
 			ubicacion: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-      }
+				type: DataTypes.STRING(50),
+				allowNull:false
+			}
 		},
 		{ timestamps: false }
 	);

@@ -10,7 +10,7 @@ import { getPetById } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
-import { useAuth } from "../../context/AuthContext";
+// import { useAuth } from "../../context/AuthContext";
 
 export default function DetailHouse() {
   const { id } = useParams();
