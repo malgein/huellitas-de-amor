@@ -57,8 +57,8 @@ export default function Home() {
 
   //h-screen w-screen
   return (
-    <div className="x-[50px] flex justify-center items-center flex-col ">
-      <div className=" flex flex-row h-[550px] mt-12">
+    <div className="x-[50px] flex justify-center items-center flex-col border border-black w-[1500px] mx-auto ">
+      <div className="border-4 border-black flex flex-row h-[550px] mt-12 mx-auto">
         <div className="relative w-[600px]  ">
           <div className="md:flex">
             <div className="md:shrink-0">

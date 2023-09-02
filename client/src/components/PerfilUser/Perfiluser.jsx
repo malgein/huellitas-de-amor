@@ -92,10 +92,10 @@ const Perfil = () => {
   }, [id]);
 
   return (
-    <div className="flex justify-center  ">
+    <div className="border-2 flex justify-center ">
       {usuario ? (
-        <div className="border max-w-3xl rounded-2xl shadow-lg  ml-2 mt-10 mb-unit-8 w-[800px]">
-          <div className="border-2 rounded-t-lg h-[300px] relative ">
+        <div className=" w-[1000px] mx-auto rounded-2xl shadow-lg   mb-unit-8">
+          <div className="border-2 rounded-t-lg h-[350px] w-[1000px] relative ">
             {/* aqui va una imagen */}
             {perfil.imagenPortada && (
               <img
@@ -103,7 +103,7 @@ const Perfil = () => {
                 alt="Imagen de portada"
                 onClick={handleCambioImagenPortada}
                 style={{ cursor: "pointer" }}
-                className="h-[300px] w-[800px] rounded-t-lg"
+                className="h-[350px] w-[1000px] rounded-t-lg"
               />
             )}
             {!perfil.imagenPortada && (
