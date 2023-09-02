@@ -1,7 +1,6 @@
 
-import React, { useEffect, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React, { useState } from "react";
+import { Formik, Form } from "formik";
 import { Button } from "@nextui-org/react";
 import styles from "./AgregarMascota.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,14 +9,17 @@ import {
   eliminarImagenes,
   limpiarImagenes,
 } from "../../redux/actions";
-
+import {useNavigate}from "react-router-dom"
 import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
-import { Button } from "@nextui-org/button";
-import { Formik, Form } from "formik";
+import validationSchema from "../../Schemas/agregarMascotaSchema"
+import FormSelect from "../FormSelect/FormSelect"
+
+
 import Swal from "sweetalert2";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import SubirImagenes from "../SubirImagenes/SubirImagenes";
+
+
 
 
 const AgregarMascota = () => {
