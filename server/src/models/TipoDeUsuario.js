@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
       tipo: {
         type: DataTypes.ENUM("Administrador", "Centro De Adopcion", "Usuario"),
         allowNull: false,
+        defaultValue: 'Usuario'
       },
     },
     { timestamps: false }
