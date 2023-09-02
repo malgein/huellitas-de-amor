@@ -35,7 +35,6 @@ router.get("/fill", fillDonations);
 router.use("/donaciones", postDonaciones);
 router.use("/usuario", postUsuario);
 
-
 router.put("/usuario/:id", actualizarPerfil);
 
 // router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
@@ -49,7 +48,6 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
-
 
 // router.post("/", crearUsuario);
 

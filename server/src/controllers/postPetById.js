@@ -10,9 +10,8 @@ const postPetById = async ({
   tamano,
   raza,
   peso,
-  casaid,
   especie,
-  /* casaDeAdopcionId */
+  casaDeAdopcionId
 }) => {
   try {
     if (
@@ -24,8 +23,8 @@ const postPetById = async ({
       !tamano ||
       !raza ||
       !peso ||
-      !especie /* || 
-      !casaDeAdopcionId */
+      !especie || 
+      !casaDeAdopcionId
     ) {
       return { status: 401, message: "Faltan datos" };
     }

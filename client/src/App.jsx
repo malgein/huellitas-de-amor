@@ -27,7 +27,6 @@ import Notificaciones from "./components/Notificaciones/Notificaciones";
 
 import { AuthProvider } from "../../server/src/context/AuthContext";
 
-
 function App() {
   const location = useLocation();
   return (
