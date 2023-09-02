@@ -43,7 +43,7 @@ export default function Detail() {
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
     }
-  }}, [dispatch, mascota.casaDeAdopcionId]);
+  }, [dispatch, mascota.casaDeAdopcionId]);
 
   // if (!mascota) {
   //   return <p> Aguarde unos Instantes...</p>;
@@ -64,6 +64,7 @@ export default function Detail() {
   // };
 =======
   
+
   const handleConfetti = () => {
     confetti({});
   };
