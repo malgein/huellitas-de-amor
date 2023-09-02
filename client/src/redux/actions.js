@@ -44,8 +44,8 @@ const handleError = (dispatch, errorType, error) => {
 
 
 export const EDIT_USER = "EDIT_USER";
-const basename = "https://huellitas-de-amor-production.up.railway.app";
-// const basename = "http://localhost:3001";
+// const basename = "https://huellitas-de-amor-production.up.railway.app";
+const basename = "http://localhost:3001";
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
@@ -310,12 +310,19 @@ export const modCompleteHouse  = (id, updatedProperties) => {
 
 export const logicalDeletePet = (id, estado) => async (dispatch) => {
   try {
-    await axios.put(`${ENDPOINT}/${id}/estado`, { estado }); // Marcamos la mascota como borrada
-    console.log("Respuesta del servidor:", response.data);
-    dispatch({ type: LOGICAL_DELETE_PET, payload: id });
+      const response = await axios.put(`${ENDPOINT}/${id}/estado`, { estado });
+      if (response.status === 200) {
+          dispatch({ type: LOGICAL_DELETE_PET, payload: id });
+      } else {
+          console.error('Error al actualizar el estado de la mascota:', response);
+      }
   } catch (error) {
-    console.log(error);
+      console.error('Error al actualizar el estado de la mascota:', error);
   }
+
+
+
+
 };
 //manejamos el estado y la visualizacion de la mascota (nacho)
 

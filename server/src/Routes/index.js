@@ -13,38 +13,30 @@ const postSendEmail = require("../controllers/postSendEmail");
 const postMercadoPago = require("../controllers/postMercadoPago");
 const fillDonations = require("../controllers/fillDonations");
 
-// const rateCasas = require("./routesRateCasas")
+// const rateCasas = require("./routesRateCasas");
+//Todas las rutas del usuario
 const fillPets = require('../utils/fillPets')
 // const postDonaciones = require('./routesDonaciones')
 const postUsuario = require('./routesUsuario')
-
-
 //const rateCasas = require("./routesRateCasas");
 
 //Todas las rutas del usuario
-
-
 const postDonaciones = require("./routesDonaciones");
 const postCrearUsuario = require("./routesUsuario");
 const getUsersId = require("../controllers/getUsersId");
-
+// const { getUsersId } = require("./routesUsuario");
 // router.get("/fill", fillPets);
+// router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
 
-
-
-
+// const postUsuario = require("../controllers/postCrearUsuario");
 // const { perfilActualizado } = require("./routesEditarPerfil");
 const { actualizarPerfil } = require("../controllers/putEditarPerfil");
-
-const modPetById = require("../controllers/modPetById");
-
-
 router.get("/perfil/:id", getUsersId);
 
 router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fill", fillDonations);
-// router.use("/donaciones", postDonaciones);
+router.use("/donaciones", postDonaciones);
 router.use("/usuario", postUsuario);
 
 router.put("/usuario/:id", actualizarPerfil);
