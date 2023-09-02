@@ -16,7 +16,8 @@ import Footer from "./components/Footer/Footer";
 import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
 import Registro from "./components/Registro/Registro";
 import Dashboard from "./components/Dashboard/Dashboard";
-
+import DetailUser from "./components/Dashboard/DetailUser";
+import DetailHouse from "./components/Dashboard/detailHouse";
 import CasaDeAdopcion from "./components/CasaDeAdopcion/CasaDeAdopcion";
 
 import Pets from "./components/Dashboard/Pets";
@@ -64,6 +65,11 @@ function App() {
             path={PathRoutes.DASHBOARD_DONACIONES}
             element={<Donations />}
           />
+
+
+          <Route path={PathRoutes.DETAILUSER} element={<DetailUser />} />
+          <Route path={PathRoutes.DETAILHOUSE} element={<DetailHouse/>} />
+
         </Routes>
         {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
 
