@@ -14,15 +14,13 @@ const postMercadoPago = require("../controllers/postMercadoPago");
 const fillDonations = require("../controllers/fillDonations");
 
 // const rateCasas = require("./routesRateCasas")
-const fillPets = require('../utils/fillPets')
+const fillPets = require("../utils/fillPets");
 // const postDonaciones = require('./routesDonaciones')
-const postUsuario = require('./routesUsuario')
-
+const postUsuario = require("./routesUsuario");
 
 //const rateCasas = require("./routesRateCasas");
 
 //Todas las rutas del usuario
-
 
 const postDonaciones = require("./routesDonaciones");
 const postCrearUsuario = require("./routesUsuario");
@@ -30,14 +28,10 @@ const getUsersId = require("../controllers/getUsersId");
 
 // router.get("/fill", fillPets);
 
-
-
-
 // const { perfilActualizado } = require("./routesEditarPerfil");
 const { actualizarPerfil } = require("../controllers/putEditarPerfil");
 
 const modPetById = require("../controllers/modPetById");
-
 
 router.get("/perfil/:id", getUsersId);
 
@@ -47,12 +41,10 @@ router.get("/fill", fillDonations);
 // router.use("/donaciones", postDonaciones);
 router.use("/usuario", postUsuario);
 
-<<<<<<< HEAD
 //router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
 
 // router.put("/usuario/:id", perfilActualizado);
-=======
->>>>>>> origin/qa
+
 router.put("/usuario/:id", actualizarPerfil);
 
 // router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
@@ -67,10 +59,8 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
-<<<<<<< HEAD
-=======
-router.put("/:id/estado", modPetById)
->>>>>>> origin/qa
+
+router.put("/:id/estado", modPetById);
 
 // router.post("/", crearUsuario);
 
