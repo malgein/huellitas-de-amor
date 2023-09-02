@@ -11,6 +11,7 @@ module.exports = (sequelize) => {
 				primaryKey: true,
 			},
 			foto: {
+
 				type: DataTypes.JSON,
 				allowNull: false
 			},
@@ -31,6 +32,7 @@ module.exports = (sequelize) => {
 				allowNull: false,
 			},
 			rating: {
+
 				type: DataTypes.FLOAT,
 				default: 0,
 			},
