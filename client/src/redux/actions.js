@@ -36,8 +36,6 @@ export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
 export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
 
 
-// const basename = "https://huellitas-de-amor-production.up.railway.app";
-// const basename = "http://localhost:3001";
 
 const handleError = (dispatch, errorType, error) => {
   console.error(error);
@@ -310,22 +308,33 @@ export const modCompleteHouse  = (id, updatedProperties) => {
 };
 
 
-
-export const logicalDeletePet = (id) => async (dispatch) => {
+export const logicalDeletePet = (id, estado) => async (dispatch) => {
   try {
-    await axios.put(`${ENDPOINT}/${id}`, { isDeleted: true }); // Marcamos la mascota como borrada
-    dispatch({ type: LOGICAL_DELETE_PET, payload: id });
+      const response = await axios.put(`${ENDPOINT}/${id}/estado`, { estado });
+      if (response.status === 200) {
+          dispatch({ type: LOGICAL_DELETE_PET, payload: id });
+      } else {
+          console.error('Error al actualizar el estado de la mascota:', response);
+      }
   } catch (error) {
-    console.log(error);
+      console.error('Error al actualizar el estado de la mascota:', error);
   }
+
+
+
+
 };
 //manejamos el estado y la visualizacion de la mascota (nacho)
-export const changePetStatus = (id, estado, visible) => async (dispatch) => {
-  try {
-    await axios.put(`${ENDPOINT}/${id}/estado`, { estado, visible }); // Cambiar el estado y la visibilidad de la mascota
-    dispatch({ type: CHANGE_PET_STATUS, payload: { id, estado, visible } });
-  } catch (error) {
-    console.log(error);
-  }
-};
+
+
+// export const changePetStatus = (id, estado, visible) => async (dispatch) => {
+//   try {
+//     await axios.put(`${ENDPOINT}/${id}/estado`, { estado, visible }); // Cambiar el estado y la visibilidad de la mascota
+//     dispatch({ type: CHANGE_PET_STATUS, payload: { id, estado, visible } });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+
 
