@@ -485,6 +485,8 @@ function Users() {
   const bottomContent = React.useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
+        {usuarios.map((user) => console.log(user.tipoDeUsuarioId))}
+        {/* {console.log(usuarios)} */}
         <span className="w-[30%] text-small text-default-400">
           {selectedKeys === "all"
             ? "All items selected"
