@@ -61,8 +61,8 @@ export default function Home() {
   );
   //h-screen w-screen
   return (
-    <div className="md:flex sm:text-center x-[50px] flex justify-center items-center flex-col">
-      <div className="md:flex sm:text-center flex flex-row h-[550px] mt-12">
+    <div className="x-[50px] flex justify-center items-center flex-col w-[1500px] mx-auto ">
+      <div className="flex flex-row  h-[550px] mt-12 mx-auto">
         <div className="relative w-[600px]  ">
           <div className="md:flex">
             <div className="md:shrink-0">
@@ -114,13 +114,14 @@ export default function Home() {
       <div className="flex bg-white w-[100%] mt-4">
         <section className=" m-0 h-[100%]  w-screen bg-white p-0 flex flex-grow items-center justify-center">
           <div className="bg-white w-[90%] h-[90%] ">
-            <div className="flex flex-col">
+            <div className=" flex flex-col">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
                 {mascotasFiltradas.map(
                   (
                     mascota //aca hago llamo a la constante asi no se muestran las cards.(nacho)
                   ) => (
-                    <div className="z-index-0" key={mascota.id}>
+
+                    <div key={mascota.id}>
                       <PetCard
                         key={mascota.id}
                         id={mascota.id}
@@ -137,7 +138,6 @@ export default function Home() {
               </div>
               <div className="pt-[20px] pb-[20px] flex justify-center">
                 <Paginated
-                  className="z-index-1"
                   petsPerPage={petsPerPage}
                   mascotas={mascotas?.length}
                   paginado={paginado}

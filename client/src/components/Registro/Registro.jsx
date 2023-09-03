@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import styles from "./Registro.module.css";
+import styles from "./registro.module.css";
 import FormInput from "../FormInput/FormInput";
 import { Button } from "@nextui-org/button";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import validationSchema from "./Validaciones";
@@ -13,24 +13,7 @@ import NewLogin from "../NewRegis/NewLogin";
 import { NuevoRegistro } from "../NewRegis/NewRegistro";
 
 const Registro = () => {
-  const { id } = useParams();
-  const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    password: "",
-  });
-
   const Navigate = useNavigate();
-  // const history = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
 
   const initialValues = {
     nombre: "",
@@ -42,12 +25,11 @@ const Registro = () => {
   const dispatchRedux = () => {
     Navigate("/");
   };
+
   // const basename = "https://huellitas-de-amor-production.up.railway.app";
   const basename = "http://localhost:3001";
 
   const onSubmit = (values) => {
-    // e.preventDefault();
-
     axios
       .post(`${basename}/usuario`, values)
       .then((res) => {
@@ -68,15 +50,13 @@ const Registro = () => {
   };
 
   return (
-    // <div className={styles.formcontainer}>
-    <div className="flex flex-col items-center">
+    <div className={styles.formcontainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        // enableReinitialize={true}
       >
-        {({ isSubmitting, errors, values, resetForm }) => (
+        {({ isSubmitting, errors }) => (
           <Form>
             <div className={styles.tittle}>
               <h1>Registrate</h1>
@@ -87,8 +67,6 @@ const Registro = () => {
                 name="nombre"
                 error={errors.nombre}
                 placeholder="Nombre"
-                value={formData.nombre}
-                onChange={handleChange}
               />
             </div>
             <div>
@@ -97,8 +75,6 @@ const Registro = () => {
                 name="apellido"
                 error={errors.apellido}
                 placeholder="Apellido"
-                value={formData.apellido}
-                onChange={handleChange}
               />
             </div>
             <div>
@@ -107,8 +83,6 @@ const Registro = () => {
                 label="Email"
                 name="email"
                 error={errors.email}
-                value={formData.email}
-                onChange={handleChange}
               />
             </div>
             <div>
@@ -117,8 +91,6 @@ const Registro = () => {
                 label="Contraseña"
                 name="password"
                 error={errors.password}
-                value={formData.password}
-                onChange={handleChange}
               />
             </div>
 
