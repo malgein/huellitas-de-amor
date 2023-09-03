@@ -36,19 +36,22 @@ const { actualizarPerfil } = require("../controllers/putEditarPerfil");
 const modPetById = require("../controllers/modPetById");
 const fillTypeUsers = require('../utils/fillTypeUsers')
 const usuarioTipoController = require('../controllers/usuarioTipoController')
-const findTypesUsers = require('../controllers/findTypeUsers')
+const donationsUser = require('../controllers/donationsUser')
+const donationsHouse = require('../controllers/donationsHouse')
+
+
+router.get("/relacion-user-type", usuarioTipoController);
+router.use("/donaciones", postDonaciones);
 router.get("/perfil/:id", getUsersId);
-
-
-router.get('/tiposDeUsuarios',  findTypesUsers)
-router.get("/relacion", usuarioTipoController);
+// router.get('/tiposDeUsuarios',  findTypesUsers)
+router.get("/relacion-donation-house", donationsHouse);
+router.get("/relacion-donation-user", donationsUser);
 router.get("/perfil/:id", getUsersId);
 router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
-// router.get("/fill", fillDonations);
+router.get("/fillDonations", fillDonations);
 router.get("/fillPets", fillPets);
 router.get("/fillTypeUsers", fillTypeUsers);
-router.use("/donaciones", postDonaciones);
 router.use("/usuario", postUsuario);
 
 
