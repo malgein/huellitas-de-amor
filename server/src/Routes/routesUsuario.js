@@ -3,18 +3,14 @@ const router = Router();
 const crearUsuario = require("../controllers/postCrearUsuario");
 const getUsersId = require("../controllers/getUsersId");
 //controlador que llena la bd de usuarios para prueba
-
-
-
-
-
 const llenarUsuario = require("../utils/llenarUsuario");
 const getUsers = require("../controllers/getUsers");
 const modUserById = require("../controllers/modUsersById");
 const deleteUsersById = require("../controllers/deleteUsersById");
 const modCompleteUser = require("../controllers/modCompleteUser");
 const getUserById = require('../controllers/getUserById')
-
+const findTypesUsers = require('../controllers/findTypeUsers')
+const usuarioTipoController = require('../controllers/usuarioTipoController')
 
 router.post("/", async (req, res) => {
   try {
@@ -123,5 +119,27 @@ router.get("/:id", async (req, res) => {
 //   }
 // });
 
+router.get('/tipoDeUsuario', async(req, res) => {
+  try{
+    // const {id} = req.params
+    const userType = await findTypesUsers()
+    return res.status(200).json(userType)
+  } catch(error){
+    return res.status(500).json({ mensaje: "Error en el servidor" });
+  }
+})
+
+// router.get('/relacionarTipo', async(req, res) => {
+//   try{
+//     const {usuarioId, tipoDeUsuarioId} = req.body
+//     console.log(usuarioId, tipoDeUsuarioId)
+//     const userRelation = usuarioTipoController(usuarioId, tipoDeUsuarioId)
+//     res.status(200).json(userRelation)
+//   } catch(error){
+//     res
+//     .status(500)
+//     .json({ error: error.message});
+//   }
+// })
 
 module.exports = router;
