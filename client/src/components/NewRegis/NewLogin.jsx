@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
-import { useAuth } from "../../../../server/src/context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function NewLogin() {
   const [user, setUser] = useState({
