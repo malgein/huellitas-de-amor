@@ -20,7 +20,7 @@ const postDonaciones = require("./routesDonaciones");
 const postCrearUsuario = require("./routesUsuario");
 const getUsersId = require("../controllers/getUsersId");
 // router.get("/fill", fillPets);
-const { actualizarPerfil } = require("../controllers/putEditarPerfil");
+// const { actualizarPerfil } = require("../controllers/putEditarPerfil");
 const modPetById = require("../controllers/modPetById");
 
 router.get("/perfil/:id", getUsersId);
