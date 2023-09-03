@@ -120,7 +120,7 @@ export default function Home() {
                   (
                     mascota //aca hago llamo a la constante asi no se muestran las cards.(nacho)
                   ) => (
-                    <div key={mascota.id}>
+                    <div className="z-index-0" key={mascota.id}>
                       <PetCard
                         key={mascota.id}
                         id={mascota.id}
@@ -137,6 +137,7 @@ export default function Home() {
               </div>
               <div className="pt-[20px] pb-[20px] flex justify-center">
                 <Paginated
+                  className="z-index-1"
                   petsPerPage={petsPerPage}
                   mascotas={mascotas?.length}
                   paginado={paginado}
