@@ -27,7 +27,7 @@ const Nav = () => {
   const location = useLocation();
   //style
 
-  const mostarSearchBar = location.pathname === "/home";
+  const mostarSearchBar = location.pathname === "/";
   const [modalabierto, setModalAbierto] = useState(false);
 
   const handleOpen = (size) => {
@@ -61,10 +61,10 @@ const Nav = () => {
         </div>
 
         <div className=" gap-20 flex flex-row justify-center items-center text-black">
-          <Link className="text-black" href="/">
+          <Link className="text-lg text-black" href="/">
             Inicio
           </Link>
-          <Link href="/perfil/${id}" className="text-black">
+          <Link href="/perfil/${id}" className="text-lg text-black">
             Mi Perfil
           </Link>
 
@@ -76,7 +76,7 @@ const Nav = () => {
                 variant="solid"
                 key={size}
                 onPress={() => handleOpen(size)}
-                className="text-black"
+                className="text-lg text-black"
               >
                 Notificaciones
               </Link>

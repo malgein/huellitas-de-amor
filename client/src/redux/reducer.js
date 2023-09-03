@@ -21,13 +21,21 @@ import {
   DELETE_HOUSES,
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
+
+
+  MOD_COMPLETE_PET,
+  MOD_COMPLETE_HOUSE,
+
   LOGICAL_DELETE_PET,
   ELIMINAR_IMAGENES, 
   MOD_COMPLETE_USER,
   GET_CASA_BY_ID,
+
 } from "./actions";
 
 const initialState = {
+  userDetail: [],
+  houseDetail: [],
   petDetail: [],
   loading: false,
   mascotas: [],
@@ -171,14 +179,29 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case MOD_COMPLETE_USER:
-      return {
-        ...state,
-      };
 
+      console.log(payload)
+      return { ...state};
+      case MOD_COMPLETE_PET:
+      console.log(payload)
+      return { ...state};
+      case MOD_COMPLETE_HOUSE:
+        console.log(payload)
+        return { ...state};
     default:
       return {
         ...state,
       };
+      case LOGICAL_DELETE_PET:
+        console.log("LOGICAL_DELETE_PET llamado con payload:", payload);
+        return {
+            ...state,
+            mascotas: state.mascotas.map(mascota =>
+                mascota.id === payload ? { ...mascota, estado: "En adopción" } : mascota
+            )
+        };
+    
+
   }
 };
 export default rootReducer;

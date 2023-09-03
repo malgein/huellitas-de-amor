@@ -10,6 +10,11 @@ module.exports = (sequelize) => {
 				allowNull: false,
 				primaryKey: true,
 			},
+			foto: {
+
+				type: DataTypes.JSON,
+				allowNull: false
+			},
 			nombreDeOng: {
 				type: DataTypes.STRING(50),
 				allowNull: false,
@@ -27,6 +32,7 @@ module.exports = (sequelize) => {
 				allowNull: false,
 			},
 			rating: {
+
 				type: DataTypes.FLOAT,
 				default: 0,
 			},
@@ -34,6 +40,10 @@ module.exports = (sequelize) => {
 				type: DataTypes.ARRAY(DataTypes.FLOAT),
 				default: [],
 			},
+			ubicacion: {
+				type: DataTypes.STRING(50),
+				allowNull:false
+			}
 		},
 		{ timestamps: false }
 	);

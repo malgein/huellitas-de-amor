@@ -1,13 +1,17 @@
 const { Router } = require("express");
 const router = Router();
+const { Usuario } = require("../models/Usuario.js");
 const crearUsuario = require("../controllers/postCrearUsuario");
-const getUsersId = require("../controllers/getUsersId");
+// const getUsersId = require("../controllers/getUsersId");
+
 //controlador que llena la bd de usuarios para prueba
 const llenarUsuario = require("../utils/llenarUsuario");
 const getUsers = require("../controllers/getUsers");
 const modUserById = require("../controllers/modUsersById");
 const deleteUsersById = require("../controllers/deleteUsersById");
 const modCompleteUser = require("../controllers/modCompleteUser");
+const getUserById = require('../controllers/getUserById')
+
 
 router.post("/", async (req, res) => {
   try {
@@ -90,6 +94,17 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId =  await getUserById(id);
+    return res.status(200).json(userId);
+  } catch (error) {
+    return res.status(500).json({ mensaje: "Error en el servidor" });
+  }
+});
+
 //Probando obtener usuario por ID
 // router.get("/:id", async (req, res) => {
 //   try {
@@ -104,5 +119,6 @@ router.put("/:id", async (req, res) => {
 //     return res.status(500).json({ mensaje: "Error en el servidor" });
 //   }
 // });
+
 
 module.exports = router;

@@ -6,7 +6,7 @@ const PathRoutes = {
   DETAIL: "/detail/:id",
   AGREGAR: "/agregar",
   REGISTRO: "/registro",
-  // LOGIN: "/login",
+  LOGIN: "/login",
   CASADETAIL: "/casaDeAdopcion/:id",
   NOTIFICACION: "/notificaciones",
 
@@ -20,6 +20,9 @@ const PathRoutes = {
   DASHBOARD_CASAS_DE_ADOPCION: "/dashboard/casas-de-adopcion",
   //subruta para el dashboard de casas de adopcion
   DASHBOARD_DONACIONES: "/dashboard/donaciones",
+
+  DETAILUSER: "/detail-user/:id",
+  DETAILHOUSE: "/detail-house-of-adoption/:id",
 };
 
 export default PathRoutes;
