@@ -1,5 +1,5 @@
-import React, {  useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -16,22 +16,18 @@ import iconHembra from "../../assets/hembra.png";
 import PathRoutes from "../../helpers/Routes.helper";
 import { useAuth } from "../../../../server/src/context/AuthContext";
 
-
 export default function Detail() {
   const { id } = useParams();
   const { user } = useAuth();
   const dispatch = useDispatch();
-  const [adopcionEnProgreso, setAdopcionEnProgreso] =useState (false)
+  const [adopcionEnProgreso, setAdopcionEnProgreso] = useState(false);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     dispatch(getPetById(id));
   }, [dispatch, id]);
 
   const mascota = useSelector((state) => state.petDetail);
-
-
 
   useEffect(() => {
     if (mascota.casaDeAdopcionId) {
@@ -46,30 +42,24 @@ export default function Detail() {
   //   return <p> Aguarde unos Instantes...</p>;
   // }
 
-  
-
   const handleConfetti = () => {
     confetti({});
   };
-  
+
   const handleAdoption = () => {
-   setAdopcionEnProgreso(true);
-   dispatch(logicalDeletePet(id, "En Proceso"));
-   
-   
-    
+    setAdopcionEnProgreso(true);
+    dispatch(logicalDeletePet(id, "En Proceso"));
+
     handleConfetti();
-    navigate("/")
+    navigate("/");
   };
-  
 
-
-  
   const casa = useSelector((state) => state.casasDeAdopcion);
+
   const isAdopted = mascota.estado === "Adoptado";
-  const isInProcess = mascota.estado === "En Proceso"
+  const isInProcess = mascota.estado === "En Proceso";
   const isAvailableForAdoption = mascota.estado === "En Adopción";
- 
+
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
@@ -122,7 +112,6 @@ export default function Detail() {
             }
             size="lx"
           ></Badge>
-
         </div>
         <div className="p-4 ">
           <div className="flex items-center mb-2">
@@ -193,31 +182,28 @@ export default function Detail() {
             </div>
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
-          {user ? (
-    <Button 
-        onClick={handleAdoption}
-        id={id}
-        currentState={mascota.estado}
-        user={user}
-    >
-        Adóptame
-    </Button>
-) : (
-    <Link to="/registro">
-        <Button radius="full" color="primary">
-            Adóptame
-        </Button>
-    </Link>
-)}
-               </div>
-        
-        <Link to="/">
-          <Button>Volver</Button>
-        </Link>
+            {user ? (
+              <Button
+                onClick={handleAdoption}
+                id={id}
+                currentState={mascota.estado}
+                user={user}
+              >
+                Adóptame
+              </Button>
+            ) : (
+              <Link to="/registro">
+                <Button radius="full" color="primary">
+                  Adóptame
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
+      <Link to="/" className="flex justify-center mt-4">
+        <Button>Volver</Button>
+      </Link>
     </div>
-
-     
-
-)};
+  );
+}

@@ -27,7 +27,7 @@ const Nav = () => {
   const location = useLocation();
   //style
 
-  const mostarSearchBar = location.pathname === "/home";
+  const mostarSearchBar = location.pathname === "/";
   const [modalabierto, setModalAbierto] = useState(false);
 
   const handleOpen = (size) => {

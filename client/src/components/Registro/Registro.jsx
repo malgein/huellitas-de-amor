@@ -9,16 +9,18 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import validationSchema from "./Validaciones";
 import * as Yup from "yup";
+import NewLogin from "../NewRegis/NewLogin";
+import { NuevoRegistro } from "../NewRegis/NewRegistro";
 
 const Registro = () => {
   const Navigate = useNavigate();
 
-	const initialValues = {
-		nombre: "",
-		apellido: "",
-		email: "",
-		password: "",
-	};
+  const initialValues = {
+    nombre: "",
+    apellido: "",
+    email: "",
+    password: "",
+  };
 
   const dispatchRedux = () => {
     Navigate("/");
@@ -92,20 +94,27 @@ const Registro = () => {
               />
             </div>
 
-						<Button
-							type='submit'
-							disabled={isSubmitting}
-							className='border border-black text-black hover:bg-slate-100 mt-8 bg-inherit '
-							size='lg'>
-							Registrate
-						</Button>
-						{/* {registroExitoso && setValues(initialValues)} */}
-					</Form>
-				)}
-			</Formik>
-			{/*  */}
-		</div>
-	);
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="border border-black text-black hover:bg-slate-100 mt-8 bg-inherit "
+              size="lg"
+            >
+              Registrate
+            </Button>
+            {/* {registroExitoso && setValues(initialValues)} */}
+          </Form>
+        )}
+      </Formik>
+      {/*  */}
+      <div>
+        <NewLogin />
+      </div>
+      <div>
+        <NuevoRegistro />
+      </div>
+    </div>
+  );
 };
 
 export default Registro;
