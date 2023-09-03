@@ -5,7 +5,8 @@ const { TipoDeUsuario } = require('../db');
     const typeUsers = [
 			{id: 1, tipo: "Administrador"},
 			{id: 2, tipo: "Centro De Adopcion"},
-			{id: 3, tipo: "Usuario"}
+			{id: 3, tipo: "Usuario"},
+      {id: 4, tipo: "Super Administrador"}
 		]
 
 const fillTypeUsers = async (req, res) => {
