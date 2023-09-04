@@ -3,15 +3,16 @@ const { Usuario, TipoDeUsuario } = require('../db'); // Importa tus modelos de S
 // Función para establecer la relación entre un usuario y un tipo de usuario
 async function usuarioTipoController(req, res) {
   try {
+    console.log(req.body)
     const { usuarioId, tipoDeUsuarioId } = req.body;
 
-   
 
     // Verifica si el usuario y el tipo de usuario existen
+    // const allUsers = await Usuario.findAll()
     const usuario = await Usuario.findByPk(usuarioId);
     const tipoDeUsuario = await TipoDeUsuario.findByPk(tipoDeUsuarioId);
     
-    // console.log()
+    // console.log(allUsers)
 
     if (!usuario || !tipoDeUsuario) {
       return res.status(404).json({ error: 'Usuario o tipo de usuario no encontrado.' });

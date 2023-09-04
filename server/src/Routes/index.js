@@ -40,7 +40,7 @@ const donationsUser = require('../controllers/donationsUser')
 const donationsHouse = require('../controllers/donationsHouse')
 
 
-router.get("/relacion-user-type", usuarioTipoController);
+router.patch("/relacion-user-type", usuarioTipoController);
 router.use("/donaciones", postDonaciones);
 router.get("/perfil/:id", getUsersId);
 // router.get('/tiposDeUsuarios',  findTypesUsers)

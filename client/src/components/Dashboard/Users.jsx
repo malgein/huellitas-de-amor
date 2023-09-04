@@ -1,11 +1,10 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { getUsers, editUser, deleteUsers, modCompleteUser} from '../../redux/actions'
+import { getUsers, editUser, deleteUsers, modCompleteUser, getEntireUsers, changeStatusUser} from '../../redux/actions'
 import PathRoutes from "../../helpers/Routes.helper";
 import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar'
 import Swal from 'sweetalert2'
-
 import {
   Table,
   TableHeader,
@@ -30,9 +29,9 @@ import { ChevronDownIcon } from "./ChevronDownIcon";
 import { capitalize } from "./Accesory";
 
 const statusColorMap = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
+  Usuario: "success",
+  Administrador: "danger",
+  // vacation: "warning",
 };
 
 // const columns = [
@@ -43,13 +42,13 @@ const statusColorMap = {
 // ];
 
 const statusOptions = [
-  { name: "Active", uid: "active" },
-  { name: "Paused", uid: "paused" },
-  { name: "Vacation", uid: "vacation" },
+  { name: "Usuario", uid: "Usuario" },
+  { name: "Administrador", uid: "Administrador" },
+  { name: "Sin tipo", uid: "Sin tipo" },
 ];
 //!Esto muestra las columnas que se ven al inicio
 
-const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre","apellido", "nacionalidad",  "ubicacion", "direccion", "telefono",  "acerca", "actions"];
+const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre","apellido", "nacionalidad",  "ubicacion", "direccion", "telefono",  "tipo", "actions"];
 
 
 function Users() {
@@ -65,7 +64,8 @@ function Users() {
 
   useEffect(() => {
     //if (userModified) {
-    dispatch(getUsers());
+    // dispatch(getUsers());
+    dispatch(getEntireUsers());
     // setUserModified(false); // Restablecer userDeleted después de obtener usuarios
     //}
   }, [userModified, dispatch]);
@@ -196,6 +196,62 @@ function Users() {
     navigate(PathRoutes.DETAILUSER.replace(":id", id))
   }
 
+  const handleStatus = user => {
+    // const result =  usuarios.find((usuario) => usuario?.id === id);
+    // console.log(user)
+    if(!user.tipoDeUsuario || user.tipoDeUsuario.tipo!== 'Administrador'){
+      Swal.fire({
+        title: `${user.nombre} ${user.apellido} es un  Usuario`,
+        text: "Quieres convertirlo en Administrador?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#edc40e',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Cambiar Estatus'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const idUser = user.id
+          const response = {
+            usuarioId: idUser,
+            tipoDeUsuarioId: 1
+          }
+          dispatch(changeStatusUser(response))
+          Swal.fire(
+            'Estatus modificado!',
+            `${user.nombre} ${user.apellido} es un Administrador ahora`,
+            'success'
+          )
+          dispatch(getEntireUsers())
+        }
+      })
+    } else {
+      // console.log('ya es administrador')
+      Swal.fire({
+        title: `${user.nombre} ${user.apellido} es un  Administrador`,
+        text: "Quieres convertirlo en un usuario?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#edc40e',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Cambiar Estatus'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const idUser = user.id
+          const response = {
+            usuarioId: idUser,
+            tipoDeUsuarioId: 3
+          }
+          dispatch(changeStatusUser(response))
+          Swal.fire(
+            'Estatus modificado!',
+            `${user.nombre} ${user.apellido} es un Usuario ahora`,
+            'success'
+          )
+        }
+      })
+    }
+  }
+
   const handleDelete = (id) => {
     Swal.fire({
       title: "Seguro que quieres eliminar al usuario?",
@@ -222,11 +278,11 @@ function Users() {
     {name: "NOMBRE", uid: "nombre", sortable: true},
     {name: "APELLIDO", uid: "apellido", sortable: true},
     {name: "NACIONALIDAD", uid: "nacionalidad", sortable: true},
-    {name: "ubicacion", uid: "ubicacion", sortable: true},
+    {name: "UBICACION", uid: "ubicacion", sortable: true},
     {name: "DIRECCION", uid: "direccion", sortable: true},
     {name: "TELEFONO", uid: "telefono" , sortable: true},
     // {name: "EMAIL", uid: "email", sortable: true},
-    { name: "ACERCA", uid: "acerca", sortable: true },
+    { name: "TIPO", uid: "tipo", sortable: true },
     { name: "ACTIONS", uid: "actions" },
   ];
 
@@ -267,7 +323,7 @@ function Users() {
       Array.from(statusFilter).length !== statusOptions.length
     ) {
       filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.status)
+        Array.from(statusFilter).includes(user.tipoDeUsuario?.tipo)
       );
     }
 
@@ -300,7 +356,7 @@ function Users() {
       case "nombre":
         return (
           <User
-            //aqui va la foto de la mascota
+            //aqui va la foto del usuario
             avatarProps={{ radius: "lg", src: user.foto }}
             description={user.email}
             name={cellValue}
@@ -317,15 +373,34 @@ function Users() {
             </p>
           </div>
         );
-      case "sexo":
+      // case "tipo":
+      //   return (
+      //     <div className="flex flex-col">
+      //       <p className="text-bold text-small capitalize">{cellValue}</p>
+      //       <p className="text-bold text-tiny capitalize text-default-500">{user.tipoDeUsuario?.tipo ? user.tipoDeUsuario?.tipo : 'Sin tipo' }</p>
+      //     </div>
+      //   );
+      // case "sexo":
+      //   return (
+      //     <Chip
+      //       className="capitalize"
+      //       color={statusColorMap[user.sexo]}
+      //       size="sm"
+      //       variant="flat"
+      //     >
+      //       {cellValue}
+      //     </Chip>
+      //   );
+      case "tipo":
         return (
           <Chip
-            className="capitalize"
-            color={statusColorMap[user.sexo]}
+            className="capitalize border-none gap-1 text-default-600"
+            color={statusColorMap[user.tipoDeUsuario?.tipo]}
             size="sm"
-            variant="flat"
+            variant="dot"
           >
-            {cellValue}
+            {/* {cellValue} */}
+            {user.tipoDeUsuario?.tipo ? user.tipoDeUsuario?.tipo : 'Sin tipo' }
           </Chip>
         );
       case "actions":
@@ -348,6 +423,13 @@ function Users() {
                   onClick={() => handleDelete(user.id)}
                 >
                   Borrar
+                </DropdownItem>
+                <DropdownItem
+                  color="warning"
+                  className="text-warning"
+                  onClick={() => handleStatus(user)}
+                >
+                  Cambiar Estatus
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -404,7 +486,7 @@ function Users() {
           />
           <div className="flex gap-3">
             <Dropdown>
-              {/* <DropdownTrigger className="hidden sm:flex">
+              <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
                   Status
                 </Button>
@@ -422,7 +504,8 @@ function Users() {
                     {capitalize(status.name)}
                   </DropdownItem>
                 ))}
-              </DropdownMenu> */}
+              </DropdownMenu>
+
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
@@ -485,7 +568,6 @@ function Users() {
   const bottomContent = React.useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
-        {usuarios.map((user) => console.log(user.tipoDeUsuarioId))}
         {/* {console.log(usuarios)} */}
         <span className="w-[30%] text-small text-default-400">
           {selectedKeys === "all"
@@ -536,7 +618,7 @@ function Users() {
          
        <div className='mt-10'>
          {/* Soy la gestion de casas de adopcion */}
-         {/* {console.log(casasDeAdopcion)} */}
+         {/* {usuarios.map(elem => console.log(elem.tipoDeUsuario?.tipo))} */}
          <Table
    aria-label="Example table with custom cells, pagination and sorting"
    isHeaderSticky

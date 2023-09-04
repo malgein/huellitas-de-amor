@@ -30,7 +30,9 @@ import {
   ELIMINAR_IMAGENES, 
   MOD_COMPLETE_USER,
   GET_CASA_BY_ID,
-
+  //case que me trae los usuarios con todas las relciones
+  GET_ENTIRE_USERS,
+  CHANGE_STATUS_USER
 } from "./actions";
 
 const initialState = {
@@ -186,6 +188,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
       console.log(payload)
       return { ...state};
       case MOD_COMPLETE_HOUSE:
+        console.log(payload)
+        return { ...state};
+      case GET_ENTIRE_USERS:
+        return {
+          ...state,
+          usuarios: payload,
+        };
+        case CHANGE_STATUS_USER:
         console.log(payload)
         return { ...state};
     default:
