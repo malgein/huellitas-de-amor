@@ -8,66 +8,52 @@ import Swal from "sweetalert2";
 export function NuevoRegistro() {
   const { signup } = useAuth();
   const navigate = useNavigate();
-  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   const initialValues = {
     email: "",
     password: "",
   };
 
-  // const validationSchema = Yup.object({
-  //   email: Yup.string()
-  //     .email("Correo electrónico no válido")
-  //     .required("El correo electrónico es obligatorio"),
-  //   password: Yup.string()
-  //     .min(6, "La contraseña debe tener al menos 6 caracteres")
-  //     .required("La contraseña es obligatoria"),
-  // });
+  //para validacion de registro o no
+  const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
 
   const dispatchRedux = () => {
     navigate("/login");
   };
 
-  const checkRegistrationStatus = () => {
-    if (registrationSuccess) {
-      // El usuario ya está registrado
-      Swal.fire({
-        icon: "info",
-        title: "Usuario registrado",
-        text: "¡Ya estás registrado! Puedes iniciar sesión.",
-      });
-    }
+  // Función para mostrar la alerta de registrado
+  const showAlert = () => {
+    Swal.fire({
+      icon: "info",
+      title: "Usuario registrado",
+      text: "El correo electrónico ya está registrado. Puedes iniciar sesión.",
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: "OK",
+    }).then(() => {
+      dispatchRedux(); 
+    });
   };
 
-  // const onSubmit = async (values, { setSubmitting, setFieldError }) => {
-  //   try {
-  //     await signup(values.email, values.password);
-  //     Swal.fire({
-  //       icon: "success",
-  //       title: "Registro exitoso",
-  //       text: "Usuario registrado con éxito",
-  //     });
-  //     dispatchRedux();
-  //   } catch (error) {
-  //     setFieldError("email", "Error de registro: " + error.message);
-  //   } finally {
-  //     setSubmitting(false);
-  //   }
-  // };
+
 
   const onSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
       await signup(values.email, values.password);
-      // Marcar el registro como exitoso
+      // Registro exitoso
       Swal.fire({
         icon: "success",
         title: "Registro exitoso",
         text: "Usuario registrado con éxito",
       });
-      setRegistrationSuccess(true);
       dispatchRedux();
     } catch (error) {
-      setFieldError("email", "Error de registro: " + error.message);
+      if (error.code === "auth/email-already-in-use") {
+        setIsAlreadyRegistered(true);
+        showAlert(); // Muestra la alerta
+      } else {
+        setFieldError("email", "Error de registro: " + error.message);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -143,11 +129,10 @@ export function NuevoRegistro() {
                 Login
               </Link>
             </p>
+
           </Form>
         )}
       </Formik>
-
-      {registrationSuccess && checkRegistrationStatus()}
     </div>
   );
 }
