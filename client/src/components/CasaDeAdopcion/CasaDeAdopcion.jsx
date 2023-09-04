@@ -6,6 +6,7 @@ import { Carousel } from "react-responsive-carousel";
 import Rate from "../Rate/Rate";
 import { getMascotas } from "../../redux/actions";
 import PetCard from "../PetCard/PetCard";
+import MapaFuncional from "../Mapa/MapaFuncional";
 
 export default function CasaDeAdopcion() {
   const { id } = useParams();
@@ -20,7 +21,7 @@ export default function CasaDeAdopcion() {
   const casa = useSelector((state) => state.casasDeAdopcion);
   return (
     <div>
-      <div className="m-2 flex rounded-xl pb-64 pt-5 shadow-2x">
+      <div className="m-2 flex rounded-xl pb-32 pt-5 shadow-2x">
         <div className=" w-1/3 h-[100%] ml-10 mt-20">
           <div className="rounded">
             <Carousel
@@ -41,7 +42,7 @@ export default function CasaDeAdopcion() {
             </Carousel>
           </div>
         </div>
-        <div className="w-2/3 m-10 mb-0 mt-20">
+        <div className="w-2/3 m-10 mb-0 mt-20 h-100%">
           <h1 className="m-2 text-3xl">{casa.nombreDeOng}</h1>
           <p>Contáctanos: </p>
           <p>{casa.email}</p>
@@ -49,8 +50,10 @@ export default function CasaDeAdopcion() {
           <div className="h-20 flex flex-col justify-end">
             <div className="flex flex-col items-center">
               <div className="flex-1"></div>
-              <p className="p-4">Maps:</p>
-              <div></div>
+              <p className="p-4">Ubicación:</p>
+            </div>
+            <div className="h-1/2 w-[100%] ">
+              <MapaFuncional />
             </div>
           </div>
         </div>
@@ -59,7 +62,7 @@ export default function CasaDeAdopcion() {
         <section className=" m-0 h-[100%]  w-screen bg-white p-0 flex flex-grow items-center justify-center">
           <div className="bg-white w-[90%] h-[90%]">
             <div className="flex flex-col">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-20 mb-8px">
                 {pet
                   .filter(
                     (mascota) => mascota && mascota.casaDeAdopcionId === casa.id

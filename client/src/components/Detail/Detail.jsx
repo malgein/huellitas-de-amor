@@ -180,11 +180,7 @@ export default function Detail() {
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
             {user ? (
-              <StateControlButton
-                id={id}
-                currentState={mascota.estado}
-                user={user}
-              />
+              <Button id={id} currentState={mascota.estado} user={user} />
             ) : (
               <Link to="/registro">
                 <Button radius="full" color="primary">
