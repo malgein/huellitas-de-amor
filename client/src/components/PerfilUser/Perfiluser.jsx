@@ -39,9 +39,9 @@ const Perfil = () => {
     imagenPerfil: "",
   });
 
-  const handleEliminarImagenPerfil = () => {
-    setPerfil({ ...perfil, imagenPerfil: "" });
-  };
+  // const handleEliminarImagenPerfil = () => {
+  //   setPerfil({ ...perfil, imagenPerfil: "" });
+  // };
 
   const handleOpen = (size) => {
     setSize(size);

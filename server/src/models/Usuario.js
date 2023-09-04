@@ -47,10 +47,10 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT(50),
         allowNull: false,
       },
-      foto: {
-        type: DataTypes.JSON, // Cambiado a JSON para representar un array de URLs
-        allowNull: false,
-      },
+      // foto: {
+      //   type: DataTypes.JSON, // Cambiado a JSON para representar un array de URLs
+      //   allowNull: false,
+      // },
     },
     { timestamps: false }
   );

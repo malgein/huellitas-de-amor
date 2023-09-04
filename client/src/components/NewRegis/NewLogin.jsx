@@ -5,6 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../server/src/context/AuthContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  User,
+} from "@nextui-org/react";
+import LoginGoogle from "../LoginGoogle/LoginGoogle";
 
 function NewLogin() {
   const { login } = useAuth();
@@ -14,6 +22,10 @@ function NewLogin() {
   const initialValues = {
     email: "",
     password: "",
+  };
+
+  const dispatchRedux = () => {
+    navigate("/");
   };
 
   const validationSchema = Yup.object({
@@ -26,7 +38,7 @@ function NewLogin() {
   const onSubmit = async (values, { setSubmitting }) => {
     try {
       await login(values.email, values.password);
-      navigate("/"); // Redirige al usuario a la página principal después de iniciar sesión
+      dispatchRedux(); // Redirige al usuario a la página principal después de iniciar sesión
     } catch (error) {
       setLoginError(error.message);
     } finally {
@@ -95,9 +107,21 @@ function NewLogin() {
               >
                 Iniciar Sesión
               </button>
+
+              <div>
+                <LoginGoogle />
+              </div>
+
+              {/* <Dropdown>
+                <DropdownMenu>
+                  <DropdownItem>
+                    <LoginGoogle />
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown> */}
             </div>
 
-            <p className="my-4 text-sm flex justify-between px-3">
+            <p className="my-8 text-sm flex justify-between px-3">
               ¿No tienes una cuenta?
               <Link
                 to="/registro"
