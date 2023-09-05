@@ -81,20 +81,13 @@ export default function Home() {
           </div>
         </div>
         <div className="w-[600px] text-start ml-8">
-          <h1 className="my-12">Calvo Amigo</h1>
+          <h1 className="my-10">BIENVENIDOS A HUELLITAS DE AMOR!! </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-            itaque tempora ex in assumenda qui cum, commodi veritatis quidem,
-            exercitationem eligendi earum tempore a dolorum eos laborum aperiam
-            repellat at. Lorem ipsum dolor sit, amet consectetur adipisicing
-            elit. Numquam vero praesentium dicta fugit facilis modi consequatur
-            dolor deserunt cum necessitatibus. Fugiat numquam alias illo rem.
-            Iusto rem corrupti ipsa eum.
+            Bienvenidos a nuestro sitio de adopción de mascotas! Nuestro objetivo es unir a estas adorables mascotas con familias cariñosas como la suya. Aqui encontrarán historias conmovedoras y fotos de los peludos que buscan un hogar.
+            La adopción de una mascota es una decisión que cambia vidas, tanto para el animal como para usted. Cada ser peludo tiene su propia personalidad única y estamos aquí para ayudarles a encontrar la combinación perfecta.
+            Al darle un hogar a una mascota, no solo les brindarán amor incondicional, sino que también estarán contribuyendo al bienestar de un ser necesitado. Gracias por unirse a nosotros en esta noble causa. ¡Comencemos esta emocionante aventura  juntos!
           </p>
-          <br />
-          <p>Lorem ipsum dolor sit amet, consectetur.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                   
           <Button className="border border-black text-black mt-6 bg-white hover:bg-slate-100">
             Adoptame
           </Button>

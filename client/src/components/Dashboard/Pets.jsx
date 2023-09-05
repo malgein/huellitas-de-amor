@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 import { useSelector, useDispatch } from "react-redux";
 import { getMascotas, deletePets, modCompletePet } from "../../redux/actions";
 import Swal from "sweetalert2";
+
 import {
   Table,
   TableHeader,
