@@ -11,11 +11,13 @@ import { getCasaById, getPetById, logicalDeletePet } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
-import iconMacho from "../../assets/macho.png";
-import iconHembra from "../../assets/hembra.png";
 import PathRoutes from "../../helpers/Routes.helper";
-import { useAuth } from "../../../../server/src/context/AuthContext";
+
+
 import AdoptionFormModal from '../FormularioAdopcion/FormAdop';
+
+import { useAuth } from "../../../context/AuthContext";
+
 
 export default function Detail() {
   const { id } = useParams();

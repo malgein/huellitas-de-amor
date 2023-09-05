@@ -1,122 +1,147 @@
-import React, { useState } from "react";
+//
 
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
-import { useAuth } from "../../../../server/src/context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  User,
+} from "@nextui-org/react";
+import LoginGoogle from "../LoginGoogle/LoginGoogle";
 
-export default function NewLogin() {
-  const [user, setUser] = useState({
+
+function NewLogin() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState(null);
+
+  const initialValues = {
     email: "",
     password: "",
+  };
+
+  const dispatchRedux = () => {
+    navigate("/");
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Correo electrónico no válido")
+      .required("El correo electrónico es obligatorio"),
+    password: Yup.string().required("La contraseña es obligatoria"),
   });
-  const { login, loginWithGoogle, resetPassword } = useAuth();
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+  const onSubmit = async (values, { setSubmitting }) => {
     try {
-      await login(user.email, user.password);
-      navigate("/");
+      await login(values.email, values.password);
+      dispatchRedux(); // Redirige al usuario a la página principal después de iniciar sesión
     } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  const handleChange = ({ target: { value, name } }) =>
-    setUser({ ...user, [name]: value });
-
-  const handleGoogleSignin = async () => {
-    try {
-      await loginWithGoogle();
-      navigate("#");
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  const handleResetPassword = async (e) => {
-    e.preventDefault();
-    if (!user.email)
-      return setError(
-        "Escriba un correo electrónico para restablecer la contraseña"
-      );
-    try {
-      await resetPassword(user.email);
-      setError("Te enviamos un correo electrónico. Revisa tu correo");
-    } catch (error) {
-      setError(error.message);
+      setLoginError(error.message);
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
-    <div className="w-full max-w-xs m-auto">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    <div className="w-full max-w-xs m-auto text-black">
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
       >
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Correo Electrónico
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Tu_Correo@empresa.com"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="password"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Contraseña
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="*************"
-          />
-        </div>
+        {({ isSubmitting }) => (
+          <Form className="border rounded-2xl bg-white shadow-xl px-8 pt-6 pb-6 mb-40  mt-[150px] w-[400px] h-[450px]">
+            <div className="mb-[20px]">
+              <h1 className="text-3xl font-bold ">Iniciar Sesión</h1>
+            </div>
 
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Ingresar
-          </button>
-          <a
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#!"
-            onClick={handleResetPassword}
-          >
-            Olvidaste tu contraseña?
-          </a>
-        </div>
-      </form>
-      <Button onClick={handleGoogleSignin} className="w-full">
-        <img src={google} className="w-6 h-6" alt="" />
-        Google login
-      </Button>
+            <div className="flex flex-col justify-center items-center gap-5 h-[300px]">
+              <div className="mb-4 justify-center items-center">
+                <label
+                  htmlFor="email"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Correo Electrónico
+                </label>
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="huellitas@deamor.com"
+                  className="shadow appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-[300px] h-[40px]"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-red-500 text-xs italic"
+                />
+              </div>
 
-      <p className="my-4 text-sm flex justify-between px-3">
-        ¿No tienes Cuenta?
-        <Link to="/registro" className="text-blue-700 hover:text-blue-900">
-          Regístrate
-        </Link>
-      </p>
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Contraseña
+                </label>
+                <Field
+                  type="password"
+                  name="password"
+                  placeholder="*************"
+                  className="shadow appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-[300px] h-[40px]"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500 text-xs italic"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                disabled={isSubmitting}
+              >
+                Iniciar Sesión
+              </button>
+
+              <div>
+                <LoginGoogle />
+              </div>
+
+              {/* <Dropdown>
+                <DropdownMenu>
+                  <DropdownItem>
+                    <LoginGoogle />
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown> */}
+            </div>
+
+            <p className="my-8 text-sm flex justify-between px-3">
+              ¿No tienes una cuenta?
+              <Link
+                to="/registro"
+                className="text-blue-700 hover:text-blue-900"
+              >
+                Registrarse
+              </Link>
+            </p>
+          </Form>
+        )}
+      </Formik>
+
+      {loginError && (
+        <div className="text-red-500 text-center mb-4">{loginError}</div>
+      )}
     </div>
   );
 }
+
+export default NewLogin;
