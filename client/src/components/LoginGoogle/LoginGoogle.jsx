@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
-import { useAuth } from "../../../../server/src/context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function LoginGoogle() {
   const [user, setUser] = useState({
@@ -53,59 +53,7 @@ export default function LoginGoogle() {
 
   return (
     <div className="w-full max-w-xs m-auto">
-      {/* <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      >
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Correo Electrónico
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Tu_Correo@empresa.com"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="password"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Contraseña
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="*************"
-          />
-        </div>
-
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Ingresar
-          </button>
-          <a
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#!"
-            onClick={handleResetPassword}
-          >
-            Olvidaste tu contraseña?
-          </a>
-        </div>
-      </form> */}
+      
       <Button onClick={handleGoogleSignin} className="w-full">
         <img src={google} className="w-6 h-6" alt="" />
         Inicia sesión con Google
