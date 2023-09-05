@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
-import { useAuth } from "../../../context/AuthContext";
+// import { useAuth } from "../../../../server/src/context/AuthContext";
 
-export default function ModalLogSig() {
+export default function LoginGoogle() {
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -31,7 +31,7 @@ export default function ModalLogSig() {
   const handleGoogleSignin = async () => {
     try {
       await loginWithGoogle();
-      navigate("#");
+      navigate("/");
     } catch (error) {
       setError(error.message);
     }
@@ -108,15 +108,8 @@ export default function ModalLogSig() {
       </form> */}
       <Button onClick={handleGoogleSignin} className="w-full">
         <img src={google} className="w-6 h-6" alt="" />
-        Google login
+        Inicia sesión con Google
       </Button>
-
-      <p className="my-4 text-sm flex justify-between px-3">
-        ¿No tienes Cuenta?
-        <Link to="/registro" className="text-blue-700 hover:text-blue-900">
-          Regístrate
-        </Link>
-      </p>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { auth } from "../../../server/src/firebase/credenciales"
+import { auth } from "../../server/src/firebase/credenciales";
 import { createContext, useContext, useState, useEffect } from "react";
 
 import {
@@ -15,7 +15,7 @@ const authContext = createContext();
 
 export const useAuth = () => {
   const context = useContext(authContext);
-  if (!context) throw new Error("There is no Auth provider");
+  if (!context) throw new Error("No esta dentro del provider");
   return context;
 };
 

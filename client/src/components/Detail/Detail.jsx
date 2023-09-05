@@ -11,10 +11,8 @@ import { getCasaById, getPetById, logicalDeletePet } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
-import iconMacho from "../../assets/macho.png";
-import iconHembra from "../../assets/hembra.png";
 import PathRoutes from "../../helpers/Routes.helper";
-import { useAuth } from "../../../../server/src/context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function Detail() {
   const { id } = useParams();
@@ -35,27 +33,27 @@ export default function Detail() {
     }
   }, [dispatch, mascota.casaDeAdopcionId]);
 
-  if (!mascota) {
-    return <p> Aguarde unos Instantes...</p>;
-  }
+  // if (!mascota) {
+  //   return <p> Aguarde unos Instantes...</p>;
+  // }
 
-  // const handleConfetti = () => {
-  //   confetti({});
-  // };
+  const handleConfetti = () => {
+    confetti({});
+  };
 
-  // const handleAdopcion = () => {
-  //   dispatch(logicalDeletePet(id));
-  //   handleConfetti();
-  // };
-  // const handleBorrado = () => {
-  //   dispatch(logicalDeletePet(id)); // Marca la mascota como borrada
-  //   // Agregar aquí cualquier otra lógica que necesites después del borrado
-  // };
+  const handleAdoption = () => {
+    setAdopcionEnProgreso(true);
+    dispatch(logicalDeletePet(id, "En Proceso"));
+
+    handleConfetti();
+    navigate("/");
+  };
 
   const casa = useSelector((state) => state.casasDeAdopcion);
-  const isAdopted = mascota.estado === "adoptado";
-  const isInProcess = mascota.estado === "en proceso";
-  const isAvailableForAdoption = mascota.estado === "en Adopción";
+
+  const isAdopted = mascota.estado === "Adoptado";
+  const isInProcess = mascota.estado === "En Proceso";
+  const isAvailableForAdoption = mascota.estado === "En Adopción";
 
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
@@ -180,7 +178,14 @@ export default function Detail() {
           </div>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
             {user ? (
-              <Button id={id} currentState={mascota.estado} user={user} />
+              <Button
+                onClick={handleAdoption}
+                id={id}
+                currentState={mascota.estado}
+                user={user}
+              >
+                Adóptame
+              </Button>
             ) : (
               <Link to="/registro">
                 <Button radius="full" color="primary">
@@ -189,12 +194,11 @@ export default function Detail() {
               </Link>
             )}
           </div>
-
-          <Link>
-            <Button>Volver</Button>
-          </Link>
         </div>
       </div>
+      <Link to="/" className="flex justify-center mt-4">
+        <Button>Volver</Button>
+      </Link>
     </div>
   );
 }
