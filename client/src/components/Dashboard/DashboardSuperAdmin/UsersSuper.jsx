@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { getUsers, editUser, deleteUsers, modCompleteUser, getEntireUsers, changeStatusUser} from '../../redux/actions'
-import PathRoutes from "../../helpers/Routes.helper";
+import { getUsers, editUser, deleteUsers, modCompleteUser, getEntireUsers, changeStatusUser} from '../../../redux/actions'
+import PathRoutes from "../../../helpers/Routes.helper";
 import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar'
 import Swal from 'sweetalert2'
@@ -22,11 +22,11 @@ import {
   User,
   Pagination,
 } from "@nextui-org/react";
-import { VerticalDotsIcon } from "./VerticalDotsIcon";
-import { SearchIcon } from "./SearchIcon";
-import { ChevronDownIcon } from "./ChevronDownIcon";
+import { VerticalDotsIcon } from "../VerticalDotsIcon";
+import { SearchIcon } from "../SearchIcon";
+import { ChevronDownIcon } from "../ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
-import { capitalize } from "./Accesory";
+import { capitalize } from "../Accesory";
 
 const statusColorMap = {
   Usuario: "success",

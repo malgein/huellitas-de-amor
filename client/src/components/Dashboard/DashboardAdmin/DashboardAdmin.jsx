@@ -1,14 +1,24 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Sidebar from './Sidebar'
-
-
-import { Outlet } from 'react-router-dom';
+import { useAuth } from "../../../../../server/src/context/AuthContext";
+import { Outlet, useNavigate } from 'react-router-dom';
 
 //Este es el componente del dashboard principal
-const Dashboard = () => {
+const DashboardAdmin = () => {
+
+	const { user } = useAuth();
+
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		// if(!user){
+		// 	navigate('/registro')
+		// }
+	},[])
 
 	return (
 		<div className='flex overflow-scroll'>
+			{console.log(user)}
 			<div className="flex overflow-scroll ">
         <div className="basis-[12%] h-[100vh]">
 			{/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
@@ -29,4 +39,4 @@ const Dashboard = () => {
 	)
 }
 
-export default Dashboard
+export default DashboardAdmin
