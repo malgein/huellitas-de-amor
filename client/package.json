@@ -15,7 +15,6 @@
     "@react-google-maps/api": "^2.19.2",
     "axios": "^1.4.0",
     "canvas-confetti": "^1.6.0",
-    "firebase": "^10.3.1",
     "formik": "^2.4.3",
     "framer-motion": "^10.15.2",
     "nodemailer": "^6.9.4",

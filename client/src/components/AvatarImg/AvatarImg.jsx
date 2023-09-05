@@ -44,12 +44,12 @@ export default function AvatarImg() {
           <DropdownItem key="analytics" to="/registro">
             <Link to={PathRoutes.HOME}>Inicio</Link>
           </DropdownItem>
-          <DropdownItem key="dashboard">
-            <Link to={PathRoutes.DASHBOARD}>Panel</Link>
-          </DropdownItem>
-          {/* <DropdownItem key="configurations">
-            <Link to={PathRoutes.REGISTRO}>Registro</Link>
-          </DropdownItem> */}
+          {user ? (
+            <DropdownItem key="dashboard">
+              <Link to={PathRoutes.DASHBOARD}>Panel</Link>
+            </DropdownItem>
+          ) : null}
+
           {user ? (
             <DropdownItem key="logout" color="danger">
               <Link to="#" onClick={handleLogout}>
