@@ -456,8 +456,8 @@ function Pets() {
             onValueChange={onSearchChange}
           />
           <div className="flex gap-3">
-            <Dropdown>
-              {/* <DropdownTrigger className="hidden sm:flex">
+            {/* <Dropdown> */}
+            {/* <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
                   Status
                 </Button>
@@ -476,7 +476,7 @@ function Pets() {
                   </DropdownItem>
                 ))}
               </DropdownMenu> */}
-            </Dropdown>
+            {/* </Dropdown> */}
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button

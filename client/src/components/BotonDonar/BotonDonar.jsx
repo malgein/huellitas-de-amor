@@ -12,9 +12,8 @@ export default function Donar() {
 
   const createPreference = async (price) => {
     try {
-      const basename =
-        "https://huellitas-de-amor-production-6e81.up.railway.app";
-      // const basename = "http://localhost:3001";
+      // "https://huellitas-de-amor-production-6e81.up.railway.app";
+      const basename = "http://localhost:3001";
       const ENDPOINT = `${basename}/create_preference`;
 
       const response = await axios.post(ENDPOINT, {
