@@ -1,11 +1,10 @@
-import React, {useState, useEffect, useCallback} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import { getUsers, editUser, deleteUsers, modCompleteUser} from '../../redux/actions'
-import PathRoutes from "../../helpers/Routes.helper";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import PathRoutes from "../../../helpers/Routes.helper";
 import Sidebar from './Sidebar'
+import { useSelector, useDispatch } from 'react-redux'
+import { getMascotas, deletePets, modCompletePet } from '../../../redux/actions'
 import Swal from 'sweetalert2'
-
 import {
   Table,
   TableHeader,
@@ -23,67 +22,91 @@ import {
   User,
   Pagination,
 } from "@nextui-org/react";
-import { VerticalDotsIcon } from "./VerticalDotsIcon";
-import { SearchIcon } from "./SearchIcon";
-import { ChevronDownIcon } from "./ChevronDownIcon";
+import {VerticalDotsIcon} from "../VerticalDotsIcon";
+import {SearchIcon} from "../SearchIcon";
+import {ChevronDownIcon} from "../ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
-import { capitalize } from "./Accesory";
+import {capitalize} from "../Accesory";
 
 const statusColorMap = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
+  Macho: "success",
+  Hembra: "danger",
+  // vacation: "warning",
+};
+//esto es para darle color al fondo de los estados(Nacho)
+const estadoColorMap = {
+  Adoptado: "danger", // Rojo
+  "En adopción": "success", // Verde
+  "En Proceso": "warning", // Amarillo
 };
 
-// const columns = [
-//   {name: "NOMBRE", uid: "nombre"},
-//   {name: "NACIONALIDAD", uid: "nacionalidad"},
-//   {name: "ubicacion", uid: "ubicacion"},
-//   {name: "ACTIONS", uid: "actions"},
-// ];
-
+//Aqui piuedo colocar la disponibilidad de la mascota adoptada, en busca de un hogar
 const statusOptions = [
   { name: "Active", uid: "active" },
   { name: "Paused", uid: "paused" },
   { name: "Vacation", uid: "vacation" },
 ];
 //!Esto muestra las columnas que se ven al inicio
+const INITIAL_VISIBLE_COLUMNS = [
+  "id",
+  "nombre",
+  "raza",
+  "sexo",
+  "edad",
+  "tamano",
+  "peso",
+  "estado",
+  "actions",
+];
 
-const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre","apellido", "nacionalidad",  "ubicacion", "direccion", "telefono",  "acerca", "actions"];
-
-
-function Users() {
-  const usuarios = useSelector((state) => state.usuarios);
+function Pets() {
+  const mascotas = useSelector((state) => state.mascotas);
 
   const dispatch = useDispatch();
 
-  const [userModified, setUserModified] = useState(true);
+  const [petModified, setPetModified] = useState(true);
 
-
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
 
   useEffect(() => {
-    //if (userModified) {
-    dispatch(getUsers());
-    // setUserModified(false); // Restablecer userDeleted después de obtener usuarios
-    //}
-  }, [userModified, dispatch]);
+    if (petModified) {
+      dispatch(getMascotas());
+      setPetModified(false);
+    }
+  }, [dispatch, petModified]);
 
-  //Esta funcion puede ser modificada para cambiar cada propiedad del usuario
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Seguro que quieres eliminar a la mascota?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("mascota borrada con exito", "", "success");
+        setPetModified(!petModified);
+        dispatch(deletePets(id));
+        console.log(petModified);
+      } else if (result.isDenied) {
+        Swal.fire("La mascota no ha sido borrada", "", "info");
+      }
+    });
+  };
+
   // const handleEdit = async(id) => {
   //   console.log(id)
   //   const { value: formValues } = await Swal.fire({
   //     title: 'Introduce la propiedad y el valor que deseas modificar',
   //     html:
   //       '<input id="swal-input1" class="swal2-input">' +
-  //       '<input id="swal-input2" class="swal2-input">' ,
+  //       '<input id="swal-input2" class="swal2-input">',
   //     focusConfirm: false,
   //     preConfirm: () => {
   //       return [
   //         document.getElementById('swal-input1').value,
-  //         document.getElementById('swal-input2').value,
-
+  //         document.getElementById('swal-input2').value
   //       ]
   //     }
   //   })
@@ -92,141 +115,147 @@ function Users() {
   //     const result = {[formValues[0]] : formValues[1]}
   //     console.log(result)
   //     // const resultJson = JSON.stringify(result)
-  //     dispatch(editUser(id, result))
-  //     console.log(userModified)
+  //     dispatch(editPets(id, result))
+  //     setPetModified(true)
   //     Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
-  //     setUserModified(!userModified)
   //   }
   // }
+
+  const handleNavigate = (id) => {
+    navigate(PathRoutes.DETAIL.replace(":id", id));
+  };
 
   const handleEdit = async (id) => {
     console.log(id);
     const { value: formValues } = await Swal.fire({
-      title: "Introduce los nuevos datos del usuario que deseas modificar",
+      title: "Introduce los nuevos datos de la mascota que deseas modificar",
       html:
-        "Nombre del usuario " +
+        "Nombre de la mascota" +
         '<input id="swal-input1" class="swal2-input"> </br> ' +
-        "Apellido del usuario" +
+        "Edad de la mascota" +
         '<input id="swal-input2" class="swal2-input"> </br> ' +
-        "Nacionalidad del usuario " +
-        '<input id="swal-input3" class="swal2-input"> </br> ' +
-
-        'ubicacion del usuario ' +
-
-        '<input id="swal-input4" class="swal2-input"> </br> ' +
-        "Direccion del usuario " +
+        "Sexo de la mascota </br>" +
+        "</br>" +
+        '<input type="radio" id="swal-input3" value="Macho"  name="sexo"> ' +
+        "Macho " +
+        '<input type="radio" id="swal-input4" value="Hembra" name="sexo">  ' +
+        "Hembra </br>" +
+        "</br>" +
+        "Descripcion de la mascota " +
         '<input id="swal-input5" class="swal2-input"> </br> ' +
-        "Telefono del usuario " +
+        "Url de la foto de la mascota " +
         '<input id="swal-input6" class="swal2-input"> </br> ' +
-        "Detalles  del usuario " +
-        '<input id="swal-input7" class="swal2-input"> </br> ' +
-        "Email del usuario " +
-        '<input id="swal-input8" class="swal2-input"> </br> ' +
-        "Password del usuario " +
-        '<input type="password" id="swal-input9" class="swal2-input"> </br> ',
+        "Tamaño de la mascota </br>" +
+        "</br>" +
+        '<input type="radio" id="swal-input7" value="Pequeño" name="tamano"> ' +
+        "Pequeño " +
+        '<input type="radio" id="swal-input8" value="Mediano" name="tamano"> ' +
+        "Mediano " +
+        '<input type="radio" id="swal-input9" value="Grande" name="tamano">  ' +
+        "Grande </br>" +
+        "</br>" +
+        "Raza de la mascota " +
+        '<input id="swal-input10" class="swal2-input"> </br> ' +
+        "Peso de la mascota " +
+        '<input id="swal-input11" class="swal2-input"> </br> ',
       focusConfirm: false,
       preConfirm: () => {
         return [
-          document.getElementById('swal-input1').value,
-          document.getElementById('swal-input2').value,
-          document.getElementById('swal-input3').value,
-          document.getElementById('swal-input4').value,
-          document.getElementById('swal-input5').value,
-          document.getElementById('swal-input6').value,
-          document.getElementById('swal-input7').value,
-          document.getElementById('swal-input8').value,
-          document.getElementById('swal-input9').value,
-        ]
-      }
-    })
-    
+          document.getElementById("swal-input1").value,
+          document.getElementById("swal-input2").value,
+          document.getElementById("swal-input3"),
+          document.getElementById("swal-input4"),
+          document.getElementById("swal-input5").value,
+          document.getElementById("swal-input6").value,
+          document.getElementById("swal-input7"),
+          document.getElementById("swal-input8"),
+          document.getElementById("swal-input9"),
+          document.getElementById("swal-input10").value,
+          document.getElementById("swal-input11").value,
+        ];
+      },
+    });
+
     const result = {
       nombre: formValues[0],
-      apellido: formValues[1],
-      nacionalidad: formValues[2],
-      ubicacion: formValues[3],
-      direccion: formValues[4],
-      telefono: parseInt(formValues[5]),
-      acerca: formValues[6],
-      email: formValues[7] ,
-      password : formValues[8]
-    }
+      edad: parseInt(formValues[1]),
+      sexo: formValues[2].checked ? formValues[2].value : formValues[3].value,
+      descripcion: formValues[4],
+      foto: [`${formValues[5]}`],
+      tamano: formValues[6].checked
+        ? formValues[6].value
+        : formValues[7].checked
+        ? formValues[7].value
+        : formValues[8].checked && formValues[8].value,
+      raza: formValues[9],
+      peso: parseFloat(formValues[10]),
+    };
 
-    if (formValues[0]==='' || formValues[1]==='' || formValues[2]==='' || formValues[3]==='' || formValues[4]==='' || formValues[5]==='' || formValues[6]==='' || formValues[7]==='' || formValues[8]==='' ) {
+    if (
+      formValues[0] === "" ||
+      formValues[1] === "" ||
+      formValues[2] === "" ||
+      formValues[3] === "" ||
+      formValues[4] === "" ||
+      formValues[5] === "" ||
+      formValues[6] === "" ||
+      formValues[7] === "" ||
+      formValues[8] === "" ||
+      formValues[9] === "" ||
+      formValues[10] === ""
+    ) {
+      // console.log(formValues[3].value)
       Swal.fire({
-        icon: 'error',
-        title: 'No se pudo modificar el usuario',
-        text: 'No puedes dejar campos en blanco!',
-      })
-    }  else if( isNaN(result.telefono)) {
+        icon: "error",
+        title: "No se pudo modificar la mascota",
+        text: "No puedes dejar campos en blanco!",
+      });
+    } else if (isNaN(result.edad)) {
       Swal.fire({
-        icon: 'error',
-        title: 'No se pudo modificar el usuario',
-        text: 'el telefono del usuario debe ser expresado en numeros enteros',
-      })
-    } else if( formValues[5].charAt(0) === '0') {
+        icon: "error",
+        title: "No se pudo modificar la mascota",
+        text: "La edad de la mascota debe ser expresada en numeros enteros",
+      });
+    } else if (isNaN(result.peso)) {
       Swal.fire({
-        icon: 'error',
-        title: 'No se pudo modificar el usuario',
-        text: 'el telefono del usuario no debe empezar por 0',
-      })
-      
-    } else if(formValues[5].length > 9) {
-      Swal.fire({
-        icon: 'error',
-        title: 'No se pudo modificar el usuario',
-        text: 'el telefono del usuario no debe exceder los 9 digitos',
-      })
-     }  else {
-      console.log(result.telefono.length)
-      dispatch(modCompleteUser(id, result))
-      // dispatch(editUser(id, result))
+        icon: "error",
+        title: "No se pudo modificar la mascota",
+        text: "El peso de la mascota debe ser expresada en numeros enteros",
+      });
+    } else {
+      console.log(result);
+      dispatch(modCompletePet(id, result));
+
       // console.log(userModified)
       Swal.fire({
-        icon: 'success',
-        text:'Modificacion exitosa!'
-        }
-      )
-      setUserModified(!userModified)
-
+        icon: "success",
+        text: "Modificacion exitosa!",
+      });
+      setPetModified(!petModified);
     }
   };
-
-  const handleNavigate = (id) => {
-    navigate(PathRoutes.DETAILUSER.replace(":id", id))
-  }
-
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Seguro que quieres eliminar al usuario?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Si",
-      denyButtonText: `No`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        Swal.fire("Usuario borrado con exito", "", "success");
-        dispatch(deleteUsers(id));
-        setUserModified(true);
-        console.log(userModified);
-      } else if (result.isDenied) {
-        Swal.fire("El usuario no ha sido borrado", "", "info");
-      }
-    });
+  //Funcion para el cambio de estado de la mascota
+  const cambioDeEstado = (id, currentStatus) => {
+    const newStatus = currentStatus === "Adoptado" ? "En adopción" : "Adoptado";
+    dispatch(editPets(id, { estado: newStatus }));
+    setPetModified(true);
+    Swal.fire(
+      "Estado actualizado",
+      `La mascota ha sido ${newStatus}`,
+      "success"
+    );
   };
 
   const columns = [
-
-    {name: "ID", uid: "id", sortable: true},
-    {name: "NOMBRE", uid: "nombre", sortable: true},
-    {name: "APELLIDO", uid: "apellido", sortable: true},
-    {name: "NACIONALIDAD", uid: "nacionalidad", sortable: true},
-    {name: "ubicacion", uid: "ubicacion", sortable: true},
-    {name: "DIRECCION", uid: "direccion", sortable: true},
-    {name: "TELEFONO", uid: "telefono" , sortable: true},
-    // {name: "EMAIL", uid: "email", sortable: true},
-    { name: "ACERCA", uid: "acerca", sortable: true },
+    { name: "ID", uid: "id", sortable: true },
+    { name: "NOMBRE", uid: "nombre", sortable: true },
+    { name: "RAZA", uid: "raza", sortable: true },
+    { name: "SEXO", uid: "sexo", sortable: true },
+    { name: "EDAD", uid: "edad", sortable: true },
+    { name: "PESO", uid: "peso", sortable: true },
+    // {name: "STATUS", uid: "status", sortable: true},
+    { name: "ESTADO", uid: "estado", sorteable: true }, //hice esta linea para que se vea en la tabla (nacho)
+    { name: "TAMANO", uid: "tamano", sortable: true },
     { name: "ACTIONS", uid: "actions" },
   ];
 
@@ -254,14 +283,14 @@ function Users() {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...usuarios];
+    let filteredUsers = [...mascotas];
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
         user.nombre.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
-    //Para modificar el estado del usuario
+    //Para modificar el estado de la mascota
     if (
       statusFilter !== "all" &&
       Array.from(statusFilter).length !== statusOptions.length
@@ -272,7 +301,7 @@ function Users() {
     }
 
     return filteredUsers;
-  }, [usuarios, filterValue, statusFilter]);
+  }, [mascotas, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -302,7 +331,7 @@ function Users() {
           <User
             //aqui va la foto de la mascota
             avatarProps={{ radius: "lg", src: user.foto }}
-            description={user.email}
+            description={user.nombre}
             name={cellValue}
           >
             {user.id}
@@ -317,6 +346,27 @@ function Users() {
             </p>
           </div>
         );
+      //esto lo puse para darle el Estilo al estado (Nacho)
+      case "estado":
+        return (
+          <div className="flex items-center gap-2">
+            <Chip
+              className="capitalize"
+              color={estadoColorMap[cellValue]}
+              size="sm"
+              variant="flat"
+            >
+              {cellValue}
+            </Chip>
+            <Button
+              size="mini"
+              onClick={() => cambioDeEstado(user.id, cellValue)}
+            >
+              {cellValue === "Adoptado" ? "En adopción" : "Adoptado"}
+            </Button>
+          </div>
+        );
+
       case "sexo":
         return (
           <Chip
@@ -338,9 +388,12 @@ function Users() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Dynamic Actions">
-                <DropdownItem onClick={() => handleNavigate(user.id)}>Detalle</DropdownItem>
-                <DropdownItem onClick={() => handleEdit(user.id)}>Editar</DropdownItem>
-
+                <DropdownItem onClick={() => handleNavigate(user.id)}>
+                  Detalle
+                </DropdownItem>
+                <DropdownItem onClick={() => handleEdit(user.id)}>
+                  Editar
+                </DropdownItem>
                 //!Aqui se borra y arriba se edita y se detalla
                 <DropdownItem
                   color="danger"
@@ -403,8 +456,8 @@ function Users() {
             onValueChange={onSearchChange}
           />
           <div className="flex gap-3">
-            <Dropdown>
-              {/* <DropdownTrigger className="hidden sm:flex">
+            {/* <Dropdown> */}
+            {/* <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
                   Status
                 </Button>
@@ -423,7 +476,7 @@ function Users() {
                   </DropdownItem>
                 ))}
               </DropdownMenu> */}
-            </Dropdown>
+            {/* </Dropdown> */}
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button
@@ -456,7 +509,7 @@ function Users() {
         </div>
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">
-            Total {usuarios.length} Usuarios
+            Total {mascotas.length} Mascotas
           </span>
           <label className="flex items-center text-default-400 text-small">
             Filas por pagina:
@@ -477,7 +530,7 @@ function Users() {
     statusFilter,
     visibleColumns,
     onRowsPerPageChange,
-    usuarios.length,
+    mascotas.length,
     onSearchChange,
     hasSearchFilter,
   ]);
@@ -485,8 +538,6 @@ function Users() {
   const bottomContent = React.useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
-        {usuarios.map((user) => console.log(user.tipoDeUsuarioId))}
-        {/* {console.log(usuarios)} */}
         <span className="w-[30%] text-small text-default-400">
           {selectedKeys === "all"
             ? "All items selected"
@@ -494,8 +545,6 @@ function Users() {
         </span>
         <Pagination
           isCompact
-          showControls
-          showShadow
           color="primary"
           page={page}
           total={pages}
@@ -524,62 +573,80 @@ function Users() {
   }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div >
-    <div className='flex overflow-scroll '>
-   <div className="flex overflow-scroll ">
-     <div className="basis-[12%] h-[100vh]">
-       {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
-       <Sidebar />
-     </div>
-     <div className="basis-[88%] border overflow-scroll h-[100vh]">
-       {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
-         
-       <div className='mt-10'>
-         {/* Soy la gestion de casas de adopcion */}
-         {/* {console.log(casasDeAdopcion)} */}
-         <Table
-   aria-label="Example table with custom cells, pagination and sorting"
-   isHeaderSticky
-   bottomContent={bottomContent}
-   bottomContentPlacement="outside"
-   classNames={{
-     wrapper: "max-h-[382px]",
-   }}
-   selectedKeys={selectedKeys}
-   selectionMode="multiple"
-   sortDescriptor={sortDescriptor}
-   topContent={topContent}
-   topContentPlacement="outside"
-   onSelectionChange={setSelectedKeys}
-   onSortChange={setSortDescriptor}
- >
-   <TableHeader columns={headerColumns}>
-     {(column) => (
-       <TableColumn
-         key={column.uid}
-         align={column.uid === "actions" ? "center" : "start"}
-         allowsSorting={column.sortable}
-       >
-         {/* {column.name} */}
-         {column.name}
-       </TableColumn>
-     )}
-   </TableHeader>
-   <TableBody emptyContent={"No se encontraron Usuarios"} items={sortedItems}>
-     {(item) => (
-       <TableRow key={item.id}>
-         {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-       </TableRow>
-     )}
-   </TableBody>
- </Table>
-       </div>
-     </div>
-   </div>
- </div>
- </div>
+    <div>
+      <div className="flex overflow-scroll ">
+        <div className="flex overflow-scroll ">
+          <div className="basis-[12%] h-[100vh]">
+            {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
+            <Sidebar />
+          </div>
+          <div className="basis-[88%] border overflow-scroll h-[100vh]">
+            {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
+            <div className="mt-10">
+              <div className="flex">
+                {mascotas.map((mascota) => (
+                  <div
+                    key={mascota.id}
+                    className={`p-4 rounded-lg shadow-md mb-4 ${
+                      // Aplicar colores de fondo según el estado de la mascota
+                      mascota.estado === "en Adopción"
+                        ? "bg-blue-200"
+                        : mascota.estado === "en proceso"
+                        ? "bg-yellow-200"
+                        : mascota.estado === "adoptado"
+                        ? "bg-green-200"
+                        : "bg-gray-200" // Color predeterminado si el estado no coincide
+                    }`}
+                  ></div>
+                ))}
+              </div>
+            </div>
 
+            <Table
+              aria-label="Example table with custom cells, pagination and sorting"
+              isHeaderSticky
+              bottomContent={bottomContent}
+              bottomContentPlacement="outside"
+              classNames={{
+                wrapper: "max-h-[382px]",
+              }}
+              selectedKeys={selectedKeys}
+              selectionMode="multiple"
+              sortDescriptor={sortDescriptor}
+              topContent={topContent}
+              topContentPlacement="outside"
+              onSelectionChange={setSelectedKeys}
+              onSortChange={setSortDescriptor}
+            >
+              <TableHeader columns={headerColumns}>
+                {(column) => (
+                  <TableColumn
+                    key={column.uid}
+                    align={column.uid === "actions" ? "center" : "start"}
+                    allowsSorting={column.sortable}
+                  >
+                    {column.name}
+                  </TableColumn>
+                )}
+              </TableHeader>
+              <TableBody
+                emptyContent={"No se encontraron Mascotas"}
+                items={sortedItems}
+              >
+                {(item) => (
+                  <TableRow key={item.id}>
+                    {(columnKey) => (
+                      <TableCell>{renderCell(item, columnKey)}</TableCell>
+                    )}
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
-export default Users;
+export default Pets;

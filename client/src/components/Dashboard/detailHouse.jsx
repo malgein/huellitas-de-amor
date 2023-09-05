@@ -14,7 +14,7 @@ import confetti from "canvas-confetti";
 
 export default function DetailHouse() {
   const { id } = useParams();
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
 	const [casa, setcasa] = useState([])
 

@@ -23,6 +23,7 @@ export const DELETE_HOUSES = "DELETE_HOUSES";
 
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = "GET_USER";
+export const GET_USERS_RELATIONS = "GET_USERS_RELATIONS"
 
 export const GET_ALL_DONATIONS = "GET_DONATIONS";
 
@@ -33,6 +34,10 @@ export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
 export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
 export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
+//Caso que me trae todos los usuarios de la bd con sus relaciones: donaciones, tipo de usuario, comentarios, favoritos etc
+export const GET_ENTIRE_USERS = 'GET_ENTIRE_USERS'
+//Modifica el tipo de usuario
+export const CHANGE_STATUS_USER ='CHANGE_STATUS_USER'
 
 const handleError = (dispatch, errorType, error) => {
   console.error(error);
@@ -314,7 +319,41 @@ export const logicalDeletePet = (id, estado) => async (dispatch) => {
   } catch (error) {
     console.error("Error al actualizar el estado de la mascota:", error);
   }
+
+
+  //Traemos todos los usuarios y sus relaciones
+
+
 };
+
+//Accion que me trare el usuario con todas sus relaciones
+export const getEntireUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${basename}/usuario/tipoDeUsuario`);
+    dispatch({
+      type: GET_ENTIRE_USERS,
+      payload: response.data,
+    });
+  } catch (error) {
+    handleError(dispatch, GET_ENTIRE_USERS, error);
+  }
+
+};
+
+export const changeStatusUser = (response) => {
+  const endpoint = `${basename}/relacion-user-type`;
+  console.log(response)
+  return (dispatch) => {
+    axios.patch(endpoint, response).then(({ data }) => {
+      return dispatch({
+        type: CHANGE_STATUS_USER,
+        payload: data,
+      });
+    });
+  };
+}
+
+
 //manejamos el estado y la visualizacion de la mascota (nacho)
 
 // export const changePetStatus = (id, estado, visible) => async (dispatch) => {

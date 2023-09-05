@@ -1,8 +1,8 @@
 import React, {useEffect, useCallback, useState} from 'react'
 import { Link, useNavigate } from "react-router-dom";
-import PathRoutes from "../../helpers/Routes.helper";
+import PathRoutes from "../../../helpers/Routes.helper";
 import Sidebar from './Sidebar'
-import { getAllHomes, modCompleteHouse, deleteHouses } from '../../redux/actions'
+import { getAllHomes, modCompleteHouse, deleteHouses } from '../../../redux/actions'
 import {useSelector , useDispatch} from 'react-redux'
 import {
   Table,
@@ -21,12 +21,12 @@ import {
   User,
   Pagination,
 } from "@nextui-org/react";
-import {PlusIcon} from "./PlusIcon";
-import {VerticalDotsIcon} from "./VerticalDotsIcon";
-import {SearchIcon} from "./SearchIcon";
-import {ChevronDownIcon} from "./ChevronDownIcon";
+import {PlusIcon} from "../PlusIcon";
+import {VerticalDotsIcon} from "../VerticalDotsIcon";
+import {SearchIcon} from "../SearchIcon";
+import {ChevronDownIcon} from "../ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
-import {capitalize} from "./Accesory";
+import {capitalize} from "../Accesory";
 import Swal from 'sweetalert2'
 
 const statusColorMap = {

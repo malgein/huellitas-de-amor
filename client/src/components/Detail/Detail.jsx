@@ -75,6 +75,7 @@ export default function Detail() {
 
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
+      {console.log(useAuth())}
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
         <div className="relative">
           {mascota.foto && mascota.foto.length === 1 ? (
