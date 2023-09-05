@@ -29,24 +29,28 @@ module.exports = (sequelize) => {
       },
       nacionalidad: {
         type: DataTypes.STRING(50),
-        allowNull: true,
+        allowNull: false,
       },
       ubicacion: {
         type: DataTypes.STRING(50),
-        allowNull: true,
+        allowNull: false,
       },
       direccion: {
         type: DataTypes.STRING(50),
-        allowNull: true,
+        allowNull: false,
       },
       telefono: {
-        type: DataTypes.STRING(15),
-        allowNull: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       acerca: {
-        type: DataTypes.STRING(100),
-        allowNull: true,
+        type: DataTypes.TEXT(50),
+        allowNull: false,
       },
+      // foto: {
+      //   type: DataTypes.JSON, // Cambiado a JSON para representar un array de URLs
+      //   allowNull: false,
+      // },
     },
     { timestamps: false }
   );

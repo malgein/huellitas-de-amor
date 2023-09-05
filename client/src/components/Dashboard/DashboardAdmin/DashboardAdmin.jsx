@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import Sidebar from './Sidebar'
-import { useAuth } from "../../../../../server/src/context/AuthContext";
+import { useAuth } from "../../../../context/AuthContext";
 import { Outlet, useNavigate } from 'react-router-dom';
 
 //Este es el componente del dashboard principal

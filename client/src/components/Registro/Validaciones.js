@@ -11,7 +11,7 @@ const validationSchema = Yup.object({
     .min(5, "El apellido debe tener al menos 5 caracteres")
     .max(15, "El aellido no puede tener más de 15 caracteres"),
 
-    email: Yup.string()
+  email: Yup.string()
     .email("Correo electrónico inválido")
     .required("Por favor, introduce tu dirección de correo electrónico."),
 
@@ -58,8 +58,6 @@ const validationSchema = Yup.object({
   //   .required("Por favor, cuéntanos un poco acerca de ti.")
   //   .min(5, "Debe tener al menos 5 caracteres")
   //   .max(100, "No puede tener más de 100 caracteres"),
-
-  
 });
 
 export default validationSchema;
