@@ -12,11 +12,11 @@ module.exports = (sequelize) => {
       },
       nombre: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       apellido: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -29,28 +29,32 @@ module.exports = (sequelize) => {
       },
       nacionalidad: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       ubicacion: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       direccion: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       telefono: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       acerca: {
         type: DataTypes.TEXT(50),
-        allowNull: false,
+        allowNull: true,
       },
-      // foto: {
-      //   type: DataTypes.JSON, // Cambiado a JSON para representar un array de URLs
-      //   allowNull: false,
-      // },
+      imagenPerfil: {
+        type: DataTypes.JSON, // Puedes ajustar el tipo de dato según tu necesidad
+        allowNull: true, // Puede ser nulo si el usuario no ha subido una imagen de perfil
+      },
+      imagenPortada: {
+        type: DataTypes.JSON, // Puedes ajustar el tipo de dato según tu necesidad
+        allowNull: true, // Puede ser nulo si el usuario no ha subido una imagen de portada
+      },
     },
     { timestamps: false }
   );
