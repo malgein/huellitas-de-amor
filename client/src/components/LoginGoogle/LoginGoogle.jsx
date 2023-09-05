@@ -3,11 +3,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
-<<<<<<< HEAD
-// import { useAuth } from "../../../../server/src/context/AuthContext";
-=======
+
 import { useAuth } from "../../../context/AuthContext";
->>>>>>> origin/qa
 
 export default function LoginGoogle() {
   const [user, setUser] = useState({
