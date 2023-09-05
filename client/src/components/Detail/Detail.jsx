@@ -11,10 +11,13 @@ import { getCasaById, getPetById, logicalDeletePet } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
-import iconMacho from "../../assets/macho.png";
-import iconHembra from "../../assets/hembra.png";
 import PathRoutes from "../../helpers/Routes.helper";
-import { useAuth } from "../../../../server/src/context/AuthContext";
+
+
+import AdoptionFormModal from '../FormularioAdopcion/FormAdop';
+
+import { useAuth } from "../../../context/AuthContext";
+
 
 export default function Detail() {
   const { id } = useParams();
@@ -22,6 +25,7 @@ export default function Detail() {
   const dispatch = useDispatch();
   const [adopcionEnProgreso, setAdopcionEnProgreso] = useState(false);
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getPetById(id));
@@ -45,19 +49,28 @@ export default function Detail() {
   const handleConfetti = () => {
     confetti({});
   };
+  const handleAdoption =() => {
+    if (user) {
+      setIsModalOpen(true);
+    } else {
+      navigate("/login");
+    }
+  };
 
-  const handleAdoption = () => {
+  const handleAdoptionConfirm = () => {
     setAdopcionEnProgreso(true);
     dispatch(logicalDeletePet(id, "En Proceso"));
-
     handleConfetti();
+    setIsModalOpen(false);
     navigate("/");
   };
+
+
 
   const casa = useSelector((state) => state.casasDeAdopcion);
 
   const isAdopted = mascota.estado === "Adoptado";
-  const isInProcess = mascota.estado === "En Proceso";
+  // const isInProcess = mascota.estado === "En Proceso";
   const isAvailableForAdoption = mascota.estado === "En Adopción";
 
   return (
@@ -181,6 +194,7 @@ export default function Detail() {
               </Link>
             </div>
           </div>
+          <AdoptionFormModal isOpen={isModalOpen} onOpenChange={setIsModalOpen}  onConfirm={handleAdoptionConfirm}/>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
             {user ? (
               <Button

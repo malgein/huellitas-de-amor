@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../../server/src/context/AuthContext";
+import { Button } from "@nextui-org/react";
+import google from "../../assets/google.png";
+import { useAuth } from "../../../context/AuthContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
@@ -13,6 +15,7 @@ import {
   User,
 } from "@nextui-org/react";
 import LoginGoogle from "../LoginGoogle/LoginGoogle";
+
 
 function NewLogin() {
   const { login } = useAuth();
