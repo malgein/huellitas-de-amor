@@ -55,6 +55,8 @@ const {
   Adopcion,
   Especie,
   Favorito,
+  Notificaciones,
+  FormularioAdop,
 } = sequelize.models;
 
 //Usuarios --> Tipo de Usuarios
@@ -125,6 +127,24 @@ Donacion.belongsTo(CasaDeAdopcion, {
 CasaDeAdopcion.hasMany(Donacion, {
   foreignKey: "casaDeAdpocionId",
 });
+//Formulario de Adopción --> Casa de Adopciones
+FormularioAdop.belongsTo(CasaDeAdopcion, {
+  foreignKey: "casaDeAdpocionId",
+})
+//Casa de Adopciones --> Formulario de Adopción
+CasaDeAdopcion.hasMany(FormularioAdop, {
+  foreignKey: "casaDeAdpocionId",
+})
+//Notificaciones --> Usuarios
+Notificaciones.belongsToMany(Usuario, {
+  through: "NotificacionUsuario",
+  
+})
+//Usuarios --> Notificaciones
+Usuario.belongsToMany(Notificaciones, {
+  through: "NotificacionUsuario",
+})
+
 
 //Usuarios -->  favoritos
 Favorito.belongsTo(Usuario, {
