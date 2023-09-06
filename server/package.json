@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js",
+    "start": "nodemon ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -23,7 +23,8 @@
     "nodemailer": "^6.9.4",
     "pg": "^8.5.1",
     "react-dropzone": "14.2.3",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

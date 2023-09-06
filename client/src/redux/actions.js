@@ -44,8 +44,8 @@ const handleError = (dispatch, errorType, error) => {
 
 
 export const EDIT_USER = "EDIT_USER";
-// const basename = "https://huellitas-de-amor-production.up.railway.app";
-const basename = "http://localhost:3001";
+// export const basename = "https://huellitas-de-amor-production.up.railway.app";
+export const basename = "http://localhost:3001";
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
