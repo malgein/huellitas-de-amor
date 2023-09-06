@@ -98,7 +98,7 @@ const Perfil = () => {
     <div className="border-2 flex justify-center ">
       {usuario ? (
         <div className=" w-[1000px] mx-auto rounded-2xl shadow-lg   mb-unit-8">
-          <div className="border-2 rounded-t-lg h-[350px] w-[1000px] relative ">
+          <div className="border border-b-4 rounded-t-lg h-[350px] w-[1000px] relative ">
             {/* aqui va una imagen */}
             <img
               src={perfil.imagenPortada.replace(/"/g, "")}
@@ -107,12 +107,17 @@ const Perfil = () => {
             />
 
             <div className="flex flex-col ml-3 max-w-sm mx-auto rounded-xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 absolute bottom-[-110px] left-0">
-              <div className="border-4 border-white rounded-full w-[180px]">
+              <div className="border-4 border-black object-contain rounded-full w-[180px] relative">
                 {/* {usuario.imagenPerfil} */}
                 <img
                   src={perfil.imagenPerfil.replace(/"/g, "")}
                   alt="Imagen de perfil"
+                  className="rounded-full object-cover "
                 />
+
+                <div className="border-2 border-black rounded-full w-[35px] h-[35px] absolute right-0 bottom-6 bg-white flex items-center justify-center">
+                  <BotonPerfil perfil={perfil} setPerfil={setPerfil} />
+                </div>
               </div>
 
               <div className="flex flex-col text-lg text-black font-semibold ">
@@ -125,14 +130,10 @@ const Perfil = () => {
                 </p>
               </div>
             </div>
-          </div>
 
-          <div className="border-2 flex justify-center">
-            <BotonPerfil perfil={perfil} setPerfil={setPerfil} />
-          </div>
-
-          <div className="border-2 flex justify-center">
-            <BotonPortada />
+            <div className="border-2 border-black rounded-full w-[35px] h-[35px] absolute right-2 bottom-0 bg-white flex items-center justify-center">
+              <BotonPortada />
+            </div>
           </div>
 
           {/* <Button

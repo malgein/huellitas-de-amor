@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Button,
+  Link,
   Modal,
   ModalContent,
   ModalHeader,
@@ -73,14 +74,14 @@ const BotonPortada = () => {
 
   return (
     <div>
-      <Button
+      <Link
         key={size}
         onPress={() => handleOpen(size)}
         onClick={() => setAbrirFotoPerfil(true)}
-        afterSave={dispatchRedux}
+        className="rounded-full flex justify-center "
       >
-        Editar foto portada
-      </Button>
+        <i className="fa-solid fa-camera"></i>
+      </Link>
 
       <Modal
         size="2xl"

@@ -7,7 +7,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import FotoPerfil from "./FotoPerfil";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
@@ -72,14 +72,14 @@ const BotonPerfil = () => {
 
   return (
     <div>
-      <Button
+      <Link
         key={size}
         onPress={() => handleOpen(size)}
         onClick={() => setAbrirFotoPerfil(true)}
-        afterSave={dispatchRedux}
+        className=" rounded-full flex justify-center  "
       >
-        Editar foto perfil
-      </Button>
+        <i className="fa-solid fa-camera"></i>
+      </Link>
 
       <Modal
         size="2xl"
@@ -93,7 +93,6 @@ const BotonPerfil = () => {
             setUserModified={setUserModified}
             perfil={perfil}
             setPerfil={setPerfil}
-            
           />
         </ModalContent>
       </Modal>
