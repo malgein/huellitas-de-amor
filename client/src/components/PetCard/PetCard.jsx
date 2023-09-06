@@ -1,3 +1,33 @@
+// import { useState } from "react"; // Importa useState
+// import {
+//   Card,
+//   CardHeader,
+//   CardBody,
+//   Image,
+//   Button,
+//   Modal,
+//   ModalHeader,
+//   ModalBody,
+//   ModalFooter,
+//   ModalContent,
+// } from "@nextui-org/react";
+// import { Link } from "react-router-dom";
+// import PathRoutes from "../../helpers/Routes.helper";
+// import Donar from "../BotonDonar/BotonDonar";
+
+// function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
+//   const [isOpen, setIsOpen] = useState(false); // Agrega estado para el modal
+//   const size = "medium"; // Define el tamaño del modal
+
+//   const handleOpen = (size) => {
+//     setIsOpen(true);
+//   };
+
+//   const handleClose = () => {
+//     setIsOpen(false);
+//   };
+
+//   return (
 
 import { useState } from "react";
 import {
@@ -44,13 +74,11 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
           </div>
         </Link>
         <div className="ml-20 relative top-[-100px] left-14">
-
           <small className="text-default-500">{edad} años</small>
           <br />
           <small className="text-default-500">{peso} kg</small>
           <h4 className="font-bold text-large">{sexo}</h4>
         </div>
-
         <div className="ml-20 relative top-[-100px] left-14">
           <Button onClick={handleOpen}> Quiero Donar $</Button>
         </div>
@@ -83,42 +111,6 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
           </Link>
         </CardBody>
       </CardBody>
-=======
-      </CardHeader>
-      <div className="ml-20 relative top-[-100px] left-14">
-        <Button onClick={() => handleOpen(size)}> Quiero Donar $</Button>
-
-        <CardBody className="overflow-visible py-2 flex flex-col items-center">
-          <Link to={PathRoutes.DETAIL.replace(":id", id)}>
-            <Modal size={size} isOpen={isOpen} onClose={handleClose}>
-              <ModalContent>
-                <ModalHeader className="flex flex-col gap-1 items-center font-bold text-xl text-orange-500">
-                  ¡Dona para hacer la diferencia!
-                </ModalHeader>
-                <ModalBody className="text-xl text-orange-500">
-                  <Donar />
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="danger" variant="light" onClick={handleClose}>
-                    {" "}
-                    Cerrar
-                  </Button>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
-          </Link>
-        </CardBody>
-
-        <CardBody className="overflow-visible py-2 flex flex-col items-center">
-          <div className="aspect-w-3 aspect-h-4  flex items-center justify-center">
-            <Image
-              alt="Card background"
-              className="object-cover rounded-xl w-[450px] h-[300px]"
-              src={foto[0]}
-            />
-          </div>
-        </CardBody>
-      </div>
     </Card>
   );
 }
