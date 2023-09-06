@@ -34,16 +34,19 @@ export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
 export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
 
+//aqui foto perfil
+export const MOD_FOTO_PERFIL = "MOD_FOTO_PERFIL";
+
 const handleError = (dispatch, errorType, error) => {
   console.error(error);
   dispatch({ type: errorType, payload: error.message });
 };
 
 export const EDIT_USER = "EDIT_USER";
-const basename = "https://huellitas-de-amor-production-6e81.up.railway.app";
+// const basename = "https://huellitas-de-amor-production-6e81.up.railway.app";
 // const basename = "https://huellitas-de-amor-prueba.railway.internal";
 
-// const basename = "http://localhost:3001";
+const basename = "http://localhost:3001";
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
@@ -271,6 +274,21 @@ export const modCompleteUser = (id, updatedProperties) => {
     axios.put(endpoint, updatedProperties).then(({ data }) => {
       dispatch({
         type: MOD_COMPLETE_USER,
+        payload: data,
+      });
+    });
+  };
+};
+
+//Para modificar foto de perfil
+
+export const modFotoPerfil = (id, updatedProperties) => {
+  const endpoint = `${basename}/usuario/${id}`;
+  console.log(updatedProperties);
+  return (dispatch) => {
+    axios.put(endpoint, updatedProperties).then(({ data }) => {
+      dispatch({
+        type: MOD_FOTO_PERFIL,
         payload: data,
       });
     });
