@@ -29,6 +29,7 @@
     "react-simple-star-rating": "^5.1.7",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
+    "serve": "^14.2.1",
     "sweetalert2": "^11.7.27",
     "yup": "^1.2.0"
   },

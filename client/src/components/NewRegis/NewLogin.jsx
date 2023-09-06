@@ -1,18 +1,9 @@
-//
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../../server/src/context/AuthContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  User,
-} from "@nextui-org/react";
 import LoginGoogle from "../LoginGoogle/LoginGoogle";
+import { useAuth } from "../../../context/AuthContext";
 
 function NewLogin() {
   const { login } = useAuth();
@@ -111,14 +102,6 @@ function NewLogin() {
               <div>
                 <LoginGoogle />
               </div>
-
-              {/* <Dropdown>
-                <DropdownMenu>
-                  <DropdownItem>
-                    <LoginGoogle />
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown> */}
             </div>
 
             <p className="my-8 text-sm flex justify-between px-3">
