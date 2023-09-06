@@ -16,7 +16,7 @@ import confetti from "canvas-confetti";
 
 export default function DetailUser() {
   const { id } = useParams();
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
 	const [usuario, setUsuario] = useState([])
 
@@ -37,6 +37,7 @@ export default function DetailUser() {
 
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
+      {console.log(usuario)}
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
         <div className="relative">
           {usuario?.foto && usuario?.foto.length === 1 ? (
@@ -63,17 +64,17 @@ export default function DetailUser() {
                 ))}
             </Carousel>
           )}
-          {/* <Badge
-            className="absolute top-[-12px] right-[-110px] text-lg text-white"
-            content="En Adopcion"
+          <Badge
+            className="absolute top-[20px] right-[-110px] text-lg text-white"
+            content={usuario.tipoDeUsuario?.tipo}
             color="success"
             size="lx"
-          ></Badge> */}
+          ></Badge>
         </div>
         <div className="p-4 ">
           <div className="flex items-center mb-2">
             <h1 className="text-3xl font-semibold pl-10 mb-2">
-              {usuario.nombre}{" "}
+              {usuario.nombre} {usuario.apellido}
             </h1>
             {/* <Tooltip content={usuario.sexo}>
               <Button className="m-1 h-10 w-10 font-extrabold text-xl	">
@@ -117,14 +118,25 @@ export default function DetailUser() {
         </div>
         <div className="flex justify-between pt-4">
           <div className="flex flex-row">
-            {/* <div className="flex items-center pl-12 pb-8">
+            <div className="flex items-center pl-12 pb-8">
               {" "}
-              <Avatar
+              {/* <Avatar
                 isBordered
                 radius="lg"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMO2GPZ5-cByJTHam2oCwuX6UuxXVjZHNPROq4Kr77KkHmRx5pjoQLBx4y3cNY4Eg-ARM&usqp=CAU"
-              />
-            </div> */}
+              /> */}
+              <h1>Donaciones</h1>
+              {!usuario.donacions ? (
+                <>No tienes Donaciones</>
+              ): (
+                <>
+                  <ul>
+                    <li>Fecha de donaciones</li>
+                    <li>{usuario.donacions.fechaDonacion}</li>
+                  </ul>
+                </>
+              )}
+            </div>
             {/* <div className="pl-4">
               <p className="text-gray-500">Posteado por:</p>
               <p className="text-black font-semibold">

@@ -10,7 +10,7 @@ import ModalLogSig from "../ModalLogSig/ModalLogSig";
 import PathRoutes from "../../helpers/Routes.helper";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../../server/src/context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function AvatarImg() {
   const { user, logout } = useAuth();
@@ -44,12 +44,12 @@ export default function AvatarImg() {
           <DropdownItem key="analytics" to="/registro">
             <Link to={PathRoutes.HOME}>Inicio</Link>
           </DropdownItem>
-          <DropdownItem key="dashboard">
-            <Link to={PathRoutes.DASHBOARD}>Panel</Link>
-          </DropdownItem>
-          {/* <DropdownItem key="configurations">
-            <Link to={PathRoutes.REGISTRO}>Registro</Link>
-          </DropdownItem> */}
+          {user ? (
+            <DropdownItem key="dashboard">
+              <Link to={PathRoutes.DASHBOARD}>Panel</Link>
+            </DropdownItem>
+          ) : null}
+
           {user ? (
             <DropdownItem key="logout" color="danger">
               <Link to="#" onClick={handleLogout}>

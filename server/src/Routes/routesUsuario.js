@@ -1,7 +1,9 @@
 const { Router } = require("express");
 const router = Router();
+const { Usuario } = require("../models/Usuario.js");
 const crearUsuario = require("../controllers/postCrearUsuario");
-const getUsersId = require("../controllers/getUsersId");
+// const getUsersId = require("../controllers/getUsersId");
+
 //controlador que llena la bd de usuarios para prueba
 const llenarUsuario = require("../utils/llenarUsuario");
 const getUsers = require("../controllers/getUsers");
@@ -21,6 +23,16 @@ router.post("/", async (req, res) => {
     res.status(error.status || 500).json({ message: error.message });
   }
 });
+
+router.get('/tipoDeUsuario', async(req, res) => {
+  try{
+    // const {id} = req.params
+    const userType = await findTypesUsers()
+    return res.status(200).json(userType)
+  } catch(error){
+    return res.status(500).json({ mensaje: "Error en el servidor" });
+  }
+})
 
 //controlador que funciona con propositos de llenar la base de datos con datos de usuario para testeo
 router.get("/fill", async (req, res) => {
@@ -119,15 +131,7 @@ router.get("/:id", async (req, res) => {
 //   }
 // });
 
-router.get('/tipoDeUsuario', async(req, res) => {
-  try{
-    // const {id} = req.params
-    const userType = await findTypesUsers()
-    return res.status(200).json(userType)
-  } catch(error){
-    return res.status(500).json({ mensaje: "Error en el servidor" });
-  }
-})
+
 
 // router.get('/relacionarTipo', async(req, res) => {
 //   try{

@@ -11,10 +11,13 @@ import { getCasaById, getPetById, logicalDeletePet } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
-import iconMacho from "../../assets/macho.png";
-import iconHembra from "../../assets/hembra.png";
 import PathRoutes from "../../helpers/Routes.helper";
-import { useAuth } from "../../../../server/src/context/AuthContext";
+
+
+import AdoptionFormModal from '../FormularioAdopcion/FormAdop';
+
+import { useAuth } from "../../../context/AuthContext";
+
 
 export default function Detail() {
   const { id } = useParams();
@@ -22,6 +25,7 @@ export default function Detail() {
   const dispatch = useDispatch();
   const [adopcionEnProgreso, setAdopcionEnProgreso] = useState(false);
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getPetById(id));
@@ -46,19 +50,28 @@ export default function Detail() {
   const handleConfetti = () => {
     confetti({});
   };
+  const handleAdoption =() => {
+    if (user) {
+      setIsModalOpen(true);
+    } else {
+      navigate("/login");
+    }
+  };
 
-  const handleAdoption = () => {
+  const handleAdoptionConfirm = () => {
     setAdopcionEnProgreso(true);
     dispatch(logicalDeletePet(id, "En Proceso"));
-
     handleConfetti();
+    setIsModalOpen(false);
     navigate("/");
   };
+
+
 
   const casa = useSelector((state) => state.casasDeAdopcion);
 
   const isAdopted = mascota.estado === "Adoptado";
-  const isInProcess = mascota.estado === "En Proceso";
+  // const isInProcess = mascota.estado === "En Proceso";
   const isAvailableForAdoption = mascota.estado === "En Adopción";
 
   return (
@@ -124,85 +137,86 @@ export default function Detail() {
 						</Tooltip>
 					</div>
 
-					<div className='flex justify-center space-x-4 p-4'>
-						<div className='w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center'>
-							<div>
-								<h2 className='text-lg font-semibold mb-1'>Tamaño</h2>
-								<p className='text-gray-500'>{mascota.tamano}</p>
-							</div>
-						</div>
-						<div className='w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center'>
-							<div>
-								<h2 className='text-lg font-semibold mb-1'>Peso</h2>
-								<p className='text-gray-500'>{`${mascota.peso} kg`}</p>
-							</div>
-						</div>
-						<div className='w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center'>
-							<div>
-								<h2 className='text-lg font-semibold mb-1'>Raza</h2>
-								<p className='text-gray-500'>{mascota.raza}</p>
-							</div>
-						</div>
-						<div className='w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center'>
-							<div>
-								<h2 className='text-lg font-semibold mb-1'>Edad</h2>
-								<p className='text-gray-500'>
-									{mascota.edad >= 2
-										? `${mascota.edad} años`
-										: `${mascota.edad} año`}
-								</p>
-							</div>
-						</div>
-					</div>
-					<p className='text-black font-semibold text-xl pl-10 pb-2'>Detalle</p>
-					<p className='text-gray-500 text-base pr-10 pl-10 text-justify'>
-						{mascota.descripcion}
-					</p>
-				</div>
-				<div className='flex justify-between pt-4'>
-					<div className='flex flex-row'>
-						<div className='flex items-center pl-12 pb-8'>
-							{" "}
-							<Avatar
-								isBordered
-								radius='lg'
-								src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMO2GPZ5-cByJTHam2oCwuX6UuxXVjZHNPROq4Kr77KkHmRx5pjoQLBx4y3cNY4Eg-ARM&usqp=CAU'
-							/>
-						</div>
-						<div className='pl-4'>
-							<p className='text-gray-500'>Posteado por:</p>
-							{console.log(casa.id)}
-							<Link to={PathRoutes.CASADETAIL.replace(":id", casa.id)}>
-								<p className='text-black font-semibold'>
-									{casa.nombreDeOng === null
-										? "Casa de Adopcion"
-										: casa.nombreDeOng}
-								</p>
-							</Link>
-						</div>
-					</div>
-					<div className='px-14 py-2 bg-white pb-8 flex items-center'>
-						{user ? (
-							<Button
-								onClick={handleAdoption}
-								id={id}
-								currentState={mascota.estado}
-								user={user}>
-								Adóptame
-							</Button>
-						) : (
-							<Link to='/registro'>
-								<Button radius='full' color='primary'>
-									Adóptame
-								</Button>
-							</Link>
-						)}
-					</div>
-				</div>
-			</div>
-			<Link to='/' className='flex justify-center mt-4'>
-				<Button>Volver</Button>
-			</Link>
-		</div>
-	);
+          <div className="flex justify-center space-x-4 p-4">
+            <div className="w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center">
+              <div>
+                <h2 className="text-lg font-semibold mb-1">Tamaño</h2>
+                <p className="text-gray-500">{mascota.tamano}</p>
+              </div>
+            </div>
+            <div className="w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center">
+              <div>
+                <h2 className="text-lg font-semibold mb-1">Peso</h2>
+                <p className="text-gray-500">{`${mascota.peso} kg`}</p>
+              </div>
+            </div>
+            <div className="w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center">
+              <div>
+                <h2 className="text-lg font-semibold mb-1">Raza</h2>
+                <p className="text-gray-500">{mascota.raza}</p>
+              </div>
+            </div>
+            <div className="w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center">
+              <div>
+                <h2 className="text-lg font-semibold mb-1">Edad</h2>
+                <p className="text-gray-500">
+                  {mascota.edad >= 2
+                    ? `${mascota.edad} años`
+                    : `${mascota.edad} año`}
+                </p>
+              </div>
+            </div>
+          </div>
+          <p className="text-black font-semibold text-xl pl-10 pb-2">Detalle</p>
+          <p className="text-gray-500 text-base pr-10 pl-10 text-justify">
+            {mascota.descripcion}
+          </p>
+        </div>
+        <div className="flex justify-between pt-4">
+          <div className="flex flex-row">
+            <div className="flex items-center pl-12 pb-8">
+              {" "}
+              <Avatar
+                isBordered
+                radius="lg"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMO2GPZ5-cByJTHam2oCwuX6UuxXVjZHNPROq4Kr77KkHmRx5pjoQLBx4y3cNY4Eg-ARM&usqp=CAU"
+              />
+            </div>
+            <div className="pl-4">
+              <p className="text-gray-500">Posteado por:</p>
+              <Link to={PathRoutes.CASADETAIL.replace(":id", casa.id)}>
+                <p className="text-black font-semibold">
+                  {casa.nombreDeOng === null
+                    ? "Casa de Adopcion"
+                    : casa.nombreDeOng}
+                </p>
+              </Link>
+            </div>
+          </div>
+          <AdoptionFormModal isOpen={isModalOpen} onOpenChange={setIsModalOpen}  onConfirm={handleAdoptionConfirm}/>
+          <div className="px-14 py-2 bg-white pb-8 flex items-center">
+            {user ? (
+              <Button
+                onClick={handleAdoption}
+                id={id}
+                currentState={mascota.estado}
+                user={user}
+              >
+                Adóptame
+              </Button>
+            ) : (
+              <Link to="/registro">
+                <Button radius="full" color="primary">
+                  Adóptame
+                </Button>
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+      <Link to="/" className="flex justify-center mt-4">
+        <Button>Volver</Button>
+      </Link>
+    </div>
+  );
 }
