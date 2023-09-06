@@ -39,14 +39,19 @@ export const GET_ENTIRE_USERS = 'GET_ENTIRE_USERS'
 //Modifica el tipo de usuario
 export const CHANGE_STATUS_USER ='CHANGE_STATUS_USER'
 
+//aqui foto perfil
+export const MOD_FOTO_PERFIL = "MOD_FOTO_PERFIL";
+
 const handleError = (dispatch, errorType, error) => {
   console.error(error);
   dispatch({ type: errorType, payload: error.message });
 };
 
 export const EDIT_USER = "EDIT_USER";
+
 // export const basename = "https://huellitas-de-amor-production.up.railway.app";
 export const basename = "http://localhost:3001";
+
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
@@ -279,6 +284,21 @@ export const modCompleteUser = (id, updatedProperties) => {
     });
   };
 };
+
+//Para modificar foto de perfil
+
+// export const modFotoPerfil = (id, updatedProperties) => {
+//   const endpoint = `${basename}/usuario/${id}`;
+//   console.log(updatedProperties);
+//   return (dispatch) => {
+//     axios.put(endpoint, updatedProperties).then(({ data }) => {
+//       dispatch({
+//         type: MOD_FOTO_PERFIL,
+//         payload: data,
+//       });
+//     });
+//   };
+// };
 
 export const modCompletePet = (id, updatedProperties) => {
   const endpoint = `${basename}/mascotas/${id}`;
