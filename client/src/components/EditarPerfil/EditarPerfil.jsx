@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"; // Asegúrate de importa
 import { modCompleteUser } from "../../redux/actions";
 import { Link, Button } from "@nextui-org/react";
 import ImagenesPerfil from "../ImagenesPerfil/ImagenesPerfil";
+import { useNavigate } from "react-router-dom";
 
 const EditarPerfil = ({
   id,
@@ -13,8 +14,9 @@ const EditarPerfil = ({
   setPerfil,
 }) => {
   const dispatch = useDispatch();
-
   const imagenes = useSelector((state) => state.imagenes);
+
+  // const [userModified, setUserModified] = useState(true);
 
   // const [perfil, setPerfil] = useState({
   //   imagenPerfil: "",
@@ -37,8 +39,8 @@ const EditarPerfil = ({
     // Llena el estado 'formData' con los datos actuales del perfil cuando se carga el componente
     if (perfil) {
       setFormData({
+        ...perfil, //cambio uno
         nombre: perfil.nombre,
-
         apellido: perfil.apellido,
         nacionalidad: perfil.nacionalidad,
         ubicacion: perfil.ubicacion,
@@ -48,6 +50,7 @@ const EditarPerfil = ({
         email: perfil.email,
         password: "",
         imagenPerfil: perfil.imagenPerfil,
+        imagenPortada: perfil.imagenPortada,
       });
     }
   }, [perfil]);
@@ -101,6 +104,7 @@ const EditarPerfil = ({
         text: "Modificación exitosa!",
       });
       setUserModified(!userModified);
+      dispatchRedux();
     }
   };
 

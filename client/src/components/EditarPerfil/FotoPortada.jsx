@@ -5,9 +5,14 @@ import { modCompleteUser } from "../../redux/actions";
 import { modFotoPerfil } from "../../redux/actions";
 import { Button } from "@nextui-org/react";
 import ImagenesPerfil from "../ImagenesPerfil/ImagenesPerfil";
-import { useNavigate } from "react-router-dom";
 
-const FotoPerfil = ({ id, updateUser, setUserModified, perfil, setPerfil }) => {
+const FotoPortada = ({
+  id,
+  updateUser,
+  setUserModified,
+  perfil,
+  setPerfil,
+}) => {
   const dispatch = useDispatch();
 
   const imagenes = useSelector((state) => state.imagenes);
@@ -17,7 +22,7 @@ const FotoPerfil = ({ id, updateUser, setUserModified, perfil, setPerfil }) => {
   // });
 
   const [formData, setFormData] = useState({
-    imagenPerfil: "",
+    imagenPortada: "",
   });
 
   useEffect(() => {
@@ -33,17 +38,18 @@ const FotoPerfil = ({ id, updateUser, setUserModified, perfil, setPerfil }) => {
         acerca: perfil.acerca,
         email: perfil.email,
         password: "",
+        // imagenPerfil: perfil.imagenPerfil,
         imagenPortada: perfil.imagenPortada,
       });
     }
   }, [perfil]);
 
   const handleEdit = async () => {
-    if (formData.imagenPerfil) {
+    if (formData.imagenPortada) {
       dispatch(modCompleteUser(id, formData));
 
       updateUser(formData);
-      setPerfil({ ...perfil, imagenPerfil: formData.imagenPerfil }); // Actualiza la imagen de perfil en el estado de Perfil
+      setPerfil({ ...perfil, imagenPortada: formData.imagenPortada });
       Swal.fire({
         icon: "success",
         text: "Modificación exitosa!",
@@ -55,13 +61,13 @@ const FotoPerfil = ({ id, updateUser, setUserModified, perfil, setPerfil }) => {
   return (
     <div className="border border-black flex flex-col justify-center items-center">
       <form>
-        <label htmlFor="">Imagen de perfil</label>
+        <label htmlFor="">Imagen de portada</label>
         <div>
           <ImagenesPerfil
             setImagenes={(imagenes) =>
               setFormData({
                 ...formData,
-                imagenPerfil: imagenes[0] || "",
+                imagenPortada: imagenes[0] || "",
               })
             }
           />
@@ -73,6 +79,21 @@ const FotoPerfil = ({ id, updateUser, setUserModified, perfil, setPerfil }) => {
             })}
         </div>
 
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+          {imagenes &&
+            imagenes.map((imag, index) => {
+              return (
+                <img
+                  key={index} // Agrega una key única, por ejemplo, utilizando el índice
+                  onClick={() => handleClickImages(imag)}
+                  src={imag}
+                  alt=""
+                  className="h-[80px] m-[15px]"
+                />
+              );
+            })}
+        </div> */}
+
         <Button type="button" onClick={handleEdit}>
           Guardar Cambio
         </Button>
@@ -81,4 +102,4 @@ const FotoPerfil = ({ id, updateUser, setUserModified, perfil, setPerfil }) => {
   );
 };
 
-export default FotoPerfil;
+export default FotoPortada;

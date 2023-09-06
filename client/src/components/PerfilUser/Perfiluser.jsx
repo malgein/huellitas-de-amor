@@ -14,6 +14,9 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FotoPerfil from "../EditarPerfil/FotoPerfil";
+import FotoPortada from "../EditarPerfil/FotoPortada";
+import BotonPerfil from "../EditarPerfil/BotonPerfil";
+import BotonPortada from "../EditarPerfil/BotonPortada";
 
 const Perfil = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -23,8 +26,11 @@ const Perfil = () => {
   const [abrir, setAbrir] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [abrirFotoPerfil, setAbrirFotoPerfil] = useState(false);
+
+  // const [abrirFotoPerfil, setAbrirFotoPerfil] = useState(false);
+  const [abrirFotoPortada, setAbrirFotoPortada] = useState(false);
 
   //Para el tamaño del modal
   const [size, setSize] = React.useState("md");
@@ -52,6 +58,11 @@ const Perfil = () => {
 
   const toggleFormulario = () => {
     setMostrarFormulario(!mostrarFormulario);
+  };
+
+  // Define una función para actualizar el estado de perfil
+  const actualizarPerfil = (nuevoPerfil) => {
+    setPerfil(nuevoPerfil);
   };
 
   useEffect(() => {
@@ -116,19 +127,26 @@ const Perfil = () => {
             </div>
           </div>
 
-          {/*BOTON EDITAR FOTO DE PERFIL*/}
-          <Button
+          <div className="border-2 flex justify-center">
+            <BotonPerfil perfil={perfil} setPerfil={setPerfil} />
+          </div>
+
+          <div className="border-2 flex justify-center">
+            <BotonPortada />
+          </div>
+
+          {/* <Button
             key={size}
             onPress={() => handleOpen(size)}
-            onClick={setAbrirFotoPerfil}
+            onClick={setAbrirFotoPortada}
           >
-            Editar foto perfil
-          </Button>
+            Editar foto de portada
+          </Button> */}
 
-          <Modal
+          {/* <Modal
             size="2xl"
             isOpen={abrirFotoPerfil}
-            onOpenChange={() => setAbrirFotoPerfil(false)}
+            onOpenChange={() => setAbrirFotoPortada(false)}
           >
             <ModalContent>
               <FotoPerfil
@@ -139,7 +157,7 @@ const Perfil = () => {
                 setPerfil={setPerfil}
               />
             </ModalContent>
-          </Modal>
+          </Modal> */}
 
           <div className="mt-[120px] ml-3 flex flex-col text-start">
             <h2 className="text-lg text-black font-semibold mb-2">
@@ -222,8 +240,8 @@ const Perfil = () => {
                   id={id}
                   updateUser={updateUser}
                   setUserModified={setUserModified}
-                  perfil={perfil} // Pasa el perfil como prop
-                  setPerfil={setPerfil} // Pasa la función setPerfil como prop
+                  perfil={perfil}
+                  setPerfil={setPerfil}
                 />
               </ModalContent>
             </Modal>
