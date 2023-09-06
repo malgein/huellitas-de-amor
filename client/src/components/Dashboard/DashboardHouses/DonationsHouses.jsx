@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react'
 import Sidebar from './Sidebar'
 import {useSelector, useDispatch} from 'react-redux'
-import { getDonations } from '../../redux/actions'
+import { getDonations } from '../../../redux/actions'
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Pagination, getKeyValue} from "@nextui-org/react";
 // import {donaciones} from "./data";
 
 
-function Donations() {
+function DonationsHouses() {
 
   const donaciones = useSelector(state => state.donaciones)
 
@@ -84,4 +84,4 @@ function Donations() {
   )
 }
 
-export default Donations
+export default DonationsHouses

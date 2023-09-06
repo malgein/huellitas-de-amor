@@ -23,6 +23,7 @@ export const DELETE_HOUSES = "DELETE_HOUSES";
 
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = "GET_USER";
+export const GET_USERS_RELATIONS = "GET_USERS_RELATIONS"
 
 export const GET_ALL_DONATIONS = "GET_DONATIONS";
 
@@ -33,6 +34,10 @@ export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 
 export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
 export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
+//Caso que me trae todos los usuarios de la bd con sus relaciones: donaciones, tipo de usuario, comentarios, favoritos etc
+export const GET_ENTIRE_USERS = 'GET_ENTIRE_USERS'
+//Modifica el tipo de usuario
+export const CHANGE_STATUS_USER ='CHANGE_STATUS_USER'
 
 //aqui foto perfil
 export const MOD_FOTO_PERFIL = "MOD_FOTO_PERFIL";
@@ -43,10 +48,10 @@ const handleError = (dispatch, errorType, error) => {
 };
 
 export const EDIT_USER = "EDIT_USER";
-// const basename = "https://huellitas-de-amor-production-6e81.up.railway.app";
-// const basename = "https://huellitas-de-amor-prueba.railway.internal";
 
-const basename = "http://localhost:3001";
+// export const basename = "https://huellitas-de-amor-production.up.railway.app";
+export const basename = "http://localhost:3001";
+
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
@@ -282,18 +287,18 @@ export const modCompleteUser = (id, updatedProperties) => {
 
 //Para modificar foto de perfil
 
-export const modFotoPerfil = (id, updatedProperties) => {
-  const endpoint = `${basename}/usuario/${id}`;
-  console.log(updatedProperties);
-  return (dispatch) => {
-    axios.put(endpoint, updatedProperties).then(({ data }) => {
-      dispatch({
-        type: MOD_FOTO_PERFIL,
-        payload: data,
-      });
-    });
-  };
-};
+// export const modFotoPerfil = (id, updatedProperties) => {
+//   const endpoint = `${basename}/usuario/${id}`;
+//   console.log(updatedProperties);
+//   return (dispatch) => {
+//     axios.put(endpoint, updatedProperties).then(({ data }) => {
+//       dispatch({
+//         type: MOD_FOTO_PERFIL,
+//         payload: data,
+//       });
+//     });
+//   };
+// };
 
 export const modCompletePet = (id, updatedProperties) => {
   const endpoint = `${basename}/mascotas/${id}`;
@@ -332,7 +337,41 @@ export const logicalDeletePet = (id, estado) => async (dispatch) => {
   } catch (error) {
     console.error("Error al actualizar el estado de la mascota:", error);
   }
+
+
+  //Traemos todos los usuarios y sus relaciones
+
+
 };
+
+//Accion que me trare el usuario con todas sus relaciones
+export const getEntireUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${basename}/usuario/tipoDeUsuario`);
+    dispatch({
+      type: GET_ENTIRE_USERS,
+      payload: response.data,
+    });
+  } catch (error) {
+    handleError(dispatch, GET_ENTIRE_USERS, error);
+  }
+
+};
+
+export const changeStatusUser = (response) => {
+  const endpoint = `${basename}/relacion-user-type`;
+  console.log(response)
+  return (dispatch) => {
+    axios.patch(endpoint, response).then(({ data }) => {
+      return dispatch({
+        type: CHANGE_STATUS_USER,
+        payload: data,
+      });
+    });
+  };
+}
+
+
 //manejamos el estado y la visualizacion de la mascota (nacho)
 
 // export const changePetStatus = (id, estado, visible) => async (dispatch) => {

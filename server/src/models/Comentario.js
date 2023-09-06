@@ -6,8 +6,8 @@ module.exports = (sequelize) => {
     "comentario",
     {
       id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        type: DataTypes.UUID,
+     
         primaryKey: true,
       },
       texto: {
