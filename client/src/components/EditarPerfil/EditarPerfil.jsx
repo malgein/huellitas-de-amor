@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux"; // Asegúrate de importar useDispatch de acuerdo a tu estructura Redux
 import { modCompleteUser } from "../../redux/actions";
@@ -33,26 +33,47 @@ const EditarPerfil = ({
     // imagenPerfil: "",
   });
 
+  useEffect(() => {
+    // Llena el estado 'formData' con los datos actuales del perfil cuando se carga el componente
+    if (perfil) {
+      setFormData({
+        nombre: perfil.nombre,
+
+        apellido: perfil.apellido,
+        nacionalidad: perfil.nacionalidad,
+        ubicacion: perfil.ubicacion,
+        direccion: perfil.direccion,
+        telefono: perfil.telefono,
+        acerca: perfil.acerca,
+        email: perfil.email,
+        password: "",
+        imagenPerfil: perfil.imagenPerfil,
+      });
+    }
+  }, [perfil]);
+  console.log(perfil);
+
   const handleEdit = async () => {
     // Lógica de validación
-    if (
-      (formData.nombre === "",
-      formData.apellido === "",
-      formData.nacionalidad === "",
-      formData.ubicacion === "",
-      formData.direccion === "",
-      formData.telefono === "",
-      formData.acerca === "",
-      formData.email === "",
-      formData.password === "",
-      formData.imagenPerfil === "")
-    ) {
-      Swal.fire({
-        icon: "error",
-        title: "No se pudo modificar el usuario",
-        text: "No puedes dejar campos en blanco!",
-      });
-    } else if (isNaN(formData.telefono)) {
+    // if (
+    //   formData.nombre === "" ||
+    //   formData.apellido === "" ||
+    //   formData.nacionalidad === "" ||
+    //   formData.ubicacion === "" ||
+    //   formData.direccion === "" ||
+    //   formData.telefono === "" ||
+    //   formData.acerca === "" ||
+    //   formData.email === "" ||
+    //   formData.password === "" ||
+    //   formData.imagenPerfil === ""
+    // ) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "No se pudo modificar el usuario",
+    //     text: "No puedes dejar campos en blanco!",
+    //   });
+    // }
+    if (isNaN(formData.telefono)) {
       Swal.fire({
         icon: "error",
         title: "No se pudo modificar el usuario",
@@ -71,15 +92,7 @@ const EditarPerfil = ({
         text: "El teléfono del usuario no debe exceder los 9 dígitos",
       });
     } else {
-      dispatch(modCompleteUser(id, formData)); // Asegúrate de definir modCompleteUser en tus acciones de Redux
-
-      // Actualizar el estado del usuario con los nuevos datos
-      // updateUser(formData);
-      // Swal.fire({
-      //   icon: "success",
-      //   text: "Modificación exitosa!",
-      // });
-      // setUserModified(!userModified);
+      dispatch(modCompleteUser(id, formData));
 
       updateUser(formData);
       setPerfil({ ...perfil, imagenPerfil: formData.imagenPerfil }); // Actualiza la imagen de perfil en el estado de Perfil

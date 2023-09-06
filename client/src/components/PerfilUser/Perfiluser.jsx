@@ -39,17 +39,9 @@ const Perfil = () => {
     onOpen();
   };
 
-  const updatePhoto = (newUserData) => {
-    setUsuario(newUserData);
-  };
-
   // Definir una función para actualizar el estado del usuario
   const updateUser = (newUserData) => {
     setUsuario(newUserData);
-  };
-
-  const editarFotoPerfil = () => {
-    setAbrirFotoPerfil(true);
   };
 
   const abrirModal = () => {
@@ -71,6 +63,15 @@ const Perfil = () => {
         // Actualiza el estado del usuario y las URLs de las imágenes
         setUsuario(userData);
         setPerfil({
+          nombre: userData.nombre || "",
+          apellido: userData.apellido || "",
+          nacionalidad: userData.nacionalidad || "",
+          ubicacion: userData.ubicacion || "",
+          direccion: userData.direccion || "",
+          telefono: userData.telefono || "",
+          acerca: userData.acerca || "",
+          email: userData.email || "",
+          password: userData.password || "",
           imagenPortada: userData.imagenPortada || "",
           imagenPerfil: userData.imagenPerfil || "",
         });
@@ -91,6 +92,7 @@ const Perfil = () => {
             <img
               src={perfil.imagenPortada.replace(/"/g, "")}
               alt="Imagen de perfil"
+              className="h-[350px] w-[1000px]"
             />
 
             <div className="flex flex-col ml-3 max-w-sm mx-auto rounded-xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 absolute bottom-[-110px] left-0">
@@ -114,13 +116,8 @@ const Perfil = () => {
             </div>
           </div>
 
-          {/* <Button>
-            {" "}
-            Editar foto
-            <FotoPerfil />
-          </Button> */}
-
-          {/* <Button
+          {/*BOTON EDITAR FOTO DE PERFIL*/}
+          <Button
             key={size}
             onPress={() => handleOpen(size)}
             onClick={setAbrirFotoPerfil}
@@ -142,7 +139,7 @@ const Perfil = () => {
                 setPerfil={setPerfil}
               />
             </ModalContent>
-          </Modal> */}
+          </Modal>
 
           <div className="mt-[120px] ml-3 flex flex-col text-start">
             <h2 className="text-lg text-black font-semibold mb-2">
@@ -220,12 +217,13 @@ const Perfil = () => {
                 <ModalHeader className="flex flex-col gap-1">
                   Actualizar Perfil
                 </ModalHeader>
+
                 <EditarPerfil
                   id={id}
                   updateUser={updateUser}
                   setUserModified={setUserModified}
-                  // perfil={perfil} // Pasa el perfil como prop
-                  // setPerfil={setPerfil} // Pasa la función setPerfil como prop
+                  perfil={perfil} // Pasa el perfil como prop
+                  setPerfil={setPerfil} // Pasa la función setPerfil como prop
                 />
               </ModalContent>
             </Modal>
