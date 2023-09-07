@@ -29,7 +29,7 @@ const getUsersId = require("../controllers/getUsersId");
 // router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
 
 // router.get("/fill", fillPets);
-
+const appCheckVerification = require('../controllers/createUsersFirebase.js')
 // const { perfilActualizado } = require("./routesEditarPerfil");
 const { actualizarPerfil } = require("../controllers/putEditarPerfil");
 
@@ -39,11 +39,11 @@ const usuarioTipoController = require('../controllers/usuarioTipoController')
 const donationsUser = require('../controllers/donationsUser')
 const donationsHouse = require('../controllers/donationsHouse')
 
-
 router.patch("/relacion-user-type", usuarioTipoController);
 router.use("/donaciones", postDonaciones);
 router.get("/perfil/:id", getUsersId);
 // router.get('/tiposDeUsuarios',  findTypesUsers)
+router.get("/createUserWithToken", appCheckVerification)
 router.get("/relacion-donation-house", donationsHouse);
 router.get("/relacion-donation-user", donationsUser);
 router.get("/perfil/:id", getUsersId);
@@ -80,3 +80,5 @@ router.put("/:id/estado", modPetById);
 // router.post("/", crearUsuario);
 
 module.exports = router;
+
+

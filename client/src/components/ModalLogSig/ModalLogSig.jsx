@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
 import { useAuth } from "../../../../server/src/context/AuthContext";
 
+
+
 export default function ModalLogSig() {
-  const [user, setUser] = useState({
+  const [usuario, setUsuario] = useState({
     email: "",
     password: "",
   });
   const { login, loginWithGoogle, resetPassword } = useAuth();
+  const  { user} = useAuth()
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -18,20 +20,23 @@ export default function ModalLogSig() {
     e.preventDefault();
     setError("");
     try {
-      await login(user.email, user.password);
+      await login(usuario.email, usuario.password);
       navigate("/");
     } catch (error) {
       setError(error.message);
     }
-  };
+  };  
 
   const handleChange = ({ target: { value, name } }) =>
-    setUser({ ...user, [name]: value });
+    setUsuario({ ...usuario, [name]: value });
 
   const handleGoogleSignin = async () => {
     try {
+      
       await loginWithGoogle();
       navigate("#");
+      console.log('creare el usuario')
+
     } catch (error) {
       setError(error.message);
     }
@@ -39,20 +44,25 @@ export default function ModalLogSig() {
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-    if (!user.email)
+    if (!usuario.email)
       return setError(
         "Escriba un correo electrónico para restablecer la contraseña"
       );
     try {
-      await resetPassword(user.email);
+      await resetPassword(usuario.email);
       setError("Te enviamos un correo electrónico. Revisa tu correo");
     } catch (error) {
       setError(error.message);
     }
   };
 
+  // useEffect(() => {
+  //   console.log(user)
+  // },[user])
+
   return (
     <div className="w-full max-w-xs m-auto">
+      {/* {console.log(usuario)} */}
       {/* <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"

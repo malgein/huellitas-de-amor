@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { authContext } from "../../../../server/src/context/AuthContext"
 
 // Acciones del redux
 import { getMascotas } from "../../redux/actions";
@@ -17,7 +18,10 @@ import imageDos from "../../assets/gata.jpg";
 // import Rate from "../Rate/Rate";
 
 export default function Home() {
+
+  const { user, actualUser } = useContext(authContext)
   const mascotas = useSelector((state) => state.mascotas);
+  const usuarioActual = useSelector(state => state.usuarioActual)
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [petsPerPage] = useState(8); // Puesto constante ya que nunca lo modificas
@@ -54,6 +58,10 @@ export default function Home() {
   useEffect(() => {
     dispatch(getMascotas());
   }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
+
+  useEffect(() => {
+   console.log(actualUser)
+  }, [actualUser]); // Agregado dispatch como dependencia para evitar warnings
 
  // Esta es la lógica de filtrado: vamos a mostrar solo las mascotas que estan 'En adopcion' (nacho)
   const mascotasFiltradas = currentPet.filter(mascota => mascota.estado === 'En adopción');

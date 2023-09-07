@@ -27,6 +27,7 @@ import { SearchIcon } from "../SearchIcon";
 import { ChevronDownIcon } from "../ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
 import { capitalize } from "../Accesory";
+import { useAuth } from '../../../../../server/src/context/AuthContext';
 
 const statusColorMap = {
   Usuario: "success",
@@ -98,6 +99,8 @@ function UsersAdmin() {
   //     setUserModified(!userModified)
   //   }
   // }
+
+  const { user: user_ } = useAuth()
 
   const handleEdit = async (id) => {
     console.log(id);
@@ -199,6 +202,7 @@ function UsersAdmin() {
   const handleStatus = user => {
     // const result =  usuarios.find((usuario) => usuario?.id === id);
     // console.log(user)
+    console.log(user_)
     if(!user.tipoDeUsuario || user.tipoDeUsuario.tipo!== 'Administrador'){
       Swal.fire({
         title: `${user.nombre} ${user.apellido} es un  Usuario`,
@@ -215,7 +219,7 @@ function UsersAdmin() {
             usuarioId: idUser,
             tipoDeUsuarioId: 1
           }
-          dispatch(changeStatusUser(response))
+          dispatch(changeStatusUser(response, user_.accessToken))
           Swal.fire(
             'Estatus modificado!',
             `${user.nombre} ${user.apellido} es un Administrador ahora`,
@@ -241,7 +245,7 @@ function UsersAdmin() {
             usuarioId: idUser,
             tipoDeUsuarioId: 3
           }
-          dispatch(changeStatusUser(response))
+          dispatch(changeStatusUser(response, user_.accessToken))
           Swal.fire(
             'Estatus modificado!',
             `${user.nombre} ${user.apellido} es un Usuario ahora`,
@@ -406,7 +410,7 @@ function UsersAdmin() {
       case "actions":
         return (
           <div className="relative flex justify-end items-center gap-2 ">
-            {console.log(user)}
+            {/* {console.log(user)} */}
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">

@@ -20,7 +20,7 @@ export const EDIT_PETS = "EDIT_PETS";
 export const DELETE_PET = "DELETE_PET";
 export const EDIT_HOUSES = "EDIT_HOUSES";
 export const DELETE_HOUSES = "DELETE_HOUSES";
-
+export const CREATE_USER_FIREBASE = 'CREATE_USER_FIREBASE'
 
 
 //tipo de action que me trae todos los usuarios
@@ -343,6 +343,23 @@ export const getEntireUsers = () => async (dispatch) => {
   }
 };
 
+// export const changeStatusUser = (response, accessToken) => {
+//   const endpoint = `${basename}/relacion-user-type`;
+//   console.log(response)
+//   return (dispatch) => {
+//     axios.patch(endpoint, response, {
+//       headers: {
+//         Authorization: `${accessToken}`
+//       }
+//     }).then(({ data }) => {
+//       return dispatch({
+//         type: CHANGE_STATUS_USER,
+//         payload: data,
+//       });
+//     });
+//   };
+// }
+
 export const changeStatusUser = (response) => {
   const endpoint = `${basename}/relacion-user-type`;
   console.log(response)
@@ -355,6 +372,19 @@ export const changeStatusUser = (response) => {
     });
   };
 }
+
+export const createUserFromFirebase = (response) => {
+  // console.log(response)
+  const endpoint = `${basename}/usuario/firebase`;
+   return (dispatch) => {
+      axios.post(endpoint, response).then(({ data }) => {
+         return dispatch({
+            type: CREATE_USER_FIREBASE,
+            payload: data,
+         });
+      });
+   };
+};
 
 
 //manejamos el estado y la visualizacion de la mascota (nacho)

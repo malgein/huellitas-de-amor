@@ -32,7 +32,8 @@ import {
   GET_CASA_BY_ID,
   //case que me trae los usuarios con todas las relciones
   GET_ENTIRE_USERS,
-  CHANGE_STATUS_USER
+  CHANGE_STATUS_USER,
+  CREATE_USER_FIREBASE
 } from "./actions";
 
 const initialState = {
@@ -47,6 +48,7 @@ const initialState = {
   casasDeAdopcion: [],
   donaciones: [],
   imagenes: [],
+  usuarioActual: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -202,6 +204,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
+      case CREATE_USER_FIREBASE:
+        // console.log(payload)
+        return{...state, usuarioActual:payload}
       case LOGICAL_DELETE_PET:
         console.log("LOGICAL_DELETE_PET llamado con payload:", payload);
         return {

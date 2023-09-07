@@ -11,6 +11,7 @@ const modCompleteUser = require("../controllers/modCompleteUser");
 const getUserById = require('../controllers/getUserById')
 const findTypesUsers = require('../controllers/findTypeUsers')
 const usuarioTipoController = require('../controllers/usuarioTipoController')
+const createUsersFirebase = require('../controllers/createUsersFirebase')
 
 router.post("/", async (req, res) => {
   try {
@@ -21,6 +22,16 @@ router.post("/", async (req, res) => {
     res.status(error.status || 500).json({ message: error.message });
   }
 });
+
+router.post("/firebase", async(req, res) =>{
+  try {
+    const response = req.body;
+    const usuarioFirebase = await createUsersFirebase(response);
+    res.status(201).json(usuarioFirebase);
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message });
+  }
+})
 
 router.get('/tipoDeUsuario', async(req, res) => {
   try{

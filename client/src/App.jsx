@@ -34,19 +34,19 @@ import DonationsHouses from "./components/Dashboard/DashboardHouses/DonationsHou
 import PetsHouses from "./components/Dashboard/DashboardHouses/PetsHouses";
 import { useAuth } from "../../server/src/context/AuthContext";
 import { AuthProvider } from "../../server/src/context/AuthContext";
+import PrivateRoutes from "./PrivateRoutes";
 
-function PrivateRoute({ element }) {
-  const  user  = useAuth();
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Ejemplo de estado de autenticación
-  console.log(user)
-  if (!user) {
-    // Si el usuario no está autenticado, redirige al inicio de sesión u otra página
-    return <Navigate to={PathRoutes.REGISTRO}/>;
-  }
+// function PrivateRoute({ element }) {
+//   const  user  = useAuth();
+//   // const [isLoggedIn, setIsLoggedIn] = useState(false); // Ejemplo de estado de autenticación
+//   console.log(user)
+//   if (!user) {
+//     // Si el usuario no está autenticado, redirige al inicio de sesión u otra página
+//     return <Navigate to={PathRoutes.REGISTRO}/>;
+//   }
 
-  return element;
-}
-
+//   return element;
+// }
 function App() {
   
   const location = useLocation();
@@ -73,10 +73,7 @@ function App() {
           {/* <Route path={PathRoutes.DASHBOARD_SUPER_ADMIN} element={<DashboardSuperAdmin />} /> */}
           <Route
           path={PathRoutes.DASHBOARD_SUPER_ADMIN}
-          element={
-            <PrivateRoute element={<DashboardSuperAdmin />} />
-          }
-        />
+          element={<DashboardSuperAdmin />} />
           {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
           <Route path={PathRoutes.DASHBOARD_SUPER_ADMIN_MASCOTAS} element={<PetsSuper />} />
           {/* Subruta de dashboard que gestiona los usuarios para el admin */}
@@ -91,8 +88,8 @@ function App() {
             path={PathRoutes.DASHBOARD_SUPER_ADMIN_DONACIONES}
             element={<DonationsSuper />}
           />
-
-          <Route path={PathRoutes.DASHBOARD_ADMIN} element={<DashboardAdmin />} />
+          <Route path={PathRoutes.DASHBOARD_ADMIN} element={<PrivateRoutes element={<DashboardAdmin />} />} />
+          {/* <Route path={PathRoutes.DASHBOARD_ADMIN} element={<DashboardAdmin />} /> */}
           {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
           <Route path={PathRoutes.DASHBOARD_ADMIN_MASCOTAS} element={<PetsAdmin />} />
           {/* Subruta de dashboard que gestiona los usuarios para el admin */}

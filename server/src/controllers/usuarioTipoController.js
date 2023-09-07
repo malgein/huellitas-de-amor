@@ -3,7 +3,8 @@ const { Usuario, TipoDeUsuario } = require('../db'); // Importa tus modelos de S
 // Función para establecer la relación entre un usuario y un tipo de usuario
 async function usuarioTipoController(req, res) {
   try {
-    console.log(req.body)
+    // console.log(req.headers['authorization'])
+    // console.log(req.body)
     const { usuarioId, tipoDeUsuarioId } = req.body;
 
 
