@@ -62,10 +62,12 @@ const Perfil = () => {
     setPerfil(nuevoPerfil);
   };
 
+// const basename = "http://localhost:3001";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/perfil/${id}`); // Reemplaza con tu URL de la API
+        const response = await axios.get(`http://localhost:3001/perfil/${id}`);
         const userData = response.data;
 
         // Actualiza el estado del usuario y las URLs de las imágenes

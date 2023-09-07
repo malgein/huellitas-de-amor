@@ -9,7 +9,7 @@ const getAdoptionUser = async (req, res) => {
     // Realiza una consulta para contar las adopciones del usuario
     const conteoAdopciones = await Adopcion.count({
       where: {
-        usuarios: usuarioId,
+        usuarioId: usuarioId,
       },
     });
 

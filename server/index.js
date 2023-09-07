@@ -4,6 +4,7 @@ const { conn } = require("./src/db.js");
 const fillHomes = require("./src/utils/fillHomes.js");
 const fillPets = require("./src/utils/fillPets.js");
 const llenarUsuario = require("./src/utils/llenarUsuario.js");
+const crearAdopcion = require("./src/utils/crearAdopcion.js");
 
 const PORT = 3001;
 
@@ -18,6 +19,7 @@ conn
       fillPets();
       fillHomes();
       llenarUsuario();
+      crearAdopcion();
       console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
     });
   });

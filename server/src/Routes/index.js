@@ -32,7 +32,7 @@ const donationsHouse = require("../controllers/donationsHouse");
 
 router.patch("/relacion-user-type", usuarioTipoController);
 router.use("/donaciones", postDonaciones);
-router.get("/perfil/:id", getUsersId);
+
 // router.get('/tiposDeUsuarios',  findTypesUsers)
 router.get("/relacion-donation-house", donationsHouse);
 router.get("/relacion-donation-user", donationsUser);
@@ -65,6 +65,6 @@ router.post("/create_preference", postMercadoPago);
 router.use("/usuario", postCrearUsuario);
 
 router.put("/:id/estado", modPetById);
-router.get("/adopcion", getAdoptionUser);
+router.get("/adopcion/:usuarioId", getAdoptionUser);
 
 module.exports = router;
