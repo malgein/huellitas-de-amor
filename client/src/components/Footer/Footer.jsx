@@ -48,8 +48,9 @@ const Footer = () => {
                 ✉ <a href="mailto:Huellitasdemaor@gmail.com">Huellitasdemaor@gmail.com</a>
               </p>
               <p>
-                <a href="tel:16572345">16572345     </a>
-                <i className="fab fa-whatsapp-square"></i>
+                <a href="https://wa.me/16572345" target="_blank" rel="noopener noreferrer">
+                  16572345 <i className="fab fa-whatsapp-square"></i>
+                </a>
               </p>
             </section>
           </div>
