@@ -14,16 +14,13 @@ const { Mascota } = require("../db");
 
 const getPets = async () => {
   try {
-    const allPets = await Mascota.findAll({
-      // where: {
-      //   estado: 'En Adopción'
-      // }
-    });
+    const allPets = await Mascota.findAll();
+    console.log(allPets)
     return allPets;
-
   } catch (error) {
-    throw new Error ('Error al obtener las mascotas.')
-    
+    console.error('Error al obtener las mascotas:', error);
+    throw new Error('Error al obtener las mascotas.');
   }
-}
+};
+
 module.exports = getPets;

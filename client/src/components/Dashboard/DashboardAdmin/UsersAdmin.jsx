@@ -27,7 +27,7 @@ import { SearchIcon } from "../SearchIcon";
 import { ChevronDownIcon } from "../ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
 import { capitalize } from "../Accesory";
-import { useAuth } from '../../../../../server/src/context/AuthContext';
+import {useAuth} from '../../../../context/AuthContext'
 
 const statusColorMap = {
   Usuario: "success",

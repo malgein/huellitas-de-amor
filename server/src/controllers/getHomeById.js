@@ -16,8 +16,10 @@ console.log(casaDeAdopcion)
 
 		return res.status(200).json(casaDeAdopcion);;
 	} catch (error) {
+		console.log(error)
 		throw { status: error?.status, message: error?.message };
 	}
+	
 };
 
 module.exports = getHomeById;

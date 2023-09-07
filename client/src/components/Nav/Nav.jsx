@@ -16,6 +16,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import AvatarImg from "../AvatarImg/AvatarImg";
+import { useAuth } from "../../../context/AuthContext";
 
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 
@@ -23,6 +24,7 @@ const Nav = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const sizes = ["2xl"];
+  const { user } = useAuth();
 
   const location = useLocation();
   //style
@@ -61,12 +63,16 @@ const Nav = () => {
         </div>
 
         <div className=" gap-20 flex flex-row justify-center items-center text-black">
-          <Link className="text-black" href="/">
+          <Link className="text-lg text-black" href="/">
             Inicio
           </Link>
-          <Link href="/perfil/${id}" className="text-black">
-            Mi Perfil
-          </Link>
+          {user ? (
+            <Link href={`/perfil/${user.id}`} className="text-lg text-black">
+              Mi Perfil
+            </Link>
+          ) : (
+            ""
+          )}
 
           <div className="flex flex-wrap justify-center gap-3">
             {sizes.map((size) => (
@@ -76,7 +82,7 @@ const Nav = () => {
                 variant="solid"
                 key={size}
                 onPress={() => handleOpen(size)}
-                className="text-black"
+                className="text-lg text-black"
               >
                 Notificaciones
               </Link>
@@ -84,7 +90,7 @@ const Nav = () => {
           </div>
 
           {/* <Link
-            href="/notificaciones"
+            href="/notificaciones" 
             onClick={abrirModal}
             className="text-black"
           >

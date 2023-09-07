@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import NewLogin from "../NewRegis/NewLogin";
 import { NuevoRegistro } from "../NewRegis/NewRegistro";
 
+
 const Registro = () => {
   const { id } = useParams();
   const [formData, setFormData] = useState({

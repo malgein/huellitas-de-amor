@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect} from "react";
 import { Route, Navigate } from "react-router-dom";
-import { authContext } from "../../server/src/context/AuthContext"; // Importa el contexto de autenticación de Firebase
+import { authContext } from "../context/AuthContext"; // Importa el contexto de autenticación de Firebase
 
 const PrivateRoutes = ({ element }) => {
 	const { user, actualUser } = useContext(authContext); // Obtiene el usuario actual del contexto de autenticación

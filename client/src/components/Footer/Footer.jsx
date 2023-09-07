@@ -14,7 +14,7 @@ const Footer = () => {
 
 
   return (
-    <div className="border-t-2 border-gray-300 pt-4 ">
+    <div className="border-t-1 border-gray-300 pt-4 mt-12">
       <div className=" flex flex-col mb-0" >
         <div className="flex flex-row  items-center gap-20 h-24">
           <div className="ml-20">
@@ -32,24 +32,22 @@ const Footer = () => {
           <div className="flex flex-row justify-center gap-20 ml-20 border-b-2">
             <section>
               <h4>
-                <a
-                  href={googleMapsUrl}
-                  target="_blank"
-                >
-                  Ubicación
-
-                </a>    <i className="fas fa-map-marker-alt"></i>
+                <a href={googleMapsUrl} target="_blank">
+                  Ubicación <i className="fas fa-map-marker-alt hover:scale-110 transform transition-transform duration-300 ease-in-out text-red-300 hover:text-red-500"></i>
+                </a><br/>
+                en el mundo
               </h4>
-              <p>en el mundo</p>
             </section>
+
             <section className="ml-20">
-              <h4>Contacto</h4>
-              <p>
+              <h2>Contacto</h2>
+              <p className=" hover:scale-105 transform transition-transform duration-300 ease-in-out">
                 ✉ <a href="mailto:Huellitasdemaor@gmail.com">Huellitasdemaor@gmail.com</a>
               </p>
-              <p>
-                <a href="tel:16572345">16572345     </a>
-                <i className="fab fa-whatsapp-square"></i>
+              <p className=" hover:scale-105 transform transition-transform duration-300 ease-in-out">
+                <a href="https://wa.me/16572345" target="_blank" rel="noopener noreferrer">
+                  16572345 <i className="fab fa-whatsapp-square"></i>
+                </a>
               </p>
             </section>
           </div>
@@ -58,14 +56,14 @@ const Footer = () => {
         <div className="flex flex-row justify-between items-center h-16 ">
           <div className="ml-4">©2023, All right reserved.</div>
           <div className="mr-4 flex flex-row  items-center  gap-4 ">
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-facebook-square"></i>
+            <a className="hover:scale-110 transform transition-transform duration-300 ease-in-out" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-facebook-square fa-lg"></i>
             </a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-instagram-square"></i>
+            <a className="hover:scale-110 transform transition-transform duration-300 ease-in-out" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-instagram-square fa-lg"></i>
             </a>
-            <a href="https://twitter.com/?lang=es" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-twitter-square"></i>
+            <a className="hover:scale-110 transform transition-transform duration-300 ease-in-out" href="https://twitter.com/?lang=es" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-twitter-square fa-lg"></i>
             </a>
           </div>
         </div>
