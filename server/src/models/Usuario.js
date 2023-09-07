@@ -12,11 +12,11 @@ module.exports = (sequelize) => {
       },
       nombre: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       apellido: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -29,28 +29,36 @@ module.exports = (sequelize) => {
       },
       nacionalidad: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       ubicacion: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       direccion: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       telefono: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       acerca: {
         type: DataTypes.TEXT(50),
-        allowNull: false,
+        allowNull: true,
       },
-      // foto: {
-      //   type: DataTypes.JSON, // Cambiado a JSON para representar un array de URLs
-      //   allowNull: false,
-      // },
+      imagenPerfil: {
+        type: DataTypes.JSON, // Puedes ajustar el tipo de dato según tu necesidad
+        allowNull: true, // Puede ser nulo si el usuario no ha subido una imagen de perfil
+        defaultValue:
+          "https://st2.depositphotos.com/4155479/6909/v/450/depositphotos_69099741-stock-illustration-labrador-retriever.jpg",
+      },
+      imagenPortada: {
+        type: DataTypes.JSON, // Puedes ajustar el tipo de dato según tu necesidad
+        allowNull: true, // Puede ser nulo si el usuario no ha subido una imagen de portada
+        defaultValue:
+          "https://st4.depositphotos.com/11498520/23294/v/450/depositphotos_232945258-stock-illustration-dog-paw-seamless-pattern-heart.jpg",
+      },
     },
     { timestamps: false }
   );

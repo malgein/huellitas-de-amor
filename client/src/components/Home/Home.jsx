@@ -12,6 +12,7 @@ import Paginated from "../Paginated/Paginated";
 
 import { Button, Image } from "@nextui-org/react";
 import imagenHome from "../../assets/imageUno.png";
+// import imagenHome from "../../assets/banner1.png";
 import imageDos from "../../assets/gata.jpg";
 // import imagenDos from "../../assets/gata.jpg";
 // import Rate from "../Rate/Rate";
@@ -62,7 +63,31 @@ export default function Home() {
   //h-screen w-screen
   return (
     <div className="x-[50px] flex justify-center items-center flex-col w-[1500px] mx-auto ">
-      <div className="flex flex-row  h-[550px] mt-12 mx-auto">
+      <div className=" flex flex-row  h-[550px] mt-12 mx-auto">
+        {/* <div className="relative">
+          <Image
+            // width={600}
+            // height={500}
+            alt="NextUI hero Image"
+            src={imagenHome}
+            className=" mr-2"
+          />
+        </div>
+
+        <div className="absolute bottom-unit-9xl  border border-black flex flex-row w-[1500px] ">
+          <div className="border border-black w-[50%]">
+            <Image width={100} src={imageDos} className="" />
+          </div>
+
+          <div className="border border-black w-[50%]">
+            <h1>Transforma vidas: adopta, ama y brinda un hogar !</h1>
+            <p>Descubre tiernos amigos en busca de un hogar amoroso.</p>
+            <Button className="border border-black text-black mt-6 bg-white hover:bg-slate-100">
+              Adoptame
+            </Button>
+          </div>
+        </div> */}
+
         <div className="relative w-[600px]  ">
           <div className="md:flex">
             <div className="md:shrink-0">

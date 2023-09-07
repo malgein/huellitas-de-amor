@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.1",
     "@mercadopago/sdk-react": "^0.0.14",
     "@nextui-org/react": "^2.0.19",
     "@react-email/render": "^0.0.7",

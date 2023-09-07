@@ -47,7 +47,7 @@ const Rate = ({ id, rating }) => {
 			});
 	};
 
-	const handleCommentChange = (e) => setNewComment(e.target.value);
+  const handleCommentChange = (e) => setNewComment(e.target.value);
 
 	return (
 		<div
@@ -97,11 +97,11 @@ const Rate = ({ id, rating }) => {
 						onChange={handleCommentChange}
 					/>
 
-					<button onClick={handleCommentSubmit}>Enviar Comentario</button>
-				</div>
-			</div>
-		</div>
-	);
+          <button onClick={handleCommentSubmit}>Enviar Comentario</button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Rate;
