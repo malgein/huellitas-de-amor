@@ -9,11 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.1",
     "@mercadopago/sdk-react": "^0.0.14",
     "@nextui-org/react": "^2.0.19",
     "@react-email/render": "^0.0.7",
     "axios": "^1.4.0",
     "canvas-confetti": "^1.6.0",
+    "firebase": "^10.3.1",
     "formik": "^2.4.3",
     "framer-motion": "^10.15.2",
     "nodemailer": "^6.9.4",

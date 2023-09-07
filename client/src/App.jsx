@@ -17,7 +17,7 @@ import DetailUser from "./components/Dashboard/DetailUser";
 import DetailHouse from "./components/Dashboard/detailHouse";
 import CasaDeAdopcion from "./components/CasaDeAdopcion/CasaDeAdopcion";
 import { NuevoRegistro } from "./components/NewRegis/NewRegistro";
-import NewLogin  from "./components/NewRegis/NewLogin";
+import NewLogin from "./components/NewRegis/NewLogin";
 
 import Pets from "./components/Dashboard/Pets";
 import Users from "./components/Dashboard/Users";
@@ -25,57 +25,64 @@ import AdoptionHouses from "./components/Dashboard/AdoptionHouses";
 import Donations from "./components/Dashboard/Donations";
 import Notificaciones from "./components/Notificaciones/Notificaciones";
 import { AuthProvider } from "../context/AuthContext";
-
+import { Auth0Provider } from "@auth0/auth0-react";
 
 function App() {
   const location = useLocation();
   return (
     <>
       <AuthProvider>
-        {location.pathname !== "/home" && <Nav />}
-        <Routes>
-          {/* <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} /> */}
-          <Route path={PathRoutes.HOME} element={<Home />} />
-          <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
-          <Route path={PathRoutes.PERFIL} element={<Perfil />} />
+        <Auth0Provider
+          domain="dev-zmxdsgjn0buf7bnr.us.auth0.com"
+          clientId="r3sV01hm6BXdgakUyDXf1AT23FEXYqUF"
+          redirectUri={window.location.origin}
+        >
+          {location.pathname !== "/home" && <Nav />}
+          <Routes>
+            {/* <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} /> */}
+            <Route path={PathRoutes.HOME} element={<Home />} />
+            <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
+            <Route path={PathRoutes.PERFIL} element={<Perfil />} />
 
-          <Route path={PathRoutes.DETAIL} element={<Detail />} />
-          <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
-          <Route path={PathRoutes.REGISTRO} element={<NuevoRegistro />}></Route>
-          <Route path={PathRoutes.LOGIN} element={<NewLogin />}></Route>
+            <Route path={PathRoutes.DETAIL} element={<Detail />} />
+            <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
+            <Route
+              path={PathRoutes.REGISTRO}
+              element={<NuevoRegistro />}
+            ></Route>
+            <Route path={PathRoutes.LOGIN} element={<NewLogin />}></Route>
 
-          <Route
-            path={PathRoutes.CASADETAIL}
-            element={<CasaDeAdopcion />}
-          ></Route>
-          {/* Componente dashboard  */}
-          <Route path={PathRoutes.DASHBOARD} element={<Dashboard />} />
-          {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
-          <Route path={PathRoutes.DASHBOARD_MASCOTAS} element={<Pets />} />
-          {/* Subruta de dashboard que gestiona los usuarios para el admin */}
-          <Route path={PathRoutes.DASHBOARD_USUARIOS} element={<Users />} />
-          {/* Subruta de dashboard que gestiona las casas de adopcion para el admin */}
-          <Route
-            path={PathRoutes.DASHBOARD_CASAS_DE_ADOPCION}
-            element={<AdoptionHouses />}
-          />
-          {/* Subruta de dashboard que gestiona las donaciones para el admin */}
-          <Route
-            path={PathRoutes.DASHBOARD_DONACIONES}
-            element={<Donations />}
-          />
+            <Route
+              path={PathRoutes.CASADETAIL}
+              element={<CasaDeAdopcion />}
+            ></Route>
+            {/* Componente dashboard  */}
+            <Route path={PathRoutes.DASHBOARD} element={<Dashboard />} />
+            {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
+            <Route path={PathRoutes.DASHBOARD_MASCOTAS} element={<Pets />} />
+            {/* Subruta de dashboard que gestiona los usuarios para el admin */}
+            <Route path={PathRoutes.DASHBOARD_USUARIOS} element={<Users />} />
+            {/* Subruta de dashboard que gestiona las casas de adopcion para el admin */}
+            <Route
+              path={PathRoutes.DASHBOARD_CASAS_DE_ADOPCION}
+              element={<AdoptionHouses />}
+            />
+            {/* Subruta de dashboard que gestiona las donaciones para el admin */}
+            <Route
+              path={PathRoutes.DASHBOARD_DONACIONES}
+              element={<Donations />}
+            />
 
-          <Route path={PathRoutes.DETAILUSER} element={<DetailUser />} />
-          <Route path={PathRoutes.DETAILHOUSE} element={<DetailHouse />} />
-        </Routes>
-        {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
+            <Route path={PathRoutes.DETAILUSER} element={<DetailUser />} />
+            <Route path={PathRoutes.DETAILHOUSE} element={<DetailHouse />} />
+          </Routes>
+          {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
 
-        <Footer />
+          <Footer />
+        </Auth0Provider>
       </AuthProvider>
     </>
   );
 }
 
 export default App;
-
-
