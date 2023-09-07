@@ -29,9 +29,6 @@ const Perfil = () => {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  // const [abrirFotoPerfil, setAbrirFotoPerfil] = useState(false);
-  const [abrirFotoPortada, setAbrirFotoPortada] = useState(false);
-
   //Para el tamaño del modal
   const [size, setSize] = React.useState("md");
   const sizes = ["2xl"];

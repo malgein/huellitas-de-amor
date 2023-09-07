@@ -20,9 +20,11 @@ const fillPets = require("../utils/fillPets");
 const postDonaciones = require("./routesDonaciones");
 const postCrearUsuario = require("./routesUsuario");
 const getUsersId = require("../controllers/getUsersId");
+const getAdoptionUser = require("../controllers/getAdoptionUser");
+// const getAdoptionUser = require("./routesAdopcion");
 
 // router.get("/fill", fillPets);
-// const { actualizarPerfil } = require("../controllers/putEditarPerfil");
+
 const modPetById = require("../controllers/modPetById");
 const fillTypeUsers = require("../utils/fillTypeUsers");
 const usuarioTipoController = require("../controllers/usuarioTipoController");
@@ -46,7 +48,7 @@ router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
 router.use("/usuario", postCrearUsuario);
-
 router.put("/:id/estado", modPetById);
+router.get("/adopcion", getAdoptionUser);
 
 module.exports = router;
