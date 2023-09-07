@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCasaById } from "../../redux/actions";
@@ -7,6 +7,8 @@ import Rate from "../Rate/Rate";
 import { getMascotas } from "../../redux/actions";
 import PetCard from "../PetCard/PetCard";
 import MapaFuncional from "../Mapa/MapaFuncional";
+import { Input } from "@nextui-org/react";
+import GoogleBar from "../GoogleBar/GoogleBar";
 
 export default function CasaDeAdopcion() {
   const { id } = useParams();
@@ -19,11 +21,26 @@ export default function CasaDeAdopcion() {
 
   const pet = useSelector((state) => state.mascotas);
   const casa = useSelector((state) => state.casasDeAdopcion);
+
+  const ubicacion = "Calle Playa 227, Nueva Morelos, Monterrey, Nuevo León";
+
+  const handleChangeInput = (event) => {
+    event.preventDefault();
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Llama a la función de geocodificación cuando se envía el formulario
+    await geoCode(inputValue);
+  };
+
   return (
     <div>
-      <div className="m-2 flex rounded-xl pb-32 pt-5 shadow-2x">
+      <GoogleBar></GoogleBar>
+      <div className="m-2 flex rounded-xl pb-32 pt-5 shadow-2x w-full">
         <div className=" w-1/3 h-[100%] ml-10 mt-20">
-          <div className="rounded">
+          <div className="rounded mr-10 ml-10">
             <Carousel
               infiniteLoop={true}
               showThumbs={false}
@@ -45,6 +62,7 @@ export default function CasaDeAdopcion() {
         <div className="w-2/3 m-10 mb-0 mt-20 h-100%">
           <h1 className="m-2 text-3xl">{casa.nombreDeOng}</h1>
           <p>Contáctanos: </p>
+          {/* <FontAwesomeIcon icon="fa-solid fa-envelope" /> */}
           <p>{casa.email}</p>
           <p>{casa.telefono}</p>
           <div className="h-20 flex flex-col justify-end">
@@ -52,8 +70,14 @@ export default function CasaDeAdopcion() {
               <div className="flex-1"></div>
               <p className="p-4">Ubicación:</p>
             </div>
-            <div className="h-1/2 w-[100%] ">
-              <MapaFuncional />
+            <div className="ml-60 h-1/2 w-full ">
+              <MapaFuncional
+                /* googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAnPhpVL3wYG0rQDT3Ixnbj5u_nuhK6Z4g"
+                containerElement={<div style={{ height: "400px" }} />}
+                mapElement={<div style={{ height: "100%" }} />}
+                loadingElement={<p>Cargando...</p>} */
+                location={ubicacion}
+              />
             </div>
           </div>
         </div>

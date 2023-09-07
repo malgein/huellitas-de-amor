@@ -14,8 +14,8 @@ conn
   })
   .then(() => {
     server.listen(PORT, () => {
-      //fillHomes();
-      //fillPets();
+      // fillHomes();
+      // fillPets();
       console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
     });
   });

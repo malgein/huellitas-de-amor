@@ -12,7 +12,7 @@ import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
 import validationSchema from "../../Schemas/agregarMascotaSchema";
 import FormSelect from "../FormSelect/FormSelect";
-
+import { Button } from "@nextui-org/react";
 import Swal from "sweetalert2";
 import SubirImagenes from "../SubirImagenes/SubirImagenes";
 
@@ -79,7 +79,7 @@ const AgregarMascota = () => {
   };
 
   const handleClickImages = async (clickedImage) => {
-    console.log(clickedImage);
+    // console.log(clickedImage);
     const updatedImages = imagenes.filter((image) => image !== clickedImage);
     dispatch(eliminarImagenes(updatedImages));
     /* console.log(updatedImages) */

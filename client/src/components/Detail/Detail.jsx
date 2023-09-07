@@ -13,11 +13,9 @@ import confetti from "canvas-confetti";
 
 import PathRoutes from "../../helpers/Routes.helper";
 
-
-import AdoptionFormModal from '../FormularioAdopcion/FormAdop';
+import AdoptionFormModal from "../FormularioAdopcion/FormAdop";
 
 import { useAuth } from "../../../context/AuthContext";
-
 
 export default function Detail() {
   const { id } = useParams();
@@ -34,6 +32,7 @@ export default function Detail() {
   const mascota = useSelector((state) => state.petDetail);
 
   useEffect(() => {
+    console.log(mascota.casaDeAdopcionId);
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
     }
@@ -46,7 +45,7 @@ export default function Detail() {
   const handleConfetti = () => {
     confetti({});
   };
-  const handleAdoption =() => {
+  const handleAdoption = () => {
     if (user) {
       setIsModalOpen(true);
     } else {
@@ -62,10 +61,8 @@ export default function Detail() {
     navigate("/");
   };
 
-
-
   const casa = useSelector((state) => state.casasDeAdopcion);
-
+  console.log(casa);
   const isAdopted = mascota.estado === "Adoptado";
   // const isInProcess = mascota.estado === "En Proceso";
   const isAvailableForAdoption = mascota.estado === "En Adopción";
@@ -191,7 +188,11 @@ export default function Detail() {
               </Link>
             </div>
           </div>
-          <AdoptionFormModal isOpen={isModalOpen} onOpenChange={setIsModalOpen}  onConfirm={handleAdoptionConfirm}/>
+          <AdoptionFormModal
+            isOpen={isModalOpen}
+            onOpenChange={setIsModalOpen}
+            onConfirm={handleAdoptionConfirm}
+          />
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
             {user ? (
               <Button
