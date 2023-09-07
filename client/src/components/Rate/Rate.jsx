@@ -1,34 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import styles from "./Rate.module.css";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import axios from "axios";
 import { basename } from "../../redux/actions";
-import { v4 as uuidv4 } from "uuid";
 
-const Rate = ({ id, rating, commentsBD }) => {
-	const endPoint = `${basename}/casaDeAdopcion/${id}`;
+const Rate = ({ id, rating }) => {
+	const endPointRatings = `${basename}/casaDeAdopcion/${id}/ratings`;
 	const endPointComments = `${basename}/casaDeAdopcion/${id}/comments`;
-
-	const comments = useState(commentsBD);
+	const [commentsData, setCommentsData] = useState([]);
 	const [newComment, setNewComment] = useState("");
-	
 
-	const handleRatingChange = async (newRating) => {
+	useEffect(() => {
+		const fetchComments = async () => {
+			try {
+				const response = await axios.get(endPointComments);
+				setCommentsData(response.data || []);
+			} catch (error) {
+				console.error("Error al obtener comentarios:", error);
+			}
+		};
+
+		fetchComments();
+	}, [endPointComments]);
+
+	const handleRatingSubmit = async (newRating) => {
 		try {
-			await axios.post(`${endPoint}/ratings`, { rating: newRating });
+			await axios.post(`${endPointRatings}`, { rating: newRating });
 		} catch (error) {
 			console.error("Error al obtener la data", error);
 		}
 	};
 
-	console.log(newComment);
 	const handleCommentSubmit = async () => {
 		if (newComment.trim() === "") {
 			return;
 		}
-	
+
 		await axios
 			.post(endPointComments, newComment)
 			.then(() => {
@@ -41,7 +49,6 @@ const Rate = ({ id, rating, commentsBD }) => {
 
 	const handleCommentChange = (e) => setNewComment(e.target.value);
 
-	console.log(commentsBD);
 	return (
 		<div
 			className={styles.horizontalRating}
@@ -50,10 +57,10 @@ const Rate = ({ id, rating, commentsBD }) => {
 				fontFamily: "sans-serif",
 				touchAction: "none",
 			}}>
-			<h2>Rating: {rating}/5</h2>
+			<h2>Rating: {!rating ? 0 : rating}/5</h2>
 			<Rating
-				initialValue={rating}
-				onClick={handleRatingChange}
+				initialValue={!rating ? 0 : rating}
+				onClick={handleRatingSubmit}
 				transition
 				allowFraction={true}
 				fillColorArray={["#f14f45", "#f16c45", "#f18845", "#f1b345", "#f1d045"]}
@@ -65,14 +72,23 @@ const Rate = ({ id, rating, commentsBD }) => {
 			<div>
 				<h3>Comentarios:</h3>
 				<ul>
-					{comments
-						.filter((comment) => comment)
-						.map((comment) => (
-							<li key={comment.id}>
-								<span>{comment.usuario ? comment.usuario : "ANONIMO"}</span>
-								<div className={styles.comentario}>{comment.text}</div>
-							</li>
-						))}
+					{commentsData &&
+						commentsData
+							.filter((comment) => comment)
+							.map((comment) => (
+								<li key={comment.id}>
+									<span>
+										<span>
+											{comment.usuario && comment.usuario.nombre
+												? comment.usuario.nombre
+												: "ANONIMO"}
+										</span>
+									</span>
+									<div className={styles.comentario}>
+										<h3>{comment.texto}</h3>
+									</div>
+								</li>
+							))}
 				</ul>
 				<div>
 					<textarea

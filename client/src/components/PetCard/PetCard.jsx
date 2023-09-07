@@ -73,12 +73,7 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
             </div>
           </div>
         </Link>
-        <div className="ml-20 relative top-[-100px] left-14">
-          <small className="text-default-500">{edad} años</small>
-          <br />
-          <small className="text-default-500">{peso} kg</small>
-          <h4 className="font-bold text-large">{sexo}</h4>
-        </div>
+      
         <div className="ml-20 relative top-[-100px] left-14">
           <Button onClick={handleOpen}> Quiero Donar $</Button>
         </div>

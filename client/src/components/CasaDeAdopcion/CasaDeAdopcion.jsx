@@ -86,8 +86,8 @@ export default function CasaDeAdopcion() {
             </div>
           </div>
           <div>
-            <Rate rating={casa.rating} commentsBD={casa.comments} id={id} />
-            {console.log(casa.comments)}
+            <Rate rating={casa.rating}  id={id} />
+            
           </div>
         </section>
       </div>

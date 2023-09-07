@@ -48,7 +48,7 @@ router.post("/email", postSendEmail);
 router.get("/fillDonations", fillDonations);
 router.get("/fillPets", fillPets);
 router.get("/fillTypeUsers", fillTypeUsers);
-router.use("/usuario", postUsuario);
+// router.use("/usuario", postUsuario);
 
 
 //router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
