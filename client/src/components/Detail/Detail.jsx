@@ -30,6 +30,7 @@ export default function Detail() {
   }, [dispatch, id]);
 
   const mascota = useSelector((state) => state.petDetail);
+  console.log(mascota)
 
   useEffect(() => {
     console.log(mascota.casaDeAdopcionId);
@@ -68,69 +69,67 @@ export default function Detail() {
   const isAvailableForAdoption = mascota.estado === "En Adopción";
 
   return (
-    <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
-      <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
-        <div className="relative">
-          {mascota.foto && mascota.foto.length === 1 ? (
-            <img
-              className="rounded-t-lg w-full h-auto"
-              src={mascota.foto[0]}
-              alt="Detalle del perro"
-            />
-          ) : (
-            <Carousel
-              infiniteLoop={true}
-              showThumbs={false}
-              showStatus={false}
-              dynamicHeight={true}
-            >
-              {mascota.foto &&
-                mascota.foto.map((fotoUrl, index) => (
-                  <img
-                    key={index}
-                    className="rounded-t-lg object-cover h-[500px] w-full"
-                    src={fotoUrl}
-                    alt={`Detalle del perro ${index + 1}`}
-                  />
-                ))}
-            </Carousel>
-          )}
-          <Badge
-            className={`absolute top-[-12px] right-[-110px] text-lg text-white ${
-              isAdopted ? "text-uppercase font-bold" : ""
-            }`}
-            content={
-              isAdopted
-                ? "Adoptado"
-                : adopcionEnProgreso
-                ? "En Proceso"
-                : isAvailableForAdoption
-                ? "En Adopción"
-                : ""
-            }
-            color={
-              isAdopted
-                ? "danger"
-                : adopcionEnProgreso
-                ? "warning"
-                : isAvailableForAdoption
-                ? "success"
-                : ""
-            }
-            size="lx"
-          ></Badge>
-        </div>
-        <div className="p-4 ">
-          <div className="flex items-center mb-2">
-            <h1 className="text-3xl font-semibold pl-10 mb-2">
-              {mascota.nombre}{" "}
-            </h1>
-            <Tooltip content={mascota.sexo}>
-              <Button className="m-1 h-10 w-10 font-extrabold text-xl	">
-                {mascota.sexo == "macho" ? "♂️" : "♀️"}
-              </Button>
-            </Tooltip>
-          </div>
+		<div className='flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 '>
+			<div className='w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white'>
+				<div className='relative'>
+					{mascota.foto && mascota.foto.length === 1 ? (
+						<img
+							className='rounded-t-lg w-full h-auto'
+							src={mascota.foto[0]}
+							alt='Detalle del perro'
+						/>
+					) : (
+						<Carousel
+							infiniteLoop={true}
+							showThumbs={false}
+							showStatus={false}
+							dynamicHeight={true}>
+							{mascota.foto &&
+								mascota.foto.map((fotoUrl, index) => (
+									<img
+										key={index}
+										className='rounded-t-lg object-cover h-[500px] w-full'
+										src={fotoUrl}
+										alt={`Detalle del perro ${index + 1}`}
+									/>
+								))}
+						</Carousel>
+					)}
+					<Badge
+						className={`absolute top-[-12px] right-[-110px] text-lg text-white ${
+							isAdopted ? "text-uppercase font-bold" : ""
+						}`}
+						content={
+							isAdopted
+								? "Adoptado"
+								: adopcionEnProgreso
+								? "En Proceso"
+								: isAvailableForAdoption
+								? "En Adopción"
+								: ""
+						}
+						color={
+							isAdopted
+								? "danger"
+								: adopcionEnProgreso
+								? "warning"
+								: isAvailableForAdoption
+								? "success"
+								: ""
+						}
+						size='lx'></Badge>
+				</div>
+				<div className='p-4 '>
+					<div className='flex items-center mb-2'>
+						<h1 className='text-3xl font-semibold pl-10 mb-2'>
+							{mascota.nombre}{" "}
+						</h1>
+						<Tooltip content={mascota.sexo}>
+							<Button className='m-1 h-10 w-10 font-extrabold text-xl	'>
+								{mascota.sexo == "macho" ? "♂️" : "♀️"}
+							</Button>
+						</Tooltip>
+					</div>
 
           <div className="flex justify-center space-x-4 p-4">
             <div className="w-32 bg-orange-100 rounded-lg shadow-md p-4 flex justify-center">

@@ -1,14 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCasaById } from "../../redux/actions";
+import { getCasaById, getMascotas } from "../../redux/actions";
 import { Carousel } from "react-responsive-carousel";
 import Rate from "../Rate/Rate";
-import { getMascotas } from "../../redux/actions";
-import PetCard from "../PetCard/PetCard";
-import MapaFuncional from "../Mapa/MapaFuncional";
-import { Input } from "@nextui-org/react";
-import GoogleBar from "../GoogleBar/GoogleBar";
 
 export default function CasaDeAdopcion() {
   const { id } = useParams();
@@ -115,7 +110,10 @@ export default function CasaDeAdopcion() {
               </div> */}
             </div>
           </div>
-          <div>{/* <Rate rating={casa.rating} id={id} /> */}</div>
+          <div>
+            <Rate rating={casa.rating} commentsBD={casa.comments} id={id} />
+            {console.log(casa.comments)}
+          </div>
         </section>
       </div>
     </div>

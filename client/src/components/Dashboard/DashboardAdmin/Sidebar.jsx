@@ -30,7 +30,7 @@ const Sidebar = () => {
         </div>
         <div className="flex items-center justify-center gap-[15px] py-[20px] border-b-[1px] border-[#EDEDED]/[0.3] cursor-pointer hover:bg-[#3954A2] hover:text-white">
           {/* Link que te lleva al dashboard como tal */}
-          <Link to="/dashboard">
+          <Link to="/dashboard-admin">
             <div className="flex justify-center">
               <FaTachometerAlt color="white" />
             </div>
@@ -41,7 +41,7 @@ const Sidebar = () => {
         </div>
         <div className="pt-[15px] border-b-[1px] border-[#EDEDED]/[0.3]">
           <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer hover:bg-[#3954A2] hover:text-white">
-            <Link to="/dashboard/mascotas">
+            <Link to="/dashboard-admin/mascotas">
               <div className="flex items-center gap-[10px]">
                 <MdPets color="white" />{" "}
                 <p className="text-[14px] leading-[20px] font-normal text-white">
@@ -52,7 +52,7 @@ const Sidebar = () => {
             <FaChevronRight color="white" />
           </div>
           <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer hover:bg-[#3954A2] hover:text-white">
-            <Link to="/dashboard/usuarios">
+            <Link to="/dashboard-admin/usuarios">
               <div className="flex items-center gap-[10px]">
                 <PiUsersThree color="white" />{" "}
                 <p className="text-[14px] leading-[20px] font-normal text-white">
@@ -66,7 +66,7 @@ const Sidebar = () => {
         <div className="pt-[15px] border-b-[1px] border-[#EDEDED]/[0.3]">
           <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer hover:bg-[#3954A2] hover:text-white">
             {/* Link que te lleva a la gestion de casas de adopcion */}
-            <Link to="/dashboard/casas-de-adopcion">
+            <Link to="/dashboard-admin/casas-de-adopcion">
               <div className="flex items-center gap-[10px]">
                 <AiFillHome color="white" size="24%" />{" "}
                 <p className="text-[14px] leading-[20px] font-normal text-white">
@@ -77,7 +77,7 @@ const Sidebar = () => {
             <FaChevronRight color="white" size="30%" />
           </div>
           <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer hover:bg-[#3954A2] hover:text-white">
-            <Link to="/dashboard/donaciones">
+            <Link to="/dashboard-admin/donaciones">
               <div className="flex items-center gap-[10px]">
                 <FaMoneyCheckAlt color="white" />{" "}
                 <p className="text-[14px] leading-[20px] font-normal text-white">

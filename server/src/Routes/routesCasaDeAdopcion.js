@@ -11,9 +11,11 @@ const modCompleteHouse = require('../controllers/modCompleteHouse')
 
 
 const postRatings = require("../controllers/postRatings")
+const postHouseComments=require('../controllers/postHouseComments')
 
 
 const getCasaById = require("../controllers/getCasaById");
+const getComentarios = require("../controllers/getComentarios");
 
 router.post("/", async (req, res) => {
   try {
@@ -102,6 +104,9 @@ router.put("/:id", async (req, res) => {
 });
 
 router.post("/:id/ratings", postRatings)
+router.post("/:id/comments", postHouseComments);
+router.get("/:id/comments", getComentarios)
+
 
 //!Mi csa por id pero Oziel se me adelanto y ya la creo
 // router.get("/:id", async (req, res) => {

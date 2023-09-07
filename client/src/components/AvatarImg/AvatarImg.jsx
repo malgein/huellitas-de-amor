@@ -8,13 +8,16 @@ import {
 } from "@nextui-org/react";
 import ModalLogSig from "../ModalLogSig/ModalLogSig";
 import PathRoutes from "../../helpers/Routes.helper";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import { LogoutButton } from "../Auth0Out/Auth0Out";
 
 export default function AvatarImg() {
-  const { user, logout } = useAuth();
-  const imgProfile = user?.photoURL;
+  // const { user, logout } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const imgProfile = user?.picture;
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -33,7 +36,7 @@ export default function AvatarImg() {
             }}
             className="transition-transform"
             description={user?.email}
-            name={user?.displayName}
+            name={user?.name}
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="User Actions" variant="flat">
@@ -52,8 +55,8 @@ export default function AvatarImg() {
 
           {user ? (
             <DropdownItem key="logout" color="danger">
-              <Link to="#" onClick={handleLogout}>
-                Cerrar sesión
+              <Link>
+                <LogoutButton />
               </Link>
             </DropdownItem>
           ) : (

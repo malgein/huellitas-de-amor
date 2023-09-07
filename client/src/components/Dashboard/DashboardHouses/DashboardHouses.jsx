@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 
 //Este es el componente del dashboard principal
-const Dashboard = () => {
+const DashboardHouses = () => {
   return (
     <div className="flex overflow-scroll">
       <div className="flex overflow-scroll ">
@@ -27,4 +27,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardHouses;

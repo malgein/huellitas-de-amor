@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Formik, Form } from "formik";
+import React, { useEffect, useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Button } from "@nextui-org/react";
 import styles from "./AgregarMascota.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,14 +8,15 @@ import {
   eliminarImagenes,
   limpiarImagenes,
 } from "../../redux/actions";
-import { useNavigate } from "react-router-dom";
 import FormInput from "../FormInput/FormInput";
 import FormTextarea from "../FormTextarea/FormTextarea";
-import validationSchema from "../../Schemas/agregarMascotaSchema";
 import FormSelect from "../FormSelect/FormSelect";
-import { Button } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SubirImagenes from "../SubirImagenes/SubirImagenes";
+import agregarMascotaSchema from "../../Schemas/agregarMascotaSchema";
+
+const validationSchema = agregarMascotaSchema;
 
 const AgregarMascota = () => {
   const [mascota, setMascota] = useState({
@@ -61,16 +63,6 @@ const AgregarMascota = () => {
         Swal.fire("La mascaota no ha sido agregada", "", "info");
       }
     });
-
-    // dispatchRedux(mascota);
-    // localStorage.removeItem("formData");
-    // Swal.fire({
-    // 	tittle: "MASCOTA AGREGADA",
-    // 	text: "La mascota se ha agregado satisfactoriamente",
-    // 	icon: "success",
-    // 	buttons: "OK",
-    // });
-    // Navigate("/Home");
   };
 
   const handleFormChange = (values) => {
