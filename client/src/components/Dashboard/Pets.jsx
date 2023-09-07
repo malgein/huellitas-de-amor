@@ -575,33 +575,34 @@ function Pets() {
 
   return (
     <div>
-      <div className="flex overflow-scroll ">
-        <div className="flex overflow-scroll ">
+      <div className="flex">
+        
           <div className="basis-[12%] h-[100vh]">
             {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
-            <Sidebar />
+            <Sidebar/>
           </div>
-          <div className="basis-[88%] border overflow-scroll h-[100vh]">
+          <div className="basis-[88%] border h-[100vh]">
             {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
             <div className="mt-10">
-              <div className="flex">
-                {mascotas.map((mascota) => (
+            
+                {/*mascotas.map((mascota) => (
                   <div
-                    key={mascota.id}
-                    className={`p-4 rounded-lg shadow-md mb-4 ${
-                      // Aplicar colores de fondo según el estado de la mascota
-                      mascota.estado === "en Adopción"
-                        ? "bg-blue-200"
-                        : mascota.estado === "en proceso"
-                        ? "bg-yellow-200"
-                        : mascota.estado === "adoptado"
-                        ? "bg-green-200"
-                        : "bg-gray-200" // Color predeterminado si el estado no coincide
-                    }`}
+                  key={mascota.id}
+                  className={`p-4 rounded-lg shadow-md mb-4 ${
+                    // Aplicar colores de fondo según el estado de la mascota
+                    mascota.estado === "en Adopción"
+                    ? "bg-blue-200"
+                    : mascota.estado === "en proceso"
+                    ? "bg-yellow-200"
+                    : mascota.estado === "adoptado"
+                    ? "bg-green-200"
+                    : "bg-gray-200" // Color predeterminado si el estado no coincide
+                  }`}
                   ></div>
-                ))}
-              </div>
-            </div>
+                ))*/}
+                
+              
+        
 
             <Table
               aria-label="Example table with custom cells, pagination and sorting"

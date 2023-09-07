@@ -15,6 +15,7 @@ const Dashboard = () => {
         <div className="basis-[88%] border overflow-scroll h-[100vh] w-[100%]">
 			 {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
 					<div>
+			
 						{/* El elemento Outlet es necesario para poder navegar en subrutas del dashboard*/}
 						<Outlet></Outlet>
 						<h1>Bienvenido Admind</h1>

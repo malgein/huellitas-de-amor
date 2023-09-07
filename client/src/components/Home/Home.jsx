@@ -112,9 +112,9 @@ export default function Home() {
                 {mascotasFiltradas.map(
                   (
                     mascota //aca hago llamo a la constante asi no se muestran las cards.(nacho)
-                  ) => (
-
-                    <div key={mascota.id}>
+                    ) => (
+                      
+                      <div key={mascota.id}>
                       <PetCard
                         key={mascota.id}
                         id={mascota.id}
@@ -124,10 +124,10 @@ export default function Home() {
                         descripcion={mascota.descripcion}
                         foto={mascota.foto}
                         peso={mascota.peso}
-                      />
+                        />
                     </div>
                   )
-                )}
+                  )}
               </div>
               <div className="pt-[20px] pb-[20px] flex justify-center">
                 <Paginated
@@ -135,7 +135,7 @@ export default function Home() {
                   mascotas={mascotas?.length}
                   paginado={paginado}
                   onClick={setPetsPerPage}
-                />
+                  />
               </div>
             </div>
           </div>

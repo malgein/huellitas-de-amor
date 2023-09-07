@@ -33,12 +33,15 @@ router.get("/perfil/:id", getUsersId);
 router.get('/tiposDeUsuarios',  findTypesUsers)
 router.get("/relacion", usuarioTipoController);
 router.get("/perfil/:id", getUsersId);
+
 router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 // router.get("/fill", fillDonations);
 router.get("/fillPets", fillPets);
 router.get("/fillTypeUsers", fillTypeUsers);
+
 router.use("/donaciones", postDonaciones);
+
 router.use("/mascotas", mascotas);
 router.get("/", getPets);
 router.get("/nombre", getPetByName);
@@ -46,9 +49,9 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
+
 router.use("/usuario", postCrearUsuario);
 router.put("/usuario/:id", actualizarPerfil);
-
 router.put("/:id/estado", modPetById);
 
 module.exports = router;

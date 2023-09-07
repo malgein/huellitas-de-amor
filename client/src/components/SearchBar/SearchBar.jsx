@@ -58,6 +58,7 @@ const SearchBar = () => {
       {/* <button type="submit" className={styles.submitButton} disabled={!nombre}>
         Buscar
       </button> */}
+      
       <Button type="submit" disabled={!nombre} color="warning" size="md">
         Buscar
       </Button>
