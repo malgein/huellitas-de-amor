@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { modCompleteUser } from "../../redux/actions";
-import { modFotoPerfil } from "../../redux/actions";
+// import { modFotoPerfil } from "../../redux/actions"; Me da error y lo comento validar con Jossy??
 import { Button } from "@nextui-org/react";
 import ImagenesPerfil from "../ImagenesPerfil/ImagenesPerfil";
 import { useNavigate } from "react-router-dom";
