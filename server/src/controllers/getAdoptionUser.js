@@ -9,11 +9,15 @@ const getAdoptionUser = async (req, res) => {
     // Realiza una consulta para contar las adopciones del usuario
     const conteoAdopciones = await Adopcion.count({
       where: {
-        usuarios: usuarioId, // Asegúrate de que esto coincida con el nombre de la columna en tu tabla "usuario_adopcion"
+        usuarios: usuarioId,
       },
     });
 
-    res.json({ conteoAdopciones });
+    if (!conteoAdopciones) {
+      return res.status(404).json({ mensaje: "Usuario no tiene adopciones" });
+    }
+
+    res.status(200).json(conteoAdopciones);
   } catch (error) {
     console.error("Error al obtener el conteo de adopciones:", error);
     res.status(500).json({ error: "Error interno del servidor" });
