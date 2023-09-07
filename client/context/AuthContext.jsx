@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+  FacebookAuthProvider,
 } from "firebase/auth";
 
 const authContext = createContext();
@@ -31,9 +32,14 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  const loginWithFacebook = () => {
+    const facebookProvider = new FacebookAuthProvider();
+    signInWithPopup(auth, facebookProvider);
+  };
+
   const loginWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleProvider);
+    signInWithPopup(auth, googleProvider);
   };
 
   const logout = () => signOut(auth);
@@ -59,6 +65,7 @@ export function AuthProvider({ children }) {
         loading,
         loginWithGoogle,
         resetPassword,
+        loginWithFacebook,
       }}
     >
       {children}

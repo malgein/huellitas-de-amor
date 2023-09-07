@@ -1,36 +1,3 @@
-
-// import { useState } from "react"; // Importa useState
-// import {
-//   Card,
-//   CardHeader,
-//   CardBody,
-//   Image,
-//   Button,
-//   Modal,
-//   ModalHeader,
-//   ModalBody,
-//   ModalFooter,
-//   ModalContent,
-// } from "@nextui-org/react";
-// import { Link } from "react-router-dom";
-// import PathRoutes from "../../helpers/Routes.helper";
-// import Donar from "../BotonDonar/BotonDonar";
-
-// function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
-//   const [isOpen, setIsOpen] = useState(false); // Agrega estado para el modal
-//   const size = "medium"; // Define el tamaño del modal
-
-//   const handleOpen = (size) => {
-//     setIsOpen(true);
-//   };
-
-//   const handleClose = () => {
-//     setIsOpen(false);
-//   };
-
-//   return (
-
-
 import { useState } from "react";
 import {
   Card,
