@@ -36,7 +36,6 @@ router.use("/donaciones", postDonaciones);
 router.get("/relacion-donation-house", donationsHouse);
 router.get("/relacion-donation-user", donationsUser);
 
-
 router.get("/perfil/:id", getUsersId);
 router.get("/tiposDeUsuarios", findTypesUsers);
 router.get("/relacion", usuarioTipoController);
@@ -56,7 +55,9 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
-router.get("/usuario", postCrearUsuario);
+router.use("/usuario", postCrearUsuario);
+router.post("/usuario", postCrearUsuario);
+
 router.put("/:id/estado", modPetById);
 router.get("/adopcion/:usuarioId", getAdoptionUser);
 
