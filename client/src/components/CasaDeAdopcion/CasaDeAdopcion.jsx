@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { getCasaById, getMascotas } from "../../redux/actions";
 import { Carousel } from "react-responsive-carousel";
 import Rate from "../Rate/Rate";
+import MapaFuncional from "../Mapa/MapaFuncional";
+import PetCard from "../PetCard/PetCard";
 
 export default function CasaDeAdopcion() {
   const { id } = useParams();
@@ -17,22 +19,10 @@ export default function CasaDeAdopcion() {
   const pet = useSelector((state) => state.mascotas);
   const casa = useSelector((state) => state.casasDeAdopcion);
 
-  const ubicacion = "Calle Playa 227, Nueva Morelos, Monterrey, Nuevo León";
-
-  const handleChangeInput = (event) => {
-    event.preventDefault();
-    setInputValue(event.target.value);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // Llama a la función de geocodificación cuando se envía el formulario
-    await geoCode(inputValue);
-  };
+  const ubicacion = casa.ubicacion;
 
   return (
     <div>
-      <GoogleBar></GoogleBar>
       <div className="m-2 flex rounded-xl pb-32 pt-5 shadow-2x w-full">
         <div className=" w-1/3 h-[100%] ml-10 mt-20">
           <div className="rounded mr-10 ml-10">
@@ -46,7 +36,7 @@ export default function CasaDeAdopcion() {
                 casa.foto.map((fotoUrl, index) => (
                   <img
                     key={index}
-                    className="rounded-lg object-cover h-[500px] w-full"
+                    className="rounded-lg object-cover h-[500px] w-[500px]"
                     src={fotoUrl}
                     alt={`Detalle de casa ${index + 1}`}
                   />
@@ -60,6 +50,7 @@ export default function CasaDeAdopcion() {
           {/* <FontAwesomeIcon icon="fa-solid fa-envelope" /> */}
           <p>{casa.email}</p>
           <p>{casa.telefono}</p>
+          <p>{casa.ubicacion}</p>
           <div className="h-20 flex flex-col justify-end">
             <div className="flex flex-col items-center">
               <div className="flex-1"></div>
@@ -110,11 +101,11 @@ export default function CasaDeAdopcion() {
               </div> */}
             </div>
           </div>
-          <div>
-            <Rate rating={casa.rating} commentsBD={casa.comments} id={id} />
-            {console.log(casa.comments)}
-          </div>
         </section>
+      </div>
+      <div>
+        <Rate rating={casa.rating} commentsBD={casa.comments} id={id} />
+        {console.log(casa.comments)}
       </div>
     </div>
   );
