@@ -10,7 +10,8 @@ const postHouseComments = async (req, res) => {
 		});
 		console.log("                                  ", id);
 		const { comment, userId } = req.body;
-
+		console.log(comment)
+		console.log(userId)
 		if (!casaDeAdopcion)
 			return res.status(404).send({ message: "Casa de adopción no existe" });
 		if (!comment || !userId) {
@@ -20,7 +21,8 @@ const postHouseComments = async (req, res) => {
 		}
 
 		const currentDate = new Date();
-		// console.log('id de Casa de ADOPCIONAAAAA          ' , casaDeAdopcion.id)
+		console.log('id de Casa de ADOPCIONAAAAA          ' , casaDeAdopcion.id)
+		console.log(comment)
 		const createdComment = await Comentario.create({
 			texto: comment,
 			usuarioId: userId,

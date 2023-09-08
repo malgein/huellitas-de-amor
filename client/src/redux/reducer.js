@@ -30,7 +30,12 @@ import {
 
   //case que me trae los usuarios con todas las relciones
   GET_ENTIRE_USERS,
-  CHANGE_STATUS_USER
+  CHANGE_STATUS_USER,
+
+  // Formulario de adopcion
+  SUBMIT_FORM,
+  SUBMIT_FORM_SUCCESS,
+  SUBMIT_FORM_FAILURE
 
 } from "./actions";
 
@@ -46,6 +51,7 @@ const initialState = {
   casasDeAdopcion: [],
   donaciones: [],
   imagenes: [],
+  formData: null,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -220,6 +226,31 @@ const rootReducer = (state = initialState, { type, payload }) => {
             : mascota
         ),
       };
+      case SUBMIT_FORM:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SUBMIT_FORM_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        formData: action.payload,
+        error: null,
+      };
+    case SUBMIT_FORM_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+   
+    }
+
+
+
   }
-};
+
+
+
 export default rootReducer;
