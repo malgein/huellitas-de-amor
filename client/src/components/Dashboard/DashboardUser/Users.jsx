@@ -48,7 +48,7 @@ const statusOptions = [
 ];
 //!Esto muestra las columnas que se ven al inicio
 
-const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre","apellido", "nacionalidad",  "ubicacion", "direccion", "telefono",  "tipo", "actions"];
+const INITIAL_VISIBLE_COLUMNS = [  "nombre","apellido", "nacionalidad",  "ubicacion", "direccion", "telefono",  "tipo", "actions"];
 
 
 function Users() {
@@ -100,7 +100,7 @@ function Users() {
   // }
 
   const handleEdit = async (id) => {
-    console.log(id);
+
     const { value: formValues } = await Swal.fire({
       title: "Introduce los nuevos datos del usuario que deseas modificar",
       html:
@@ -274,7 +274,7 @@ function Users() {
 
   const columns = [
 
-    {name: "ID", uid: "id", sortable: true},
+  
     {name: "NOMBRE", uid: "nombre", sortable: true},
     {name: "APELLIDO", uid: "apellido", sortable: true},
     {name: "NACIONALIDAD", uid: "nacionalidad", sortable: true},

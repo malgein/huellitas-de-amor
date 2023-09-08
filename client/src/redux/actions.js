@@ -54,8 +54,8 @@ const handleError = (dispatch, errorType, error) => {
 
 export const EDIT_USER = "EDIT_USER";
 
-// export const basename = "huellitas-de-amor-production-6e81.up.railway.app";
-export const basename = "http://localhost:3001";
+export const basename = "https://huellitas-de-amor-3.up.railway.app";
+// export const basename = "http://localhost:3001";
 
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
@@ -150,7 +150,7 @@ export const addMascota = (Mascota) => {
 
 export const getUsers = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${basename}/usuario`);
+    const response = await axios.get(`${basename}/usuarios`);
     dispatch({
       type: GET_USERS,
       payload: response.data,
@@ -185,7 +185,7 @@ export const getDonations = () => async (dispatch) => {
 };
 
 export const editUser = (id, updatedData) => {
-  const endpoint = `${basename}/usuario/${id}`;
+  const endpoint = `${basename}/usuarios/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -198,7 +198,7 @@ export const editUser = (id, updatedData) => {
 };
 
 export const deleteUsers = (id) => {
-  const endpoint = `${basename}/usuario/${id}`;
+  const endpoint = `${basename}/usuarios/${id}`;
   return (dispatch) => {
     axios.delete(endpoint).then(({ data }) => {
       return dispatch({

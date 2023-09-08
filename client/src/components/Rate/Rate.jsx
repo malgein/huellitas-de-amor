@@ -4,6 +4,10 @@ import styles from "./Rate.module.css";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import axios from "axios";
 import { basename } from "../../redux/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faPaw
+} from "@fortawesome/free-solid-svg-icons";
 
 const Rate = ({ id, rating }) => {
 	const endPointRatings = `${basename}/casaDeAdopcion/${id}/ratings`;
@@ -22,7 +26,7 @@ const Rate = ({ id, rating }) => {
 		};
 
 		fetchComments();
-	}, [handleCommentSubmit]);
+	}, [endPointComments]);
 
 	const handleRatingSubmit = async (newRating) => {
 		try {
@@ -31,7 +35,19 @@ const Rate = ({ id, rating }) => {
 			console.error("Error al obtener la data", error);
 		}
 	};
+	  const handleCommentDelete = async (commentId) => {
+			try {
+				await axios.delete(`${endPointComments}/${commentId}`);
 
+				// After successful deletion, update the commentsData state to trigger a re-render
+				setCommentsData((prevCommentsData) =>
+					prevCommentsData.filter((comment) => comment.id !== commentId)
+				);
+			} catch (error) {
+				console.error("Error deleting comment:", error);
+				// Handle any errors, such as displaying an error message to the user
+			}
+		};
 	const handleCommentSubmit = async () => {
 		if (newComment.trim() === "") {
 			return;
@@ -65,9 +81,19 @@ const Rate = ({ id, rating }) => {
 				allowFraction={true}
 				fillColorArray={["#f14f45", "#f16c45", "#f18845", "#f1b345", "#f1d045"]}
 				emptyIcon={
-					<MdFavoriteBorder className={styles.horizontalStars} size={25} />
+					<FontAwesomeIcon
+						icon={faPaw}
+						className={styles.horizontalStars}
+						size={35}
+					/>
 				}
-				fillIcon={<MdFavorite className={styles.horizontalStars} size={25} />}
+				fillIcon={
+					<FontAwesomeIcon
+						icon={faPaw}
+						className={styles.horizontalStars}
+						size={35}
+					/>
+				}
 			/>
 			<div>
 				<h3>Comentarios:</h3>
@@ -87,6 +113,9 @@ const Rate = ({ id, rating }) => {
 									<div className={styles.comentario}>
 										<h3>{comment.texto}</h3>
 									</div>
+									<button onClick={handleCommentDelete(comment.id)}>
+										Eliminar
+									</button>
 								</li>
 							))}
 				</ul>
@@ -97,11 +126,11 @@ const Rate = ({ id, rating }) => {
 						onChange={handleCommentChange}
 					/>
 
-          <button onClick={handleCommentSubmit}>Enviar Comentario</button>
-        </div>
-      </div>
-    </div>
-  );
+					<button onClick={handleCommentSubmit}>Enviar Comentario</button>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Rate;

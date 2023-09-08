@@ -20,7 +20,7 @@ const PathRoutes = {
   DASHBOARD_SUPER_ADMIN_CASAS_DE_ADOPCION: "/dashboard-super-admin/casas-de-adopcion",
   //subruta para el dashboard de casas de adopcion
   DASHBOARD_SUPER_ADMIN_DONACIONES: "/dashboard-super-admin/donaciones",
-
+USUARIOS:"/usuarios",
   DASHBOARD_USERS: "/dashboard-usuarios/",
 
   DASHBOARD_USERS_MASCOTAS: "/dashboard-admin/mascotas",

@@ -63,7 +63,7 @@ const allHomes = [
     ubicacion:
       "Jerónimo Salguero 151,C1177AEA, C1177 AEA, Buenos Aires, Argentina",
   },
-  /* {
+  {
     id: 6,
     foto: [
       "https://bestfriends.org/sites/default/files/styles/three_col_rect_470x350_/public/story_images/Dog-1124x554.jpg?h=5c78e16c&itok=bNFOdYDI",
@@ -227,7 +227,7 @@ const allHomes = [
     email: "qtranfieldj@sciencedirect.com",
     telefono: "73-287-9748",
     ubicacion: "Po box 71",
-  }, */
+  }, 
 ];
 
 module.exports = allHomes;

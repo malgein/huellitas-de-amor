@@ -27,7 +27,7 @@
 
 // module.exports = getUsers;
 
-const { Usuario, TipoDeUsuario, Donacion } = require("../db");
+const { Usuario, TipoDeUsuario, Donacion, Mascota} = require("../db");
 
 
 
@@ -43,13 +43,19 @@ const getUsers = async () => {
 					model: Donacion,
 					// Alias opcional para Donaciones
 				},
+				{
+					model: Mascota,
+					// Alias opcional para Donaciones
+				},
 			],
+			raw: true, // Debe estar aquí, no dentro de include
 		});
+
 		console.log(users);
 		return users;
 	} catch (error) {
-		console.error("Error al obtener las mascotas:", error);
-		throw new Error("Error al obtener las mascotas.");
+		console.error("Error al obtener los usuarios:", error);
+		throw new Error("Error al obtener los usuarios.");
 	}
 };
 

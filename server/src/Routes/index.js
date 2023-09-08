@@ -25,7 +25,10 @@ const fillTypeUsers = require("../utils/fillTypeUsers");
 const usuarioTipoController = require("../controllers/usuarioTipoController");
 const donationsUser = require("../controllers/donationsUser");
 const donationsHouse = require("../controllers/donationsHouse");
-const formularioAdopt = require("../controllers/FormularioAdop.js");
+const {formularioAdopt} = require("../controllers/FormularioAdop");
+const getAdoptionUser=require("../controllers/getAdoptionUser");
+const getUsers = require("../controllers/getUsers");
+
 
 router.patch("/relacion-user-type", usuarioTipoController);
 router.use("/donaciones", postDonaciones);
@@ -33,6 +36,28 @@ router.use("/donaciones", postDonaciones);
 // router.get('/tiposDeUsuarios',  findTypesUsers)
 router.get("/relacion-donation-house", donationsHouse);
 router.get("/relacion-donation-user", donationsUser);
+router.get('/usuarios', getUsers)
+router.delete("/usuarios/:id", async (req, res) => {
+	try {
+		const { id } = req.params;
+		const userId = await deleteUsersById(id);
+		return res.status(200).json(userId);
+	} catch (error) {
+		return res.status(500).json({ mensaje: "Error en el servidor" });
+	}
+});
+router.patch("/usuarios/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const response = req.body;
+        console.log(response);
+        const userId = await modUserById(id, response);
+        return res.status(200).json(userId);
+    } catch (error) {
+        return res.status(500).json({ mensaje: "Error en el servidor" })
+    }
+}) 
+
 
 
 router.get("/perfil/:id", getUsersId);
@@ -57,6 +82,7 @@ router.post("/create_preference", postMercadoPago);
 router.get("/usuario", postCrearUsuario);
 router.put("/:id/estado", modPetById);
 router.get("/adopcion/:usuarioId", getAdoptionUser);
+router.get("/formadop", formularioAdopt);
 
 module.exports = router;
 
@@ -125,7 +151,7 @@ module.exports = router;
 // const filtradoMascotas = require("../controllers/filtradoMascotas");
 // const getPets = require("../controllers/getPets");
 // const postCasaAdopcion = require("./routesCasaDeAdopcion");
-const formularioAdopt = require("../controllers/FormularioAdop.js");
+
 
 // const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 // const postSendEmail = require("../controllers/postSendEmail");
@@ -189,7 +215,7 @@ const formularioAdopt = require("../controllers/FormularioAdop.js");
 // router.use("/usuario", postUsuario);
 
 // //Fromularios de Adopcion
-// router.get("/formadop", formularioAdopt);
+
 // router.post("/nuevoform", postCrearUsuario);
 
 // // router.post("/", crearUsuario);

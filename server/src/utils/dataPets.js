@@ -12,6 +12,7 @@ const allPets = [
 		tamano: "Mediano",
 		raza: "Rottweiler",
 		peso: 32,
+		casaDeAdopcionId: 1,
 		estado: "En adopción",
 	},
 	{
@@ -26,6 +27,7 @@ const allPets = [
 		raza: "Golden Retriever",
 		peso: 35,
 		estado: "En adopción",
+		casaDeAdopcionId: 3,
 	},
 	{
 		nombre: "Milo",
@@ -39,6 +41,7 @@ const allPets = [
 		raza: "Boxer",
 		peso: 27,
 		estado: "En adopción",
+		casaDeAdopcionId: 3,
 	},
 	{
 		nombre: "Rocky",
@@ -52,6 +55,7 @@ const allPets = [
 		raza: "Boxer",
 		peso: 20,
 		estado: "En adopción",
+		casaDeAdopcionId: 4,
 	},
 	{
 		nombre: "Charlie",
@@ -65,6 +69,7 @@ const allPets = [
 		raza: "Labrador Retriever",
 		peso: 15,
 		estado: "En adopción",
+		casaDeAdopcionId: 7,
 	},
 	{
 		nombre: "Daisy",
@@ -78,6 +83,7 @@ const allPets = [
 		raza: "Boxer",
 		peso: 7,
 		estado: "En adopción",
+		casaDeAdopcionId: 9,
 	},
 	{
 		nombre: "Milo",
@@ -91,6 +97,7 @@ const allPets = [
 		raza: "Dachshund",
 		peso: 19,
 		estado: "En adopción",
+		casaDeAdopcionId: 8,
 	},
 	{
 		nombre: "Bella",
@@ -102,6 +109,7 @@ const allPets = [
 		],
 		tamano: "Pequeño",
 		raza: "German Shepherd",
+		casaDeAdopcionId: 8,
 		peso: 27,
 		estado: "En adopción",
 	},
@@ -110,6 +118,7 @@ const allPets = [
 		edad: 5,
 		sexo: "Macho",
 		descripcion: "juguetón",
+		casaDeAdopcionId: 2,
 		foto: [
 			"https://img.freepik.com/foto-gratis/retrato-perro-adorable-mirando-arriba_23-2148366909.jpg?w=360&t=st=1693890352~exp=1693890952~hmac=ad36e3474bfa37bced02095733bada54ad27822904deb4cd27d034d0e0628c21",
 		],
@@ -123,6 +132,7 @@ const allPets = [
 		edad: 4,
 		sexo: "Hembra",
 		descripcion: "amigable",
+		casaDeAdopcionId: 3,
 		foto: [
 			"https://img.freepik.com/foto-gratis/perro-pug-aislado-fondo-blanco_2829-11416.jpg?w=740&t=st=1693890364~exp=1693890964~hmac=304b10f25dba54a2fdf7ffb6cbd52bcdd482a249ef7683e0b2190c1e215924e6",
 		],
@@ -136,6 +146,7 @@ const allPets = [
 		edad: 2,
 		sexo: "Macho",
 		descripcion: "Jugueton",
+		casaDeAdopcionId: 1,
 		foto: [
 			"https://img.freepik.com/foto-gratis/perrito-joven-posando-alegre_155003-28765.jpg",
 			"https://www.nationalgeographic.com.es/medio/2022/12/12/perro-1_514aad3b_221212161023_1280x720.jpg",
@@ -149,6 +160,7 @@ const allPets = [
 		nombre: "Jack",
 		raza: "Persian",
 		tamano: "Mediano",
+		casaDeAdopcionId: 3,
 		edad: 8,
 		sexo: "Macho",
 		foto: [
@@ -162,6 +174,7 @@ const allPets = [
 		nombre: "Daisy",
 		raza: "Persian",
 		tamano: "Pequeño",
+		casaDeAdopcionId: 2,
 		edad: 5,
 		sexo: "Hembra",
 		foto: [
@@ -175,6 +188,7 @@ const allPets = [
 		nombre: "Bella",
 		raza: "Ragdoll",
 		tamano: "Grande",
+		casaDeAdopcionId: 4,
 		edad: 12,
 		sexo: "Macho",
 		foto: [
@@ -188,6 +202,7 @@ const allPets = [
 		nombre: "Max",
 		raza: "Poodle",
 		tamano: "Pequeño",
+		casaDeAdopcionId: 5,
 		edad: 8,
 		sexo: "Hembra",
 		foto: [
@@ -201,6 +216,7 @@ const allPets = [
 		nombre: "Jack",
 		raza: "Golden Retriever",
 		tamano: "Grande",
+		casaDeAdopcionId: 10,
 		edad: 6,
 		sexo: "Macho",
 		foto: [
@@ -214,6 +230,7 @@ const allPets = [
 		nombre: "Sadie",
 		raza: "Pastor Aleman",
 		tamano: "Grande",
+		casaDeAdopcionId: 9,
 		edad: 14,
 		sexo: "Hembra",
 		foto: [
@@ -229,6 +246,7 @@ const allPets = [
 		tamano: "Pequeño",
 		edad: 9,
 		sexo: "Macho",
+		casaDeAdopcionId: 8,
 		foto: [
 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFymZmfZvNXgr3ltxy4r_Sm9ZXnCaTcNVB8Q&usqp=CAU",
 		],
@@ -242,6 +260,7 @@ const allPets = [
 		tamano: "Mediano",
 		edad: 2,
 		sexo: "Hembra",
+		casaDeAdopcionId: 7,
 		foto: [
 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCpLuMKexrK_u0LPjLWQkRliCc1Uh0wArkzQ&usqp=CAU",
 		],
@@ -255,6 +274,7 @@ const allPets = [
 		tamano: "Grande",
 		edad: 14,
 		sexo: "Macho",
+		casaDeAdopcionId: 6,
 		foto: [
 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhGwYlzREQu1UCjRe_y7voSpTGOVBXd9Awqg&usqp=CAU",
 		],
@@ -268,6 +288,7 @@ const allPets = [
 		tamano: "Pequeño",
 		edad: 7,
 		sexo: "Macho",
+		casaDeAdopcionId: 1,
 		foto: [
 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWCeIkhgbMvAausz_cKUqNylLLNiQBudqqFQ&usqp=CAU",
 		],
@@ -281,6 +302,7 @@ const allPets = [
 		tamano: "Mediano",
 		edad: 6,
 		sexo: "Hembra",
+		casaDeAdopcionId: 2,
 		foto: [
 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA3hM6f9I7R6Q8ceScU4fC6k9uS93m4-e8Pw&usqp=CAU",
 		],
@@ -298,6 +320,7 @@ const allPets = [
 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjAgzTd5_WqhOsU364NBAO-dbHHqcRGPfMA&usqp=CAU",
 		],
 		peso: 9.3,
+		casaDeAdopcionId: 4,
 		descripcion:
 			"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
 	},
@@ -313,6 +336,7 @@ const allPets = [
 		peso: 17.9,
 		descripcion:
 			"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
+		casaDeAdopcionId: 3,
 	},
 	{
 		nombre: "Princesa",
@@ -326,6 +350,7 @@ const allPets = [
 		peso: 7.9,
 		descripcion:
 			"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
+		casaDeAdopcionId: 3,
 	},
 	{
 		nombre: "Fifi",
@@ -339,6 +364,7 @@ const allPets = [
 		peso: 4.3,
 		descripcion:
 			"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
+		casaDeAdopcionId: 3,
 	},
 ];
 

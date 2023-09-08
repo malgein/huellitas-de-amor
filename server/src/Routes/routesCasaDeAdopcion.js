@@ -108,6 +108,7 @@ router.post("/:id/comments", postHouseComments);
 router.get("/:id/comments", getComentarios)
 
 
+
 //!Mi csa por id pero Oziel se me adelanto y ya la creo
 // router.get("/:id", async (req, res) => {
 //   try {
