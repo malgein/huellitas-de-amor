@@ -13,7 +13,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const info = () => {
-    const botMessage = createChatBotMessage('"Huellitas de amor es un sitio donde puedes adoptar una mascota u ofrecerlas en adopcion de manera dresponsable y transparente');
+    const botMessage = createChatBotMessage('"Huellitas de amor es un sitio donde puedes adoptar una mascota u ofrecerlas en adopcion de manera responsable y transparente');
 
     setState((prev) => ({
       ...prev,
