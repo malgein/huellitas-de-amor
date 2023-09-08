@@ -53,10 +53,7 @@ const postPetById = async ({
     await createPet.setCasaDeAdopcion(casaDeAdopcionId);
     return createPet;
 
-    //Llaves foraneas
-    /* await createPet.setGenres(genres);
-    await createPet.setPlatforms(platforms); */
-    return createPet;
+ 
   } catch (error) {
     throw { error: error?.status, message: error?.message };
   }

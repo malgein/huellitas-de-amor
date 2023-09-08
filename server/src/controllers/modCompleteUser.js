@@ -19,6 +19,8 @@ const modCompleteUser = async (id, updatedData) => {
     usuario.acerca = updatedData.acerca;
     usuario.email = updatedData.email;
     usuario.password = updatedData.password;
+    usuario.imagenPerfil = updatedData.imagenPerfil;
+    usuario.imagenPortada = updatedData.imagenPortada;
 
     // Guardar los cambios en la base de datos
     await usuario.save();

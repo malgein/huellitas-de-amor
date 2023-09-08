@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import PathRoutes from "../../helpers/Routes.helper";
-import Sidebar from "./Sidebar";
-import { useSelector, useDispatch } from "react-redux";
-import { getMascotas, deletePets, modCompletePet } from "../../redux/actions";
-import Swal from "sweetalert2";
-
+import PathRoutes from "../../../helpers/Routes.helper";
+import Sidebar from './Sidebar'
+import { useSelector, useDispatch } from 'react-redux'
+import { getMascotas, deletePets, modCompletePet } from '../../../redux/actions'
+import Swal from 'sweetalert2'
 import {
   Table,
   TableHeader,
@@ -23,11 +22,11 @@ import {
   User,
   Pagination,
 } from "@nextui-org/react";
-import { VerticalDotsIcon } from "./VerticalDotsIcon";
-import { SearchIcon } from "./SearchIcon";
-import { ChevronDownIcon } from "./ChevronDownIcon";
+import {VerticalDotsIcon} from "../VerticalDotsIcon";
+import {SearchIcon} from "../SearchIcon";
+import {ChevronDownIcon} from "../ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
-import { capitalize } from "./Accesory";
+import {capitalize} from "../Accesory";
 
 const statusColorMap = {
   Macho: "success",

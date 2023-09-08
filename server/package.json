@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node ./index.js",
-    "start": "nodemon ./index.js",
+    "start": "node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -25,6 +25,7 @@
     "pg": "^8.5.1",
     "react-dropzone": "14.2.3",
     "sequelize": "^6.3.5",
+    "uuidv4": "^6.2.13",
     "serve": "^14.2.1"
   },
   "devDependencies": {
