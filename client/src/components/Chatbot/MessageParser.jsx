@@ -10,6 +10,9 @@ const MessageParser = ({ children, actions }) => {
       case message.includes('hola'):
         actions.saludar();
         break;
+        case message.includes('info'):
+        actions.info();
+        break;
       case message.includes('adios'):
         actions.despedirse();
         break;
