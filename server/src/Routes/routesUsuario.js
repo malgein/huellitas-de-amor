@@ -13,7 +13,7 @@ const getUserById = require('../controllers/getUserById')
 const findTypesUsers = require('../controllers/findTypeUsers')
 const usuarioTipoController = require('../controllers/usuarioTipoController')
 
-router.post("/", async (req, res) => {
+router.post("/crearUsuario", async (req, res) => {
   try {
     const response = req.body;
     const usuarioPost = await crearUsuario(response);
@@ -63,6 +63,7 @@ router.get("/fill", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const data = await getUsers();
+    console.log(data);
 
     return res.status(200).json(data);
   } catch (error) {

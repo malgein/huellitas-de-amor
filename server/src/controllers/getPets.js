@@ -15,7 +15,7 @@ const { Mascota } = require("../db");
 const getPets = async () => {
   try {
     const allPets = await Mascota.findAll();
-    console.log(allPets)
+    // console.log(allPets)
     return allPets;
   } catch (error) {
     console.error('Error al obtener las mascotas:', error);
