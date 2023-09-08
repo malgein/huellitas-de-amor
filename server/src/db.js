@@ -5,18 +5,18 @@ const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
-  //!Para usar la base de datos Remota 01/09:
+  // //!Para usar la base de datos Remota 01/09:
   // "postgresql://postgres:XkyrYs7Ygf2FSyF5nQs3@containers-us-west-149.railway.app:6905/railway",
-  
-	//!Para usar la base de datos Remota:
 
-	// `postgresql://postgres:devZjxigFLUOiHZBcQxh@containers-us-west-127.railway.app:6739/railway`,
-	//!Para usar la base de datos local
-	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
-	{
-		logging: false, // set to console.log to see the raw SQL queries
-		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-	}
+  // //!Para usar la base de datos Remota:
+ 
+  // // `postgresql://postgres:devZjxigFLUOiHZBcQxh@containers-us-west-127.railway.app:6739/railway`,
+  // //!Para usar la base de datos local
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
+  {
+    logging: false,// set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  }
 );
 const basename = path.basename(__filename);
 
@@ -55,6 +55,8 @@ const {
   Adopcion,
   Especie,
   Favorito,
+  Notificaciones,
+  FormularioAdop,
 } = sequelize.models;
 
 //Usuarios --> Tipo de Usuarios
@@ -88,15 +90,22 @@ Adopcion.belongsTo(Usuario, {
 Usuario.hasMany(Adopcion, {
   foreignKey: "usuarioId",
 });
+
+Mascota.belongsTo(Usuario, {
+	foreignKey: "usuarioId",
+});
+Usuario.hasMany(Mascota, {
+	foreignKey: "usuarioId",
+});
+
 //Lo comenté porque si no, cuando haces post de casa de adopción te pide un comentario como dato en el json.
 //Casa de Apciones --> Comentarios
 CasaDeAdopcion.hasMany(Comentario, {
   foreignKey: "casaDeAdopcionId",
 });
 Comentario.belongsTo(CasaDeAdopcion, {
-	foreignKey: "casaDeAdopcionId",
-}); 
-
+  foreignKey: "casaDeAdopcionId",
+});
 
 //Mascotas --> Casa de Adopciones
 Mascota.belongsTo(CasaDeAdopcion, {
@@ -121,13 +130,31 @@ Donacion.belongsTo(CasaDeAdopcion, {
 CasaDeAdopcion.hasMany(Donacion, {
   foreignKey: "casaDeAdpocionId",
 });
+//Formulario de Adopción --> Casa de Adopciones
+FormularioAdop.belongsTo(CasaDeAdopcion, {
+  foreignKey: "casaDeAdpocionId",
+})
+//Casa de Adopciones --> Formulario de Adopción
+CasaDeAdopcion.hasMany(FormularioAdop, {
+  foreignKey: "casaDeAdpocionId",
+})
+//Notificaciones --> Usuarios
+Notificaciones.belongsToMany(Usuario, {
+  through: "NotificacionUsuario",
+  
+})
+//Usuarios --> Notificaciones
+Usuario.belongsToMany(Notificaciones, {
+  through: "NotificacionUsuario",
+})
+
 
 //Usuarios -->  favoritos
 Favorito.belongsTo(Usuario, {
   foreignKey: "favoritoId",
 }); //Un usuario puede tener muchos favoritos (1 a N)
 
-Usuario.hasMany(Favorito, { foreignKey: "usuarioId" }); //
+Usuario.hasMany(Favorito, { foreignKey: "favoritoId" }); //
 
 //Mascotas --> Favoritos
 
@@ -135,7 +162,7 @@ Favorito.belongsTo(Mascota, {
   foreignKey: "favoritoId",
 }); //Un usuario puede tener muchos favoritos (1 a N)
 
-Mascota.hasMany(Favorito, { foreignKey: "mascotaId" }); //
+Mascota.hasMany(Favorito, { foreignKey: "favoritoId" }); //
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -17,7 +17,7 @@ const llenarUsuario = async () => {
       return result()
     } catch (error) {
       console.error('Error al llenar los datos:', error);
-      throw { error: error?.status, message: error?.message };
+      // throw { error: error?.status, message: error?.message };
     }
   }
 }

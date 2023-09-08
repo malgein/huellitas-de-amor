@@ -26,7 +26,7 @@ const getUserById = async (id) => {
     return usuario
   } catch (error) {
     console.error(error);
-    return { mensaje: "Error en el servidor" }
+   throw { status: error?.status, message: error?.message };
   }
 }
 

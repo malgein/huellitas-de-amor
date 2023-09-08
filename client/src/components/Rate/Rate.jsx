@@ -22,7 +22,7 @@ const Rate = ({ id, rating }) => {
 		};
 
 		fetchComments();
-	}, [endPointComments]);
+	}, [handleCommentSubmit]);
 
 	const handleRatingSubmit = async (newRating) => {
 		try {

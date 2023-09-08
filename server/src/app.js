@@ -4,10 +4,17 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./Routes/index.js");
 const cors = require("cors"); // Agregamos el middleware cors
-
+const process = require("process");
 require("./db.js");
 
+
 const server = express();
+
+process.on("unhandledRejection", (reason, promise) => {
+	console.error("Unhandled Promise Rejection:", reason);
+	console.error("Promise:", promise);
+  // Agrega un manejo adicional de errores aquí si es necesario
+});
 
 server.name = "API";
 

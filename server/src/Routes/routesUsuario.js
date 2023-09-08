@@ -35,41 +35,42 @@ router.get('/tipoDeUsuario', async(req, res) => {
 })
 
 //controlador que funciona con propositos de llenar la base de datos con datos de usuario para testeo
-router.get("/fill", async (req, res) => {
-  try {
-    //Esta linea de codigo borra la tabla para asegurarse que no se vuelva a rescribir la informacion que le estamos a punto de pasar
+// router.get("/fill", async (req, res) => {
+//   try {
+//     //Esta linea de codigo borra la tabla para asegurarse que no se vuelva a rescribir la informacion que le estamos a punto de pasar
 
-    // Llena la tabla con los datos de users que al final son los datos de data.js es decir todas los usuarios
-    // await Usuario.bulkCreate(allUsers);
+//     // Llena la tabla con los datos de users que al final son los datos de data.js es decir todas los usuarios
+//     // await Usuario.bulkCreate(allUsers);
 
-    //Llama llenarUsuario que usa un metodo de sequelize llamado bulkCreate que llena la la base de datos con data de usuarios validos
+//     //Llama llenarUsuario que usa un metodo de sequelize llamado bulkCreate que llena la la base de datos con data de usuarios validos
 
-    console.log(llenarUsuario);
-    const getFill = () => llenarUsuario();
+//     console.log(llenarUsuario);
+//     const getFill = () => llenarUsuario();
 
-    getFill();
+//     getFill();
 
-    res
-      .status(200)
-      .json({ message: "Datos de usuarios llenados exitosamente" });
-  } catch (error) {
-    console.error("Error al llenar los datos:", error);
-    res
-      .status(500)
-      .json({ error: "Error al llenar los datos de los usuarios" });
-  }
-});
+//     res
+//       .status(200)
+//       .json({ message: "Datos de usuarios llenados exitosamente" });
+//   } catch (error) {
+//     console.error("Error al llenar los datos:", error);
+//     res
+//       .status(500)
+//       .json({ error: "Error al llenar los datos de los usuarios" });
+//   }
+// });
 
 //Ruta que me trae todos los usuarios de la base de datos necesario para la gestion de usuarios en el componente admin
-router.get("/", async (req, res) => {
-  try {
-    const data = await getUsers();
+router.get("/", getUsers)
+//router.get("/", async (req, res) => {
+//   try {
+//     const data = await getUsers();
 
-    return res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+//     return res.status(200).json(data);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 router.patch("/:id", async (req, res) => {
   try {

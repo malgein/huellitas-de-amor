@@ -77,6 +77,7 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
       </CardBody>
     </Card>
   );
+
 }
 
 export default PetCard;
