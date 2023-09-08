@@ -23,7 +23,7 @@ export const DELETE_HOUSES = "DELETE_HOUSES";
 export const CREATE_USER_FIREBASE = 'CREATE_USER_FIREBASE'
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = "GET_USER";
-export const GET_USERS_RELATIONS = "GET_USERS_RELATIONS"
+export const GET_USERS_RELATIONS = "GET_USERS_RELATIONS";
 
 export const GET_ALL_DONATIONS = "GET_DONATIONS";
 
@@ -35,9 +35,9 @@ export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
 export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
 export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
 //Caso que me trae todos los usuarios de la bd con sus relaciones: donaciones, tipo de usuario, comentarios, favoritos etc
-export const GET_ENTIRE_USERS = 'GET_ENTIRE_USERS'
+export const GET_ENTIRE_USERS = "GET_ENTIRE_USERS";
 //Modifica el tipo de usuario
-export const CHANGE_STATUS_USER ='CHANGE_STATUS_USER'
+export const CHANGE_STATUS_USER = "CHANGE_STATUS_USER";
 
 //aqui foto perfil
 export const MOD_FOTO_PERFIL = "MOD_FOTO_PERFIL";
@@ -49,7 +49,7 @@ const handleError = (dispatch, errorType, error) => {
 
 export const EDIT_USER = "EDIT_USER";
 
-// export const basename = "https://huellitas-de-amor-production.up.railway.app";
+// export const basename = "huellitas-de-amor-production-6e81.up.railway.app";
 export const basename = "http://localhost:3001";
 
 const ENDPOINT = `${basename}/mascotas`;
@@ -338,13 +338,11 @@ export const logicalDeletePet = (id, estado) => async (dispatch) => {
     console.error("Error al actualizar el estado de la mascota:", error);
   }
 
-
   //Traemos todos los usuarios y sus relaciones
-
-
 };
 
-//Accion que me trare el usuario con todas sus relaciones
+//Accion que me trare el usuario con todas sus relacione
+//? User validar
 export const getEntireUsers = () => async (dispatch) => {
   try {
     const response = await axios.get(`${basename}/usuario/tipoDeUsuario`);
@@ -355,7 +353,6 @@ export const getEntireUsers = () => async (dispatch) => {
   } catch (error) {
     handleError(dispatch, GET_ENTIRE_USERS, error);
   }
-
 };
 
 // export const changeStatusUser = (response, accessToken) => {
@@ -377,7 +374,7 @@ export const getEntireUsers = () => async (dispatch) => {
 
 export const changeStatusUser = (response) => {
   const endpoint = `${basename}/relacion-user-type`;
-  console.log(response)
+  console.log(response);
   return (dispatch) => {
     axios.patch(endpoint, response).then(({ data }) => {
       return dispatch({
@@ -386,6 +383,7 @@ export const changeStatusUser = (response) => {
       });
     });
   };
+
 }
 
 export const createUserFromFirebase = (response) => {

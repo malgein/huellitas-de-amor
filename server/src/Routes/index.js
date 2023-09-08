@@ -21,7 +21,6 @@ const postDonaciones = require("./routesDonaciones");
 const postCrearUsuario = require("./routesUsuario");
 const getUsersId = require("../controllers/getUsersId");
 
-
 // router.get("/fill", fillPets);
 
 const appCheckVerification = require('../controllers/createUsersFirebase.js')
@@ -30,10 +29,12 @@ const appCheckVerification = require('../controllers/createUsersFirebase.js')
 
 const modPetById = require("../controllers/modPetById");
 
-const fillTypeUsers = require('../utils/fillTypeUsers')
-const usuarioTipoController = require('../controllers/usuarioTipoController')
-const donationsUser = require('../controllers/donationsUser')
-const donationsHouse = require('../controllers/donationsHouse')
+
+const fillTypeUsers = require("../utils/fillTypeUsers");
+const usuarioTipoController = require("../controllers/usuarioTipoController");
+const donationsUser = require("../controllers/donationsUser");
+const donationsHouse = require("../controllers/donationsHouse");
+
 
 router.patch("/relacion-user-type", usuarioTipoController);
 router.use("/donaciones", postDonaciones);
@@ -42,8 +43,7 @@ router.get("/perfil/:id", getUsersId);
 router.get("/createUserWithToken", appCheckVerification)
 router.get("/relacion-donation-house", donationsHouse);
 router.get("/relacion-donation-user", donationsUser);
-const findTypesUsers = require('../controllers/findTypeUsers')
-
+const findTypesUsers = require("../controllers/findTypeUsers");
 
 router.get("/perfil/:id", getUsersId);
 router.get("/tiposDeUsuarios", findTypesUsers);
@@ -56,10 +56,13 @@ router.get("/fillPets", fillPets);
 router.get("/fillTypeUsers", fillTypeUsers);
 
 
+
+// router.use("/usuario", postUsuario);
+
+
 //router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
 
 // router.put("/usuario/:id", perfilActualizado);
-
 
 // router.put("/usuario/:id", actualizarPerfil);
 
@@ -76,8 +79,6 @@ router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
 router.use("/usuario", postCrearUsuario);
-
-
 
 router.put("/:id/estado", modPetById);
 
