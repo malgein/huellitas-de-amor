@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import LoginGoogle from "../LoginGoogle/LoginGoogle";
-import { useAuth } from "../../../context/AuthContext";
+// import { useAuth } from "../../../context/AuthContext";
 
 function NewLogin() {
-  const { login } = useAuth();
+  // const { login } = useAuth();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(null);
 

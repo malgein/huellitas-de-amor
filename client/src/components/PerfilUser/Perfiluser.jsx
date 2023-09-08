@@ -13,8 +13,6 @@ import EditarPerfil from "../EditarPerfil/EditarPerfil";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import FotoPerfil from "../EditarPerfil/FotoPerfil";
-import FotoPortada from "../EditarPerfil/FotoPortada";
 import BotonPerfil from "../EditarPerfil/BotonPerfil";
 import BotonPortada from "../EditarPerfil/BotonPortada";
 
@@ -22,15 +20,11 @@ const Perfil = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [usuario, setUsuario] = useState(null);
   const [userModified, setUserModified] = useState(true);
-  const [usuarioModificado, setUsuarioModificado] = useState(true);
   const [abrir, setAbrir] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  const [numeroAdopciones, setNumeroAdopciones] = useState(0);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  // const [abrirFotoPerfil, setAbrirFotoPerfil] = useState(false);
-  const [abrirFotoPortada, setAbrirFotoPortada] = useState(false);
 
   //Para el tamaño del modal
   const [size, setSize] = React.useState("md");
@@ -65,6 +59,8 @@ const Perfil = () => {
     setPerfil(nuevoPerfil);
   };
 
+  const basename = "http://localhost:3001";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -72,6 +68,9 @@ const Perfil = () => {
         const response = await axios.get(
           `https://huellitas-de-amor-3.up.railway.app${id}`
         );
+
+        // const response = await axios.get(`${basename}/perfil/${id}`);
+
         const userData = response.data;
 
         // Actualiza el estado del usuario y las URLs de las imágenes
@@ -89,6 +88,11 @@ const Perfil = () => {
           imagenPortada: userData.imagenPortada || "",
           imagenPerfil: userData.imagenPerfil || "",
         });
+
+        // Obtiene el número de adopciones
+        const adopcionResponse = await axios.get(`${basename}/adopcion/${id}`);
+        const numeroAdopciones = adopcionResponse.data;
+        setNumeroAdopciones(numeroAdopciones);
       } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);
       }
@@ -172,7 +176,9 @@ const Perfil = () => {
 
           <div className="flex flex-row items-center justify-center h-[100px] mt-10 gap-10">
             <div className=" ">
-              <p className="text-lg text-black font-semibold">1</p>
+              <p className="text-lg text-black font-semibold">
+                {numeroAdopciones}
+              </p>
               <h4 className="text-slate-500 font-light">Adoptados</h4>
             </div>
             <div className="border-x border-slate-400  px-10">
@@ -225,7 +231,7 @@ const Perfil = () => {
                   className="bg-orange-400 text-black"
                   onClick={abrirModal}
                 >
-                  Editar perfil
+                  <i class="fa-solid fa-pen"></i> Editar perfil
                 </Button>
               ))}
             </div>

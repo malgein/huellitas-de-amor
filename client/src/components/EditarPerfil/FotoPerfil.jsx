@@ -53,10 +53,13 @@ const FotoPerfil = ({ id, updateUser, setUserModified, perfil, setPerfil }) => {
   };
 
   return (
-    <div className="border border-black flex flex-col justify-center items-center">
-      <form>
-        <label htmlFor="">Imagen de perfil</label>
-        <div>
+    <div className="border border-black flex flex-col justify-center items-center ">
+      <form className="mt-4">
+        <div className=" flex justify-start">
+          <label className="font-medium text-black">Foto de perfil</label>
+        </div>
+
+        <div className=" border-4 rounded-full w-[180px] mx-auto mb-4 mt-4">
           <ImagenesPerfil
             setImagenes={(imagenes) =>
               setFormData({
@@ -66,14 +69,18 @@ const FotoPerfil = ({ id, updateUser, setUserModified, perfil, setPerfil }) => {
             }
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+        <div className=" flex justify-center items-center w-[200px]">
           {imagenes &&
             imagenes.map((imag) => {
-              return <img src={imag} alt="" className="h-[80px] m-[15px]" />;
+              return <img src={imag} alt="" className=" " />;
             })}
         </div>
 
-        <Button type="button" onClick={handleEdit}>
+        <Button
+          type="button"
+          onClick={handleEdit}
+          className="bg-orange-400 text-black mt-4 mb-4"
+        >
           Guardar Cambio
         </Button>
       </form>

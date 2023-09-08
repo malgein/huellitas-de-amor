@@ -34,7 +34,7 @@
 const { Mascota } = require("../db.js");
 
 const modPetById = async (id, updatedData) => {
-
+console.log(id)
   try {
     // Buscamos la mascota por su ID en la base de datos
     const mascota = await Mascota.findByPk(id);

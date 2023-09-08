@@ -64,30 +64,6 @@ export default function Home() {
   return (
     <div className="x-[50px] flex justify-center items-center flex-col w-[1500px] mx-auto ">
       <div className=" flex flex-row  h-[550px] mt-12 mx-auto">
-        {/* <div className="relative">
-          <Image
-            // width={600}
-            // height={500}
-            alt="NextUI hero Image"
-            src={imagenHome}
-            className=" mr-2"
-          />
-        </div>
-
-        <div className="absolute bottom-unit-9xl  border border-black flex flex-row w-[1500px] ">
-          <div className="border border-black w-[50%]">
-            <Image width={100} src={imageDos} className="" />
-          </div>
-
-          <div className="border border-black w-[50%]">
-            <h1>Transforma vidas: adopta, ama y brinda un hogar !</h1>
-            <p>Descubre tiernos amigos en busca de un hogar amoroso.</p>
-            <Button className="border border-black text-black mt-6 bg-white hover:bg-slate-100">
-              Adoptame
-            </Button>
-          </div>
-        </div> */}
-
         <div className="relative w-[600px]  ">
           <div className="md:flex">
             <div className="md:shrink-0">
@@ -105,17 +81,35 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="w-[600px] text-start ml-8">
-          <h1 className="my-10">BIENVENIDOS A HUELLITAS DE AMOR!! </h1>
-          <p>
+        <div className="w-[600px] text-start ml-8 mt-10">
+          <h1 className="my-10 text-black font-bold text-4xl ">
+            BIENVENIDOS A HUELLITAS DE AMOR!!{" "}
+          </h1>
+          <h2 className="font-medium text-black text-3xl mt-4">
+            Transforma vidas: adopta, ama y brinda un hogar!
+          </h2>
+          <br />
+          <p className="text-lg">
+            Descubre tiernos amigos en busca de un hogar amoroso.
+          </p>
+          {/* <p>
             Bienvenidos a nuestro sitio de adopción de mascotas! Nuestro objetivo es unir a estas adorables mascotas con familias cariñosas como la suya. Aqui encontrarán historias conmovedoras y fotos de los peludos que buscan un hogar.
             La adopción de una mascota es una decisión que cambia vidas, tanto para el animal como para usted. Cada ser peludo tiene su propia personalidad única y estamos aquí para ayudarles a encontrar la combinación perfecta.
             Al darle un hogar a una mascota, no solo les brindarán amor incondicional, sino que también estarán contribuyendo al bienestar de un ser necesitado. Gracias por unirse a nosotros en esta noble causa. ¡Comencemos esta emocionante aventura  juntos!
-          </p>
-                   
-          <Button className="border border-black text-black mt-6 bg-white hover:bg-slate-100">
-            Adoptame
-          </Button>
+          </p> */}
+
+          <a href="#cards">
+            <Button className="border text-black mt-6 hover:bg-orange-200 bg-orange-300">
+              Conoce más
+            </Button>
+          </a>
+
+          {/* <Button
+            href="#cards"
+            className="border text-black mt-6 hover:bg-orange-200 bg-orange-400"
+          >
+            Conoce más
+          </Button> */}
         </div>
       </div>
       <div className=" flex flex-row items-center justify-center w-[100%] mt-4 ">
@@ -124,7 +118,7 @@ export default function Home() {
           <Sorts />
         </div>
 
-        <div>
+        <div id="cards">
           <FilterMascotas />
         </div>
       </div>
@@ -138,7 +132,6 @@ export default function Home() {
                   (
                     mascota //aca hago llamo a la constante asi no se muestran las cards.(nacho)
                   ) => (
-
                     <div key={mascota.id}>
                       <PetCard
                         key={mascota.id}

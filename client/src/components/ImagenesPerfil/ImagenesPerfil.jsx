@@ -65,7 +65,7 @@ const ImagenesPerfil = ({ setImagenes }) => {
   return (
     <div>
       <div
-        className={`flex items-center justify-center h-[150px] bg-gray-100 bg-opacity-60 border-dashed mb-[10px] mt-[20px]`}
+        className={` rounded-full flex items-center justify-center h-[150px] bg-gray-100 bg-opacity-60 border-dashed mb-[10px] mt-[20px]`}
       >
         <Dropzone
           className={`w-64 p-8 border-dashed border-2 border-gray-500 rounded-lg  bg-opacity-70 text-center cursor-pointer z-10`}
@@ -78,7 +78,7 @@ const ImagenesPerfil = ({ setImagenes }) => {
                 <input {...getInputProps()} />
 
                 <p className="text-xs text-gray-600">
-                  Coloca tus imagenes aquí o click para seleccionar
+                  Click para seleccionar
                 </p>
               </div>
             </section>

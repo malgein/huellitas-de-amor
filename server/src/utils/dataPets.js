@@ -2,6 +2,150 @@
 
 const allPets = [
 	{
+		nombre: "Daisy",
+		edad: 11,
+		sexo: "Hembra",
+		descripcion: "inteligente",
+		foto: [
+			"https://img.freepik.com/foto-gratis/perro-pug-aislado-fondo-blanco_2829-11416.jpg?w=740&t=st=1693890364~exp=1693890964~hmac=304b10f25dba54a2fdf7ffb6cbd52bcdd482a249ef7683e0b2190c1e215924e6",
+		],
+		tamano: "Mediano",
+		raza: "Rottweiler",
+		peso: 32,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Lucy",
+		edad: 3,
+		sexo: "Hembra",
+		descripcion: "afectuoso",
+		foto: [
+			"https://img.freepik.com/foto-gratis/perro-pug-aislado-fondo-blanco_2829-11416.jpg?w=740&t=st=1693890364~exp=1693890964~hmac=304b10f25dba54a2fdf7ffb6cbd52bcdd482a249ef7683e0b2190c1e215924e6",
+		],
+		tamano: "Mediano",
+		raza: "Golden Retriever",
+		peso: 35,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Milo",
+		edad: 9,
+		sexo: "Hembra",
+		descripcion: "energético",
+		foto: [
+			"https://img.freepik.com/foto-gratis/adorable-perro-basenji-marron-blanco-sonriendo-dando-maximo-cinco-aislado-blanco_346278-1657.jpg?w=740&t=st=1693890332~exp=1693890932~hmac=3ed211691ce5c9f45984cb3e58970a8d7b0381662c068471a3d31502752e1972",
+		],
+		tamano: "Mediano",
+		raza: "Boxer",
+		peso: 27,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Rocky",
+		edad: 10,
+		sexo: "Hembra",
+		descripcion: "inteligente",
+		foto: [
+			"https://img.freepik.com/foto-gratis/retrato-perro-adorable-mirando-arriba_23-2148366909.jpg?w=360&t=st=1693890352~exp=1693890952~hmac=ad36e3474bfa37bced02095733bada54ad27822904deb4cd27d034d0e0628c21",
+		],
+		tamano: "Pequeño",
+		raza: "Boxer",
+		peso: 20,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Charlie",
+		edad: 2,
+		sexo: "Macho",
+		descripcion: "amigable",
+		foto: [
+			"https://img.freepik.com/foto-gratis/hermoso-retrato-mascota-perro_23-2149218450.jpg?w=826&t=st=1693890724~exp=1693891324~hmac=b030ba585caa7d533d0819a672d704fd589dd41e2f8fd1331c1d527c6d283e98",
+		],
+		tamano: "Pequeño",
+		raza: "Labrador Retriever",
+		peso: 15,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Daisy",
+		edad: 17,
+		sexo: "Hembra",
+		descripcion: "afectuoso",
+		foto: [
+			"https://img.freepik.com/fotos-premium/sentado-jadeando-beagles_191971-7359.jpg?w=740",
+		],
+		tamano: "Grande",
+		raza: "Boxer",
+		peso: 7,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Milo",
+		edad: 19,
+		sexo: "Hembra",
+		descripcion: "amigable",
+		foto: [
+			"https://img.freepik.com/foto-gratis/retrato-perro-adorable-mirando-arriba_23-2148366909.jpg?w=360&t=st=1693890352~exp=1693890952~hmac=ad36e3474bfa37bced02095733bada54ad27822904deb4cd27d034d0e0628c21",
+		],
+		tamano: "Mediano",
+		raza: "Dachshund",
+		peso: 19,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Bella",
+		edad: 16,
+		sexo: "Hembra",
+		descripcion: "inteligente",
+		foto: [
+			"https://img.freepik.com/foto-gratis/hermoso-retrato-mascota-perro_23-2149218450.jpg?w=826&t=st=1693890724~exp=1693891324~hmac=b030ba585caa7d533d0819a672d704fd589dd41e2f8fd1331c1d527c6d283e98",
+		],
+		tamano: "Pequeño",
+		raza: "German Shepherd",
+		peso: 27,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Rocky",
+		edad: 5,
+		sexo: "Macho",
+		descripcion: "juguetón",
+		foto: [
+			"https://img.freepik.com/foto-gratis/retrato-perro-adorable-mirando-arriba_23-2148366909.jpg?w=360&t=st=1693890352~exp=1693890952~hmac=ad36e3474bfa37bced02095733bada54ad27822904deb4cd27d034d0e0628c21",
+		],
+		tamano: "Mediano",
+		raza: "Boxer",
+		peso: 28,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Lucy",
+		edad: 4,
+		sexo: "Hembra",
+		descripcion: "amigable",
+		foto: [
+			"https://img.freepik.com/foto-gratis/perro-pug-aislado-fondo-blanco_2829-11416.jpg?w=740&t=st=1693890364~exp=1693890964~hmac=304b10f25dba54a2fdf7ffb6cbd52bcdd482a249ef7683e0b2190c1e215924e6",
+		],
+		tamano: "Pequeño",
+		raza: "Rottweiler",
+		peso: 11,
+		estado: "En adopción",
+	},
+	{
+		nombre: "Pedro",
+		edad: 2,
+		sexo: "Macho",
+		descripcion: "Jugueton",
+		foto: [
+			"https://img.freepik.com/foto-gratis/perrito-joven-posando-alegre_155003-28765.jpg",
+			"https://www.nationalgeographic.com.es/medio/2022/12/12/perro-1_514aad3b_221212161023_1280x720.jpg",
+		],
+		tamano: "Pequeño",
+		raza: "Pomerania",
+		peso: 10.5,
+	},
+
+	{
 		nombre: "Jack",
 		raza: "Persian",
 		tamano: "Mediano",
@@ -13,7 +157,6 @@ const allPets = [
 		peso: 6.0,
 		descripcion:
 			"Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
-		estado: "Adoptado",
 	},
 	{
 		nombre: "Daisy",
@@ -27,7 +170,6 @@ const allPets = [
 		peso: 4.5,
 		descripcion:
 			"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.",
-		estado: "En adopción",
 	},
 	{
 		nombre: "Bella",
@@ -41,7 +183,6 @@ const allPets = [
 		peso: 14.5,
 		descripcion:
 			"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
-		estado: "En Proceso",
 	},
 	{
 		nombre: "Max",
@@ -55,7 +196,6 @@ const allPets = [
 		peso: 12.2,
 		descripcion:
 			"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
-		estado: "En adopción",
 	},
 	{
 		nombre: "Jack",
@@ -69,7 +209,6 @@ const allPets = [
 		peso: 20.7,
 		descripcion:
 			"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
-		estado: "En adopción",
 	},
 	{
 		nombre: "Sadie",
@@ -83,7 +222,6 @@ const allPets = [
 		peso: 17.7,
 		descripcion:
 			"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\n\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.",
-		estado: "En adopción",
 	},
 	{
 		nombre: "Max",
@@ -97,7 +235,6 @@ const allPets = [
 		peso: 5.1,
 		descripcion:
 			"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
-		estado: "En adopción",
 	},
 	{
 		nombre: "Cooper",
@@ -111,7 +248,6 @@ const allPets = [
 		peso: 6,
 		descripcion:
 			"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.",
-		estado: "En Proceso",
 	},
 	{
 		nombre: "Jack",
@@ -125,7 +261,6 @@ const allPets = [
 		peso: 23.5,
 		descripcion:
 			"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\n\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.",
-		estado: "En adopción",
 	},
 	{
 		nombre: "Charlie",
@@ -139,7 +274,6 @@ const allPets = [
 		peso: 6.5,
 		descripcion:
 			"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
-		estado: "En Proceso",
 	},
 	{
 		nombre: "Daisy",
@@ -153,7 +287,6 @@ const allPets = [
 		peso: 16.6,
 		descripcion:
 			"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-		estado: "En Proceso",
 	},
 	{
 		nombre: "Bella",
@@ -167,7 +300,6 @@ const allPets = [
 		peso: 9.3,
 		descripcion:
 			"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
-		estado: "En adopción",
 	},
 	{
 		nombre: "Firulais",
@@ -181,7 +313,6 @@ const allPets = [
 		peso: 17.9,
 		descripcion:
 			"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-		estado: "Adoptado",
 	},
 	{
 		nombre: "Princesa",
@@ -195,7 +326,6 @@ const allPets = [
 		peso: 7.9,
 		descripcion:
 			"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-		estado: "Adoptado",
 	},
 	{
 		nombre: "Fifi",
@@ -209,7 +339,6 @@ const allPets = [
 		peso: 4.3,
 		descripcion:
 			"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-		estado: "En Proceso",
 	},
 ];
 

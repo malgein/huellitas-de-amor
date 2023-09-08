@@ -15,6 +15,7 @@ const postCrearUsuario = async ({
     const nuevoUsuario = await Usuario.create({
       nombre,
       apellido,
+      apellido,
       email,
       imagenPerfil,
       password,
@@ -25,6 +26,31 @@ const postCrearUsuario = async ({
     throw { error: error?.status, message: error?.message };
   }
 };
+
+// const postCrearUsuario = async ({ name, email }) => {
+//   try {
+//     if (!name || !email) {
+//       return { status: 401, message: "Faltan datos" };
+//     }
+
+//     const nuevoUsuario = await Usuario.create({
+//       nombre,
+//       email,
+//     });
+
+//     const auth0User = await auth0.createUser({
+//       email,
+//       name: nombre,
+//     });
+
+//     console.log("Nuevo usuario creado en Auth0:", auth0User);
+//     console.log("Nuevo usuario creado en la base de datos:", nuevoUsuario);
+
+//     return nuevoUsuario;
+//   } catch (error) {
+//     throw { error: error?.status, message: error?.message };
+//   }
+// };
 
 module.exports = postCrearUsuario;
 

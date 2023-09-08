@@ -16,7 +16,6 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import AvatarImg from "../AvatarImg/AvatarImg";
-import { useAuth } from "../../../context/AuthContext";
 import { useAuth0 } from "@auth0/auth0-react";
 
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
@@ -64,7 +63,6 @@ const Nav = () => {
           ) : (
             ""
           )}
-          <div>{JSON.stringify(user)}</div>
           <div className="flex flex-wrap justify-center gap-3">
             {sizes.map((size) => (
               <Link
