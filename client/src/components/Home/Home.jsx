@@ -12,10 +12,7 @@ import Paginated from "../Paginated/Paginated";
 
 import { Button, Image } from "@nextui-org/react";
 import imagenHome from "../../assets/imageUno.png";
-// import imagenHome from "../../assets/banner1.png";
-import imageDos from "../../assets/gata.jpg";
-// import imagenDos from "../../assets/gata.jpg";
-// import Rate from "../Rate/Rate";
+import CarouselComponent from "../Carousel/Carousel";
 
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
@@ -66,18 +63,17 @@ export default function Home() {
       <div className=" flex flex-row  h-[550px] mt-12 mx-auto">
         <div className="relative w-[600px]  ">
           <div className="md:flex">
-            <div className="md:shrink-0">
+            <div className="relative">
               <Image
                 width={600}
                 height={500}
                 alt="NextUI hero Image"
                 src={imagenHome}
-                className=" relative mr-2"
+                className="mr-2"
               />
             </div>
-
-            <div className="absolute left-[200px] top-[58px]">
-              <Image width={230} src={imageDos} className="-rotate-12" />
+            <div className="absolute left-[100px] top-[90px] z-40 -rotate-6">
+              <CarouselComponent />
             </div>
           </div>
         </div>
