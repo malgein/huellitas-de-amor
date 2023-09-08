@@ -24,6 +24,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get('/tipoDeUsuario', async(req, res) => {
+  try{
+    // const {id} = req.params
+    const userType = await findTypesUsers()
+    return res.status(200).json(userType)
+  } catch(error){
+    return res.status(500).json({ mensaje: "Error en el servidor" });
+  }
+})
+
 //controlador que funciona con propositos de llenar la base de datos con datos de usuario para testeo
 router.get("/fill", async (req, res) => {
   try {
@@ -121,15 +131,7 @@ router.get("/:id", async (req, res) => {
 //   }
 // });
 
-router.get('/tipoDeUsuario', async(req, res) => {
-  try{
-    // const {id} = req.params
-    const userType = await findTypesUsers()
-    return res.status(200).json(userType)
-  } catch(error){
-    return res.status(500).json({ mensaje: "Error en el servidor" });
-  }
-})
+
 
 // router.get('/relacionarTipo', async(req, res) => {
 //   try{

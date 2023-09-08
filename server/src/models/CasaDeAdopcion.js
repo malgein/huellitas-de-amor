@@ -43,7 +43,11 @@ module.exports = (sequelize) => {
 			ubicacion: {
 				type: DataTypes.STRING(50),
 				allowNull:false
-			}
+			},
+			// comments: {
+			// 	type: DataTypes.ARRAY(DataTypes.JSON),
+			// 	default: [],
+			// }
 		},
 		{ timestamps: false }
 	);

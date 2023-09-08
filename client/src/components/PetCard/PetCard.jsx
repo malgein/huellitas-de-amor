@@ -35,45 +35,50 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
           <div className="flex flex-row">
             <div>
               <p className="uppercase font-bold text-lg">{nombre}</p>
-           
-            <small className="text-default-500">{edad} años</small>
-            <br />
-            <small className="text-default-500">{peso} kg</small>
-            <h4 className="font-bold text-large">{sexo}</h4>
+              <small className="text-default-500">{edad} años</small>
+              <br />
+              <small className="text-default-500">{peso} kg</small>
+              <h4 className="font-bold text-large">{sexo}</h4>
+            </div>
           </div>
+        </Link>
+        <div className="ml-20 relative top-[-100px] left-14">
+          <small className="text-default-500">{edad} años</small>
+          <br />
+          <small className="text-default-500">{peso} kg</small>
+          <h4 className="font-bold text-large">{sexo}</h4>
         </div>
         <div className="ml-20 relative top-[-100px] left-14">
-          <Button onClick={() => handleOpen(size)}> Quiero Donar $</Button>
-
-          <Modal size={size} isOpen={isOpen} onClose={handleClose}>
-            <ModalContent>
-              <ModalHeader className="flex flex-col gap-1 items-center font-bold text-xl text-orange-500">
-                ¡Dona para hacer la diferencia!
-              </ModalHeader>
-              <ModalBody className="text-xl text-orange-500">
-                <Donar />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onClick={handleClose}>
-                  {" "}
-                  Cerrar
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
+          <Button onClick={handleOpen}> Quiero Donar $</Button>
         </div>
-          </Link>
       </CardHeader>
-
       <CardBody className="overflow-visible py-2 flex flex-col items-center">
-        <div className="aspect-w-3 aspect-h-4  flex items-center justify-center">
-
-          <Image
-            alt="Card background"
-            className="object-cover rounded-xl w-[450px] h-[300px]"
-            src={foto[0]}
-            />
-        </div>
+        <Modal size={size} isOpen={isOpen} onClose={handleClose}>
+          <ModalContent>
+            <ModalHeader className="flex flex-col gap-1 items-center font-bold text-xl text-orange-500">
+              ¡Dona para hacer la diferencia!
+            </ModalHeader>
+            <ModalBody className="text-xl text-orange-500">
+              <Donar />
+            </ModalBody>
+            <ModalFooter>
+              <Button color="danger" variant="light" onClick={handleClose}>
+                Cerrar
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+        <CardBody className="overflow-visible py-2 flex flex-col items-center">
+          <Link to={PathRoutes.DETAIL.replace(":id", id)}>
+            <div className="aspect-w-3 aspect-h-4  flex items-center justify-center">
+              <Image
+                alt="Card background"
+                className="object-cover rounded-xl w-[450px] h-[300px]"
+                src={foto[0]}
+              />
+            </div>
+          </Link>
+        </CardBody>
       </CardBody>
     </Card>
   );

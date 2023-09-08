@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "auth0": "^3.7.0",
     "axios": "^1.4.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
@@ -25,7 +26,8 @@
     "pg": "^8.5.1",
     "react-dropzone": "14.2.3",
     "sequelize": "^6.3.5",
-    "serve": "^14.2.1"
+    "serve": "^14.2.1",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

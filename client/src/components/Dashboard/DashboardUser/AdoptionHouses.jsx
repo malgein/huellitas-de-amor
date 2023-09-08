@@ -1,10 +1,9 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useEffect, useCallback, useState} from 'react'
 import { Link, useNavigate } from "react-router-dom";
-import PathRoutes from "../../helpers/Routes.helper";
+import PathRoutes from "../../../helpers/Routes.helper";
 import Sidebar from './Sidebar'
-import { useSelector, useDispatch } from 'react-redux'
-import { getMascotas, deletePets, modCompletePet, editPets } from '../../redux/actions'
-import Swal from 'sweetalert2'
+import { getAllHomes, modCompleteHouse, deleteHouses } from '../../../redux/actions'
+import {useSelector , useDispatch} from 'react-redux'
 import {
   Table,
   TableHeader,
@@ -22,55 +21,49 @@ import {
   User,
   Pagination,
 } from "@nextui-org/react";
-import {VerticalDotsIcon} from "./VerticalDotsIcon";
-import {SearchIcon} from "./SearchIcon";
-import {ChevronDownIcon} from "./ChevronDownIcon";
+import {PlusIcon} from "../PlusIcon";
+import {VerticalDotsIcon} from "../VerticalDotsIcon";
+import {SearchIcon} from "../SearchIcon";
+import {ChevronDownIcon} from "../ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
-import {capitalize} from "./Accesory";
+import {capitalize} from "../Accesory";
+import Swal from 'sweetalert2'
 
 const statusColorMap = {
-  Macho: "success",
-  Hembra: "danger",
-  // vacation: "warning",
-};
-//esto es para darle color al fondo de los estados(Nacho)
-const estadoColorMap = {
-  'Adoptado': 'danger',    // Rojo
-  'En adopción': 'success', // Verde
-  'En Proceso': 'warning',  // Amarillo
+  active: "success",
+  paused: "danger",
+  vacation: "warning",
 };
 
 
-//Aqui piuedo colocar la disponibilidad de la mascota adoptada, en busca de un hogar
 const statusOptions = [
   {name: "Active", uid: "active"},
   {name: "Paused", uid: "paused"},
   {name: "Vacation", uid: "vacation"},
 ];
 //!Esto muestra las columnas que se ven al inicio
-const INITIAL_VISIBLE_COLUMNS = [ "id", "nombre", "raza","sexo", "edad",  "tamano", "peso","estado", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["nombreDeOng", "nombreDeContacto", "telefono", "actions", "email", "id"];
 
+function AdoptionHouses() {
 
-function Pets() {
-
-  const mascotas = useSelector(state => state.mascotas)
+  const casasDeAdopcion = useSelector(state => state.casasDeAdopcion)
 
   const dispatch = useDispatch()
 
-  const [petModified , setPetModified] = useState(true)
+  const [houseModified , setHouseModified] = useState(true)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(petModified){
-      dispatch(getMascotas())
-      setPetModified(false)
+    if(houseModified){
+      dispatch(getAllHomes())
+      setHouseModified(false)
     }
-  },[dispatch, petModified])
+  },[houseModified, dispatch])
 
   const handleDelete = (id) => {
     Swal.fire({
-      title: 'Seguro que quieres eliminar a la mascota?',
+      title: 'Seguro que quieres eliminar esta casa de adopcion?',
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Si',
@@ -78,161 +71,90 @@ function Pets() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('mascota borrada con exito', '', 'success')
-        setPetModified(!petModified)
-        dispatch(deletePets(id))
-        console.log(petModified)
+        Swal.fire('casa de adopcion borrada con exito', '', 'success')
+        setHouseModified(!houseModified)
+        dispatch(deleteHouses(id))
+        console.log(houseModified)
       } else if (result.isDenied) {
-        Swal.fire('La mascota no ha sido borrada', '', 'info')
+        Swal.fire('La casa de adopcion no ha sido borrada', '', 'info')
       }
     })
   }
-  
-  // const handleEdit = async(id) => {
-  //   console.log(id)
-  //   const { value: formValues } = await Swal.fire({
-  //     title: 'Introduce la propiedad y el valor que deseas modificar',
-  //     html:
-  //       '<input id="swal-input1" class="swal2-input">' +
-  //       '<input id="swal-input2" class="swal2-input">',
-  //     focusConfirm: false,
-  //     preConfirm: () => {
-  //       return [
-  //         document.getElementById('swal-input1').value,
-  //         document.getElementById('swal-input2').value
-  //       ]
-  //     }
-  //   })
-    
-  //   if (formValues) {
-  //     const result = {[formValues[0]] : formValues[1]}
-  //     console.log(result)
-  //     // const resultJson = JSON.stringify(result)
-  //     dispatch(editPets(id, result))
-  //     setPetModified(true)
-  //     Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
-  //   }
-  // }
 
   const handleNavigate = (id) => {
-    navigate(PathRoutes.DETAIL.replace(":id", id))
+    navigate(PathRoutes.DETAILHOUSE.replace(":id", id))
   }
 
+  //Funcion que modifica cualquier propiedad de casas de adopcion
   const handleEdit = async(id) => {
     console.log(id)
     const { value: formValues } = await Swal.fire({
-      title: 'Introduce los nuevos datos de la mascota que deseas modificar',
+      title: 'Introduce los nuevos datos de la casa de adopcion que deseas modificar',
       html:
-        'Nombre de la mascota' +
-        '<input id="swal-input1" class="swal2-input"> </br> ' +
-        'Edad de la mascota' +
-        '<input id="swal-input2" class="swal2-input"> </br> ' +
-        'Sexo de la mascota </br>' +
-        '</br>' +
-        '<input type="radio" id="swal-input3" value="Macho"  name="sexo"> ' +
-        'Macho ' +
-        '<input type="radio" id="swal-input4" value="Hembra" name="sexo">  ' +
-        'Hembra </br>' +
-        '</br>' +
-        'Descripcion de la mascota ' +
-        '<input id="swal-input5" class="swal2-input"> </br> ' +
-        'Url de la foto de la mascota ' +
-        '<input id="swal-input6" class="swal2-input"> </br> ' +
-        'Tamaño de la mascota </br>' +
-        '</br>' +
-        '<input type="radio" id="swal-input7" value="Pequeño" name="tamano"> ' +
-        'Pequeño ' +
-        '<input type="radio" id="swal-input8" value="Mediano" name="tamano"> ' +
-        'Mediano ' +
-        '<input type="radio" id="swal-input9" value="Grande" name="tamano">  ' +
-        'Grande </br>' +
-        '</br>' +
-        'Raza de la mascota ' +
-        '<input id="swal-input10" class="swal2-input"> </br> ' +
-        'Peso de la mascota ' +
-        '<input id="swal-input11" class="swal2-input"> </br> ' ,
+      'Foto de la casa de adopcion </br>' +
+      '<input id="swal-input1"  class="swal2-input" placeholder="Introduce el url de la imagen" required> </br> </br>' +
+      'Nombre de la Organizacion </br>' +
+      '<input id="swal-input2" class="swal2-input" placeholder="Introduce el nombre..."> </br> </br>' +
+      'Nombre del contacto </br>' +
+      '<input id="swal-input3" class="swal2-input" placeholder="Nombre de contacto...">  </br> </br>' +
+      'Email del contacto </br>' +
+      '<input id="swal-input4" class="swal2-input" placeholder="@mail.com"> </br> </br>' +
+      'Telefono de la Organizacion</br> ' +
+      '<input id="swal-input5" class="swal2-input" placeholder="Telefono de la organizacion"> </br> </br>' +
+      'Ubicacion de la casa de adopcion </br >' +
+      '<input id="swal-input6" class="swal2-input" placeholder="Ubicacion de la organizacion"> </br> ' ,
       focusConfirm: false,
       preConfirm: () => {
-        return [
+
+        // if(document.getElementById('swal-input1').value=== ''){
+        //   return  Swal.fire(`No puedes dejar el primer campo en blanco`)
+        // } else
+         return [
           document.getElementById('swal-input1').value,
           document.getElementById('swal-input2').value,
-          document.getElementById('swal-input3'),
-          document.getElementById('swal-input4'),
+          document.getElementById('swal-input3').value,
+          document.getElementById('swal-input4').value,
           document.getElementById('swal-input5').value,
-          document.getElementById('swal-input6').value,
-          document.getElementById('swal-input7'),
-          document.getElementById('swal-input8'),
-          document.getElementById('swal-input9'),
-          document.getElementById('swal-input10').value,
-          document.getElementById('swal-input11').value
+          document.getElementById('swal-input6').value
         ]
       }
     })
     
-    const result = {
-      nombre: formValues[0],
-      edad: parseInt(formValues[1]),
-      sexo: formValues[2].checked ? formValues[2].value :  formValues[3].value,
-      descripcion: formValues[4],
-      foto: [`${formValues[5]}`],
-      tamano: formValues[6].checked ? formValues[6].value : formValues[7].checked ? formValues[7].value : formValues[8].checked && formValues[8].value,
-      raza: formValues[9],
-      peso: parseFloat(formValues[10]) ,
-    }
-
-    if (formValues[0]==='' || formValues[1]==='' || formValues[2]==='' || formValues[3]==='' || formValues[4]==='' || formValues[5]==='' || formValues[6]==='' || formValues[7]==='' || formValues[8]==='' || formValues[9]==='' || formValues[10]==='') {
-      // console.log(formValues[3].value)
-      Swal.fire({
-        icon: 'error',
-        title: 'No se pudo modificar la mascota',
-        text: 'No puedes dejar campos en blanco!',
-      })
-    } else if( isNaN(result.edad)) {
-      Swal.fire({
-        icon: 'error',
-        title: 'No se pudo modificar la mascota',
-        text: 'La edad de la mascota debe ser expresada en numeros enteros',
-      })
-    } else if( isNaN(result.peso)) {
-      Swal.fire({
-        icon: 'error',
-        title: 'No se pudo modificar la mascota',
-        text: 'El peso de la mascota debe ser expresada en numeros enteros',
-      })
-    } else {
-     
+    if (formValues[0]!=='' && formValues[1]!=='' && formValues[2]!=='' && formValues[3]!=='' && formValues[4]!=='' && formValues[5]!=='') {
+      const result = {
+        foto : [`${formValues[0]}`],
+        nombreDeOng: formValues[1],
+        nombreDeContacto: formValues[2],
+        email: formValues[3],
+        telefono: formValues[4],
+        ubicacion: formValues[5],
+      }
       console.log(result)
-      dispatch(modCompletePet(id, result))
-  
-      // console.log(userModified)
+      // const resultJson = JSON.stringify(result)
+      dispatch(modCompleteHouse(id, result))
+      setHouseModified(true)
       Swal.fire({
         icon: 'success',
         text:'Modificacion exitosa!'
         }
       )
-      setPetModified(!petModified)
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'No se pudo modificar la casa de adopcion',
+        text: 'No puedes dejar campos en blanco!',
+      })
     }
   }
-  //Funcion para el cambio de estado de la mascota
-  const cambioDeEstado = (id, currentStatus) => {
-    const newStatus = currentStatus === 'Adoptado' ? 'En adopción' : 'Adoptado';
-    dispatch(editPets(id, {estado: newStatus}));
-    setPetModified(true);
-    Swal.fire('Estado actualizado', `La mascota ha sido ${newStatus}`, 'success');
-};
-
-
 
   const columns = [
     {name: "ID", uid: "id", sortable: true},
-    {name: "NOMBRE", uid: "nombre", sortable: true},
-    {name: "RAZA", uid: "raza", sortable: true},
-    {name: "SEXO", uid: "sexo", sortable: true},
-    {name: "EDAD", uid: "edad", sortable: true},
-    {name: "PESO", uid: "peso", sortable: true},
-    // {name: "STATUS", uid: "status", sortable: true},
-    {name: "ESTADO", uid: "estado", sorteable: true},//hice esta linea para que se vea en la tabla (nacho)
-    {name: "TAMANO", uid: "tamano" , sortable: true},
+    {name: "NOMBRE", uid: "nombreDeOng", sortable: true},
+    // {name: "AGE", uid: "age", sortable: true},
+    {name: "CONTACTO", uid: "nombreDeContacto", sortable: true},
+    {name: "TELEFONO", uid: "telefono", sortable: true},
+    {name: "EMAIL", uid: "email"},
+    // {name: "UBICACION", uid: "ubicacion", sortable: true},
     {name: "ACTIONS", uid: "actions"},
   ];  
 
@@ -256,14 +178,13 @@ function Pets() {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...mascotas];
+    let filteredUsers = [...casasDeAdopcion];
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
-        user.nombre.toLowerCase().includes(filterValue.toLowerCase()),
+        user.nombreDeOng.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
-    //Para modificar el estado de la mascota
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
       filteredUsers = filteredUsers.filter((user) =>
         Array.from(statusFilter).includes(user.status),
@@ -271,7 +192,7 @@ function Pets() {
     }
 
     return filteredUsers;
-  }, [mascotas, filterValue, statusFilter]);
+  }, [casasDeAdopcion, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -296,51 +217,27 @@ function Pets() {
     const cellValue = user[columnKey];
 
     switch (columnKey) {
-      case "nombre":
+      case "nombreDeOng":
         return (
           <User
-          //aqui va la foto de la mascota
+          //AQUI va la imagen del usuario o de la casa de adopcion
             avatarProps={{radius: "lg", src: user.foto}}
-            description={user.nombre}
+            description={user.ubicacion}
             name={cellValue}
           >
-            {user.id}
+            {user.ubicacion}
           </User>
         );
-      case "raza":
+      case "nombreDeContacto":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">{user.raza}</p>
+            <p className="text-bold text-tiny capitalize text-default-400">{user.nombreDeContacto}</p>
           </div>
         );
-        //esto lo puse para darle el Estilo al estado (Nacho)
-        case "estado":
-          return (
-              <div className="flex items-center gap-2">
-                  <Chip
-                      className="capitalize"
-                      color={estadoColorMap[cellValue]}
-                      size="sm"
-                      variant="flat"
-                  >
-                      {cellValue}
-                  </Chip>
-                  <Button 
-                      size="mini" 
-                      onClick={() => cambioDeEstado(user.id, cellValue)}
-                  >
-                      {cellValue === 'Adoptado' ? 'En adopción' : 'Adoptado'}
-                  </Button>
-              </div>
-          );
-      
-          
-        
-  
-      case "sexo":
+      case "telefono":
         return (
-          <Chip className="capitalize" color={statusColorMap[user.sexo]} size="sm" variant="flat">
+          <Chip className="capitalize" color={statusColorMap[user.telefono]} size="sm" variant="flat">
             {cellValue}
           </Chip>
         );
@@ -354,7 +251,7 @@ function Pets() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Dynamic Actions">
-                  <DropdownItem onClick={() => handleNavigate(user.id)}>Detalle</DropdownItem>
+                <DropdownItem onClick={() => handleNavigate(user.id)}>Detalle</DropdownItem>
                 <DropdownItem onClick={() => handleEdit(user.id)}>Editar</DropdownItem>
                 //!Aqui se borra y arriba se edita y se detalla
                 <DropdownItem  color="danger" className="text-danger" onClick={() => handleDelete(user.id)}>Borrar</DropdownItem>
@@ -461,7 +358,7 @@ function Pets() {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {mascotas.length} Mascotas</span>
+          <span className="text-default-400 text-small">Total {casasDeAdopcion.length} Casas de adopcion</span>
           <label className="flex items-center text-default-400 text-small">
             Filas por pagina:
             <select
@@ -481,7 +378,7 @@ function Pets() {
     statusFilter,
     visibleColumns,
     onRowsPerPageChange,
-    mascotas.length,
+    casasDeAdopcion.length,
     onSearchChange,
     hasSearchFilter,
   ]);
@@ -514,8 +411,7 @@ function Pets() {
       </div>
     );
   }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
-    
-    
+
   return (
     <div >
        <div className='flex overflow-scroll '>
@@ -525,32 +421,10 @@ function Pets() {
 					<Sidebar />
         </div>
         <div className="basis-[88%] border overflow-scroll h-[100vh]">
-          {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
 					<div className='mt-10'>
-           <div className="flex">
-                {mascotas.map((mascota) => (
-                  <div
-                    key={mascota.id}
-                    className={`p-4 rounded-lg shadow-md mb-4 ${
-                      // Aplicar colores de fondo según el estado de la mascota
-                      mascota.estado === "en Adopción"
-                        ? "bg-blue-200"
-                        : mascota.estado === "en proceso"
-                        ? "bg-yellow-200"
-                        : mascota.estado === "adoptado"
-                        ? "bg-green-200"
-                        : "bg-gray-200" // Color predeterminado si el estado no coincide
-                    }`}>
-                          </div>
-    ))}
-  </div>
-</div>
-                      
-                
-                  
-
-                    
-<Table
+            {/* Soy la gestion de casas de adopcion */}
+            {/* {console.log(casasDeAdopcion)} */}
+            <Table
       aria-label="Example table with custom cells, pagination and sorting"
       isHeaderSticky
       bottomContent={bottomContent}
@@ -573,11 +447,12 @@ function Pets() {
             align={column.uid === "actions" ? "center" : "start"}
             allowsSorting={column.sortable}
           >
+            {/* {column.name} */}
             {column.name}
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No se encontraron Mascotas"} items={sortedItems}>
+      <TableBody emptyContent={"No Se encontraron casas de adopcion"} items={sortedItems}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
@@ -585,14 +460,12 @@ function Pets() {
         )}
       </TableBody>
     </Table>
-  </div>
-
+          </div>
         </div>
       </div>
 		</div>
-  );
-                
-  
-        }
+    </div>
+  )
+}
 
-export default Pets;
+export default AdoptionHouses

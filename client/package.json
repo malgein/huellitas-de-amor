@@ -9,17 +9,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.1",
     "@mercadopago/sdk-react": "^0.0.14",
     "@nextui-org/react": "^2.0.19",
     "@react-email/render": "^0.0.7",
     "axios": "^1.4.0",
     "canvas-confetti": "^1.6.0",
-    "firebase": "^10.3.1",
     "formik": "^2.4.3",
     "framer-motion": "^10.15.2",
     "nodemailer": "^6.9.4",
     "react": "^18.2.0",
     "react-bootstrap": "^1.6.1",
+    "react-chatbot-kit": "^2.1.2",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.10.1",
@@ -32,6 +33,7 @@
     "redux-thunk": "^2.4.2",
     "serve": "^14.2.1",
     "sweetalert2": "^11.7.27",
+    "uuid": "^9.0.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {

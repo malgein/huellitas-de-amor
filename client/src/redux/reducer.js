@@ -21,15 +21,16 @@ import {
   DELETE_HOUSES,
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
-
-
   MOD_COMPLETE_PET,
   MOD_COMPLETE_HOUSE,
-
   LOGICAL_DELETE_PET,
-  ELIMINAR_IMAGENES, 
+  ELIMINAR_IMAGENES,
   MOD_COMPLETE_USER,
   GET_CASA_BY_ID,
+
+  //case que me trae los usuarios con todas las relciones
+  GET_ENTIRE_USERS,
+  CHANGE_STATUS_USER
 
 } from "./actions";
 
@@ -135,6 +136,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
       };
 
+    //foto de perfil
+    // case FOTO_PERFIL:
+    //   return {
+    //     ...state,
+    //   };
+
     case DELETE_USERS:
       return {
         ...state,
@@ -188,20 +195,31 @@ const rootReducer = (state = initialState, { type, payload }) => {
       case MOD_COMPLETE_HOUSE:
         console.log(payload)
         return { ...state};
+      case GET_ENTIRE_USERS:
+        return {
+          ...state,
+          usuarios: payload,
+        };
+        case CHANGE_STATUS_USER:
+        console.log(payload)
+        return { ...state};
     default:
       return {
         ...state,
       };
-      case LOGICAL_DELETE_PET:
-        console.log("LOGICAL_DELETE_PET llamado con payload:", payload);
-        return {
-            ...state,
-            mascotas: state.mascotas.map(mascota =>
-                mascota.id === payload ? { ...mascota, estado: "En adopción" } : mascota
-            )
-        };
-    
 
+   
+
+    case LOGICAL_DELETE_PET:
+      console.log("LOGICAL_DELETE_PET llamado con payload:", payload);
+      return {
+        ...state,
+        mascotas: state.mascotas.map((mascota) =>
+          mascota.id === payload
+            ? { ...mascota, estado: "En adopción" }
+            : mascota
+        ),
+      };
   }
 };
 export default rootReducer;

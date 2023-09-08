@@ -60,4 +60,4 @@ const validationSchema = Yup.object({
   //   .max(100, "No puede tener más de 100 caracteres"),
 });
 
-// export default validationSchema;
+export default validationSchema;
