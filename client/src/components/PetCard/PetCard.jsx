@@ -62,6 +62,7 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
             </ModalContent>
           </Modal>
         </div>
+          </Link>
       </CardHeader>
 
       <CardBody className="overflow-visible py-2 flex flex-col items-center">
@@ -71,12 +72,12 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
             alt="Card background"
             className="object-cover rounded-xl w-[450px] h-[300px]"
             src={foto[0]}
-          />
+            />
         </div>
       </CardBody>
     </Card>
-     </Link>
   );
+
 }
 
 export default PetCard;
