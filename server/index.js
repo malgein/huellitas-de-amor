@@ -15,8 +15,8 @@ conn
   })
   .then(() => {
     server.listen(PORT, () => {
-      // fillPets();
-      // fillHomes();
+      //fillPets();
+      //fillHomes();
       // llenarUsuario();
       console.log(`%s levanta che culiaaaa! ${PORT}`); // eslint-disable-line no-console
     });

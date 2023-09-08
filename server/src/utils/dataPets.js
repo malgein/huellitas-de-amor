@@ -14,6 +14,7 @@ const allPets = [
     descripcion:
       "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
     estado: "Adoptado",
+    casaDeAdopcionId: 1,
   },
   {
     nombre: "Daisy",
@@ -28,6 +29,7 @@ const allPets = [
     descripcion:
       "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.",
     estado: "En adopción",
+    casaDeAdopcionId: 3,
   },
   {
     nombre: "Bella",
@@ -42,6 +44,7 @@ const allPets = [
     descripcion:
       "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
     estado: "En Proceso",
+    casaDeAdopcionId: 4,
   },
   {
     nombre: "Max",
@@ -56,6 +59,7 @@ const allPets = [
     descripcion:
       "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
     estado: "En adopción",
+    casaDeAdopcionId: 5,
   },
   {
     nombre: "Jack",
@@ -70,6 +74,7 @@ const allPets = [
     descripcion:
       "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
     estado: "En adopción",
+    casaDeAdopcionId: 1,
   },
   {
     nombre: "Sadie",
@@ -84,6 +89,7 @@ const allPets = [
     descripcion:
       "Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\n\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.",
     estado: "En adopción",
+    casaDeAdopcionId: 3,
   },
   {
     nombre: "Max",
@@ -98,6 +104,7 @@ const allPets = [
     descripcion:
       "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
     estado: "En adopción",
+    casaDeAdopcionId: 4,
   },
   {
     nombre: "Cooper",
@@ -112,6 +119,7 @@ const allPets = [
     descripcion:
       "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.",
     estado: "En Proceso",
+    casaDeAdopcionId: 5,
   },
   {
     nombre: "Jack",
@@ -126,6 +134,7 @@ const allPets = [
     descripcion:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\n\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.",
     estado: "En adopción",
+    casaDeAdopcionId: 3,
   },
   {
     nombre: "Charlie",
@@ -140,6 +149,7 @@ const allPets = [
     descripcion:
       "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
     estado: "En Proceso",
+    casaDeAdopcionId: 5,
   },
   {
     nombre: "Daisy",
@@ -154,6 +164,7 @@ const allPets = [
     descripcion:
       "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
     estado: "En Proceso",
+    casaDeAdopcionId: 3,
   },
   {
     nombre: "Bella",
@@ -168,6 +179,7 @@ const allPets = [
     descripcion:
       "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
     estado: "En adopción",
+    casaDeAdopcionId: 5,
   },
   {
     nombre: "Firulais",
@@ -182,6 +194,7 @@ const allPets = [
     descripcion:
       "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
     estado: "Adoptado",
+    casaDeAdopcionId: 4,
   },
   {
     nombre: "Princesa",
@@ -196,6 +209,7 @@ const allPets = [
     descripcion:
       "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
     estado: "Adoptado",
+    casaDeAdopcionId: 5,
   },
   {
     nombre: "Fifi",
@@ -210,6 +224,7 @@ const allPets = [
     descripcion:
       "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
     estado: "En Proceso",
+    casaDeAdopcionId: 3,
   },
 ];
 
