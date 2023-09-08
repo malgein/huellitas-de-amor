@@ -68,6 +68,7 @@ router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
 router.use("/usuario", postCrearUsuario);
+router.post("/usuario", postCrearUsuario);
 
 router.put("/:id/estado", modPetById);
 
