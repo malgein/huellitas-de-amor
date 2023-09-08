@@ -22,7 +22,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const textoAdoptante = () => {
-    const botMessage = createChatBotMessage('Como adoptante podras acceder a los perfiles de las casa de adopcion que ofrecen mascotas');
+    const botMessage = createChatBotMessage('Como adoptante podras acceder a los perfiles de las casa de adopcion que ofrecen mascotas, registrate para acceder a todas las funcionalidades');
 
     setState((prev) => ({
       ...prev,
