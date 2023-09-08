@@ -21,8 +21,8 @@ const postDonaciones = require("./routesDonaciones");
 const postCrearUsuario = require("./routesUsuario");
 const getUsersId = require("../controllers/getUsersId");
 
+
 // router.get("/fill", fillPets);
-// j
 const modPetById = require("../controllers/modPetById");
 
 const fillTypeUsers = require("../utils/fillTypeUsers");
@@ -32,7 +32,7 @@ const donationsHouse = require("../controllers/donationsHouse");
 
 router.patch("/relacion-user-type", usuarioTipoController);
 router.use("/donaciones", postDonaciones);
-router.get("/perfil/:id", getUsersId);
+
 // router.get('/tiposDeUsuarios',  findTypesUsers)
 router.get("/relacion-donation-house", donationsHouse);
 router.get("/relacion-donation-user", donationsUser);
@@ -47,13 +47,10 @@ router.post("/email", postSendEmail);
 router.get("/fillDonations", fillDonations);
 router.get("/fillPets", fillPets);
 router.get("/fillTypeUsers", fillTypeUsers);
-// router.use("/usuario", postUsuario);
+
 
 //router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
 
-// router.put("/usuario/:id", perfilActualizado);
-
-// router.put("/usuario/:id", actualizarPerfil);
 
 // router.use("/rate", rateCasas);//ruta para obtener promedio de calificacion
 
@@ -70,6 +67,7 @@ router.post("/create_preference", postMercadoPago);
 router.use("/usuario", postCrearUsuario);
 
 router.put("/:id/estado", modPetById);
+router.get("/adopcion/:usuarioId", getAdoptionUser);
 
 module.exports = router;
 
