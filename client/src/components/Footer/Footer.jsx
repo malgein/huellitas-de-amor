@@ -61,36 +61,38 @@ const Footer = () => {
           </div>
         </div>
 
-      
+
 
 
         <div className="flex flex-row justify-between items-center h-16 ">
           <div className="ml-4">©2023, All right reserved.</div>
           <div className="mr-4 flex flex-row  items-center  gap-4 ">
 
-          <Button onPress={onOpen} color="primary" className="bg-orange-400 text-orange hover:scale-105 transform transition-transform duration-300 ease-in-out">
-          Chabot
-        </Button>
+            <Button onPress={onOpen} color="primary" className="bg-orange-400 text-orange hover:scale-105 transform transition-transform duration-300 ease-in-out">
+              Chabot
+            </Button>
 
 
 
-        <Modal
-          isOpen={isOpen}
-          backdrop={blur}
-          onOpenChange={onOpenChange}
-          placement="top"
-          className="bg-orange-400"
-        >
-          <ModalContent>
-            <div className="max-w-lg max-h-80vh mx-auto">
-              <Chatbot
-                config={config}
-                messageParser={MessageParser}
-                actionProvider={ActionProvider}
-              />
-            </div>
-          </ModalContent>
-        </Modal>
+            <Modal
+              isOpen={isOpen}
+              backdrop={blur}
+              onOpenChange={onOpenChange}
+              placement="top"
+              className="bg-orange-400"
+            >
+              <ModalContent>
+                <div className="max-w-lg max-h-80vh mx-auto">
+                  <Chatbot
+                    actionProvider={ActionProvider}
+                    messageParser={MessageParser}
+                    config={config}
+                    headerText='HUELLITAS CHAT BOT'
+                    placeholderText='Ingrese texto aqui'
+                  />
+                </div>
+              </ModalContent>
+            </Modal>
 
             <a className="hover:scale-110 transform transition-transform duration-300 ease-in-out" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-facebook-square fa-lg"></i>
