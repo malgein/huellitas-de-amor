@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth0 } from '@auth0/auth0-react';
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -19,7 +19,7 @@ import AdoptionFormModal from '../FormularioAdopcion/FormAdop';
 
 export default function Detail() {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user } = useAuth0();
   const dispatch = useDispatch();
   const [adopcionEnProgreso, setAdopcionEnProgreso] = useState(false);
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ export default function Detail() {
       console.log('Opening modal');
       setIsModalOpen(true);
     } else {
-      navigate("/login");
+      navigate("/NewLogin");
     }
   };
   const handleClose =() => {
@@ -210,7 +210,7 @@ export default function Detail() {
                 Adóptame
               </Button>
             ) : (
-              <Link to="/registro">
+              <Link to="/NuevoRegistro">
                 <Button radius="full" color="primary">
                   Adóptame
                 </Button>
