@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react";
 import ModalLogSig from "../ModalLogSig/ModalLogSig";
 import PathRoutes from "../../helpers/Routes.helper";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { useAuth0 } from "@auth0/auth0-react";

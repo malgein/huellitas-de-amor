@@ -1,13 +1,17 @@
 // import React from "react";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 // import { MonitorMobileIcon } from "./MonitorMobileIcon";
 // import { ShieldSecurityIcon } from "./ShieldSecurityIcon";
 // import { InfoIcon } from "./InfoIcon";
 // import { InvalidCardIcon } from "./InvalidCardIcon";
+import { useNavigate } from "react-router-dom";
 
 const Notificaciones = () => {
+  const [notificaciones, setNotificaciones] = useState ([]);
+  const navigate = useNavigate();
+  
   const itemClasses = {
     base: "py-0 w-full",
     title: "font-normal text-medium",
@@ -15,6 +19,26 @@ const Notificaciones = () => {
       "px-2 py-0 data-[hover=true]:bg-default-100 rounded-lg h-14 flex items-center",
     indicator: "text-medium",
     content: "text-small px-2",
+
+    
+  };
+   // Simula la recepción de nuevas notificaciones
+  useEffect(() => {
+    const nuevasNotificaciones = [
+      {
+        id: 1,
+        titulo: 'Nueva Solicitud de Adopción',
+        subtitulo: 'Haz recibido una nueva solicitud de adopción',
+        contenido: 'Haz recibido una nueva solicitud de adopción. Por favor, revisa los detalles en el dashboard.'
+      },
+      // ... otras notificaciones
+    ];
+
+    setNotificaciones(nuevasNotificaciones);
+  }, []);
+
+  const handleVerDetalles = () => {
+    navigate('/dashboard');
   };
 
   const defaultContent =
@@ -27,7 +51,7 @@ const Notificaciones = () => {
       variant="shadow"
       itemClasses={itemClasses}
     >
-      <AccordionItem
+      {/* <AccordionItem
         key="1"
         aria-label="Connected devices"
         // startContent={<MonitorMobileIcon className="text-primary" />}
@@ -72,11 +96,25 @@ const Notificaciones = () => {
           </p>
         }
       >
+        
         {defaultContent}
       </AccordionItem>
+    </Accordion> */}
+         {notificaciones.map((notificacion) => (
+        <AccordionItem
+          key={notificacion.id}
+          aria-label={notificacion.titulo}
+          subtitle={notificacion.subtitulo}
+          title={notificacion.titulo}
+        >
+          <p>{notificacion.contenido}</p>
+          <button onClick={handleVerDetalles}>Ver detalles</button>
+        </AccordionItem>
+      ))}
     </Accordion>
   );
 };
+ 
 
 export default Notificaciones;
 

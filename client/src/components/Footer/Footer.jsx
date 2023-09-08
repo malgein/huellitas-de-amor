@@ -1,9 +1,17 @@
 import React from "react";
-import { Link, Button, Image } from "@nextui-org/react";
+import { Link, Button, Image, Modal, ModalContent, useDisclosure } from "@nextui-org/react";
 import logoPrueba from "../../assets/LogoPrueba.jpg";
+import Chatbot from 'react-chatbot-kit'
+import 'react-chatbot-kit/build/main.css'
+import config from "../Chatbot/Config";
+import MessageParser from "../Chatbot/MessageParser";
+import ActionProvider from "../Chatbot/ActionProvider";
+
 // import styles from "./footer.module.css";
 
 const Footer = () => {
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const latitude = -35.1673333;
   const longitude = -58.2400684;
@@ -34,7 +42,7 @@ const Footer = () => {
               <h4>
                 <a href={googleMapsUrl} target="_blank">
                   Ubicación <i className="fas fa-map-marker-alt hover:scale-110 transform transition-transform duration-300 ease-in-out text-red-300 hover:text-red-500"></i>
-                </a><br/>
+                </a><br />
                 en el mundo
               </h4>
             </section>
@@ -53,9 +61,39 @@ const Footer = () => {
           </div>
         </div>
 
+
+
+
         <div className="flex flex-row justify-between items-center h-16 ">
           <div className="ml-4">©2023, All right reserved.</div>
           <div className="mr-4 flex flex-row  items-center  gap-4 ">
+
+            <Button onPress={onOpen} color="primary" className="bg-orange-400 text-orange hover:scale-105 transform transition-transform duration-300 ease-in-out">
+              Chabot
+            </Button>
+
+
+
+            <Modal
+              isOpen={isOpen}
+              backdrop={blur}
+              onOpenChange={onOpenChange}
+              placement="top"
+              className="bg-orange-400"
+            >
+              <ModalContent>
+                <div className="max-w-lg max-h-80vh mx-auto">
+                  <Chatbot
+                    actionProvider={ActionProvider}
+                    messageParser={MessageParser}
+                    config={config}
+                    headerText='HUELLITAS CHAT BOT'
+                    placeholderText='Ingrese texto aqui'
+                  />
+                </div>
+              </ModalContent>
+            </Modal>
+
             <a className="hover:scale-110 transform transition-transform duration-300 ease-in-out" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-facebook-square fa-lg"></i>
             </a>
