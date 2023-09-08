@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const router = Router();
-const { Usuario } = require("../models/Usuario.js");
 const crearUsuario = require("../controllers/postCrearUsuario");
 // const getUsersId = require("../controllers/getUsersId");
 
@@ -14,7 +13,7 @@ const getUserById = require('../controllers/getUserById')
 const findTypesUsers = require('../controllers/findTypeUsers')
 const usuarioTipoController = require('../controllers/usuarioTipoController')
 
-router.post("/", async (req, res) => {
+router.post("/crearUsuario", async (req, res) => {
   try {
     const response = req.body;
     const usuarioPost = await crearUsuario(response);
@@ -61,10 +60,10 @@ router.get('/tipoDeUsuario', async(req, res) => {
 // });
 
 //Ruta que me trae todos los usuarios de la base de datos necesario para la gestion de usuarios en el componente admin
-router.get("/", getUsers)
-//router.get("/", async (req, res) => {
-//   try {
-//     const data = await getUsers();
+router.get("/", async (req, res) => {
+  try {
+    const data = await getUsers();
+    console.log(data);
 
 //     return res.status(200).json(data);
 //   } catch (error) {

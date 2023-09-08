@@ -63,8 +63,6 @@ const AgregarMascota = () => {
         Swal.fire("La mascaota no ha sido agregada", "", "info");
       }
     });
-
-
   };
 
   const handleFormChange = (values) => {
@@ -73,7 +71,7 @@ const AgregarMascota = () => {
   };
 
   const handleClickImages = async (clickedImage) => {
-    console.log(clickedImage);
+    // console.log(clickedImage);
     const updatedImages = imagenes.filter((image) => image !== clickedImage);
     dispatch(eliminarImagenes(updatedImages));
     /* console.log(updatedImages) */

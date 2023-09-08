@@ -6,10 +6,17 @@ const postCasaDeAdopcion = async ({
   email,
   telefono,
   foto,
-  ubicacion
+  ubicacion,
 }) => {
   try {
-    if (!nombreDeOng || !nombreDeContacto || !email || !telefono || !foto || !ubicacion) {
+    if (
+      !nombreDeOng ||
+      !nombreDeContacto ||
+      !email ||
+      !telefono ||
+      !foto ||
+      !ubicacion
+    ) {
       return { status: 401, message: "Faltan datos" };
     }
 
@@ -18,10 +25,10 @@ const postCasaDeAdopcion = async ({
       telefono,
       email,
       nombreDeContacto,
-      foto, 
-      ubicacion
+      foto,
+      ubicacion,
     });
-    console.log(createCasaDeAdopcion);
+    // console.log(createCasaDeAdopcion);
     return createCasaDeAdopcion;
   } catch (error) {
     throw { error: error?.status, message: error?.message };
