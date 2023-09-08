@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PathRoutes from "../../../helpers/Routes.helper";
 import Sidebar from './Sidebar'
 import { useSelector, useDispatch } from 'react-redux'
-import { getMascotas, deletePets, modCompletePet } from '../../../redux/actions'
+import { getMascotas, deletePets, modCompletePet,editPets } from '../../../redux/actions'
 import Swal from 'sweetalert2'
 import { PlusIcon } from '../PlusIcon';
 import {
