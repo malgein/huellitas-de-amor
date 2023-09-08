@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const router = Router();
-const { Usuario } = require("../models/Usuario.js");
 const crearUsuario = require("../controllers/postCrearUsuario");
 // const getUsersId = require("../controllers/getUsersId");
 

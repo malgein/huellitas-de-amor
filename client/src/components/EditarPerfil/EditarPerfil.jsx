@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux"; // Asegúrate de importar useDispatch de acuerdo a tu estructura Redux
 import { modCompleteUser } from "../../redux/actions";
-import { Link, Button } from "@nextui-org/react";
+import { Button, Input, Textarea } from "@nextui-org/react";
 import ImagenesPerfil from "../ImagenesPerfil/ImagenesPerfil";
-import { useNavigate } from "react-router-dom";
 
 const EditarPerfil = ({
   id,
@@ -15,12 +14,6 @@ const EditarPerfil = ({
 }) => {
   const dispatch = useDispatch();
   const imagenes = useSelector((state) => state.imagenes);
-
-  // const [userModified, setUserModified] = useState(true);
-
-  // const [perfil, setPerfil] = useState({
-  //   imagenPerfil: "",
-  // });
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -109,78 +102,125 @@ const EditarPerfil = ({
   };
 
   return (
-    <div className="border border-black flex flex-col justify-center items-center">
-      <h2>Editar Usuario</h2>
-      <form>
-        <label>Nombre:</label>
-        <input
-          type="text"
-          value={formData.nombre}
-          onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-        />
-        <label>Apellido:</label>
-        <input
-          type="text"
-          value={formData.apellido}
-          onChange={(e) =>
-            setFormData({ ...formData, apellido: e.target.value })
-          }
-        />
-        <label>Nacionalidad:</label>
-        <input
-          type="text"
-          value={formData.nacionalidad}
-          onChange={(e) =>
-            setFormData({ ...formData, nacionalidad: e.target.value })
-          }
-        />
-        <label>Ubicación:</label>
-        <input
-          type="text"
-          value={formData.ubicacion}
-          onChange={(e) =>
-            setFormData({ ...formData, ubicacion: e.target.value })
-          }
-        />
-        <label>Dirección:</label>
-        <input
-          type="text"
-          value={formData.direccion}
-          onChange={(e) =>
-            setFormData({ ...formData, direccion: e.target.value })
-          }
-        />
-        <label>Teléfono:</label>
-        <input
-          type="text"
-          value={formData.telefono}
-          onChange={(e) =>
-            setFormData({ ...formData, telefono: e.target.value })
-          }
-        />
-        <label>Detalles:</label>
-        <input
-          type="text"
-          value={formData.acerca}
-          onChange={(e) => setFormData({ ...formData, acerca: e.target.value })}
-        />
-        <label>Email:</label>
-        <input
-          type="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={formData.password}
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
-        />
+    <div className="flex flex-col justify-center items-center">
+      <form className=" w-[600px] flex flex-col text-gray-800 font-medium">
+        <div className="flex flex-row gap-5">
+          <div className=" flex flex-col w-[50%] ">
+            <Input
+              type="email"
+              label="Nombre"
+              placeholder="Agrega un nombre"
+              labelPlacement="outside"
+              value={formData.nombre}
+              onChange={(e) =>
+                setFormData({ ...formData, nombre: e.target.value })
+              }
+            />
 
-        <label htmlFor="">Imagen de perfil</label>
-        <div>
+            <Input
+              type="email"
+              label="Apellidos"
+              placeholder="Apellidos"
+              labelPlacement="outside"
+              value={formData.apellido}
+              onChange={(e) =>
+                setFormData({ ...formData, apellido: e.target.value })
+              }
+              className="mt-2"
+            />
+
+            <Input
+              type="email"
+              label="Nacionalidad"
+              placeholder="Nacionalidad"
+              labelPlacement="outside"
+              value={formData.nacionalidad}
+              onChange={(e) =>
+                setFormData({ ...formData, nacionalidad: e.target.value })
+              }
+              className="mt-2"
+            />
+          </div>
+
+          <div className=" flex flex-col w-[50%] ">
+            <Input
+              type="email"
+              label="Ubicación"
+              placeholder="Ubicación"
+              labelPlacement="outside"
+              value={formData.ubicacion}
+              onChange={(e) =>
+                setFormData({ ...formData, ubicacion: e.target.value })
+              }
+            />
+
+            <Input
+              type="email"
+              label="Dirección"
+              placeholder="Dirección"
+              labelPlacement="outside"
+              value={formData.direccion}
+              onChange={(e) =>
+                setFormData({ ...formData, direccion: e.target.value })
+              }
+              className="mt-2"
+            />
+
+            <Input
+              type="email"
+              label="Telefono"
+              placeholder="Telefono"
+              labelPlacement="outside"
+              value={formData.telefono}
+              onChange={(e) =>
+                setFormData({ ...formData, telefono: e.target.value })
+              }
+              className="mt-2"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col mt-6">
+          <Textarea
+            type="text"
+            label="Descripción"
+            labelPlacement="outside"
+            placeholder="Acerca de..."
+            value={formData.acerca}
+            onChange={(e) =>
+              setFormData({ ...formData, acerca: e.target.value })
+            }
+            // className="w-[600px] h-[100px] mb-2 border-2 rounded"
+          />
+        </div>
+
+        <div className="flex gap-5 mt-6">
+          <Input
+            type="email"
+            label="Email"
+            placeholder="Ingresa tu correo"
+            labelPlacement="outside"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+          />
+
+          <Input
+            type="email"
+            label="Contraseña"
+            placeholder="Contraseña"
+            labelPlacement="outside"
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
+          />
+        </div>
+
+        <label className="mt-4 text-black">Foto de perfil</label>
+
+        <div className="border-4 rounded-full w-[180px] mx-auto mb-4">
           <ImagenesPerfil
             setImagenes={(imagenes) =>
               setFormData({
@@ -190,7 +230,7 @@ const EditarPerfil = ({
             }
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+        <div className=" flex justify-center items-center w-[200px]">
           {imagenes &&
             imagenes.map((imag) => {
               return (
@@ -204,9 +244,15 @@ const EditarPerfil = ({
             })}
         </div>
 
-        <Button type="button" onClick={handleEdit}>
-          Editar Usuario
-        </Button>
+        <div className="flex flex-col justify-center items-center mb-4">
+          <Button
+            type="button"
+            onClick={handleEdit}
+            className="bg-orange-400 text-black w-[150px] mt-4"
+          >
+            Editar Usuario
+          </Button>
+        </div>
       </form>
     </div>
   );
