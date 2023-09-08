@@ -5,7 +5,7 @@ const fillHomes = require("./src/utils/fillHomes.js");
 const fillPets = require("./src/utils/fillPets.js");
 const llenarUsuario = require("./src/utils/llenarUsuario.js");
 
-const PORT =  3001;
+const PORT = 3001;
 
 // Syncing all the models at once.
 
