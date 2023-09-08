@@ -49,7 +49,7 @@ const handleError = (dispatch, errorType, error) => {
 
 export const EDIT_USER = "EDIT_USER";
 
-// export const basename = "https://huellitas-de-amor-production.up.railway.app";
+// export const basename = "huellitas-de-amor-production-6e81.up.railway.app";
 export const basename = "http://localhost:3001";
 
 const ENDPOINT = `${basename}/mascotas`;
@@ -341,7 +341,8 @@ export const logicalDeletePet = (id, estado) => async (dispatch) => {
   //Traemos todos los usuarios y sus relaciones
 };
 
-//Accion que me trare el usuario con todas sus relaciones
+//Accion que me trare el usuario con todas sus relacione
+//? User validar
 export const getEntireUsers = () => async (dispatch) => {
   try {
     const response = await axios.get(`${basename}/usuario/tipoDeUsuario`);

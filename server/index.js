@@ -17,11 +17,9 @@ conn
   })
   .then(() => {
     server.listen(PORT, () => {
-      fillPets();
-      fillHomes();
-      llenarUsuario();
-      crearAdopcion();
-      // fillDonations();
-      console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
+      // fillPets();
+      // fillHomes();
+      // llenarUsuario();
+      console.log(`%s levanta che culiaaaa! ${PORT}`); // eslint-disable-line no-console
     });
   });

@@ -16,8 +16,6 @@ import PathRoutes from "../../helpers/Routes.helper";
 
 import AdoptionFormModal from '../FormularioAdopcion/FormAdop';
 
-import { useAuth } from "../../../context/AuthContext";
-
 
 export default function Detail() {
   const { id } = useParams();
@@ -48,21 +46,27 @@ export default function Detail() {
   // }
 
   const handleConfetti = () => {
+    console.log('Ver confetti');
     confetti({});
   };
   const handleAdoption =() => {
     if (user) {
+      console.log('Opening modal');
       setIsModalOpen(true);
     } else {
       navigate("/login");
     }
   };
+  const handleClose =() => {
+    setIsModalOpen(false);
+  }
 
   const handleAdoptionConfirm = () => {
+    console.log('Confirmacion de adopcion');
     setAdopcionEnProgreso(true);
     dispatch(logicalDeletePet(id, "En Proceso"));
     handleConfetti();
-    setIsModalOpen(false);
+  
     navigate("/");
   };
 
@@ -193,8 +197,9 @@ export default function Detail() {
               </Link>
             </div>
           </div>
-          <AdoptionFormModal isOpen={isModalOpen} onOpenChange={setIsModalOpen}  onConfirm={handleAdoptionConfirm}/>
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
+          <AdoptionFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={handleAdoptionConfirm}/>
+
             {user ? (
               <Button
                 onClick={handleAdoption}
