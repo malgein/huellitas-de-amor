@@ -3,9 +3,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import validationSchema from "./validaciones";
 import Swal from "sweetalert2";
-import { useAuth } from "../../../context/AuthContext";
+// import { useAuth } from "../../../context/AuthContext";
 export function NuevoRegistro() {
-  const { signup } = useAuth();
+  // const { signup } = useAuth();
   const navigate = useNavigate();
 
   const initialValues = {

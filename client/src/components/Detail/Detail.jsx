@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0 } from "@auth0/auth0-react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -14,8 +14,6 @@ import confetti from "canvas-confetti";
 import PathRoutes from "../../helpers/Routes.helper";
 
 import AdoptionFormModal from "../FormularioAdopcion/FormAdop";
-
-import { useAuth } from "../../../context/AuthContext";
 
 export default function Detail() {
   const { id } = useParams();

@@ -22,11 +22,11 @@ import {
   User,
   Pagination,
 } from "@nextui-org/react";
-import {VerticalDotsIcon} from "../VerticalDotsIcon";
-import {SearchIcon} from "../SearchIcon";
-import {ChevronDownIcon} from "../ChevronDownIcon";
+import { VerticalDotsIcon } from "../VerticalDotsIcon";
+import { SearchIcon } from "../SearchIcon";
+import { ChevronDownIcon } from "../ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
-import {capitalize} from "../Accesory";
+import { capitalize } from "../Accesory";
 
 const statusColorMap = {
   Macho: "success",
@@ -444,7 +444,8 @@ function Pets() {
 
   const topContent = React.useMemo(() => {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="fleX">
+        // BARRA SUPERRIOR
         <div className="flex justify-between gap-3 items-end">
           <Input
             isClearable
@@ -584,7 +585,7 @@ function Pets() {
             {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
             <div className="mt-10">
               <div className="flex">
-                {mascotas.map((mascota) => (
+                {/* {mascotas.map((mascota) => (
                   <div
                     key={mascota.id}
                     className={`p-4 rounded-lg shadow-md mb-4 ${
@@ -598,7 +599,7 @@ function Pets() {
                         : "bg-gray-200" // Color predeterminado si el estado no coincide
                     }`}
                   ></div>
-                ))}
+                ))} */}
               </div>
             </div>
 
@@ -618,7 +619,7 @@ function Pets() {
               onSelectionChange={setSelectedKeys}
               onSortChange={setSortDescriptor}
             >
-              <TableHeader columns={headerColumns}>
+              <TableHeader className="bg-red-500 p-14" columns={headerColumns}>
                 {(column) => (
                   <TableColumn
                     key={column.uid}

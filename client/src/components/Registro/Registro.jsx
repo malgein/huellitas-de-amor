@@ -12,7 +12,6 @@ import * as Yup from "yup";
 import NewLogin from "../NewRegis/NewLogin";
 import { NuevoRegistro } from "../NewRegis/NewRegistro";
 
-
 const Registro = () => {
   const { id } = useParams();
   const [formData, setFormData] = useState({
@@ -43,7 +42,7 @@ const Registro = () => {
   const dispatchRedux = () => {
     Navigate("/");
   };
-  // const basename = "https://huellitas-de-amor-production.up.railway.app";
+  // const basename = "https://huellitas-de-amor-3.up.railway.app";
   const basename = "http://localhost:3001";
 
   const onSubmit = (values) => {

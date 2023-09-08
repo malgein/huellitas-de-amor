@@ -1,4 +1,4 @@
-const FormularioAdopt = require ('../models/FormularioAdop');
+const FormularioAdopt = require ('../models/FormularioAdop.js');
 
 
 const formularioAdopt = async (req, res) => {

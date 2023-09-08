@@ -35,8 +35,7 @@ import {
   // Formulario de adopcion
   SUBMIT_FORM,
   SUBMIT_FORM_SUCCESS,
-  SUBMIT_FORM_FAILURE
-
+  SUBMIT_FORM_FAILURE,
 } from "./actions";
 
 const initialState = {
@@ -192,29 +191,26 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case MOD_COMPLETE_USER:
-
-      console.log(payload)
-      return { ...state};
-      case MOD_COMPLETE_PET:
-      console.log(payload)
-      return { ...state};
-      case MOD_COMPLETE_HOUSE:
-        console.log(payload)
-        return { ...state};
-      case GET_ENTIRE_USERS:
-        return {
-          ...state,
-          usuarios: payload,
-        };
-        case CHANGE_STATUS_USER:
-        console.log(payload)
-        return { ...state};
+      console.log(payload);
+      return { ...state };
+    case MOD_COMPLETE_PET:
+      console.log(payload);
+      return { ...state };
+    case MOD_COMPLETE_HOUSE:
+      console.log(payload);
+      return { ...state };
+    case GET_ENTIRE_USERS:
+      return {
+        ...state,
+        usuarios: payload,
+      };
+    case CHANGE_STATUS_USER:
+      console.log(payload);
+      return { ...state };
     default:
       return {
         ...state,
       };
-
-   
 
     case LOGICAL_DELETE_PET:
       console.log("LOGICAL_DELETE_PET llamado con payload:", payload);
@@ -226,7 +222,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             : mascota
         ),
       };
-      case SUBMIT_FORM:
+    case SUBMIT_FORM:
       return {
         ...state,
         loading: true,
@@ -244,13 +240,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: action.payload,
       };
-   
-    }
-
-
-
   }
-
-
+};
 
 export default rootReducer;
