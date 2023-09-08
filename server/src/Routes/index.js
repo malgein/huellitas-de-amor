@@ -127,7 +127,7 @@ module.exports = router;
 // const filtradoMascotas = require("../controllers/filtradoMascotas");
 // const getPets = require("../controllers/getPets");
 // const postCasaAdopcion = require("./routesCasaDeAdopcion");
-const formularioAdopt = require("../controllers/FormularioAdop.js");
+// const formularioAdopt = require("../controllers/FormularioAdop.js");
 
 // const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 // const postSendEmail = require("../controllers/postSendEmail");

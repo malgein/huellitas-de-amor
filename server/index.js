@@ -6,7 +6,6 @@ const fillHomes = require("./src/utils/fillHomes.js");
 const fillPets = require("./src/utils/fillPets.js");
 const llenarUsuario = require("./src/utils/llenarUsuario.js");
 // const crearAdopcion = require("./src/utils/crearAdopcion.js");
-const fillDonations = require("./src/controllers/fillDonations.js");
 
 const PORT = 3001;
 
@@ -14,8 +13,7 @@ const PORT = 3001;
 
 conn
   .sync({
-    force: false
-    ,
+    force: false,
   })
   .then(() => {
     server.listen(PORT, () => {
