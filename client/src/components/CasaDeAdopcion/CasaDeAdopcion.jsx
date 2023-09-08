@@ -6,6 +6,12 @@ import { Carousel } from "react-responsive-carousel";
 import Rate from "../Rate/Rate";
 import MapaFuncional from "../Mapa/MapaFuncional";
 import PetCard from "../PetCard/PetCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEnvelope,
+  faPhone,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function CasaDeAdopcion() {
   const { id } = useParams();
@@ -48,14 +54,21 @@ export default function CasaDeAdopcion() {
           <h1 className="m-2 text-3xl">{casa.nombreDeOng}</h1>
           <p>Contáctanos: </p>
           {/* <FontAwesomeIcon icon="fa-solid fa-envelope" /> */}
-          <p>{casa.email}</p>
-          <p>{casa.telefono}</p>
-          <p>{casa.ubicacion}</p>
+
+          <p>
+            <FontAwesomeIcon icon={faEnvelope} />
+            {` ${casa.email}`}
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faPhone} />
+            {` ${casa.telefono}`}
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faLocationDot} />
+            {` ${casa.ubicacion}`}
+          </p>
           <div className="h-20 flex flex-col justify-end">
-            <div className="flex flex-col items-center">
-              <div className="flex-1"></div>
-              <p className="p-4">Ubicación:</p>
-            </div>
+            <div className="flex flex-col items-center"></div>
             <div className="ml-60 h-1/2 w-full ">
               <MapaFuncional
                 /* googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAnPhpVL3wYG0rQDT3Ixnbj5u_nuhK6Z4g"
