@@ -169,22 +169,23 @@ const Perfil = () => {
           </div>
 
           <div className="flex flex-row items-center justify-center h-[100px] mt-10 gap-10">
-            <div className=" ">
+            <div className="border-x border-slate-400  px-10">
+              {" "}
               <p className="text-lg text-black font-semibold">
                 {numeroAdopciones}
               </p>
-              <h4 className="text-slate-500 font-light">Adoptados</h4>
+              <h4 className="text-slate-500 font-light text-xl">Adoptados</h4>
             </div>
-            <div className="border-x border-slate-400  px-10">
+            {/* <div className="border-x border-slate-400  px-10">
               {" "}
               <p className="text-lg text-black font-semibold">3</p>
               <h4 className="text-slate-500 font-light">Favoritos</h4>
-            </div>
-            <div className=" ">
+            </div> */}
+            {/* <div className=" ">
               {" "}
               <p className="text-lg text-black font-semibold">2</p>
               <h4 className="text-slate-500 font-light">Donaciones</h4>
-            </div>
+            </div> */}
           </div>
 
           <div className="mt-8 mb-3 ml-3 text-start">
