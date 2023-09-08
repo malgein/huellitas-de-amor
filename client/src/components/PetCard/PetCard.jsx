@@ -42,14 +42,16 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
             </div>
           </div>
         </Link>
-        <div className="ml-20 relative top-[-100px] left-14">
-          <small className="text-default-500">{edad} años</small>
-          <br />
-          <small className="text-default-500">{peso} kg</small>
-          <h4 className="font-bold text-large">{sexo}</h4>
-        </div>
-        <div className="ml-20 relative top-[-100px] left-14">
-          <Button onClick={handleOpen}> Quiero Donar $</Button>
+
+        <div className="ml-11 relative top-[-100px] left-14 bg-transparent">
+          <Button
+            onClick={handleOpen}
+            // className="border border-orange-300  bg-transparent hover:bg-orange-200 mr-4 font-medium"
+            className="border border-orange-300  bg-orange-300 hover:bg-orange-200 mr-4 "
+          >
+            {" "}
+            Quiero Donar $
+          </Button>
         </div>
       </CardHeader>
       <CardBody className="overflow-visible py-2 flex flex-col items-center">
@@ -82,7 +84,6 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
       </CardBody>
     </Card>
   );
-
 }
 
 export default PetCard;

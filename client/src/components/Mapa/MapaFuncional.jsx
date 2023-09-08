@@ -54,7 +54,7 @@ const MapaFuncional = (props) => {
       );
 
       const data = response.data;
-
+      console.log(data);
       if (data.results.length > 0) {
         const latitude = data.results[0].geometry.location.lat;
         const longitude = data.results[0].geometry.location.lng;

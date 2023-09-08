@@ -42,6 +42,11 @@ export const CHANGE_STATUS_USER = "CHANGE_STATUS_USER";
 //aqui foto perfil
 export const MOD_FOTO_PERFIL = "MOD_FOTO_PERFIL";
 
+//ACA FORMULARIO ADOPCION
+export const SUBMIT_FORM = "SUBMIT_FORM";
+export const SUBMIT_FORM_SUCCESS = "SUBMIT_FORM_SUCCESS";
+export const SUBMIT_FORM_FAILURE = "SUBMIT_FORM_FAILURE";
+
 const handleError = (dispatch, errorType, error) => {
   console.error(error);
   dispatch({ type: errorType, payload: error.message });
@@ -368,13 +373,23 @@ export const changeStatusUser = (response) => {
   };
 };
 
-//manejamos el estado y la visualizacion de la mascota (nacho)
+//ACTION FORMULARIO DE ADOPCION
+export const submitForm = (formData) => async (dispatch) => {
+  dispatch({
+    type: SUBMIT_FORM,
+  });
 
-// export const changePetStatus = (id, estado, visible) => async (dispatch) => {
-//   try {
-//     await axios.put(`${ENDPOINT}/${id}/estado`, { estado, visible }); // Cambiar el estado y la visibilidad de la mascota
-//     dispatch({ type: CHANGE_PET_STATUS, payload: { id, estado, visible } });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+  try {
+    const response = await axios.post(`${basename}/casaDeAdopcion`, formData);
+    
+    dispatch({
+      type: SUBMIT_FORM_SUCCESS,
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SUBMIT_FORM_FAILURE,
+      payload: error.message,
+    });
+  }
+};
