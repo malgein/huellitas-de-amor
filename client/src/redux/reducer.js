@@ -30,8 +30,7 @@ import {
 
   //case que me trae los usuarios con todas las relciones
   GET_ENTIRE_USERS,
-  CHANGE_STATUS_USER
-
+  CHANGE_STATUS_USER,
 } from "./actions";
 
 const initialState = {
@@ -186,29 +185,26 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case MOD_COMPLETE_USER:
-
-      console.log(payload)
-      return { ...state};
-      case MOD_COMPLETE_PET:
-      console.log(payload)
-      return { ...state};
-      case MOD_COMPLETE_HOUSE:
-        console.log(payload)
-        return { ...state};
-      case GET_ENTIRE_USERS:
-        return {
-          ...state,
-          usuarios: payload,
-        };
-        case CHANGE_STATUS_USER:
-        console.log(payload)
-        return { ...state};
+      console.log(payload);
+      return { ...state };
+    case MOD_COMPLETE_PET:
+      console.log(payload);
+      return { ...state };
+    case MOD_COMPLETE_HOUSE:
+      console.log(payload);
+      return { ...state };
+    case GET_ENTIRE_USERS:
+      return {
+        ...state,
+        usuarios: payload,
+      };
+    case CHANGE_STATUS_USER:
+      console.log(payload);
+      return { ...state };
     default:
       return {
         ...state,
       };
-
-   
 
     case LOGICAL_DELETE_PET:
       console.log("LOGICAL_DELETE_PET llamado con payload:", payload);

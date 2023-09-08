@@ -49,7 +49,7 @@ export default function AvatarImg() {
           </DropdownItem>
           {user ? (
             <DropdownItem key="dashboard">
-              <Link to={PathRoutes.DASHBOARD}>Panel</Link>
+              <Link to={PathRoutes.DASHBOARD_SUPER_ADMIN}>Panel</Link>
             </DropdownItem>
           ) : null}
 

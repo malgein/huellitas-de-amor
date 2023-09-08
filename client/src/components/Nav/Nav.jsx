@@ -17,6 +17,7 @@ import {
 } from "@nextui-org/react";
 import AvatarImg from "../AvatarImg/AvatarImg";
 import { useAuth } from "../../../context/AuthContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 
@@ -24,8 +25,7 @@ const Nav = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const sizes = ["2xl"];
-  const { user } = useAuth();
-
+  const { user, isAuthenticated } = useAuth0();
   const location = useLocation();
   //style
 
@@ -37,18 +37,9 @@ const Nav = () => {
     onOpen();
   };
 
-  // const abrirModal = () => {
-  //   setModalAbierto(true);
-  // };
-
-  // const CerrarModal = () => {
-  //   setModalAbierto(false);
-  // };
-
-  //Por aqui unos cambios
-
   return (
     //"flex flex-col justify-center border-b shadow-lg my-2 w-screen"
+
     <div className="flex flex-col justify-center border-b shadow-lg w-screen">
       <div className="flex justify-between gap-4 flex-row">
         <div className="ml-2 flex items-center">
@@ -66,14 +57,14 @@ const Nav = () => {
           <Link className="text-lg text-black" href="/">
             Inicio
           </Link>
-          {user ? (
+          {isAuthenticated ? (
             <Link href={`/perfil/${user.id}`} className="text-lg text-black">
               Mi Perfil
             </Link>
           ) : (
             ""
           )}
-
+          <div>{JSON.stringify(user)}</div>
           <div className="flex flex-wrap justify-center gap-3">
             {sizes.map((size) => (
               <Link
@@ -88,25 +79,6 @@ const Nav = () => {
               </Link>
             ))}
           </div>
-
-          {/* <Link
-            href="/notificaciones" 
-            onClick={abrirModal}
-            className="text-black"
-          >
-            Notificaciones
-          </Link> */}
-
-          {/* <div>
-            <Link href="/agregar">
-              <Button
-                className="border border-black text-black bg-white hover:bg-slate-100"
-                color="primary"
-              >
-                Crear Nueva Mascota
-              </Button>
-            </Link>
-          </div> */}
         </div>
 
         <div className="flex flex-row items-center">

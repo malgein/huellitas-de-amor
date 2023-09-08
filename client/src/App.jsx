@@ -59,7 +59,7 @@ function App() {
         <Auth0Provider
           domain="dev-zmxdsgjn0buf7bnr.us.auth0.com"
           clientId="r3sV01hm6BXdgakUyDXf1AT23FEXYqUF"
-          redirectUri={window.location.origin}
+          authorizationParams={{ redirect_uri: window.location.origin }}
         >
           {location.pathname !== "/home" && <Nav />}
           <Routes>
