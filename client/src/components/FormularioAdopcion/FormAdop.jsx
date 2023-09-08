@@ -2,8 +2,9 @@ import React from "react";
 import { Formik, Form, Field } from 'formik';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 
-export default function App() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+export default function App({isOpen, onClose, onConfirm}) {
+//   const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log('Rendering AdoptionFormModal', isOpen)
 
   const initialValues = {
     nombre: '',
@@ -19,17 +20,20 @@ export default function App() {
 
   const handleSubmit = (values) => {
     // ... envía la solicitud de adopción
+    alert('Gracias por enviar tu solicitud, la estaremos analizando y te contactaremos a la brevedad');
     console.log(values);
-    onOpenChange(false);
-  };
+    onConfirm(); // maneja la confirmación de la adopción
+    onClose(); // cierra la modal
+};
+
 
   return (
     <>
-      <Button onPress={onOpen}>Adoptar</Button>
+      {/* <Button onPress={onOpen}>Adoptar</Button> */}
       <Modal 
         backdrop="opaque" 
         isOpen={isOpen} 
-        onOpenChange={onOpenChange}
+        onClose={onClose}
         classNames={{
           backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20"
         }}
@@ -78,13 +82,13 @@ export default function App() {
                         <label htmlFor="telefono">Teléfono</label>
                         <Field name="telefono" required />
                       </div>
-                      <Button type="submit" color="primary">Enviar solicitud</Button>
+                      <Button type="submit" color="success" >Enviar solicitud</Button>
                     </Form>
                   )}
                 </Formik>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button color="danger" variant="light" onClick={onClose}>
                   Cerrar
                 </Button>
               </ModalFooter>
