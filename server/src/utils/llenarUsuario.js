@@ -6,7 +6,7 @@ const allUsers = require('./dataUsers');
 
 //controlador que funciona en la  ruta de usuarios con el proposito de llenar la base de datos con datos de usuarios validdos
 const llenarUsuario = async () => {
-  const DB = Usuario.count();
+  const DB = await Usuario.count();
   if (!DB) {
     try {
 	
@@ -17,7 +17,7 @@ const llenarUsuario = async () => {
       return result()
     } catch (error) {
       console.error('Error al llenar los datos:', error);
-      throw { error: error?.status, message: error?.message };
+      // throw { error: error?.status, message: error?.message };
     }
   }
 }

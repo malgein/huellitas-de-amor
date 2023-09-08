@@ -19,7 +19,7 @@ const getPets = async () => {
     return allPets;
   } catch (error) {
     console.error('Error al obtener las mascotas:', error);
-    throw new Error('Error al obtener las mascotas.');
+    throw { status: error?.status, message: error?.message };
   }
 };
 

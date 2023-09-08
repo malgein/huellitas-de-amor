@@ -125,14 +125,12 @@ module.exports = router;
 // const filtradoMascotas = require("../controllers/filtradoMascotas");
 // const getPets = require("../controllers/getPets");
 // const postCasaAdopcion = require("./routesCasaDeAdopcion");
-
+const formularioAdopt = require("../controllers/FormularioAdop.js");
 
 // const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 // const postSendEmail = require("../controllers/postSendEmail");
 // const postMercadoPago = require("../controllers/postMercadoPago");
 // const fillDonations = require("../controllers/fillDonations");
-
-// const fillPets = require("../utils/fillPets");
 
 // const fillPets = require("../utils/fillPets");
 

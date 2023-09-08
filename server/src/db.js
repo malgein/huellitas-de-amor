@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
   // //!Para usar la base de datos local
   // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
   {
-    logging: false, // set to console.log to see the raw SQL queries
+    logging: false,// set to console.log to see the raw SQL queries
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   }
 );
@@ -90,6 +90,14 @@ Adopcion.belongsTo(Usuario, {
 Usuario.hasMany(Adopcion, {
   foreignKey: "usuarioId",
 });
+
+Mascota.belongsTo(Usuario, {
+	foreignKey: "usuarioId",
+});
+Usuario.hasMany(Mascota, {
+	foreignKey: "usuarioId",
+});
+
 //Lo comenté porque si no, cuando haces post de casa de adopción te pide un comentario como dato en el json.
 //Casa de Apciones --> Comentarios
 CasaDeAdopcion.hasMany(Comentario, {
@@ -146,7 +154,7 @@ Favorito.belongsTo(Usuario, {
   foreignKey: "favoritoId",
 }); //Un usuario puede tener muchos favoritos (1 a N)
 
-Usuario.hasMany(Favorito, { foreignKey: "usuarioId" }); //
+Usuario.hasMany(Favorito, { foreignKey: "favoritoId" }); //
 
 //Mascotas --> Favoritos
 
@@ -154,7 +162,7 @@ Favorito.belongsTo(Mascota, {
   foreignKey: "favoritoId",
 }); //Un usuario puede tener muchos favoritos (1 a N)
 
-Mascota.hasMany(Favorito, { foreignKey: "mascotaId" }); //
+Mascota.hasMany(Favorito, { foreignKey: "favoritoId" }); //
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
