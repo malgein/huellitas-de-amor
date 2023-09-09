@@ -8,7 +8,7 @@ const fillHomes = async () => {
 	const DB = await CasaDeAdopcion.count();
 	if (!DB) {
 		try {
-			console.log(allHomes);
+			// console.log(allHomes);
 			// Llena la tabla con los datos de users que al final son los datos de data.js es decir todas los usuarios
 			const result = async () => await CasaDeAdopcion.bulkCreate(allHomes);
 

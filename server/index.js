@@ -21,6 +21,6 @@ conn
       fillHomes();
       llenarUsuario();
       fillDonations();
-      console.log(`Correte a la POKEVERGA en el:  ${PORT}`); // eslint-disable-line no-console
+      console.log(`el server si no anda se la come en el :  ${PORT}`); // eslint-disable-line no-console
     });
   });

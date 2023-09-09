@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const {FormularioAdop} = require('../db.js'); 
+const {FormularioAdop} = require('../db'); 
 const router = Router();
 
 // Ruta GET para obtener todos los formularios de adopción
-router.get("/formadop", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const formularios = await FormularioAdop.findAll();
         res.json(formularios);

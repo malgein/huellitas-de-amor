@@ -7,7 +7,7 @@ const getPetByName = require("../controllers/getPetsByName");
 const filtradoMascotas = require("../controllers/filtradoMascotas");
 const getPets = require("../controllers/getPets");
 const postCasaAdopcion = require("./routesCasaDeAdopcion");
-// const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
+const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
 const postSendEmail = require("../controllers/postSendEmail");
 const postMercadoPago = require("../controllers/postMercadoPago");
@@ -27,7 +27,7 @@ const fillTypeUsers = require("../utils/fillTypeUsers");
 const usuarioTipoController = require("../controllers/usuarioTipoController");
 const donationsUser = require("../controllers/donationsUser");
 const donationsHouse = require("../controllers/donationsHouse");
-const formularioAdopt = require("../controllers/FormularioAdop.js");
+// const formularioRouter = require("../controllers/FormularioAdop");
 
 router.patch("/relacion-user-type", usuarioTipoController);
 router.use("/donaciones", postDonaciones);
@@ -56,7 +56,10 @@ router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
 router.use("/usuario", postCrearUsuario);
-router.post("/usuario", postCrearUsuario);
+router.post("/usuario", postCrearUsuario); 
+
+// router.use("/formadop", formularioRouter);
+// router.post("/formadop/nuevoform", formularioRouter);
 
 router.put("/:id/estado", modPetById);
 router.get("/adopcion/:usuarioId", getAdoptionUser);

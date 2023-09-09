@@ -1,7 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field } from 'formik';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-
+import { submitForm } from "../../redux/actions";
 export default function App({isOpen, onClose, onConfirm}) {
 //   const { isOpen, onOpen, onClose } = useDisclosure();
   console.log('Rendering AdoptionFormModal', isOpen)
@@ -17,13 +18,14 @@ export default function App({isOpen, onClose, onConfirm}) {
     pais: '',
     telefono: ''
   };
+  const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    // ... envía la solicitud de adopción
+    dispatch(submitForm(values)); // Enviar los valores del formulario a tu acción
     alert('Gracias por enviar tu solicitud, la estaremos analizando y te contactaremos a la brevedad');
     console.log(values);
-    onConfirm(); // maneja la confirmación de la adopción
-    onClose(); // cierra la modal
+    onConfirm(); 
+    onClose(); 
 };
 
 
