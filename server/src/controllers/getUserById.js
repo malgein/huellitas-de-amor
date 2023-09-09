@@ -1,10 +1,21 @@
-const { Usuario } = require("../db.js");
+const { Usuario, TipoDeUsuario, Donacion} = require("../db.js");
 
 const getUserById = async (id) => {
 
   try {
     // Buscamos la mascota por su ID en la base de datos
-    const usuario = await Usuario.findByPk(id);
+    const usuario = await Usuario.findByPk(id, {
+      include: [
+        {
+          model: TipoDeUsuario,
+           // Alias opcional para TipoDeUsuario
+        },
+        {
+          model: Donacion,
+         // Alias opcional para Donaciones
+        },
+      ],
+    });
 
     if (!usuario) {
       return ({ mensaje: "Usuario no encontrado" });
@@ -15,7 +26,7 @@ const getUserById = async (id) => {
     return usuario
   } catch (error) {
     console.error(error);
-    return { mensaje: "Error en el servidor" }
+   throw { status: error?.status, message: error?.message };
   }
 }
 

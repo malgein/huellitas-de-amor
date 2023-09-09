@@ -11,8 +11,9 @@ module.exports = (sequelize) => {
         primaryKey: true,
       },
       tipo: {
-        type: DataTypes.ENUM("Administrador", "Centro De Adopcion", "Usuario"),
+        type: DataTypes.ENUM("Administrador", "Centro De Adopcion", "Usuario", "Super Administrador"),
         allowNull: false,
+        defaultValue: 'Usuario'
       },
     },
     { timestamps: false }

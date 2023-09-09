@@ -1,165 +1,259 @@
-//
-
 import React, { useState, useEffect } from "react";
-import FormInput from "../FormInput/FormInput";
-import FormTextarea from "../FormTextarea/FormTextarea";
-import { Button } from "@nextui-org/button";
-import { Formik, Form } from "formik";
 import Swal from "sweetalert2";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"; // Asegúrate de importar useDispatch de acuerdo a tu estructura Redux
+import { modCompleteUser } from "../../redux/actions";
+import { Button, Input, Textarea } from "@nextui-org/react";
+import ImagenesPerfil from "../ImagenesPerfil/ImagenesPerfil";
 
-const EditarPerfil = () => {
-  const { userId } = useParams(); // Asegúrate de tener el userId desde React Router
+const EditarPerfil = ({
+  id,
+  updateUser,
+  setUserModified,
+  perfil,
+  setPerfil,
+}) => {
+  const dispatch = useDispatch();
+  const imagenes = useSelector((state) => state.imagenes);
 
-  const initialValues = {
+  const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
-    email: "",
-    password: "",
     nacionalidad: "",
     ubicacion: "",
     direccion: "",
     telefono: "",
     acerca: "",
-  };
+    email: "",
+    password: "",
+    // imagenPerfil: "",
+  });
 
-  // const [userData, setUserData] = useState(initialValues);
+  useEffect(() => {
+    // Llena el estado 'formData' con los datos actuales del perfil cuando se carga el componente
+    if (perfil) {
+      setFormData({
+        ...perfil, //cambio uno
+        nombre: perfil.nombre,
+        apellido: perfil.apellido,
+        nacionalidad: perfil.nacionalidad,
+        ubicacion: perfil.ubicacion,
+        direccion: perfil.direccion,
+        telefono: perfil.telefono,
+        acerca: perfil.acerca,
+        email: perfil.email,
+        password: "",
+        imagenPerfil: perfil.imagenPerfil,
+        imagenPortada: perfil.imagenPortada,
+      });
+    }
+  }, [perfil]);
+  console.log(perfil);
 
-  // useEffect(() => {
-  //   // Obtener los datos del usuario del backend y establecerlos en el estado
-  //   if (userId) {
-  //     axios
-  //       .get(`http://localhost:3001/perfil/${userId}`)
-  //       .then((response) => {
-  //         setUserData(response.data || initialValues); // Usar initialValues si no hay datos disponibles
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error al obtener los datos del usuario:", error);
-  //       });
-  //   }
-  // }, []);
+  const handleEdit = async () => {
+    // Lógica de validación
+    // if (
+    //   formData.nombre === "" ||
+    //   formData.apellido === "" ||
+    //   formData.nacionalidad === "" ||
+    //   formData.ubicacion === "" ||
+    //   formData.direccion === "" ||
+    //   formData.telefono === "" ||
+    //   formData.acerca === "" ||
+    //   formData.email === "" ||
+    //   formData.password === "" ||
+    //   formData.imagenPerfil === ""
+    // ) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "No se pudo modificar el usuario",
+    //     text: "No puedes dejar campos en blanco!",
+    //   });
+    // }
+    if (isNaN(formData.telefono)) {
+      Swal.fire({
+        icon: "error",
+        title: "No se pudo modificar el usuario",
+        text: "El teléfono del usuario debe ser expresado en números enteros",
+      });
+    } else if (formData.telefono.charAt(0) === "0") {
+      Swal.fire({
+        icon: "error",
+        title: "No se pudo modificar el usuario",
+        text: "El teléfono del usuario no debe empezar por 0",
+      });
+    } else if (formData.telefono.length > 9) {
+      Swal.fire({
+        icon: "error",
+        title: "No se pudo modificar el usuario",
+        text: "El teléfono del usuario no debe exceder los 9 dígitos",
+      });
+    } else {
+      dispatch(modCompleteUser(id, formData));
 
-  // console.log("aqui user data", userData);
-
-  // const onSubmit = (values) => {
-  //   // Clonar los datos para evitar referencias circulares
-  //   const clonedData = JSON.parse(JSON.stringify(values));
-
-  //   axios
-  //     .put(`http://localhost:3001/usuario/${userId}`, clonedData)
-  //     .then((response) => {
-  //       Swal.fire(
-  //         "Éxito",
-  //         "Los cambios se guardaron correctamente.",
-  //         "success"
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error al actualizar los datos del usuario:", error);
-  //       Swal.fire("Error", "No se pudieron guardar los cambios.", "error");
-  //       console.log(error);
-  //     });
-  // };
-
-  const onSubmit = async (values) => {
-    // Clonar los datos para evitar referencias circulares
-    // const clonedData = JSON.parse(JSON.stringify(values));
-    try {
-      await axios
-        .put(`http://localhost:3001/usuario/${userId}`, values)
-        .then((response) => {
-          Swal.fire(
-            "Éxito",
-            "Los cambios se guardaron correctamente.",
-            "success"
-          );
-        });
-    } catch (error) {
-      console.error("Error al actualizar los datos del usuario:", error);
-      Swal.fire("Error", "No se pudieron guardar los cambios.", "error");
-      console.log(error);
+      updateUser(formData);
+      setPerfil({ ...perfil, imagenPerfil: formData.imagenPerfil }); // Actualiza la imagen de perfil en el estado de Perfil
+      Swal.fire({
+        icon: "success",
+        text: "Modificación exitosa!",
+      });
+      setUserModified(!userModified);
+      dispatchRedux();
     }
   };
 
   return (
-    <div className="flex flex-col items-center">
-      {/* <form action="">
-        <label htmlFor=""></label>
-        <input type="text" />
-      </form> */}
-      <Formik
-        initialValues={initialValues} // Rellenar el formulario con los datos del usuario
-        onSubmit={onSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form onSubmit={onSubmit}>
-            <div>
-              <FormInput label="Nombre" name="nombre" placeholder="Nombre" />
-            </div>
-            <div>
-              <FormInput
-                label="Apellido"
-                name="apellido"
-                placeholder="Apellido"
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Nacionalidad"
-                name="nacionalidad"
-                placeholder="Nacionalidad"
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Ubicación"
-                name="ubicacion"
-                placeholder="Ubicación"
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Direccion"
-                name="direccion"
-                placeholder="Direccion"
-              />
-            </div>
-            <div>
-              <FormInput
-                label="Telefono"
-                name="telefono"
-                placeholder="Telefono"
-              />
-            </div>
-            <div>
-              <FormTextarea
-                placeholder="Realiza una descripción..."
-                label="Acerca De:"
-                name="acerca"
-              />
-            </div>
-            <div>
-              <FormInput placeholder="Email" label="Email" name="email" />
-            </div>
-            <div>
-              <FormInput
-                placeholder="Contraseña"
-                label="Contraseña"
-                name="password"
-              />
-            </div>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="border border-black text-black hover:bg-slate-100 mt-8 bg-inherit mb-4"
-              size="lg"
-            >
-              Guardar Cambios
-            </Button>
-          </Form>
-        )}
-      </Formik>
+    <div className="flex flex-col justify-center items-center">
+      <form className=" w-[600px] flex flex-col text-gray-800 font-medium">
+        <div className="flex flex-row gap-5">
+          <div className=" flex flex-col w-[50%] ">
+            <Input
+              type="email"
+              label="Nombre"
+              placeholder="Agrega un nombre"
+              labelPlacement="outside"
+              value={formData.nombre}
+              onChange={(e) =>
+                setFormData({ ...formData, nombre: e.target.value })
+              }
+            />
+
+            <Input
+              type="email"
+              label="Apellidos"
+              placeholder="Apellidos"
+              labelPlacement="outside"
+              value={formData.apellido}
+              onChange={(e) =>
+                setFormData({ ...formData, apellido: e.target.value })
+              }
+              className="mt-2"
+            />
+
+            <Input
+              type="email"
+              label="Nacionalidad"
+              placeholder="Nacionalidad"
+              labelPlacement="outside"
+              value={formData.nacionalidad}
+              onChange={(e) =>
+                setFormData({ ...formData, nacionalidad: e.target.value })
+              }
+              className="mt-2"
+            />
+          </div>
+
+          <div className=" flex flex-col w-[50%] ">
+            <Input
+              type="email"
+              label="Ubicación"
+              placeholder="Ubicación"
+              labelPlacement="outside"
+              value={formData.ubicacion}
+              onChange={(e) =>
+                setFormData({ ...formData, ubicacion: e.target.value })
+              }
+            />
+
+            <Input
+              type="email"
+              label="Dirección"
+              placeholder="Dirección"
+              labelPlacement="outside"
+              value={formData.direccion}
+              onChange={(e) =>
+                setFormData({ ...formData, direccion: e.target.value })
+              }
+              className="mt-2"
+            />
+
+            <Input
+              type="email"
+              label="Telefono"
+              placeholder="Telefono"
+              labelPlacement="outside"
+              value={formData.telefono}
+              onChange={(e) =>
+                setFormData({ ...formData, telefono: e.target.value })
+              }
+              className="mt-2"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col mt-6">
+          <Textarea
+            type="text"
+            label="Descripción"
+            labelPlacement="outside"
+            placeholder="Acerca de..."
+            value={formData.acerca}
+            onChange={(e) =>
+              setFormData({ ...formData, acerca: e.target.value })
+            }
+            // className="w-[600px] h-[100px] mb-2 border-2 rounded"
+          />
+        </div>
+
+        <div className="flex gap-5 mt-6">
+          <Input
+            type="email"
+            label="Email"
+            placeholder="Ingresa tu correo"
+            labelPlacement="outside"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+          />
+
+          <Input
+            type="email"
+            label="Contraseña"
+            placeholder="Contraseña"
+            labelPlacement="outside"
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
+          />
+        </div>
+
+        <label className="mt-4 text-black">Foto de perfil</label>
+
+        <div className="border-4 rounded-full w-[180px] mx-auto mb-4">
+          <ImagenesPerfil
+            setImagenes={(imagenes) =>
+              setFormData({
+                ...formData,
+                imagenPerfil: imagenes[0] || "",
+              })
+            }
+          />
+        </div>
+        <div className=" flex justify-center items-center w-[200px]">
+          {imagenes &&
+            imagenes.map((imag) => {
+              return (
+                <img
+                  onClick={() => handleClickImages(imag)}
+                  src={imag}
+                  alt=""
+                  className="h-[80px] m-[15px]"
+                />
+              );
+            })}
+        </div>
+
+        <div className="flex flex-col justify-center items-center mb-4">
+          <Button
+            type="button"
+            onClick={handleEdit}
+            className="bg-orange-400 text-black w-[150px] mt-4"
+          >
+            Editar Usuario
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };

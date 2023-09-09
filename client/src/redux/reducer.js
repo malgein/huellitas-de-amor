@@ -21,16 +21,21 @@ import {
   DELETE_HOUSES,
   SUBIR_IMAGENES,
   LIMPIAR_IMAGENES,
-
-
   MOD_COMPLETE_PET,
   MOD_COMPLETE_HOUSE,
-
   LOGICAL_DELETE_PET,
-  ELIMINAR_IMAGENES, 
+  ELIMINAR_IMAGENES,
   MOD_COMPLETE_USER,
   GET_CASA_BY_ID,
 
+  //case que me trae los usuarios con todas las relciones
+  GET_ENTIRE_USERS,
+  CHANGE_STATUS_USER,
+
+  // Formulario de adopcion
+  SUBMIT_FORM,
+  SUBMIT_FORM_SUCCESS,
+  SUBMIT_FORM_FAILURE,
 } from "./actions";
 
 const initialState = {
@@ -45,6 +50,7 @@ const initialState = {
   casasDeAdopcion: [],
   donaciones: [],
   imagenes: [],
+  formData: null,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -135,6 +141,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
       };
 
+    //foto de perfil
+    // case FOTO_PERFIL:
+    //   return {
+    //     ...state,
+    //   };
+
     case DELETE_USERS:
       return {
         ...state,
@@ -179,28 +191,56 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case MOD_COMPLETE_USER:
-
-      console.log(payload)
-      return { ...state};
-      case MOD_COMPLETE_PET:
-      console.log(payload)
-      return { ...state};
-      case MOD_COMPLETE_HOUSE:
-        console.log(payload)
-        return { ...state};
+      console.log(payload);
+      return { ...state };
+    case MOD_COMPLETE_PET:
+      console.log(payload);
+      return { ...state };
+    case MOD_COMPLETE_HOUSE:
+      console.log(payload);
+      return { ...state };
+    case GET_ENTIRE_USERS:
+      return {
+        ...state,
+        usuarios: payload,
+      };
+    case CHANGE_STATUS_USER:
+      console.log(payload);
+      return { ...state };
     default:
       return {
         ...state,
       };
-      case LOGICAL_DELETE_PET:
-        console.log("LOGICAL_DELETE_PET llamado con payload:", payload);
-  return {
-    ...state,
-    mascotas: state.mascotas.map(mascota =>
-      mascota.id === payload ? { ...mascota, estado: "En Proceso" } : mascota
-    )
-  };
 
+    case LOGICAL_DELETE_PET:
+      console.log("LOGICAL_DELETE_PET llamado con payload:", payload);
+      return {
+        ...state,
+        mascotas: state.mascotas.map((mascota) =>
+          mascota.id === payload
+            ? { ...mascota, estado: "En adopción" }
+            : mascota
+        ),
+      };
+    case SUBMIT_FORM:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SUBMIT_FORM_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        formData: action.payload,
+        error: null,
+      };
+    case SUBMIT_FORM_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
   }
 };
+
 export default rootReducer;

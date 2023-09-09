@@ -1,21 +1,27 @@
 require("dotenv").config();
 const server = require("./src/app.js");
+const fillDonations = require("./src/controllers/fillDonations.js");
 const { conn } = require("./src/db.js");
 const fillHomes = require("./src/utils/fillHomes.js");
 const fillPets = require("./src/utils/fillPets.js");
+const llenarUsuario = require("./src/utils/llenarUsuario.js");
+// const crearAdopcion = require("./src/utils/crearAdopcion.js");
 
-const PORT =  process.env.PORT ||3001;
+const PORT = 3001;
 
 // Syncing all the models at once.
 
 conn
   .sync({
-    force: false,
+    force: true
+    ,
   })
   .then(() => {
     server.listen(PORT, () => {
-      // fillPets();
-      // fillHomes();
-      console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
+      fillHomes();
+      llenarUsuario();
+      fillDonations();
+      fillPets();
+      console.log(`Correte a la POKEVERGA en el:  ${PORT}`); // eslint-disable-line no-console
     });
   });

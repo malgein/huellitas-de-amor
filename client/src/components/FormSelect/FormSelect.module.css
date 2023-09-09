@@ -1,4 +1,16 @@
-.selectRed {
+.select{
+	background-color: azure;
+	width: 200px;
+	height: 55px;
+	top: 328px;
+	left: 503px;
+	border-radius: 12px;
+	margin-bottom: 5px;
+	margin-top: 20px;
+}
+
+
+/* .selectRed {
 	background-color: white;
 	width: 200px;
 	height: 55px;
@@ -9,9 +21,10 @@
 	border-color: red;
 	margin-bottom: 5px;
 	margin-top: 20px;
-	/* position: absolute; */
+	
 
 }
+
 .select {
     background-color: hsl(240, 6%, 90%);
 	position: relative;
@@ -55,4 +68,4 @@
 	border-color: green;
 	margin-bottom: 5px;
 	margin-top: 20px;
-}
+} */

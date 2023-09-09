@@ -12,11 +12,11 @@ module.exports = (sequelize) => {
       },
       nombre: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       apellido: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -24,7 +24,6 @@ module.exports = (sequelize) => {
       },
 
       password: {
-
         type: DataTypes.STRING(50),
         allowNull: false,
       },
@@ -41,12 +40,24 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       telefono: {
-        type: DataTypes.STRING(15),
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       acerca: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.TEXT(50),
         allowNull: true,
+      },
+      imagenPerfil: {
+        type: DataTypes.JSON, // Puedes ajustar el tipo de dato según tu necesidad
+        allowNull: true, // Puede ser nulo si el usuario no ha subido una imagen de perfil
+        defaultValue:
+          "https://st2.depositphotos.com/4155479/6909/v/450/depositphotos_69099741-stock-illustration-labrador-retriever.jpg",
+      },
+      imagenPortada: {
+        type: DataTypes.JSON, // Puedes ajustar el tipo de dato según tu necesidad
+        allowNull: true, // Puede ser nulo si el usuario no ha subido una imagen de portada
+        defaultValue:
+          "https://st4.depositphotos.com/11498520/23294/v/450/depositphotos_232945258-stock-illustration-dog-paw-seamless-pattern-heart.jpg",
       },
     },
     { timestamps: false }

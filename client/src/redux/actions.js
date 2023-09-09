@@ -10,9 +10,9 @@ export const FILTERS_ERROR = "FILTERS_ERROR";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const ORDER_BY_AGE = "ORDER_BY_AGE";
 export const FETCHING_MASCOTAS = "FETCHING_MASCOTAS";
-export const MOD_COMPLETE_USER = 'MOD_COMPLETE_USER'
-export const MOD_COMPLETE_PET = 'MOD_COMPLETE_PET'
-export const MOD_COMPLETE_HOUSE = 'MOD_COMPLETE_HOUSE'
+export const MOD_COMPLETE_USER = "MOD_COMPLETE_USER";
+export const MOD_COMPLETE_PET = "MOD_COMPLETE_PET";
+export const MOD_COMPLETE_HOUSE = "MOD_COMPLETE_HOUSE";
 export const GET_ALL_HOMES = "GET_ALL_HOMES";
 export const GET_CASA_BY_ID = "GET_CASA_BY_ID";
 export const DELETE_USERS = "DELETE_USERS";
@@ -21,10 +21,9 @@ export const DELETE_PET = "DELETE_PET";
 export const EDIT_HOUSES = "EDIT_HOUSES";
 export const DELETE_HOUSES = "DELETE_HOUSES";
 
-
-
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = "GET_USER";
+export const GET_USERS_RELATIONS = "GET_USERS_RELATIONS";
 
 export const GET_ALL_DONATIONS = "GET_DONATIONS";
 
@@ -32,25 +31,38 @@ export const ADD_MASCOTA = "ADD_MASCOTA";
 export const SUBIR_IMAGENES = "SUBIR_IMAGENES";
 export const LIMPIAR_IMAGENES = "LIMPIAR_IMAGENES";
 export const ELIMINAR_IMAGENES = "ELIMINAR_IMAGENES";
+
 export const LOGICAL_DELETE_PET = "LOGICAL_DELETE_PET";
 export const CHANGE_PET_STATUS = "CHANGE_PET_STATUS ";
+//Caso que me trae todos los usuarios de la bd con sus relaciones: donaciones, tipo de usuario, comentarios, favoritos etc
+export const GET_ENTIRE_USERS = "GET_ENTIRE_USERS";
+//Modifica el tipo de usuario
+export const CHANGE_STATUS_USER = "CHANGE_STATUS_USER";
 
+//aqui foto perfil
+export const MOD_FOTO_PERFIL = "MOD_FOTO_PERFIL";
 
+//ACA FORMULARIO ADOPCION
+export const SUBMIT_FORM = "SUBMIT_FORM";
+export const SUBMIT_FORM_SUCCESS = "SUBMIT_FORM_SUCCESS";
+export const SUBMIT_FORM_FAILURE = "SUBMIT_FORM_FAILURE";
 
 const handleError = (dispatch, errorType, error) => {
   console.error(error);
   dispatch({ type: errorType, payload: error.message });
 };
 
-
 export const EDIT_USER = "EDIT_USER";
-const basename = "https://huellitas-de-amor-production.up.railway.app";
-// const basename = "http://localhost:3001";
+
+// export const basename = "https://huellitas-de-amor-production-6e81.up.railway.app";
+export const basename = "https://huellitas-de-amor-3.up.railway.app";
+
+// export const basename = "http://localhost:3001";
+
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
 const ENDPOINTNAME2 = `${basename}/mascotas/nombre?nombre=`;
 const ENDPOINTNAME = `${basename}/mascotas?name=`;
-
 
 export const getPetById = (id) => async (dispatch) => {
   try {
@@ -138,9 +150,20 @@ export const addMascota = (Mascota) => {
   };
 };
 
+//todo Nuevo
+export const postCrearUsuario = (user) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(`${ENDPOINT}/usuario`, user);
+    console.log(data);
+    dispatch({ payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getUsers = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${basename}/usuario`);
+    const response = await axios.get(`${basename}/usuarios`);
     dispatch({
       type: GET_USERS,
       payload: response.data,
@@ -175,7 +198,7 @@ export const getDonations = () => async (dispatch) => {
 };
 
 export const editUser = (id, updatedData) => {
-  const endpoint = `${basename}/usuario/${id}`;
+  const endpoint = `${basename}/usuarios/${id}`;
 
   return (dispatch) => {
     axios.patch(endpoint, updatedData).then(({ data }) => {
@@ -188,7 +211,7 @@ export const editUser = (id, updatedData) => {
 };
 
 export const deleteUsers = (id) => {
-  const endpoint = `${basename}/usuario/${id}`;
+  const endpoint = `${basename}/usuarios/${id}`;
   return (dispatch) => {
     axios.delete(endpoint).then(({ data }) => {
       return dispatch({
@@ -280,10 +303,24 @@ export const modCompleteUser = (id, updatedProperties) => {
   };
 };
 
+//Para modificar foto de perfil
 
-export const modCompletePet  = (id, updatedProperties) => {
+// export const modFotoPerfil = (id, updatedProperties) => {
+//   const endpoint = `${basename}/usuario/${id}`;
+//   console.log(updatedProperties);
+//   return (dispatch) => {
+//     axios.put(endpoint, updatedProperties).then(({ data }) => {
+//       dispatch({
+//         type: MOD_FOTO_PERFIL,
+//         payload: data,
+//       });
+//     });
+//   };
+// };
+
+export const modCompletePet = (id, updatedProperties) => {
   const endpoint = `${basename}/mascotas/${id}`;
-  console.log(updatedProperties)
+  console.log(updatedProperties);
   return (dispatch) => {
     axios.put(endpoint, updatedProperties).then(({ data }) => {
       dispatch({
@@ -294,9 +331,9 @@ export const modCompletePet  = (id, updatedProperties) => {
   };
 };
 
-export const modCompleteHouse  = (id, updatedProperties) => {
+export const modCompleteHouse = (id, updatedProperties) => {
   const endpoint = `${basename}/casaDeAdopcion/${id}`;
-  console.log(updatedProperties)
+  console.log(updatedProperties);
   return (dispatch) => {
     axios.put(endpoint, updatedProperties).then(({ data }) => {
       dispatch({
@@ -307,27 +344,65 @@ export const modCompleteHouse  = (id, updatedProperties) => {
   };
 };
 
-
 export const logicalDeletePet = (id, estado) => async (dispatch) => {
   try {
-    await axios.put(`${ENDPOINT}/${id}/estado`, { estado }); // Marcamos la mascota como borrada
-    console.log("Respuesta del servidor:", response.data);
-    dispatch({ type: LOGICAL_DELETE_PET, payload: id });
+    const response = await axios.put(`${ENDPOINT}/${id}/estado`, { estado });
+    if (response.status === 200) {
+      dispatch({ type: LOGICAL_DELETE_PET, payload: id });
+    } else {
+      console.error("Error al actualizar el estado de la mascota:", response);
+    }
   } catch (error) {
-    console.log(error);
+    console.error("Error al actualizar el estado de la mascota:", error);
+  }
+
+  //Traemos todos los usuarios y sus relaciones
+};
+
+//Accion que me trare el usuario con todas sus relacione
+//? User validar
+export const getEntireUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${basename}/usuario/tipoDeUsuario`);
+    dispatch({
+      type: GET_ENTIRE_USERS,
+      payload: response.data,
+    });
+  } catch (error) {
+    handleError(dispatch, GET_ENTIRE_USERS, error);
   }
 };
-//manejamos el estado y la visualizacion de la mascota (nacho)
 
+export const changeStatusUser = (response) => {
+  const endpoint = `${basename}/relacion-user-type`;
+  console.log(response);
+  return (dispatch) => {
+    axios.patch(endpoint, response).then(({ data }) => {
+      return dispatch({
+        type: CHANGE_STATUS_USER,
+        payload: data,
+      });
+    });
+  };
+};
 
-// export const changePetStatus = (id, estado, visible) => async (dispatch) => {
-//   try {
-//     await axios.put(`${ENDPOINT}/${id}/estado`, { estado, visible }); // Cambiar el estado y la visibilidad de la mascota
-//     dispatch({ type: CHANGE_PET_STATUS, payload: { id, estado, visible } });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+//ACTION FORMULARIO DE ADOPCION
+export const submitForm = (formData) => async (dispatch) => {
+  dispatch({
+    type: SUBMIT_FORM,
+  });
 
+  try {
+    const response = await axios.post(`${basename}/casaDeAdopcion`, formData);
 
-
+    dispatch({
+      type: SUBMIT_FORM_SUCCESS,
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SUBMIT_FORM_FAILURE,
+      payload: error.message,
+    });
+  }
+};

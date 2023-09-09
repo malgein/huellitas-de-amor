@@ -1,6 +1,6 @@
-import React, {  useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom"
-
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -11,32 +11,27 @@ import { getCasaById, getPetById, logicalDeletePet } from "../../redux/actions";
 import { Button, Badge, Avatar, Tooltip } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
-import iconMacho from "../../assets/macho.png";
-import iconHembra from "../../assets/hembra.png";
 import PathRoutes from "../../helpers/Routes.helper";
-import { useAuth } from "../../../../server/src/context/AuthContext";
 
+import AdoptionFormModal from "../FormularioAdopcion/FormAdop";
 
 export default function Detail() {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user } = useAuth0();
   const dispatch = useDispatch();
-  const [adopcionEnProgreso, setAdopcionEnProgreso] =useState (false)
+  const [adopcionEnProgreso, setAdopcionEnProgreso] = useState(false);
   const navigate = useNavigate();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getPetById(id));
   }, [dispatch, id]);
 
   const mascota = useSelector((state) => state.petDetail);
-
-
+  console.log(id);
 
   useEffect(() => {
-    if (mascota.casaDeAdopcionId) {
-      dispatch(getCasaById(mascota.casaDeAdopcionId));
-    }
+    console.log(mascota.casaDeAdopcionId);
     if (mascota.casaDeAdopcionId) {
       dispatch(getCasaById(mascota.casaDeAdopcionId));
     }
@@ -46,30 +41,37 @@ export default function Detail() {
   //   return <p> Aguarde unos Instantes...</p>;
   // }
 
-  
-
   const handleConfetti = () => {
+    console.log("Ver confetti");
     confetti({});
   };
-  
   const handleAdoption = () => {
-   setAdopcionEnProgreso(true);
-   dispatch(logicalDeletePet(id, "En Proceso"));
-   
-   
-    
-    handleConfetti();
-    navigate("/")
+    if (user) {
+      console.log("Opening modal");
+      setIsModalOpen(true);
+    } else {
+      navigate("/NewLogin");
+    }
   };
-  
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
 
+  const handleAdoptionConfirm = () => {
+    console.log("Confirmacion de adopcion");
+    setAdopcionEnProgreso(true);
+    dispatch(logicalDeletePet(id, "En Proceso"));
+    handleConfetti();
 
-  
+    navigate("/");
+  };
+
   const casa = useSelector((state) => state.casasDeAdopcion);
+  console.log(casa);
   const isAdopted = mascota.estado === "Adoptado";
-  const isInProcess = mascota.estado === "En Proceso"
+  // const isInProcess = mascota.estado === "En Proceso";
   const isAvailableForAdoption = mascota.estado === "En Adopción";
- 
+
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
@@ -122,7 +124,6 @@ export default function Detail() {
             }
             size="lx"
           ></Badge>
-
         </div>
         <div className="p-4 ">
           <div className="flex items-center mb-2">
@@ -192,34 +193,40 @@ export default function Detail() {
               </Link>
             </div>
           </div>
+          <AdoptionFormModal
+            isOpen={isModalOpen}
+            onOpenChange={setIsModalOpen}
+            onConfirm={handleAdoptionConfirm}
+          />
           <div className="px-14 py-2 bg-white pb-8 flex items-center">
-          {user ? (
-    <Button 
-        onClick={handleAdoption}
-        id={id}
-        currentState={mascota.estado}
-        user={user}
-    >
-        Adóptame
-    </Button>
-) : (
-    <Link to="/registro">
-        <Button radius="full" color="primary">
-            Adóptame
-        </Button>
-    </Link>
-)}
-               </div>
-        
-        <Link to="/">
-          <Button>Volver</Button>
-        </Link>
+            <AdoptionFormModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              onConfirm={handleAdoptionConfirm}
+            />
+
+            {user ? (
+              <Button
+                onClick={handleAdoption}
+                id={id}
+                currentState={mascota.estado}
+                user={user}
+              >
+                Adóptame
+              </Button>
+            ) : (
+              <Link to="/NuevoRegistro">
+                <Button radius="full" color="primary">
+                  Adóptame
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
+      <Link to="/" className="flex justify-center mt-4">
+        <Button>Volver</Button>
+      </Link>
     </div>
-
-     
-
-)};
-
-
+  );
+}

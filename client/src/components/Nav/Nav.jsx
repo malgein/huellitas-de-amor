@@ -16,6 +16,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import AvatarImg from "../AvatarImg/AvatarImg";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // import { addToFavs, removeFromFavs } from "../../redux/actions";
 
@@ -23,11 +24,11 @@ const Nav = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const sizes = ["2xl"];
-
+  const { user, isAuthenticated } = useAuth0();
   const location = useLocation();
   //style
 
-  const mostarSearchBar = location.pathname === "/home";
+  const mostarSearchBar = location.pathname === "/";
   const [modalabierto, setModalAbierto] = useState(false);
 
   const handleOpen = (size) => {
@@ -35,18 +36,9 @@ const Nav = () => {
     onOpen();
   };
 
-  // const abrirModal = () => {
-  //   setModalAbierto(true);
-  // };
-
-  // const CerrarModal = () => {
-  //   setModalAbierto(false);
-  // };
-
-  //Por aqui unos cambios
-
   return (
     //"flex flex-col justify-center border-b shadow-lg my-2 w-screen"
+
     <div className="flex flex-col justify-center border-b shadow-lg w-screen">
       <div className="flex justify-between gap-4 flex-row">
         <div className="ml-2 flex items-center">
@@ -61,13 +53,16 @@ const Nav = () => {
         </div>
 
         <div className=" gap-20 flex flex-row justify-center items-center text-black">
-          <Link className="text-black" href="/">
+          <Link className="text-lg text-black" href="/">
             Inicio
           </Link>
-          <Link href="/perfil/${id}" className="text-black">
-            Mi Perfil
-          </Link>
-
+          {isAuthenticated ? (
+            <Link href={`/perfil/${user.id}`} className="text-lg text-black">
+              Mi Perfil
+            </Link>
+          ) : (
+            ""
+          )}
           <div className="flex flex-wrap justify-center gap-3">
             {sizes.map((size) => (
               <Link
@@ -76,31 +71,12 @@ const Nav = () => {
                 variant="solid"
                 key={size}
                 onPress={() => handleOpen(size)}
-                className="text-black"
+                className="text-lg text-black"
               >
                 Notificaciones
               </Link>
             ))}
           </div>
-
-          {/* <Link
-            href="/notificaciones"
-            onClick={abrirModal}
-            className="text-black"
-          >
-            Notificaciones
-          </Link> */}
-
-          {/* <div>
-            <Link href="/agregar">
-              <Button
-                className="border border-black text-black bg-white hover:bg-slate-100"
-                color="primary"
-              >
-                Crear Nueva Mascota
-              </Button>
-            </Link>
-          </div> */}
         </div>
 
         <div className="flex flex-row items-center">
