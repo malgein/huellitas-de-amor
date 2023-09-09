@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
 
-import { useAuth } from "../../../context/AuthContext";
+// import { useAuth } from "../../../context/AuthContext";
 
 export default function LoginGoogle() {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const { login, loginWithGoogle, resetPassword } = useAuth();
+  // const { login, loginWithGoogle, resetPassword } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 

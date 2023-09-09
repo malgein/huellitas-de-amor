@@ -10,7 +10,7 @@ import ModalLogSig from "../ModalLogSig/ModalLogSig";
 import PathRoutes from "../../helpers/Routes.helper";
 import { Link, json } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/AuthContext";
+// import { useAuth } from "../../../context/AuthContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "../Auth0Out/Auth0Out";
 
@@ -49,7 +49,7 @@ export default function AvatarImg() {
           </DropdownItem>
           {user ? (
             <DropdownItem key="dashboard">
-              <Link to={PathRoutes.DASHBOARD}>Panel</Link>
+              <Link to={PathRoutes.DASHBOARD_ADMIN}>Panel</Link>
             </DropdownItem>
           ) : null}
 

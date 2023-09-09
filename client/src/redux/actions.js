@@ -54,7 +54,9 @@ const handleError = (dispatch, errorType, error) => {
 
 export const EDIT_USER = "EDIT_USER";
 
+// export const basename = "https://huellitas-de-amor-production-6e81.up.railway.app";
 export const basename = "https://huellitas-de-amor-3.up.railway.app";
+
 // export const basename = "http://localhost:3001";
 
 const ENDPOINT = `${basename}/mascotas`;
@@ -146,6 +148,17 @@ export const addMascota = (Mascota) => {
       console.log(error);
     }
   };
+};
+
+//todo Nuevo
+export const postCrearUsuario = (user) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(`${ENDPOINT}/usuario`, user);
+    console.log(data);
+    dispatch({ payload: data });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getUsers = () => async (dispatch) => {
@@ -381,7 +394,7 @@ export const submitForm = (formData) => async (dispatch) => {
 
   try {
     const response = await axios.post(`${basename}/casaDeAdopcion`, formData);
-    
+
     dispatch({
       type: SUBMIT_FORM_SUCCESS,
       payload: response.data,
