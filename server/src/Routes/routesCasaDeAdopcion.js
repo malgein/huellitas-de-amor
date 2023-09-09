@@ -8,7 +8,7 @@ const deleteHouseAdoptionById = require('../controllers/deleteHouseAdoption')
 
 const modCompleteHouse = require('../controllers/modCompleteHouse')
 // const getHouseById = require('../controllers/getHouseById')
-
+const deleteCommentHouse = require("../../src/controllers/deleteCommentHouse");
 
 const postRatings = require("../controllers/postRatings")
 const postHouseComments=require('../controllers/postHouseComments')
@@ -106,6 +106,7 @@ router.put("/:id", async (req, res) => {
 router.post("/:id/ratings", postRatings)
 router.post("/:id/comments", postHouseComments);
 router.get("/:id/comments", getComentarios)
+router.delete('/:id/comments', deleteCommentHouse)
 
 
 

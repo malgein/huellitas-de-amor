@@ -28,7 +28,7 @@ export default function Detail() {
   }, [dispatch, id]);
 
   const mascota = useSelector((state) => state.petDetail);
-  console.log(mascota);
+  console.log(id);
 
   useEffect(() => {
     console.log(mascota.casaDeAdopcionId);

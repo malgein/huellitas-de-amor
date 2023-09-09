@@ -28,7 +28,7 @@ const usuarioTipoController = require("../controllers/usuarioTipoController");
 const donationsUser = require("../controllers/donationsUser");
 const donationsHouse = require("../controllers/donationsHouse");
 const {formularioAdopt} = require("../controllers/FormularioAdop");
-const getAdoptionUser=require("../controllers/getAdoptionUser");
+// const getAdoptionUser=require("../controllers/getAdoptionUser");
 const getUsers = require("../controllers/getUsers");
 
 

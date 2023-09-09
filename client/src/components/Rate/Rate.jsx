@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Rating } from "react-simple-star-rating";
+import { useParams } from 'react-router-dom';
 import styles from "./Rate.module.css";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import axios from "axios";
@@ -14,28 +15,39 @@ const Rate = ({ id, rating }) => {
 	const endPointComments = `${basename}/casaDeAdopcion/${id}/comments`;
 	const [commentsData, setCommentsData] = useState([]);
 	const [newComment, setNewComment] = useState("");
-
+	const { casaDeAdopcionId } = useParams();
+	const [rate,setRate]= useState(0)
+	
 	useEffect(() => {
-		const fetchComments = async () => {
-			try {
-				const response = await axios.get(endPointComments);
-				setCommentsData(response.data || []);
-			} catch (error) {
-				console.error("Error al obtener comentarios:", error);
-			}
-		};
-
 		fetchComments();
-	}, [endPointComments]);
+		
+	}, [commentsData || rating]);
+
+	// useEffect(() => {
+	// 	setRate(rating.rating)
+	// }, [])
+
+	
+const fetchComments = async () => {
+	try {
+		const response = await axios.get(endPointComments);
+		setCommentsData(response.data || []);
+	} catch (error) {
+		console.error("Error al obtener comentarios:", error);
+	}
+};
+
 
 	const handleRatingSubmit = async (newRating) => {
 		try {
 			await axios.post(`${endPointRatings}`, { rating: newRating });
+			setRate(rating)
 		} catch (error) {
 			console.error("Error al obtener la data", error);
 		}
 	};
-	  const handleCommentDelete = async (commentId) => {
+	const handleCommentDelete = async (commentId) => {
+		console.log(commentId)
 			try {
 				await axios.delete(`${endPointComments}/${commentId}`);
 
@@ -73,9 +85,9 @@ const Rate = ({ id, rating }) => {
 				fontFamily: "sans-serif",
 				touchAction: "none",
 			}}>
-			<h2>Rating: {!rating ? 0 : rating}/5</h2>
+			<h2>Rating: {!rating ? 0 : rate}/5</h2>
 			<Rating
-				initialValue={!rating ? 0 : rating}
+				initialValue={!rate ? 0 : rate}
 				onClick={handleRatingSubmit}
 				transition
 				allowFraction={true}
@@ -104,6 +116,7 @@ const Rate = ({ id, rating }) => {
 							.map((comment) => (
 								<li key={comment.id}>
 									<span>
+										{console.log(comment)}
 										<span>
 											{comment.usuario && comment.usuario.nombre
 												? comment.usuario.nombre
@@ -113,7 +126,7 @@ const Rate = ({ id, rating }) => {
 									<div className={styles.comentario}>
 										<h3>{comment.texto}</h3>
 									</div>
-									<button onClick={handleCommentDelete(comment.id)}>
+									<button key={comment.id} onClick={()=>handleCommentDelete(comment.id)}>
 										Eliminar
 									</button>
 								</li>
