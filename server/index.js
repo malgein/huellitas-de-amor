@@ -13,15 +13,15 @@ const PORT = 3001;
 
 conn
   .sync({
-    force: true
+    force:  false
     ,
   })
   .then(() => {
     server.listen(PORT, () => {
-      fillHomes();
-      llenarUsuario();
-      fillDonations();
-      fillPets();
+      // fillHomes();
+      // llenarUsuario();
+      // fillDonations();
+      // fillPets();
       console.log(`Correte a la POKEVERGA en el:  ${PORT}`); // eslint-disable-line no-console
     });
   });

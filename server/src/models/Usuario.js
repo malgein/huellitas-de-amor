@@ -11,32 +11,33 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       nombre: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       apellido: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
       },
 
       password: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       nacionalidad: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       ubicacion: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       direccion: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       telefono: {
@@ -44,8 +45,13 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       acerca: {
-        type: DataTypes.TEXT(50),
+        type: DataTypes.TEXT,
         allowNull: true,
+      },
+      tipoDeUsuario:{
+        type: DataTypes.ENUM("Administrador", "Centro De Adopcion", "Usuario", "Super Administrador"),
+        allowNull: false,
+        defaultValue: 'Usuario'
       },
       imagenPerfil: {
         type: DataTypes.JSON, // Puedes ajustar el tipo de dato según tu necesidad
@@ -53,7 +59,7 @@ module.exports = (sequelize) => {
         defaultValue:
           "https://st2.depositphotos.com/4155479/6909/v/450/depositphotos_69099741-stock-illustration-labrador-retriever.jpg",
       },
-      imagenPortada: {
+    imagenPortada: {
         type: DataTypes.JSON, // Puedes ajustar el tipo de dato según tu necesidad
         allowNull: true, // Puede ser nulo si el usuario no ha subido una imagen de portada
         defaultValue:

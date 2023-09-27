@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "node ./index.js",
-		"start": "node ./index.js",
+		"start": "nodemon ./index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
@@ -14,12 +14,15 @@
 	"dependencies": {
 		"auth0": "^3.7.0",
 		"axios": "^1.4.0",
+		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.19.0",
 		"cookie-parser": "^1.4.5",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.18.2",
 		"firebase": "^10.1.0",
+		"js-cookie": "^3.0.5",
+		"jsonwebtoken": "^9.0.2",
 		"mercadopago": "^1.5.17",
 		"morgan": "^1.10.0",
 		"nodemailer": "^6.9.4",

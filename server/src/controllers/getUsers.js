@@ -27,7 +27,7 @@
 
 // module.exports = getUsers;
 
-const { Usuario, TipoDeUsuario, Donacion, Mascota} = require("../db");
+const { Usuario, Donacion, Mascota} = require("../db");
 
 
 
@@ -35,10 +35,6 @@ const getUsers = async () => {
 	try {
 		const users = await Usuario.findAll({
 			include: [
-				{
-					model: TipoDeUsuario,
-					// Alias opcional para TipoDeUsuario
-				},
 				{
 					model: Donacion,
 					// Alias opcional para Donaciones
@@ -51,7 +47,7 @@ const getUsers = async () => {
 			raw: true, // Debe estar aquí, no dentro de include
 		});
 
-		console.log(users);
+		// console.log(users);
 		return users;
 	} catch (error) {
 		console.error("Error al obtener los usuarios:", error);

@@ -1,26 +1,56 @@
 // * viejo que si anda
-const { Usuario } = require("../db");
+const { Usuario} = require("../db");
+const bcrypt = require('bcryptjs')
+//para verificar los tokens
+const jwt = require("jsonwebtoken");
+const TOKEN_SECRET = require('../config')
 
 const postCrearUsuario = async ({
   nombre,
   apellido,
   email,
-  imagenPerfil,
+  // imagenPerfil,
   password,
+  nacionalidad,
+  ubicacion,
+  direccion,
+  telefono,
+  acerca
 }) => {
   try {
-    if (!nombre || !apellido || !email || !imagenPerfil || !password) {
+    if (!nombre || !apellido || !email || !password || !nacionalidad || !ubicacion || !direccion || !acerca || !telefono ) {
       return { status: 401, message: "Faltan datos" };
     }
+
+    //averiguamos si el correo que el usuario esta apunto de agregar existe
+    const existingUser = await Usuario.findOne({ where: { email } });
+
+    //si el correo existe en la bd enviamos un mensaje de error y el usuario no podra registrarse con el mismo correo
+    if (existingUser) {
+      return {status:400, error: 'El correo electrónico ya está en uso.' };
+    }
+
+    //encripta el password
+		const passwordHash = await bcrypt.hash(password, 10)
+
     const nuevoUsuario = await Usuario.create({
       nombre,
       apellido,
-      apellido,
       email,
-      imagenPerfil,
-      password,
+      nacionalidad,
+      // imagenPerfil,
+      password: passwordHash,
+      ubicacion,
+      direccion,
+      telefono,
+      acerca
     });
-    console.log(nuevoUsuario);
+
+    // Crea una entrada en el modelo tipoDeUsuario y relaciona el usuario con el tipo "Usuario"
+
+    // // Establece la relación
+    // nuevoUsuario.setTipoDeUsuario(userType);
+
     return nuevoUsuario;
   } catch (error) {
     throw { error: error?.status, message: error?.message };

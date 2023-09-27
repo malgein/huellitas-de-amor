@@ -22,17 +22,20 @@ const getAdoptionUser = require("../controllers/getAdoptionUser");
 
 // router.get("/fill", fillPets);
 const modPetById = require("../controllers/modPetById");
-const findTypesUsers = require("../controllers/findTypeUsers");
-const fillTypeUsers = require("../utils/fillTypeUsers");
-const usuarioTipoController = require("../controllers/usuarioTipoController");
 const donationsUser = require("../controllers/donationsUser");
 const donationsHouse = require("../controllers/donationsHouse");
 const {formularioAdopt} = require("../controllers/FormularioAdop");
 // const getAdoptionUser=require("../controllers/getAdoptionUser");
 const getUsers = require("../controllers/getUsers");
+const loginUser = require('../controllers/loginUser')
+const logOut = require('../controllers/logOut')
+const profile = require('../controllers/profile')
+const authRequired = require('../middlewares/authRequired')
 
-
-router.patch("/relacion-user-type", usuarioTipoController);
+router.get('/profile', authRequired, profile)
+router.post('/loginUser', loginUser)
+router.post('/logoutUser', logOut)
+router.use("/usuario", postCrearUsuario);
 router.use("/donaciones", postDonaciones);
 
 // router.get('/tiposDeUsuarios',  findTypesUsers)
@@ -60,17 +63,12 @@ router.patch("/usuarios/:id", async (req, res) => {
     }
 }) 
 
-
-
 router.get("/perfil/:id", getUsersId);
-router.get("/tiposDeUsuarios", findTypesUsers);
-router.get("/relacion", usuarioTipoController);
 router.get("/perfil/:id", getUsersId);
 router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fillDonations", fillDonations);
 router.get("/fillPets", fillPets);
-router.get("/fillTypeUsers", fillTypeUsers);
 router.post("/crearUsuario", postCrearUsuario);
 // router.use("/usuario", postUsuario);
 router.use("/donaciones", postDonaciones);
@@ -81,8 +79,7 @@ router.get("/:id", getPetById);
 router.get("/filtro", filtradoMascotas);
 router.post("/", postPetById);
 router.post("/create_preference", postMercadoPago);
-router.use("/usuario", postCrearUsuario);
-router.post("/usuario", postCrearUsuario);
+
 
 router.put("/:id/estado", modPetById);
 router.get("/adopcion/:usuarioId", getAdoptionUser);

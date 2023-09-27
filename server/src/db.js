@@ -7,14 +7,14 @@ const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 const sequelize = new Sequelize(
 
   //!Para usar la base de datos Remota 01/09:
-  "postgresql://postgres:XkyrYs7Ygf2FSyF5nQs3@containers-us-west-149.railway.app:6905/railway",
+  // "postgresql://postgres:XkyrYs7Ygf2FSyF5nQs3@containers-us-west-149.railway.app:6905/railway",
   
 
   //!Para usar la base de datos Remota:
 
   // `postgresql://postgres:devZjxigFLUOiHZBcQxh@containers-us-west-127.railway.app:6739/railway`,
   //!Para usar la base de datos local
-  // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/huellitas`,
 
 
 
@@ -52,7 +52,6 @@ sequelize.models = Object.fromEntries(capsEntries);
 const {
   CasaDeAdopcion,
   Comentario,
-  TipoDeUsuario,
   Usuario,
   Mascota,
   EstadoAdopcion,
@@ -65,12 +64,7 @@ const {
 } = sequelize.models;
 
 //Usuarios --> Tipo de Usuarios
-Usuario.belongsTo(TipoDeUsuario, {
-  foreignKey: "tipoDeUsuarioId",
-});
-TipoDeUsuario.hasMany(Usuario, {
-  foreignKey: "tipoDeUsuarioId",
-});
+
 
 //Donaciones --> Usuarios
 Donacion.belongsTo(Usuario, {
