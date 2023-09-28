@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import LoginGoogle from "../LoginGoogle/LoginGoogle";
-// import { useAuth } from "../../../context/AuthContext";
+ import { useAuth } from "../../context/authContext";
 
 function NewLogin() {
   // const { login } = useAuth();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(null);
+
+  const {signin, isAuthenticated} = useAuth()
+
 
   const initialValues = {
     email: "",
@@ -27,14 +30,20 @@ function NewLogin() {
   });
 
   const onSubmit = async (values, { setSubmitting }) => {
-    try {
-      await login(values.email, values.password);
-      dispatchRedux(); // Redirige al usuario a la página principal después de iniciar sesión
-    } catch (error) {
-      setLoginError(error.message);
-    } finally {
-      setSubmitting(false);
+    // try {
+    //   await login(values.email, values.password);
+    //   dispatchRedux(); // Redirige al usuario a la página principal después de iniciar sesión
+    // } catch (error) {
+    //   setLoginError(error.message);
+    // } finally {
+    //   setSubmitting(false);
+    // }
+    const result = {
+      email: values.email,
+      password: values.password
     }
+    console.log(result)
+    signin(result)
   };
 
   return (

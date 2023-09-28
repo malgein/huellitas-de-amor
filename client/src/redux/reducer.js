@@ -27,7 +27,7 @@ import {
   ELIMINAR_IMAGENES,
   MOD_COMPLETE_USER,
   GET_CASA_BY_ID,
-
+  ADD_USERS,
   //case que me trae los usuarios con todas las relciones
   GET_ENTIRE_USERS,
   CHANGE_STATUS_USER,
@@ -51,6 +51,7 @@ const initialState = {
   donaciones: [],
   imagenes: [],
   formData: null,
+  newUser: null
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -140,7 +141,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
-
+      case ADD_USERS:
+        return{
+          ...state,
+          newUser: payload
+        }
     //foto de perfil
     // case FOTO_PERFIL:
     //   return {

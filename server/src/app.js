@@ -19,7 +19,11 @@ process.on("unhandledRejection", (reason, promise) => {
 server.name = "API";
 
 // Middlewares
-server.use(cors()); // Usamos el middleware cors
+server.use(cors({
+  origin: 'http://localhost:5173',
+  //Esto es para que tenga acceso a los headers y que la app pueda leer cookies
+  credentials: true
+}))// Usamos el middleware cors
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());

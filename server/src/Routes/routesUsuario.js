@@ -13,34 +13,34 @@ const createAccessToken = require('../libs/jwt')
 
 
 //Crea los usuarios
-router.post("/crearUsuario", async (req, res) => {
-	try {
-		const response = req.body;
-		const usuarioPost = await crearUsuario(response);
-		//le pasamos el id del nuevo usuario para que la funcion importada de libs me cree su token
-		const token = await createAccessToken({id: usuarioPost.id})
-		//funcion que crea el token del usuario
-		res.cookie('token', token)
-			res.status(201).json({
-				id: usuarioPost.id,
-		 		nombre: usuarioPost.nombre,
-				apellido: usuarioPost.apellido,
-				email: usuarioPost.email,
-				tipoDeUsuario: usuarioPost.tipoDeUsuario,
-				imagenPerfil: usuarioPost.imagenPerfil,
-				imagenPortada: usuarioPost.imagenPortada
-		})
+// router.post("/crearUsuario", async (req, res) => {
+// 	try {
+// 		const response = req.body;
+// 		const usuarioPost = await crearUsuario(response);
+// 		//le pasamos el id del nuevo usuario para que la funcion importada de libs me cree su token
+// 		const token = await createAccessToken({id: usuarioPost.id})
+// 		//funcion que crea el token del usuario
+// 		res.cookie('token', token)
+// 			res.status(201).json({
+// 				id: usuarioPost.id,
+// 		 		nombre: usuarioPost.nombre,
+// 				apellido: usuarioPost.apellido,
+// 				email: usuarioPost.email,
+// 				tipoDeUsuario: usuarioPost.tipoDeUsuario,
+// 				imagenPerfil: usuarioPost.imagenPerfil,
+// 				imagenPortada: usuarioPost.imagenPortada
+// 		})
 
-		//Esta es la forma de obtener para el frontend solo los datos que necesito para el usuario
-		//el password no es necesario por eso se excluye del objeto
-		// res.json({
+// 		//Esta es la forma de obtener para el frontend solo los datos que necesito para el usuario
+// 		//el password no es necesario por eso se excluye del objeto
+// 		// res.json({
 
-		// })
-		// res.status(200).json(usuarioPost);
-	} catch (error) {
-		res.status(error.status || 500).json({ message: error.message });
-	}
-});
+// 		// })
+// 		// res.status(200).json(usuarioPost);
+// 	} catch (error) {
+// 		res.status(error.status || 500).json({ message: error.message });
+// 	}
+// });
 
 //Establece el tipo de usuarios enlazando una tabla de tipo de usuarios con el usuario en especifico
 router.get("/tipoDeUsuario", async (req, res) => {
@@ -83,7 +83,7 @@ router.get("/fill", async (req, res) => {
 router.get("/", async (req, res) => {
 	try {
 		const data = await getUsers();
-		console.log(data);
+		// console.log(data);
 
 		return res.status(200).json(data);
 	} catch (error) {

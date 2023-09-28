@@ -24,6 +24,7 @@ export const DELETE_HOUSES = "DELETE_HOUSES";
 //tipo de action que me trae todos los usuarios
 export const GET_USERS = "GET_USER";
 export const GET_USERS_RELATIONS = "GET_USERS_RELATIONS";
+export const ADD_USERS = "ADD_USERS"
 
 export const GET_ALL_DONATIONS = "GET_DONATIONS";
 
@@ -150,20 +151,36 @@ export const addMascota = (Mascota) => {
   };
 };
 
-//todo Nuevo
-export const postCrearUsuario = (user) => async (dispatch) => {
-  try {
-    const { data } = await axios.post(`${ENDPOINT}/usuario`, user);
-    console.log(data);
-    dispatch({ payload: data });
-  } catch (error) {
-    console.log(error);
-  }
+// //todo Nuevo
+// export const postCrearUsuario = (user) => async (dispatch) => {
+//   try {
+//     const { data } = await axios.post(`${basename}/usuario/crearUsuario`, user);
+//     console.log(data);
+//     dispatch({ 
+//       type: ADD_USERS,
+//       payload: data 
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const postCrearUsuario = (user) => {
+	const endpoint =`${basename}/usuario/crearUsuario`;
+	return (dispatch) => {
+		 axios.post(endpoint, user).then(({ data }) => {
+				return dispatch({
+					 type: ADD_USERS,
+					 payload: data.data,
+				});
+		 }).catch(error => console.log(error.message));
+	};
 };
+
 
 export const getUsers = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${basename}/usuarios`);
+    const response = await axios.get(`${basename}/usuario`);
     dispatch({
       type: GET_USERS,
       payload: response.data,

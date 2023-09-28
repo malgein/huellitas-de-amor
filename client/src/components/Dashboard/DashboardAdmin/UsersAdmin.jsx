@@ -65,7 +65,7 @@ function UsersAdmin() {
   useEffect(() => {
     //if (userModified) {
     // dispatch(getUsers());
-    dispatch(getEntireUsers());
+    dispatch(getUsers());
     // setUserModified(false); // Restablecer userDeleted después de obtener usuarios
     //}
   }, [userModified, dispatch]);
@@ -221,7 +221,7 @@ function UsersAdmin() {
             `${user.nombre} ${user.apellido} es un Administrador ahora`,
             'success'
           )
-          dispatch(getEntireUsers())
+          dispatch(getUsers())
         }
       })
     } else {

@@ -16,7 +16,8 @@ const fillDonations = require("../controllers/fillDonations");
 const fillPets = require("../utils/fillPets");
 // const postDonaciones = require('./routesDonaciones')
 const postDonaciones = require("./routesDonaciones");
-const postCrearUsuario = require("./routesUsuario");
+const routesUsuarios = require("./routesUsuario");
+const postCrearUsuario = require('../controllers/postCrearUsuario')
 const getUsersId = require("../controllers/getUsersId");
 const getAdoptionUser = require("../controllers/getAdoptionUser");
 
@@ -30,12 +31,13 @@ const getUsers = require("../controllers/getUsers");
 const loginUser = require('../controllers/loginUser')
 const logOut = require('../controllers/logOut')
 const profile = require('../controllers/profile')
-const authRequired = require('../middlewares/authRequired')
+const authRequired = require('../middlewares/authRequired');
 
+router.post('/crearUsuario', postCrearUsuario)
 router.get('/profile', authRequired, profile)
 router.post('/loginUser', loginUser)
 router.post('/logoutUser', logOut)
-router.use("/usuario", postCrearUsuario);
+router.use("/usuario", routesUsuarios);
 router.use("/donaciones", postDonaciones);
 
 // router.get('/tiposDeUsuarios',  findTypesUsers)
@@ -69,7 +71,7 @@ router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fillDonations", fillDonations);
 router.get("/fillPets", fillPets);
-router.post("/crearUsuario", postCrearUsuario);
+// router.post("/crearUsuario", postCrearUsuario);
 // router.use("/usuario", postUsuario);
 router.use("/donaciones", postDonaciones);
 router.use("/mascotas", mascotas);
