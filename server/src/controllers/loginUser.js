@@ -11,7 +11,7 @@ const loginUser = async(req, res) => {
 	
 	//Buscar en la BD un usuario por el email ingresado, si no lo encuantra imprime not found
 	const userFound = await Usuario.findOne({ where: { email } });
-	if(!userFound) return res.status(400).json({ message: 'user not found'})
+	if(!userFound) return res.status(404).json({ message: 'user not found'})
 	
 	//encripta el password y lo guarda en isMatch
 		const isMatch = await bcrypt.compare(password, userFound.password)

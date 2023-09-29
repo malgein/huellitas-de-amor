@@ -37,18 +37,19 @@ import PetsHouses from "./components/Dashboard/DashboardHouses/PetsHouses";
 import { AuthProvider } from "./context/authContext";
 import { Auth0Provider } from "@auth0/auth0-react";
 import Usuarios from "./components/usuarios/Usuarios";
+import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 
-function PrivateRoute({ element }) {
-  const user = useAuth();
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Ejemplo de estado de autenticación
-  console.log(user);
-  if (!user) {
-    // Si el usuario no está autenticado, redirige al inicio de sesión u otra página
-    return <Navigate to={PathRoutes.REGISTRO} />;
-  }
+// function PrivateRoute({ element }) {
+//   const user = useAuth();
+//   // const [isLoggedIn, setIsLoggedIn] = useState(false); // Ejemplo de estado de autenticación
+//   console.log(user);
+//   if (!user) {
+//     // Si el usuario no está autenticado, redirige al inicio de sesión u otra página
+//     return <Navigate to={PathRoutes.REGISTRO} />;
+//   }
 
-  return element;
-}
+//   return element;
+// }
 
 function App() {
   const location = useLocation();
@@ -65,7 +66,7 @@ function App() {
             {/* <Route path={PathRoutes.LANDINGPAGE} element={<Landing />} /> */}
             <Route path={PathRoutes.HOME} element={<Home />} />
             <Route path={PathRoutes.FILTER} element={<FilterMascotas />} />
-            <Route path={PathRoutes.PERFIL} element={<Perfil />} />
+            
 
             <Route path={PathRoutes.DETAIL} element={<Detail />} />
             <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
@@ -80,7 +81,7 @@ function App() {
             {/* <Route path={PathRoutes.DASHBOARD_SUPER_ADMIN} element={<DashboardSuperAdmin />} /> */}
             <Route
               path={PathRoutes.DASHBOARD_SUPER_ADMIN}
-              element={<PrivateRoute element={<DashboardSuperAdmin />} />}
+              element={<DashboardSuperAdmin />}
             />
             {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
             <Route
@@ -102,11 +103,13 @@ function App() {
               path={PathRoutes.DASHBOARD_SUPER_ADMIN_DONACIONES}
               element={<DonationsSuper />}
             />
-
-            <Route
-              path={PathRoutes.DASHBOARD_ADMIN}
-              element={<DashboardAdmin />}
-            />
+            <Route element={<ProtectedRoutes />}>
+              <Route
+                path={PathRoutes.DASHBOARD_ADMIN}
+                element={<DashboardAdmin />}
+              />
+              <Route path={PathRoutes.PERFIL} element={<Perfil />} />
+            </Route>
             {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
             <Route
               path={PathRoutes.DASHBOARD_ADMIN_MASCOTAS}
@@ -140,12 +143,10 @@ function App() {
               path={PathRoutes.DASHBOARD_HOUSES_MASCOTAS}
               element={<PetsHouses />}
             />
-
             <Route path={PathRoutes.DETAILUSER} element={<DetailUser />} />
             <Route path={PathRoutes.DETAILHOUSE} element={<DetailHouse />} />
           </Routes>
           {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
-
           <Footer />
         </AuthProvider>
       </Auth0Provider>

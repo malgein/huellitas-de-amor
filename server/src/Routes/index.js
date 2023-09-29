@@ -32,6 +32,7 @@ const loginUser = require('../controllers/loginUser')
 const logOut = require('../controllers/logOut')
 const profile = require('../controllers/profile')
 const authRequired = require('../middlewares/authRequired');
+const verifyToken = require('../controllers/verifyToken')
 
 router.post('/crearUsuario', postCrearUsuario)
 router.get('/profile', authRequired, profile)
@@ -39,6 +40,7 @@ router.post('/loginUser', loginUser)
 router.post('/logoutUser', logOut)
 router.use("/usuario", routesUsuarios);
 router.use("/donaciones", postDonaciones);
+router.get("/verify", verifyToken);
 
 // router.get('/tiposDeUsuarios',  findTypesUsers)
 router.get("/relacion-donation-house", donationsHouse);
@@ -66,7 +68,7 @@ router.patch("/usuarios/:id", async (req, res) => {
 }) 
 
 router.get("/perfil/:id", getUsersId);
-router.get("/perfil/:id", getUsersId);
+// router.get("/perfil/:id", getUsersId);
 router.use("/casaDeAdopcion", postCasaAdopcion);
 router.post("/email", postSendEmail);
 router.get("/fillDonations", fillDonations);

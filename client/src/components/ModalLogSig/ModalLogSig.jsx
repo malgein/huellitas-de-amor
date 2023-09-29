@@ -5,14 +5,17 @@ import { Button } from "@nextui-org/react";
 import google from "../../assets/google.png";
 import { LogoutButton } from "../Auth0Out/Auth0Out";
 import LoginButton from "../Auth0/Auth0";
+import {useAuth} from '../../context/authContext'
 
 export default function ModalLogSig() {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+  // const [user, setUser] = useState({
+  //   email: "",
+  //   password: "",
+  // });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const {user, loading} = useAuth()
 
   return (
     <div>
@@ -29,10 +32,11 @@ export default function ModalLogSig() {
           </Link>
         </p>
       </div>
-
-      <div>
-        <LogoutButton />
-      </div>
+      {user && (
+        <div>
+          <LogoutButton />
+        </div>
+      )}
     </div>
   );
 }

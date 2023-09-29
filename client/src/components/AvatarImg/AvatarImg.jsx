@@ -13,19 +13,23 @@ import { useNavigate } from "react-router-dom";
 // import { useAuth } from "../../../context/AuthContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "../Auth0Out/Auth0Out";
+import {useAuth} from '../../context/authContext'
 
 export default function AvatarImg() {
   // const { user, logout } = useAuth();
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const imgProfile = user?.picture;
+  // const { user, isAuthenticated, isLoading } = useAuth0();
+  const {user, loading, isAuthenticated} = useAuth()
+  // console.log(loading, isAuthenticated)
+  const imgProfile = user?.imagenPerfil;
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await logout();
   };
-
+  if(loading) return <></>
   return (
     <div className="flex items-center gap-4">
+      {/* {console.log(user)} */}
       <Dropdown placement="bottom-start">
         <DropdownTrigger>
           <User
@@ -36,17 +40,23 @@ export default function AvatarImg() {
             }}
             className="transition-transform"
             description={user?.email}
-            name={user?.name}
+            name={user?.nombre}
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="User Actions" variant="flat">
-          <DropdownItem key="profile" className="h-14 gap-2">
-            <p className="font-bold">Hola 🐾</p>
-            <p className="font-bold">{user?.displayName}</p>
-          </DropdownItem>
-          <DropdownItem key="analytics" to="/registro">
-            <Link to={PathRoutes.HOME}>Inicio</Link>
-          </DropdownItem>
+          {user && (
+            <DropdownItem key="profile" className="h-14 gap-2">
+                <Link to={`/perfil/${user?.id}`}>
+                  <p className="font-bold" onClick={() => console.log(user?.id)}>Hola {user?.nombre}🐾 </p>
+                </Link>
+              <p className="font-bold">{user?.displayName}</p>
+            </DropdownItem>
+          )}
+          {!user && (
+            <DropdownItem key="analytics" to="/registro">
+              <Link to={PathRoutes.LOGIN}>Inicia sesion</Link>
+            </DropdownItem>
+          )}
           {user ? (
             <DropdownItem key="dashboard">
               <Link to={PathRoutes.DASHBOARD_ADMIN}>Panel</Link>

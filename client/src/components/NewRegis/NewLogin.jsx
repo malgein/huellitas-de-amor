@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import LoginGoogle from "../LoginGoogle/LoginGoogle";
  import { useAuth } from "../../context/authContext";
+
 
 function NewLogin() {
   // const { login } = useAuth();
@@ -38,13 +39,21 @@ function NewLogin() {
     // } finally {
     //   setSubmitting(false);
     // }
-    const result = {
-      email: values.email,
-      password: values.password
-    }
-    console.log(result)
-    signin(result)
+      const result = {
+        email: values.email,
+        password: values.password
+      }
+      // console.log(result)
+      signin(result)
+      values.email = ''
+      values.password= ''
   };
+
+  useEffect(() => {
+    if(isAuthenticated){
+      navigate('/')
+    }
+  }, [isAuthenticated])
 
   return (
     <div className="w-full max-w-xs m-auto text-black">

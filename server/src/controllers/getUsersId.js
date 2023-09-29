@@ -1,4 +1,4 @@
-const { Usuario } = require("../db");
+const { Usuario , Donacion, Mascota} = require("../db");
 
 // Ruta para obtener un usuario por su ID
 const getUsersId = async (req, res) => {
@@ -8,6 +8,17 @@ const getUsersId = async (req, res) => {
   try {
     const user = await Usuario.findOne({
       where: { id },
+      include: [
+				{
+					model: Donacion,
+					// Alias opcional para Donaciones
+				},
+				{
+					model: Mascota,
+					// Alias opcional para Donaciones
+				},
+			],
+			raw: true, 
     });
 
     if (!user) {

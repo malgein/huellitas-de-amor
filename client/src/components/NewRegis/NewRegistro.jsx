@@ -33,9 +33,6 @@ export function NuevoRegistro() {
     navigate("/login");
   };
 
-  const registerRequest = async(user) => {
-    return axios.post('/crearUsuario', user)
-  }
 
   // Función para mostrar la alerta de registrado
   const showAlert = () => {

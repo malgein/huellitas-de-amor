@@ -5,21 +5,21 @@ import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector';
 import { Outlet } from 'react-router-dom';
 
 //Este es el componente del dashboard principal
-const DashboardSuperAdmin = () => {
-	const usuarios = useSelector(state => state.usuarios)
-	const { user, isAuthenticated, isLoading } = useAuth0(); // Obtiene información del usuario de Auth0
+const DashboardUser = () => {
+	// const usuarios = useSelector(state => state.usuarios)
+	// const { user, isAuthenticated, isLoading } = useAuth0(); // Obtiene información del usuario de Auth0
 
-	useEffect(() => {
-		// Puedes realizar acciones adicionales aquí después de obtener la información del usuario
-		if (isAuthenticated) {
-			console.log("Usuario autenticado:", user);
-		}
-	}, [isAuthenticated, user]);
+	// useEffect(() => {
+	// 	// Puedes realizar acciones adicionales aquí después de obtener la información del usuario
+	// 	if (isAuthenticated) {
+	// 		console.log("Usuario autenticado:", user);
+	// 	}
+	// }, [isAuthenticated, user]);
 
-	if (isLoading) {
-		// Muestra una carga o pantalla de inicio de sesión mientras Auth0 verifica la autenticación
-		return <div>Cargando...</div>;
-	}
+	// if (isLoading) {
+	// 	// Muestra una carga o pantalla de inicio de sesión mientras Auth0 verifica la autenticación
+	// 	return <div>Cargando...</div>;
+	// }
 
 	return (
 		<div className='flex overflow-scroll'>
@@ -48,4 +48,4 @@ const DashboardSuperAdmin = () => {
 	);
 }
 
-export default DashboardSuperAdmin
+export default DashboardUser

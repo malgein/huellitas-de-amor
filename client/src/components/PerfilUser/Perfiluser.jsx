@@ -15,9 +15,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import BotonPerfil from "../EditarPerfil/BotonPerfil";
 import BotonPortada from "../EditarPerfil/BotonPortada";
+import {useAuth} from '../../context/authContext'
 
 const Perfil = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {user, loading} = useAuth()
   const [usuario, setUsuario] = useState(null);
   const [userModified, setUserModified] = useState(true);
   const [abrir, setAbrir] = useState(false);
@@ -25,6 +27,8 @@ const Perfil = () => {
   const dispatch = useDispatch();
   const [numeroAdopciones, setNumeroAdopciones] = useState(0);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  
 
   //Para el tamaño del modal
   const [size, setSize] = React.useState("md");
@@ -64,10 +68,10 @@ const Perfil = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get(`http://localhost:3001/perfil/${id}`); // Reemplaza con tu URL de la API
-        const response = await axios.get(
-          `https://huellitas-de-amor-3.up.railway.app${id}`
-        );
+        const response = await axios.get(`http://localhost:3001/perfil/${id}`); // Reemplaza con tu URL de la API
+        // const response = await axios.get(
+        //   `https://huellitas-de-amor-3.up.railway.app${id}`
+        // );
 
         // const response = await axios.get(`${basename}/perfil/${id}`);
 
@@ -222,20 +226,22 @@ const Perfil = () => {
           </div>
 
           <div className="mb-3 ml-2">
-            <div className="flex flex-wrap justify-center gap-3">
-              {sizes.map((size) => (
-                <Button
-                  color="primary"
-                  variant="solid"
-                  key={size}
-                  onPress={() => handleOpen(size)}
-                  className="bg-orange-400 text-black"
-                  onClick={abrirModal}
-                >
-                  <i class="fa-solid fa-pen"></i> Editar perfil
-                </Button>
-              ))}
-            </div>
+            {usuario.id === user?.id && (
+              <div className="flex flex-wrap justify-center gap-3">
+                {sizes.map((size) => (
+                  <Button
+                    color="primary"
+                    variant="solid"
+                    key={size}
+                    onPress={() => handleOpen(size)}
+                    className="bg-orange-400 text-black"
+                    onClick={abrirModal}
+                  >
+                    <i class="fa-solid fa-pen"></i> Editar perfil
+                  </Button>
+                ))}
+              </div>
+            )}
 
             <Modal
               size="2xl"
