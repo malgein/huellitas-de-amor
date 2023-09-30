@@ -32,24 +32,20 @@ import DonationsAdmin from "./components/Dashboard/DashboardAdmin/DonationsAdmin
 import PetsAdmin from "./components/Dashboard/DashboardAdmin/PetsAdmin";
 import UsersAdmin from "./components/Dashboard/DashboardAdmin/UsersAdmin";
 import DashboardHouses from "./components/Dashboard/DashboardHouses/DashboardHouses";
+import DashboardUser from "./components/Dashboard/DashboardUser/DashboardUser";
+import AdoptionHousesUser from "./components/Dashboard/DashboardUser/AdoptionHousesUser";
+import DonationsUser from "./components/Dashboard/DashboardUser/DonationsUser";
+import PetsUser from "./components/Dashboard/DashboardUser/PetsUser";
+import UsersUser from "./components/Dashboard/DashboardUser/UsersUser";
 import DonationsHouses from "./components/Dashboard/DashboardHouses/DonationsHouses";
 import PetsHouses from "./components/Dashboard/DashboardHouses/PetsHouses";
 import { AuthProvider } from "./context/authContext";
 import { Auth0Provider } from "@auth0/auth0-react";
 import Usuarios from "./components/usuarios/Usuarios";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
-
-// function PrivateRoute({ element }) {
-//   const user = useAuth();
-//   // const [isLoggedIn, setIsLoggedIn] = useState(false); // Ejemplo de estado de autenticación
-//   console.log(user);
-//   if (!user) {
-//     // Si el usuario no está autenticado, redirige al inicio de sesión u otra página
-//     return <Navigate to={PathRoutes.REGISTRO} />;
-//   }
-
-//   return element;
-// }
+import AuthorizationAdmin from "./components/ProtectedRoutes/AuthorizationAdmin";
+import Error404 from "./components/Error404/Error404";
+import AuthorizationUser from "./components/ProtectedRoutes/AuthorizationUser";
 
 function App() {
   const location = useLocation();
@@ -104,32 +100,39 @@ function App() {
               element={<DonationsSuper />}
             />
             <Route element={<ProtectedRoutes />}>
+              <Route path={PathRoutes.PERFIL} element={<Perfil />} />
+            </Route>
+            <Route element={<AuthorizationAdmin />}>
               <Route
                 path={PathRoutes.DASHBOARD_ADMIN}
                 element={<DashboardAdmin />}
               />
-              <Route path={PathRoutes.PERFIL} element={<Perfil />} />
-            </Route>
-            {/* Subruta de dashboard que gestiona las mascotas para ek admin */}
-            <Route
-              path={PathRoutes.DASHBOARD_ADMIN_MASCOTAS}
-              element={<PetsAdmin />}
-            />
-            {/* Subruta de dashboard que gestiona los usuarios para el admin */}
-            <Route
+              <Route
               path={PathRoutes.DASHBOARD_ADMIN_USUARIOS}
               element={<UsersAdmin />}
-            />
-            {/* Subruta de dashboard que gestiona las casas de adopcion para el admin */}
-            <Route
+              />
+              <Route
+              path={PathRoutes.DASHBOARD_ADMIN_MASCOTAS}
+              element={<PetsAdmin />}
+              />
+              <Route
               path={PathRoutes.DASHBOARD_ADMIN_CASAS_DE_ADOPCION}
               element={<AdoptionHousesAdmin />}
-            />
-            {/* Subruta de dashboard que gestiona las donaciones para el admin */}
-            <Route
+              />
+               <Route
               path={PathRoutes.DASHBOARD_ADMIN_DONACIONES}
               element={<DonationsAdmin />}
-            />
+              />
+            </Route>
+            <Route element={<AuthorizationUser/>}>
+              <Route path={PathRoutes.DASHBOARD_USERS} element={<DashboardUser />}/>
+              <Route path={PathRoutes.DASHBOARD_USERS_ADOPTION_HOUSES} element={<AdoptionHousesUser />}/>
+              <Route path={PathRoutes.DASHBOARD_USERS_DONATIONS} element={<DonationsUser />}/>
+              <Route path={PathRoutes.DASHBOARD_USERS_USERS} element={<UsersUser />}/>
+              <Route path={PathRoutes.DASHBOARD_USERS_MASCOTAS} element={<PetsUser />}/>
+            </Route>
+          
+           
 
             <Route
               path={PathRoutes.DASHBOARD_HOUSES}
@@ -145,6 +148,7 @@ function App() {
             />
             <Route path={PathRoutes.DETAILUSER} element={<DetailUser />} />
             <Route path={PathRoutes.DETAILHOUSE} element={<DetailHouse />} />
+            <Route path='*' element={<Error404 />}/>
           </Routes>
           {/* <div>{location.pathname !== "/home" && <Footer />}</div> */}
           <Footer />

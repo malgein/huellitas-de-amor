@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../../context/authContext";
 
 //Este es el componente del dashboard principal
 const DashboardAdmin = () => {
-  const { user } = useAuth0();
+  const { user } = useAuth();
 
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ const DashboardAdmin = () => {
 
   return (
     <div className="flex overflow-scroll">
-      {console.log(user)}
+      {/* {console.log(user)} */}
       <div className="flex overflow-scroll ">
         <div className="basis-[12%] h-[100vh]">
           {/* Necesario que para que se vea el sidebar en la gestion de las casas de adopcion */}
@@ -28,9 +29,10 @@ const DashboardAdmin = () => {
           <div>
             {/* El elemento Outlet es necesario para poder navegar en subrutas del dashboard*/}
             <Outlet></Outlet>
-            <h1>Bienvenido Admind</h1>
-            <h1>Nombre del admin</h1>
-            <h1>Correo del admin</h1>
+            <div>
+							<h1>Nombre: {user.nombre}</h1>
+							<h1>Correo: {user.email}</h1>
+						</div>
           </div>
         </div>
       </div>

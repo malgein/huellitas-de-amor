@@ -57,9 +57,15 @@ export default function AvatarImg() {
               <Link to={PathRoutes.LOGIN}>Inicia sesion</Link>
             </DropdownItem>
           )}
-          {user ? (
+          {user?.tipoDeUsuario === 'Administrador' ? (
             <DropdownItem key="dashboard">
               <Link to={PathRoutes.DASHBOARD_ADMIN}>Panel</Link>
+            </DropdownItem>
+          ) : null}
+
+          {user?.tipoDeUsuario === 'Usuario' ? (
+            <DropdownItem key="dashboard">
+              <Link to={PathRoutes.DASHBOARD_USERS}>Panel</Link>
             </DropdownItem>
           ) : null}
 

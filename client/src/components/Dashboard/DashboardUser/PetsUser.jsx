@@ -59,7 +59,7 @@ const INITIAL_VISIBLE_COLUMNS = [
   "actions",
 ];
 
-function Pets() {
+function PetsUser() {
   const mascotas = useSelector((state) => state.mascotas);
 
   const dispatch = useDispatch();
@@ -650,4 +650,4 @@ function Pets() {
   );
 }
 
-export default Pets;
+export default PetsUser;

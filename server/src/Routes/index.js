@@ -33,6 +33,7 @@ const logOut = require('../controllers/logOut')
 const profile = require('../controllers/profile')
 const authRequired = require('../middlewares/authRequired');
 const verifyToken = require('../controllers/verifyToken')
+const changeUserStatus = require('../controllers/changeUserStatus')
 
 router.post('/crearUsuario', postCrearUsuario)
 router.get('/profile', authRequired, profile)
@@ -41,8 +42,8 @@ router.post('/logoutUser', logOut)
 router.use("/usuario", routesUsuarios);
 router.use("/donaciones", postDonaciones);
 router.get("/verify", verifyToken);
+router.patch('/cambiarTipo/:id', changeUserStatus)
 
-// router.get('/tiposDeUsuarios',  findTypesUsers)
 router.get("/relacion-donation-house", donationsHouse);
 router.get("/relacion-donation-user", donationsUser);
 router.get('/usuarios', getUsers)

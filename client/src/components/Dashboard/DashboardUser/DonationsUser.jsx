@@ -6,7 +6,7 @@ import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Paginat
 // import {donaciones} from "./data";
 
 
-function Donations() {
+function DonationsUser() {
 
   const donaciones = useSelector(state => state.donaciones)
 
@@ -84,4 +84,4 @@ function Donations() {
   )
 }
 
-export default Donations
+export default DonationsUser

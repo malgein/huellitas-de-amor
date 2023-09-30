@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { getUsers, editUser, deleteUsers, modCompleteUser, getEntireUsers, changeStatusUser} from '../../../redux/actions'
+import { getUsers, editUser, deleteUsers, modCompleteUser, getEntireUsers, cambiarTipoDeUsuario} from '../../../redux/actions'
 import PathRoutes from "../../../helpers/Routes.helper";
 import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar'
@@ -51,7 +51,7 @@ const statusOptions = [
 const INITIAL_VISIBLE_COLUMNS = [  "nombre","apellido", "nacionalidad",  "ubicacion", "direccion", "telefono",  "tipo", "actions"];
 
 
-function Users() {
+function UsersUser() {
   const usuarios = useSelector((state) => state.usuarios);
 
   const dispatch = useDispatch();
@@ -215,7 +215,7 @@ function Users() {
             usuarioId: idUser,
             tipoDeUsuarioId: 1
           }
-          dispatch(changeStatusUser(response))
+          dispatch(cambiarTipoDeUsuario(response))
           Swal.fire(
             'Estatus modificado!',
             `${user.nombre} ${user.apellido} es un Administrador ahora`,
@@ -241,7 +241,7 @@ function Users() {
             usuarioId: idUser,
             tipoDeUsuarioId: 3
           }
-          dispatch(changeStatusUser(response))
+          dispatch(cambiarTipoDeUsuario(response))
           Swal.fire(
             'Estatus modificado!',
             `${user.nombre} ${user.apellido} es un Usuario ahora`,
@@ -664,4 +664,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default UsersUser;

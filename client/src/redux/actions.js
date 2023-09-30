@@ -390,16 +390,28 @@ export const getEntireUsers = () => async (dispatch) => {
   }
 };
 
-export const changeStatusUser = (response) => {
-  const endpoint = `${basename}/relacion-user-type`;
-  console.log(response);
-  return (dispatch) => {
-    axios.patch(endpoint, response).then(({ data }) => {
-      return dispatch({
-        type: CHANGE_STATUS_USER,
-        payload: data,
+// Acción para cambiar el tipo de usuario
+export const cambiarTipoDeUsuario = (userId, nuevoTipoDeUsuario) => {
+  return async (dispatch) => {
+    try {
+      // Realiza la solicitud PATCH a la ruta '/cambiarTipo/:id'
+      const response = await axios.patch(`${basename}/cambiarTipo/${userId}`, {
+        nuevoTipoDeUsuario,
       });
-    });
+
+      // Si la solicitud es exitosa, actualiza el estado del usuario en Redux
+      dispatch({
+        type: CHANGE_STATUS_USER,
+        payload: response.data,
+      });
+    } catch (error) {
+      // Si hay un error, puedes manejarlo aquí, por ejemplo, enviando una acción de error
+      console.error('Error al cambiar el tipo de usuario:', error);
+      dispatch({
+        type: 'CAMBIAR_TIPO_USUARIO_ERROR',
+        payload: error.message,
+      });
+    }
   };
 };
 

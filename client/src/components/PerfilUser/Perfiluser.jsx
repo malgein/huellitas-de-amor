@@ -89,6 +89,7 @@ const Perfil = () => {
           acerca: userData.acerca || "",
           email: userData.email || "",
           password: userData.password || "",
+          tipoDeUsuario: userData.tipoDeUsuario || "",
           imagenPortada: userData.imagenPortada || "",
           imagenPerfil: userData.imagenPerfil || "",
         });
@@ -176,6 +177,12 @@ const Perfil = () => {
               Acerca de Mí:
             </h2>
             <p>{usuario.acerca}</p>
+          </div>
+          <div className="mt-[120px] ml-3 flex flex-col text-start">
+            <h2 className="text-lg text-black font-semibold mb-2">
+              Status:
+            </h2>
+            <p>{usuario.tipoDeUsuario}</p>
           </div>
 
           <div className="flex flex-row items-center justify-center h-[100px] mt-10 gap-10">

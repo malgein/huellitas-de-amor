@@ -1,25 +1,12 @@
 import React from 'react'
 import Sidebar from './Sidebar'
-import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector';
-
+import { useAuth } from '../../../context/authContext';
 import { Outlet } from 'react-router-dom';
 
 //Este es el componente del dashboard principal
 const DashboardUser = () => {
-	// const usuarios = useSelector(state => state.usuarios)
-	// const { user, isAuthenticated, isLoading } = useAuth0(); // Obtiene información del usuario de Auth0
 
-	// useEffect(() => {
-	// 	// Puedes realizar acciones adicionales aquí después de obtener la información del usuario
-	// 	if (isAuthenticated) {
-	// 		console.log("Usuario autenticado:", user);
-	// 	}
-	// }, [isAuthenticated, user]);
-
-	// if (isLoading) {
-	// 	// Muestra una carga o pantalla de inicio de sesión mientras Auth0 verifica la autenticación
-	// 	return <div>Cargando...</div>;
-	// }
+	const {user} = useAuth()
 
 	return (
 		<div className='flex overflow-scroll'>
@@ -32,15 +19,11 @@ const DashboardUser = () => {
 					{/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
 					<div>
 						{/* El elemento Outlet es necesario para poder navegar en subrutas del dashboard*/}
-						<Outlet></Outlet>
-						{isAuthenticated ? (
+						<Outlet/>
 							<div>
-								<h1>Nombre: {user.name}</h1>
+								<h1>Nombre: {user.nombre}</h1>
 								<h1>Correo: {user.email}</h1>
 							</div>
-						) : (
-							<h1>No autenticado</h1>
-						)}
 					</div>
 				</div>
 			</div>

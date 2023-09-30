@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { getUsers, editUser, deleteUsers, modCompleteUser, getEntireUsers, changeStatusUser} from '../../../redux/actions'
+import { getUsers, editUser, deleteUsers, modCompleteUser, getEntireUsers, cambiarTipoDeUsuario} from '../../../redux/actions'
 import PathRoutes from "../../../helpers/Routes.helper";
 import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar'
@@ -31,7 +31,7 @@ import { capitalize } from "../Accesory";
 const statusColorMap = {
   Usuario: "success",
   Administrador: "danger",
-  // vacation: "warning",
+  // SuperAdministrador: "warning",
 };
 
 // const columns = [
@@ -44,6 +44,7 @@ const statusColorMap = {
 const statusOptions = [
   { name: "Usuario", uid: "Usuario" },
   { name: "Administrador", uid: "Administrador" },
+  // { name: "SuperAdministrador", uid: "Super Administrador" },
   { name: "Sin tipo", uid: "Sin tipo" },
 ];
 //!Esto muestra las columnas que se ven al inicio
@@ -70,34 +71,7 @@ function UsersAdmin() {
     //}
   }, [userModified, dispatch]);
 
-  //Esta funcion puede ser modificada para cambiar cada propiedad del usuario
-  // const handleEdit = async(id) => {
-  //   console.log(id)
-  //   const { value: formValues } = await Swal.fire({
-  //     title: 'Introduce la propiedad y el valor que deseas modificar',
-  //     html:
-  //       '<input id="swal-input1" class="swal2-input">' +
-  //       '<input id="swal-input2" class="swal2-input">' ,
-  //     focusConfirm: false,
-  //     preConfirm: () => {
-  //       return [
-  //         document.getElementById('swal-input1').value,
-  //         document.getElementById('swal-input2').value,
-
-  //       ]
-  //     }
-  //   })
-
-  //   if (formValues) {
-  //     const result = {[formValues[0]] : formValues[1]}
-  //     console.log(result)
-  //     // const resultJson = JSON.stringify(result)
-  //     dispatch(editUser(id, result))
-  //     console.log(userModified)
-  //     Swal.fire(`${formValues[0]} cambiado a ${formValues[1]}`)
-  //     setUserModified(!userModified)
-  //   }
-  // }
+  console.log(usuarios)
 
   const handleEdit = async (id) => {
     console.log(id);
@@ -193,13 +167,14 @@ function UsersAdmin() {
   };
 
   const handleNavigate = (id) => {
-    navigate(PathRoutes.DETAILUSER.replace(":id", id))
+    // navigate(PathRoutes.DETAILUSER.replace(":id", id))
+    navigate(`/perfil/${id}`)
   }
 
   const handleStatus = user => {
     // const result =  usuarios.find((usuario) => usuario?.id === id);
     // console.log(user)
-    if(!user.tipoDeUsuario || user.tipoDeUsuario.tipo!== 'Administrador'){
+    if(!user.tipoDeUsuario!== 'Super Administrador' || user.tipoDeUsuario!== 'Administrador'){
       Swal.fire({
         title: `${user.nombre} ${user.apellido} es un  Usuario`,
         text: "Quieres convertirlo en Administrador?",
@@ -211,11 +186,9 @@ function UsersAdmin() {
       }).then((result) => {
         if (result.isConfirmed) {
           const idUser = user.id
-          const response = {
-            usuarioId: idUser,
-            tipoDeUsuarioId: 1
-          }
-          dispatch(changeStatusUser(response))
+          const response = 'Administrador'
+          console.log(user.id)
+          dispatch(cambiarTipoDeUsuario(idUser, response ))
           Swal.fire(
             'Estatus modificado!',
             `${user.nombre} ${user.apellido} es un Administrador ahora`,
@@ -323,7 +296,7 @@ function UsersAdmin() {
       Array.from(statusFilter).length !== statusOptions.length
     ) {
       filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.tipoDeUsuario?.tipo)
+        Array.from(statusFilter).includes(user.tipoDeUsuario)
       );
     }
 
@@ -357,7 +330,7 @@ function UsersAdmin() {
         return (
           <User
             //aqui va la foto del usuario
-            avatarProps={{ radius: "lg", src: user.foto }}
+            avatarProps={{ radius: "lg", src: user.imagenPerfil }}
             description={user.email}
             name={cellValue}
           >
@@ -395,18 +368,18 @@ function UsersAdmin() {
         return (
           <Chip
             className="capitalize border-none gap-1 text-default-600"
-            color={statusColorMap[user.tipoDeUsuario?.tipo]}
+            color={statusColorMap[user.tipoDeUsuario]}
             size="sm"
             variant="dot"
           >
             {/* {cellValue} */}
-            {user.tipoDeUsuario?.tipo ? user.tipoDeUsuario?.tipo : 'Sin tipo' }
+            {user.tipoDeUsuario ? user.tipoDeUsuario : 'Sin tipo' }
           </Chip>
         );
       case "actions":
         return (
           <div className="relative flex justify-end items-center gap-2 ">
-            {console.log(user)}
+            {/* {console.log(user)} */}
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
@@ -415,8 +388,7 @@ function UsersAdmin() {
               </DropdownTrigger>
               <DropdownMenu aria-label="Dynamic Actions">
                 <DropdownItem onClick={() => handleNavigate(user.id)}>Detalle</DropdownItem> 
-                {user.tipoDeUsuario?.tipo!=='Administrador' && (
-                  
+                {user.tipoDeUsuario === 'Usuario' && (
                     <DropdownItem
                       color="warning"
                       className="text-warning"
@@ -425,10 +397,10 @@ function UsersAdmin() {
                       Cambiar Estatus
                     </DropdownItem>
                 )}
-                    {user.tipoDeUsuario?.tipo!=='Administrador' && (
+                    {user.tipoDeUsuario === 'Usuario'  && (
                    <DropdownItem onClick={() => handleEdit(user.id)}>Editar</DropdownItem>
               )}
-               {user.tipoDeUsuario?.tipo!=='Administrador' && (
+               {user.tipoDeUsuario === 'Usuario' && (
                     //!Aqui se borra y arriba se edita y se detalla
                 <DropdownItem
                 color="danger"

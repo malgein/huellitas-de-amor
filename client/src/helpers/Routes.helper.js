@@ -23,8 +23,10 @@ const PathRoutes = {
   DASHBOARD_SUPER_ADMIN_DONACIONES: "/dashboard-super-admin/donaciones",
 USUARIOS:"/usuarios",
   DASHBOARD_USERS: "/dashboard-usuarios/",
-
-  DASHBOARD_USERS_MASCOTAS: "/dashboard-admin/mascotas",
+  DASHBOARD_USERS_ADOPTION_HOUSES: "/dashboard-usuarios/casas-de-adopcion",
+  DASHBOARD_USERS_USERS: "/dashboard-usuarios/usuarios",
+  DASHBOARD_USERS_DONATIONS: "/dashboard-usuarios/donaciones",
+  DASHBOARD_USERS_MASCOTAS: "/dashboard-usuarios/mascotas",
 
   DASHBOARD_HOUSES: "/dashboard-casas-de-adopcion/",
   DASHBOARD_HOUSES_MASCOTAS: "/dashboard-casas-de-adopcion/mascotas",
@@ -42,6 +44,7 @@ USUARIOS:"/usuarios",
 
   DETAILUSER: "/detail-user/:id",
   DETAILHOUSE: "/detail-house-of-adoption/:id",
+  ERROR404: '/error'
 };
 
 export default PathRoutes;
