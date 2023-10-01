@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BotonPerfil from "../EditarPerfil/BotonPerfil";
 import BotonPortada from "../EditarPerfil/BotonPortada";
 import {useAuth} from '../../context/authContext'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Perfil = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -272,7 +273,15 @@ const Perfil = () => {
           </div>
         </div>
       ) : (
-        <p>Cargando...</p>
+        <ClipLoader
+        color='#6f3b05'
+        loading={loading}
+        // cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+
       )}
     </div>
   );

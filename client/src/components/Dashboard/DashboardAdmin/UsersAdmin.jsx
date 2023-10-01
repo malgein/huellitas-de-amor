@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { getUsers, editUser, deleteUsers, modCompleteUser, getEntireUsers, cambiarTipoDeUsuario} from '../../../redux/actions'
+import { getUsers, editUser, deleteUsers, modCompleteUser, cambiarTipoDeUsuario} from '../../../redux/actions'
 import PathRoutes from "../../../helpers/Routes.helper";
 import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar'

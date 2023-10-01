@@ -377,18 +377,18 @@ export const logicalDeletePet = (id, estado) => async (dispatch) => {
 };
 
 //Accion que me trare el usuario con todas sus relacione
-//? User validar
-export const getEntireUsers = () => async (dispatch) => {
-  try {
-    const response = await axios.get(`${basename}/usuario/tipoDeUsuario`);
-    dispatch({
-      type: GET_ENTIRE_USERS,
-      payload: response.data,
-    });
-  } catch (error) {
-    handleError(dispatch, GET_ENTIRE_USERS, error);
-  }
-};
+ //? User validar
+// export const getEntireUsers = () => async (dispatch) => {
+//   try {
+//     const response = await axios.get(`${basename}/usuario/tipoDeUsuario`);
+//     dispatch({
+//       type: GET_ENTIRE_USERS,
+//       payload: response.data,
+//     });
+//   } catch (error) {
+//     handleError(dispatch, GET_ENTIRE_USERS, error);
+//   }
+// };
 
 // Acción para cambiar el tipo de usuario
 export const cambiarTipoDeUsuario = (userId, nuevoTipoDeUsuario) => {

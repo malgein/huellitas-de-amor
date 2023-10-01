@@ -104,13 +104,13 @@ export function NuevoRegistro() {
         onSubmit={onSubmit}
       >
         {({ isSubmitting }) => (
-          <Form className="border rounded-2xl bg-white shadow-xl px-8 pt-6 pb-6 mb-40  mt-[150px] w-[400px] h-[900px] ">
-            <div className="mb-[20px]">
-              <h1 className="text-3xl font-bold my-5">Registrate</h1>
-            </div>
+          <Form className="border rounded-2xl bg-white shadow-xl px-8 pt-6 pb-6 mb-40  mt-[50px] w-[400px] h-[900px] ">
+            {/* <div className="mb-[20px] mt-[50px]"> */}
+              <h1 className="text-3xl font-bold my-5 mt-[-60px] mb-[110px]">Registrate</h1>
+            {/* </div> */}
 
             <div className="flex flex-col justify-center items-center gap-5 h-[300px]">
-              <div className="mb-4  justify-center items-center">
+              <div className="mb-4  justify-center items-center  mt-[350px]">
                 <label
                   htmlFor="email"
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -292,7 +292,7 @@ export function NuevoRegistro() {
               </button>
             </div>
 
-            <p className="my-4 text-sm flex justify-between px-3">
+            <p className="my-4 text-sm flex justify-between px-3 mt-[460px]">
               ¿Ya tienes una cuenta?
               <Link to="/login" className="text-blue-700 hover:text-blue-900">
                 Login

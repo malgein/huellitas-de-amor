@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { getUsers, editUser, deleteUsers, modCompleteUser, getEntireUsers, cambiarTipoDeUsuario} from '../../../redux/actions'
+import { getUsers, editUser, deleteUsers, modCompleteUser,  cambiarTipoDeUsuario} from '../../../redux/actions'
 import PathRoutes from "../../../helpers/Routes.helper";
 import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar'
@@ -65,7 +65,7 @@ function Users() {
   useEffect(() => {
     //if (userModified) {
     // dispatch(getUsers());
-    dispatch(getEntireUsers());
+    dispatch(getUsers());
     // setUserModified(false); // Restablecer userDeleted después de obtener usuarios
     //}
   }, [userModified, dispatch]);
@@ -221,7 +221,7 @@ function Users() {
             `${user.nombre} ${user.apellido} es un Administrador ahora`,
             'success'
           )
-          dispatch(getEntireUsers())
+          dispatch(getUsers())
         }
       })
     } else {

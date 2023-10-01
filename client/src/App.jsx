@@ -65,7 +65,7 @@ function App() {
             
 
             <Route path={PathRoutes.DETAIL} element={<Detail />} />
-            <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
+            
             <Route path={PathRoutes.REGISTRO} element={<NuevoRegistro />}></Route>
             <Route path={PathRoutes.LOGIN} element={<NewLogin />}></Route>
 
@@ -123,6 +123,7 @@ function App() {
               path={PathRoutes.DASHBOARD_ADMIN_DONACIONES}
               element={<DonationsAdmin />}
               />
+              <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
             </Route>
             <Route element={<AuthorizationUser/>}>
               <Route path={PathRoutes.DASHBOARD_USERS} element={<DashboardUser />}/>

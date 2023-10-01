@@ -2,6 +2,7 @@ import { createContext, useState, useContext, useEffect } from "react";
 import axios from '../api/axios'
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 
 const AuthContext = createContext();
@@ -16,6 +17,8 @@ export const AuthProvider = ({ children }) =>{
 	const [user, setUser] = useState(null);
 	//Estado que nos dice en la app si el usuario se logeo o no
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+	const navigate = useNavigate()
 
 	//Estado que simulara un ambiente de carga mientras  se muestran cierto datosy se monta el componente
   const [loading, setLoading] = useState(true)
@@ -85,6 +88,7 @@ export const AuthProvider = ({ children }) =>{
 	}
 
 	const logout = () =>{
+		// navigate('/login')
     Cookies.remove('token')
     setIsAuthenticated(false)
     setUser(null)

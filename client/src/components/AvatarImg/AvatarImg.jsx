@@ -26,7 +26,7 @@ export default function AvatarImg() {
   const handleLogout = async () => {
     await logout();
   };
-  if(loading) return <></>
+  if(loading) return  <div style={{backgroundImage : 'https://icons8.com/preloaders/preloaders/480/Running%20dog.gif'}}></div>
   return (
     <div className="flex items-center gap-4">
       {/* {console.log(user)} */}

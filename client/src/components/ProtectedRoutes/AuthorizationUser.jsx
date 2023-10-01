@@ -1,5 +1,6 @@
 import { useAuth } from "../../context/authContext"
 import { Navigate, Outlet } from "react-router-dom"
+import Loader from "../Loader/Loader"
 
 
 const AuthorizationUser = () => {

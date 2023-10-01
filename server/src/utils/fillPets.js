@@ -10,7 +10,7 @@ const fillPets = async () => {
 	if (!DB) {
 		console.log("Creando BD");
 		try {
-			console.log(allPets);
+			// console.log(allPets);
 			await Mascota.bulkCreate(allPets);
 			
 			// console.log(res)
