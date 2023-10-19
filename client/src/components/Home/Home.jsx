@@ -21,8 +21,9 @@ export default function Home() {
   // const [petsPerPage] = useState(8); // Puesto constante ya que nunca lo modificas
   //Guardame el estado guardame cuantas Mascotas guardo por pagina, en este caso 8.
   const [petsPerPage, setPetsPerPage] = useState(8);
-  //El índice de la ultima Mascota por página.
 
+  const [loading, setLoading] = useState(false)
+  //El índice de la ultima Mascota por página.
   const indexOfLastPet = currentPage * petsPerPage;
   const indexOfFirstPet = indexOfLastPet - petsPerPage;
   const currentPet = Array.isArray(mascotas)
@@ -50,8 +51,12 @@ export default function Home() {
   };
 
   useEffect(() => {
+    setLoading(true)
     dispatch(getMascotas());
-  }, [dispatch]); // Agregado dispatch como dependencia para evitar warnings
+    setTimeout(()=>{
+      setLoading(false)
+    }, 3000)
+  }, [])
 
   // Esta es la lógica de filtrado: vamos a mostrar solo las mascotas que estan 'En adopcion' (nacho)
   const mascotasFiltradas = currentPet.filter(
@@ -59,6 +64,7 @@ export default function Home() {
   );
   //h-screen w-screen
   return (
+    loading ? <div className="flex justify-center items-center "><img src='https://cdn.dribbble.com/users/1680506/screenshots/5472165/animal.gif' alt='loading' className='flex justify-center items-center' /> </div>:
     <div className="x-[50px] flex justify-center items-center flex-col w-[1500px] mx-auto ">
       <div className=" flex flex-row  h-[550px] mt-12 mx-auto">
         <div className="relative w-[600px]  ">

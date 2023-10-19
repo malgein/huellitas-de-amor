@@ -29,7 +29,7 @@ export default function AvatarImg() {
   if(loading) return  <div style={{backgroundImage : 'https://icons8.com/preloaders/preloaders/480/Running%20dog.gif'}}></div>
   return (
     <div className="flex items-center gap-4">
-      {/* {console.log(user)} */}
+      {/* {console.log(user?.id)} */}
       <Dropdown placement="bottom-start">
         <DropdownTrigger>
           <User

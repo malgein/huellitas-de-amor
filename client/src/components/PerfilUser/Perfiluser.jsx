@@ -109,6 +109,7 @@ const Perfil = () => {
 
   return (
     <div className="border-2 flex justify-center ">
+      {console.log(id)}
       {usuario ? (
         <div className=" w-[1000px] mx-auto rounded-2xl shadow-lg   mb-unit-8">
           <div className="border border-b-4 rounded-t-lg h-[350px] w-[1000px] relative ">
