@@ -24,13 +24,18 @@ export default function Detail() {
   const [adopcionEnProgreso, setAdopcionEnProgreso] = useState(false);
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     dispatch(getPetById(id));
+    setTimeout(()=>{
+      setLoading(false)
+    }, 2000)
   }, [dispatch, id]);
 
   const mascota = useSelector((state) => state.petDetail);
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     console.log(mascota.casaDeAdopcionId);
@@ -75,6 +80,7 @@ export default function Detail() {
   const isAvailableForAdoption = mascota.estado === "En Adopción";
 
   return (
+    loading ? <div className="flex justify-center items-center "><img src='https://cdn.dribbble.com/users/1680506/screenshots/5472165/animal.gif' alt='loading' className='flex justify-center items-center' /> </div>:
     <div className="flex flex-col items-center bg-gray-100 min-h-screen pt-5 pb-8 ">
       <div className="w-full md:w-4/5 max-w-2xl rounded-lg shadow-md overflow-hidden bg-white">
         <div className="relative">

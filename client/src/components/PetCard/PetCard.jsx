@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -18,6 +18,8 @@ import Donar from "../BotonDonar/BotonDonar";
 function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  // const [loading, setLoading] = useState(false)
+
   const size = "medium";
 
   const handleOpen = () => {
@@ -28,7 +30,15 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
     setIsOpen(false);
   };
 
+  // useEffect(() => {
+  //   setLoading(true)
+  //   setTimeout(()=>{
+  //     setLoading(false)
+  //   }, 3000)
+  // }, [])
+
   return (
+    // loading ? <div className="flex justify-center items-center "><img src='https://cdn.dribbble.com/users/1680506/screenshots/5472165/animal.gif' alt='loading' className='flex justify-center items-center' /> </div>:
     <Card className="py-4 h-full card border hover:scale-105 hover:shadow-md">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <Link to={PathRoutes.DETAIL.replace(":id", id)}>
