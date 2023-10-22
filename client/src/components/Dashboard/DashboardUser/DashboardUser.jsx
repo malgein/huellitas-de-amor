@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 //Este es el componente del dashboard principal
 const DashboardUser = () => {
 
-	const {user} = useAuth()
+	const {usuario} = useAuth()
 
 	return (
 		<div className='flex overflow-scroll'>
@@ -21,8 +21,8 @@ const DashboardUser = () => {
 						{/* El elemento Outlet es necesario para poder navegar en subrutas del dashboard*/}
 						<Outlet/>
 							<div>
-								<h1>Nombre: {user.nombre}</h1>
-								<h1>Correo: {user.email}</h1>
+								<h1>Nombre: {usuario.nombre}</h1>
+								<h1>Correo: {usuario.email}</h1>
 							</div>
 					</div>
 				</div>

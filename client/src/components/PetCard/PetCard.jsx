@@ -11,12 +11,21 @@ import {
   ModalFooter,
   ModalContent,
 } from "@nextui-org/react";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 import PathRoutes from "../../helpers/Routes.helper";
 import Donar from "../BotonDonar/BotonDonar";
+import { useAuth } from "../../context/authContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const {usuario} = useAuth()
+
+  const {user} = useAuth0()
+
+  const navigate = useNavigate();
 
   // const [loading, setLoading] = useState(false)
 
@@ -54,14 +63,25 @@ function PetCard({ nombre, edad, sexo, descripcion, foto, peso, id }) {
         </Link>
 
         <div className="ml-11 relative top-[-100px] left-14 bg-transparent">
-          <Button
-            onClick={handleOpen}
-            // className="border border-orange-300  bg-transparent hover:bg-orange-200 mr-4 font-medium"
-            className="border border-orange-300  bg-orange-300 hover:bg-orange-200 mr-4 "
-          >
-            {" "}
-            Quiero Donar $
-          </Button>
+          {!user && !usuario ? (
+              <Button
+               onClick={() => navigate('/registro')}
+               // className="border border-orange-300  bg-transparent hover:bg-orange-200 mr-4 font-medium"
+               className="border border-orange-300  bg-orange-300 hover:bg-orange-200 mr-4 "
+             >
+               {" "}
+               Quiero Donar $
+             </Button>
+          ) : (
+            <Button
+              onClick={handleOpen}
+              // className="border border-orange-300  bg-transparent hover:bg-orange-200 mr-4 font-medium"
+              className="border border-orange-300  bg-orange-300 hover:bg-orange-200 mr-4 "
+            >
+              {" "}
+              Quiero Donar $
+            </Button>
+          )}
         </div>
       </CardHeader>
       <CardBody className="overflow-visible py-2 flex flex-col items-center">

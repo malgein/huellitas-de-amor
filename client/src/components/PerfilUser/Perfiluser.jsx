@@ -20,8 +20,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const Perfil = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const {user, loading} = useAuth()
-  const [usuario, setUsuario] = useState(null);
+  const {usuario, cargando} = useAuth()
+  const [usuarioLocal, setUsuarioLocal] = useState(null);
   const [userModified, setUserModified] = useState(true);
   const [abrir, setAbrir] = useState(false);
   const { id } = useParams();
@@ -46,7 +46,7 @@ const Perfil = () => {
 
   // Definir una función para actualizar el estado del usuario
   const updateUser = (newUserData) => {
-    setUsuario(newUserData);
+    setUsuarioLocal(newUserData);
   };
 
   const abrirModal = () => {
@@ -79,7 +79,7 @@ const Perfil = () => {
         const userData = response.data;
 
         // Actualiza el estado del usuario y las URLs de las imágenes
-        setUsuario(userData);
+        setUsuarioLocal(userData);
         setPerfil({
           nombre: userData.nombre || "",
           apellido: userData.apellido || "",
@@ -110,7 +110,7 @@ const Perfil = () => {
   return (
     <div className="border-2 flex justify-center ">
       {console.log(id)}
-      {usuario ? (
+      {usuarioLocal ? (
         <div className=" w-[1000px] mx-auto rounded-2xl shadow-lg   mb-unit-8">
           <div className="border border-b-4 rounded-t-lg h-[350px] w-[1000px] relative ">
             {/* aqui va una imagen */}
@@ -136,11 +136,11 @@ const Perfil = () => {
 
               <div className="flex flex-col text-lg text-black font-semibold ">
                 <h1 className="mb-0">
-                  {usuario.nombre + " " + usuario.apellido}
+                  {usuarioLocal.nombre + " " + usuarioLocal.apellido}
                 </h1>
 
                 <p className="text-slate-500 font-light mt-0">
-                  {usuario.ubicacion}
+                  {usuarioLocal.ubicacion}
                 </p>
               </div>
             </div>
@@ -178,13 +178,13 @@ const Perfil = () => {
             <h2 className="text-lg text-black font-semibold mb-2">
               Acerca de Mí:
             </h2>
-            <p>{usuario.acerca}</p>
+            <p>{usuarioLocal.acerca}</p>
           </div>
           <div className="mt-[120px] ml-3 flex flex-col text-start">
             <h2 className="text-lg text-black font-semibold mb-2">
               Status:
             </h2>
-            <p>{usuario.tipoDeUsuario}</p>
+            <p>{usuarioLocal.tipoDeUsuario}</p>
           </div>
 
           <div className="flex flex-row items-center justify-center h-[100px] mt-10 gap-10">
@@ -216,26 +216,26 @@ const Perfil = () => {
                 <i className="fa-solid fa-envelope mr-2"></i>
                 {/* <i class="fa-regular fa-envelope mr-2"></i> */}
                 <span className="inline-block text-slate-600 font-light">
-                  {usuario.email}
+                  {usuarioLocal.email}
                 </span>
               </p>
               <p className="">
                 <i className="fa-solid fa-phone-flip mr-2"></i>
                 <span className="inline-block text-slate-600 font-light">
-                  {usuario.telefono}
+                  {usuarioLocal.telefono}
                 </span>
               </p>
               <p className=" ">
                 <i className="fa-solid fa-location-dot mr-2"></i>
                 <span className="inline-block text-slate-600 font-light">
-                  {usuario.direccion}
+                  {usuarioLocal.direccion}
                 </span>
               </p>
             </div>
           </div>
 
           <div className="mb-3 ml-2">
-            {usuario.id === user?.id && (
+            {usuarioLocal.id === usuario?.id && (
               <div className="flex flex-wrap justify-center gap-3">
                 {sizes.map((size) => (
                   <Button
@@ -276,7 +276,7 @@ const Perfil = () => {
       ) : (
         <ClipLoader
         color='#6f3b05'
-        loading={loading}
+        loading={cargando}
         // cssOverride={override}
         size={150}
         aria-label="Loading Spinner"

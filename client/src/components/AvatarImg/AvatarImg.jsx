@@ -16,67 +16,85 @@ import { LogoutButton } from "../Auth0Out/Auth0Out";
 import {useAuth} from '../../context/authContext'
 
 export default function AvatarImg() {
-  // const { user, logout } = useAuth();
+  const { user, logout } = useAuth0();
   // const { user, isAuthenticated, isLoading } = useAuth0();
-  const {user, loading, isAuthenticated} = useAuth()
+  const {usuario} = useAuth()
   // console.log(loading, isAuthenticated)
-  const imgProfile = user?.imagenPerfil;
+  const imgProfile = usuario?.imagenPerfil;
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await logout();
   };
-  if(loading) return  <div style={{backgroundImage : 'https://icons8.com/preloaders/preloaders/480/Running%20dog.gif'}}></div>
   return (
     <div className="flex items-center gap-4">
       {/* {console.log(user?.id)} */}
       <Dropdown placement="bottom-start">
-        <DropdownTrigger>
-          <User
+        {user ? (
+            <DropdownTrigger>
+            <User
             as="button"
             avatarProps={{
               isBordered: true,
-              src: imgProfile,
+              src: user?.picture,
             }}
             className="transition-transform"
             description={user?.email}
-            name={user?.nombre}
-          />
+            name={user?.given_name}/>
+    
+          </DropdownTrigger>
+        ): (
+          <DropdownTrigger>
+          <User
+          as="button"
+          avatarProps={{
+            isBordered: true,
+            src: imgProfile,
+          }}
+          className="transition-transform"
+          description={usuario?.email}
+          name={usuario?.nombre} />
         </DropdownTrigger>
+        )}
         <DropdownMenu aria-label="User Actions" variant="flat">
-          {user && (
+          {usuario && (
             <DropdownItem key="profile" className="h-14 gap-2">
-                <Link to={`/perfil/${user?.id}`}>
-                  <p className="font-bold" onClick={() => console.log(user?.id)}>Hola {user?.nombre}🐾 </p>
+                <Link to={`/perfil/${usuario?.id}`}>
+                  <p className="font-bold" onClick={() => console.log(usuario?.id)}>Hola {usuario?.nombre}🐾 </p>
                 </Link>
-              <p className="font-bold">{user?.displayName}</p>
             </DropdownItem>
           )}
-          {!user && (
+          {user && (
+            <DropdownItem key="profile" className="h-14 gap-2">
+                  <p className="font-bold" >Hola {user?.name}🐾 </p>
+            </DropdownItem>
+          )}
+          {(!usuario && !user) ? (
             <DropdownItem key="analytics" to="/registro">
               <Link to={PathRoutes.LOGIN}>Inicia sesion</Link>
             </DropdownItem>
-          )}
-          {user?.tipoDeUsuario === 'Administrador' ? (
+          ): null }
+
+          {usuario?.tipoDeUsuario === 'Administrador' ? (
             <DropdownItem key="dashboard">
               <Link to={PathRoutes.DASHBOARD_ADMIN}>Panel</Link>
             </DropdownItem>
           ) : null}
 
-          {user?.tipoDeUsuario === 'Usuario' ? (
+          {usuario?.tipoDeUsuario === 'Usuario' ? (
             <DropdownItem key="dashboard">
               <Link to={PathRoutes.DASHBOARD_USERS}>Panel</Link>
             </DropdownItem>
           ) : null}
 
-          {user ? (
+          {usuario ? (
             <DropdownItem key="logout" color="danger">
               <Link>
                 <LogoutButton />
               </Link>
             </DropdownItem>
           ) : (
-            <DropdownItem>
+            <DropdownItem  >
               <ModalLogSig />
             </DropdownItem>
           )}

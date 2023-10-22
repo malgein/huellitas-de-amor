@@ -11,7 +11,7 @@ function NewLogin() {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(null);
 
-  const {signin, isAuthenticated} = useAuth()
+  const {signin, autenticado} = useAuth()
 
 
   const initialValues = {
@@ -50,10 +50,10 @@ function NewLogin() {
   };
 
   useEffect(() => {
-    if(isAuthenticated){
+    if(autenticado){
       navigate('/')
     }
-  }, [isAuthenticated])
+  }, [autenticado])
 
   return (
     <div className="w-full max-w-xs m-auto text-black">

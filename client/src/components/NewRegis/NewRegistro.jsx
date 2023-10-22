@@ -22,7 +22,7 @@ export function NuevoRegistro() {
     acerca: ""
   };
 
-  const {signup, isAuthenticated} = useAuth()
+  const {signup, autenticado} = useAuth()
 
   // console.log(user)
 
@@ -89,10 +89,10 @@ export function NuevoRegistro() {
   };
 
   useEffect(() => {
-    if(isAuthenticated){
+    if(autenticado){
       navigate('/')
     }
-  }, [isAuthenticated])
+  }, [autenticado])
 
 
   return (

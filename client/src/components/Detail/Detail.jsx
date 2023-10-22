@@ -18,8 +18,8 @@ import AdoptionFormModal from "../FormularioAdopcion/FormAdop";
 
 export default function Detail() {
   const { id } = useParams();
-  // const { user } = useAuth0();
-  const { user } = useAuth();
+  const { user } = useAuth0();
+  const { usuario } = useAuth();
   const dispatch = useDispatch();
   const [adopcionEnProgreso, setAdopcionEnProgreso] = useState(false);
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function Detail() {
     dispatch(getPetById(id));
     setTimeout(()=>{
       setLoading(false)
-    }, 2000)
+    }, 1500)
   }, [dispatch, id]);
 
   const mascota = useSelector((state) => state.petDetail);
@@ -53,7 +53,7 @@ export default function Detail() {
     confetti({});
   };
   const handleAdoption = () => {
-    if (user) {
+    if (usuario || user) {
       console.log("Opening modal");
       setIsModalOpen(true);
     } else {
@@ -213,21 +213,36 @@ export default function Detail() {
               onConfirm={handleAdoptionConfirm}
             />
 
-            {user ? (
-              <Button
-                onClick={handleAdoption}
-                id={id}
-                currentState={mascota.estado}
-                user={user}
-              >
-                Adóptame
-              </Button>
-            ) : (
+            {(!usuario && !user) ? (
+              // <Button
+              //   onClick={handleAdoption}
+              //   id={id}
+              //   currentState={mascota.estado}
+              //   user={usuario}
+              //   color="primary"
+              // >
+              //   Adóptame
+              // </Button>
               <Link to="/registro">
-                <Button radius="full" color="primary">
+                <Button radius="full" >
                   Adóptame
                 </Button>
               </Link>
+            ) : (
+              // <Link to="/registro">
+              //   <Button radius="full" >
+              //     Adóptame
+              //   </Button>
+              // </Link>
+               <Button
+                onClick={handleAdoption}
+                id={id}
+                currentState={mascota.estado}
+                user={usuario}
+                color="primary"
+              >
+                Adóptame
+              </Button>
             )}
           </div>
         </div>

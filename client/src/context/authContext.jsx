@@ -14,26 +14,26 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) =>{
-	const [user, setUser] = useState(null);
+	const [usuario, setUsuario] = useState(null);
 	//Estado que nos dice en la app si el usuario se logeo o no
-	const [isAuthenticated, setIsAuthenticated] = useState(false)
+	const [autenticado, setAutenticado] = useState(false)
 
 	const navigate = useNavigate()
 
 	//Estado que simulara un ambiente de carga mientras  se muestran cierto datosy se monta el componente
-  const [loading, setLoading] = useState(true)
+  const [cargando, setCargando] = useState(true)
 
 	const signup = async(user) => {
 		try {
 			const response = await axios.post('/crearUsuario', user)
 			console.log(response.data)
-			setUser(response.data)
+			setUsuario(response.data)
 			Swal.fire(
 				'Usuario registrado con exito!',
 				'',
 				'success'
 			)
-			setIsAuthenticated(true)
+			setAutenticado(true)
 		} catch (error) {
 			console.log(error)
 			console.log(error?.response?.data?.message)
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) =>{
 		try {
 			const res = await axios.post('/loginUser', user)
 			console.log(res)
-			setUser(res.data)
+			setUsuario(res.data)
 			const Toast = Swal.mixin({
 				toast: true,
 				position: 'center',
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) =>{
 				icon: 'success',
 				title: 'Inicio de sesion exitoso'
 			})
-			setIsAuthenticated(true)
+			setAutenticado(true)
 		} catch (error) {
 			console.log(error);
 			if(error?.response?.data?.message === 'user not found'){
@@ -87,11 +87,11 @@ export const AuthProvider = ({ children }) =>{
 		}
 	}
 
-	const logout = () =>{
+	const deslogear = () =>{
 		// navigate('/login')
     Cookies.remove('token')
-    setIsAuthenticated(false)
-    setUser(null)
+    setAutenticado(false)
+    setUsuario(null)
   }
 
 
@@ -111,9 +111,9 @@ export const AuthProvider = ({ children }) =>{
 			 
 				 //verificca si el token lo tiene el navegador si ya se encuantra autenticado, si no es asi torna el usuario en nulo y el isAuthenticated en false y el loading el false lo que deberia de reedicreccionar al login 
 					if(!cookies.token){
-					 setIsAuthenticated(false)
-					 setLoading(false)
-					 return setUser(null)
+					 setAutenticado(false)
+					 setCargando(false)
+					 return setUsuario(null)
 					}
 					 // console.log(cookies.token)
 					 try {
@@ -122,19 +122,19 @@ export const AuthProvider = ({ children }) =>{
 						 // console.log(res);
 						 //si no es valido torna el isauthenticated en false y el estado de carga en false tambien para que se detenga el spiner
 						 if (!res.data) {
-							 setIsAuthenticated(false);
-							 setLoading(false)
+							 setAutenticado(false);
+							 setCargando(false)
 							 return
 						 }
 						 //si es valido  torna el isauthenticated en true le pasa al estado user global el los datos que necesitamos del usuario guardado 
-						 setIsAuthenticated(true);
-						 setUser(res.data);
-						 setLoading(false)
+						 setAutenticado(true);
+						 setUsuario(res.data);
+						 setCargando(false)
 					 } catch (error) {
 						 console.log(error)
-						 setIsAuthenticated(false);
-						 setUser(null)
-						 setLoading(false)
+						 setAutenticado(false);
+						 setUsuario(null)
+						 setCargando(false)
 					 }	
 				}
 				checkLogin();		 
@@ -143,12 +143,12 @@ export const AuthProvider = ({ children }) =>{
 	return (
     <AuthContext.Provider
       value={{
-        user,
+        usuario,
         signup,
-				isAuthenticated,
+			 	autenticado,
 				signin, 
-				loading,
-				logout
+				cargando,
+				deslogear
       }}
     >
       {children}

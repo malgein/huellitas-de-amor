@@ -6,7 +6,7 @@ import { useAuth } from "../../../context/authContext";
 
 //Este es el componente del dashboard principal
 const DashboardAdmin = () => {
-  const { user } = useAuth();
+  const { usuario } = useAuth();
 
   const navigate = useNavigate();
 
@@ -30,8 +30,8 @@ const DashboardAdmin = () => {
             {/* El elemento Outlet es necesario para poder navegar en subrutas del dashboard*/}
             <Outlet></Outlet>
             <div>
-							<h1>Nombre: {user.nombre}</h1>
-							<h1>Correo: {user.email}</h1>
+							<h1>Nombre: {usuario.nombre}</h1>
+							<h1>Correo: {usuario.email}</h1>
 						</div>
           </div>
         </div>

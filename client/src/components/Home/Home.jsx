@@ -13,6 +13,7 @@ import Paginated from "../Paginated/Paginated";
 import { Button, Image } from "@nextui-org/react";
 import imagenHome from "../../assets/imageUno.png";
 import CarouselComponent from "../Carousel/Carousel";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Home() {
   const mascotas = useSelector((state) => state.mascotas);
@@ -22,7 +23,9 @@ export default function Home() {
   //Guardame el estado guardame cuantas Mascotas guardo por pagina, en este caso 8.
   const [petsPerPage, setPetsPerPage] = useState(8);
 
-  const [loading, setLoading] = useState(false)
+  const {user} = useAuth0()
+
+  const [cargandoLocal, setCargandoLocal] = useState(false)
   //El índice de la ultima Mascota por página.
   const indexOfLastPet = currentPage * petsPerPage;
   const indexOfFirstPet = indexOfLastPet - petsPerPage;
@@ -42,6 +45,8 @@ export default function Home() {
   // const Favs = useSelector((state) => state.favorites);
   // const [openModal, setOpenModal] = useState(false);
 
+  // console.log(user)
+
   const handleOpenModal = () => {
     setOpenModal(true);
   };
@@ -51,11 +56,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setLoading(true)
+    setCargandoLocal(true)
     dispatch(getMascotas());
     setTimeout(()=>{
-      setLoading(false)
-    }, 3000)
+      setCargandoLocal(false)
+    }, 1500)
   }, [])
 
   // Esta es la lógica de filtrado: vamos a mostrar solo las mascotas que estan 'En adopcion' (nacho)
@@ -64,7 +69,7 @@ export default function Home() {
   );
   //h-screen w-screen
   return (
-    loading ? <div className="flex justify-center items-center "><img src='https://cdn.dribbble.com/users/1680506/screenshots/5472165/animal.gif' alt='loading' className='flex justify-center items-center' /> </div>:
+    cargandoLocal ? <div className="flex justify-center items-center "><img src='https://cdn.dribbble.com/users/1680506/screenshots/5472165/animal.gif' alt='loading' className='flex justify-center items-center' /> </div>:
     <div className="x-[50px] flex justify-center items-center flex-col w-[1500px] mx-auto ">
       <div className=" flex flex-row  h-[550px] mt-12 mx-auto">
         <div className="relative w-[600px]  ">
