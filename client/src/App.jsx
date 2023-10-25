@@ -12,7 +12,7 @@ import PathRoutes from "./helpers/Routes.helper";
 import Footer from "./components/Footer/Footer";
 import ModalLogSig from "./components/ModalLogSig/ModalLogSig";
 
-import Registro from "./components/Registro/Registro";
+import RegistroCasa from "./components/Registro/RegistroCasa";
 import DashboardSuperAdmin from "./components/Dashboard/DashboardSuperAdmin/DashboardSuperAdmin";
 // import Dashboard from "./components/Dashboard/Dashboard";
 import DetailUser from "./components/Dashboard/DetailUser";
@@ -68,6 +68,8 @@ function App() {
             
             <Route path={PathRoutes.REGISTRO} element={<NuevoRegistro />}></Route>
             <Route path={PathRoutes.LOGIN} element={<NewLogin />}></Route>
+
+            <Route path={PathRoutes.REGISTRO_CASA} element={<RegistroCasa />}></Route>
 
             <Route
               path={PathRoutes.CASADETAIL}

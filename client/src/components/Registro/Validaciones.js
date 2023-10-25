@@ -1,15 +1,15 @@
 import * as Yup from "yup";
 
 const validationSchema = Yup.object({
-  nombre: Yup.string()
-    .required("Por favor, introduce tu nombre")
-    .min(4, "El nombre debe tener al menos 4 caracteres")
-    .max(15, "El nombre no puede tener más de 15 caracteres"),
+  nombreDeOng: Yup.string()
+    .required("Por favor, introduce el nombre de la organizacion")
+    .min(4, "El nombre de la organozacion debe tener al menos 4 caracteres")
+    .max(25, "El nombre de la organizaciob no puede tener más de 15 caracteres"),
 
-  apellido: Yup.string()
-    .required("Por favor, introduce tu apellido.")
-    .min(5, "El apellido debe tener al menos 5 caracteres")
-    .max(15, "El aellido no puede tener más de 15 caracteres"),
+  nombreDeContacto: Yup.string()
+    .required("Por favor, introduce el nombre de contacto.")
+    .min(5, "El nombre de contacto debe tener al menos 5 caracteres")
+    .max(15, "El nombre de contacto no puede tener más de 15 caracteres"),
 
   email: Yup.string()
     .email("Correo electrónico inválido")

@@ -10,6 +10,7 @@ const PathRoutes = {
   CASADETAIL: "/casaDeAdopcion/:id",
   NOTIFICACION: "/notificaciones",
   DASHBOARD: "/dashboard",
+  REGISTRO_CASA: "/registro-casa",
 
   DASHBOARD_SUPER_ADMIN: "dashboard-super-admin",
   //Sub ruta para el dashboard de mascotas
