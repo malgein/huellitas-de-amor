@@ -18,6 +18,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 // import NewLogin from "../NewRegis/NewLogin";
 // import { NuevoRegistro } from "../NewRegis/NewRegistro";
 import FlexBetween from "./FlexBetween";
+import { useAuth } from "../../context/authContext"
 
 const RegistroCasa = () => {
   // const { id } = useParams();
@@ -30,6 +31,8 @@ const RegistroCasa = () => {
     ubicacion: "",
     foto: ""
   });
+
+  const {signupHouse, autenticado} = useAuth()
 
   const [pageType, setPageType] = useState("login");
 
@@ -75,35 +78,35 @@ const RegistroCasa = () => {
     // this allows us to send form info with image
     //Hacemos en loop para enviar las imagenes a traves de un request body al backend esta es una forma de hacer eso
     //creo que formData es  una propiedad de material ui para guardar data de los inputs
-    const formData = new FormData();
-    for (let value in values) {
-      //En este caso formdata tendra el valor de los inputs
-      formData.append(value, values[value]);
-    }
+    console.log(values)
+   
     //Despues del loop guardaremos el archivo en nuestra carpeta local de assets a traves del nombre eso es lo que hacee esta linea de codigo
     //Y aqui formData tendra el valor de las pictures de los archivos
-    formData.append("picturePath", values.foto.name);
-    //Endpoint  del backend que se encarga del registro de usuarios
-    const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
-      {
-        method: "POST",
-        //Aqui le pasamos el valor de los inputs icluyendo los archivos para registrar el usuario en el backend y en la bd
-        body: formData,
-      }
-    );
-    //Aqui convertimos la constante 
-    const savedUser = await savedUserResponse.json();
-    Swal.fire(
-      'Registro de usuario exitoso!',
-      '',
-      'success'
-    )
-    onSubmitProps.resetForm();
+   
 
-    if (savedUser) {
-      setPageType("login");
-    }
+    // Endpoint  del backend que se encarga del registro de usuarios
+    // const savedUserResponse = await fetch(
+    //   "http://localhost:3001/crearCasaDeAdopcion",
+    //   {
+    //     method: "POST",
+    //     //Aqui le pasamos el valor de los inputs icluyendo los archivos para registrar el usuario en el backend y en la bd
+    //     body: values,
+    //   }
+    // );
+    // //Aqui convertimos la constante 
+    // const savedUser = await savedUserResponse.json();
+    // Swal.fire(
+    //   'Registro de usuario exitoso!',
+    //   '',
+    //   'success'
+    // )
+    // onSubmitProps.resetForm();
+
+    // if (savedUser) {
+    //   setPageType("login");
+    // }
+
+    signupHouse(values)
   };
 
 
@@ -141,7 +144,7 @@ const RegistroCasa = () => {
 
   const onSubmit = async(values, onSubmitProps) => {
     // e.preventDefault();
-    console.log(values)
+    // console.log(values)
 
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
@@ -187,7 +190,7 @@ const RegistroCasa = () => {
           <Form>
             {isRegister && (
               <>
-                {console.log(pageType)}
+                {/* {console.log(pageType)} */}
                 <div className={styles.tittle}>
                   <h1>Registrate como Casa de Adopcion</h1>
                 </div>
@@ -195,6 +198,7 @@ const RegistroCasa = () => {
                   <FormInput
                     label="Nombre de organizacion"
                     name="nombreDeOng"
+                    type="text"
                     error={errors.nombreDeOng}
                     placeholder="Nombre de organizacion"
                     value={formData.nombreDeOng}
@@ -205,6 +209,7 @@ const RegistroCasa = () => {
                   <FormInput
                     label="Nombre de contacto"
                     name="nombreDeContacto"
+                    type="text"
                     error={errors.nombreDeContacto}
                     placeholder="Nombre de contacto"
                     value={formData.nombreDeContacto}
@@ -216,6 +221,7 @@ const RegistroCasa = () => {
                     placeholder="Email"
                     label="Email"
                     name="email"
+                    type="text"
                     error={errors.email}
                     value={formData.email}
                     onChange={handleChange}
@@ -226,6 +232,7 @@ const RegistroCasa = () => {
                     placeholder="Contraseña"
                     label="Contraseña"
                     name="password"
+                    type="password"
                     error={errors.password}
                     value={formData.password}
                     onChange={handleChange}
@@ -235,6 +242,7 @@ const RegistroCasa = () => {
                   <FormInput
                     label="Telefono"
                     name="telefono"
+                    type="text"
                     error={errors.telefono}
                     placeholder="Telefono"
                     value={formData.telefono}
@@ -245,6 +253,7 @@ const RegistroCasa = () => {
                   <FormInput
                     label="Ubicacion"
                     name="ubicacion"
+                    type="text"
                     error={errors.ubicacion}
                     placeholder="Ubicacion"
                     value={formData.ubicacion}
@@ -296,6 +305,7 @@ const RegistroCasa = () => {
                       placeholder="Email"
                       label="Email"
                       name="email"
+                      type="text"
                       error={errors.email}
                       value={formData.email}
                       onChange={handleChange}
@@ -306,6 +316,7 @@ const RegistroCasa = () => {
                     placeholder="Contraseña"
                     label="Contraseña"
                     name="password"
+                    type="password"
                     error={errors.password}
                     value={formData.password}
                     onChange={handleChange}

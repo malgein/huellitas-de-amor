@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
       foto: {
         type: DataTypes.JSON,
         allowNull: false,
+        defaultValue: 'https://bestfriends.org/sites/default/files/styles/three_col_rect_470x350_/public/story_images/Dog-1124x554.jpg?h=5c78e16c&itok=bNFOdYDI'
       },
       nombreDeOng: {
         type: DataTypes.STRING(50),

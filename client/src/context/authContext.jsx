@@ -18,6 +18,9 @@ export const AuthProvider = ({ children }) =>{
 	//Estado que nos dice en la app si el usuario se logeo o no
 	const [autenticado, setAutenticado] = useState(false)
 
+	//Estado global que representa una casa de adopcion que o bien se ha logeado o bien se ha registrado
+	const [house, setHouse] = useState(null)
+
 	const navigate = useNavigate()
 
 	//Estado que simulara un ambiente de carga mientras  se muestran cierto datosy se monta el componente
@@ -41,6 +44,30 @@ export const AuthProvider = ({ children }) =>{
 				Swal.fire(
 					'No se pudo registrar el usuario!',
 					'Ya existe un usuario con ese email',
+					'error'
+				)
+			}
+		}
+	}
+
+	const signupHouse = async(house) => {
+		try {
+			const response = await axios.post('/crearCasaDeAdopcion', house)
+			console.log(response.data)
+			setHouse(response.data)
+			Swal.fire(
+				'Casa de adopcion registrado con exito!',
+				'',
+				'success'
+			)
+			setAutenticado(true)
+		} catch (error) {
+			console.log(error)
+			console.log(error?.response?.data?.message)
+			if(error?.response?.data?.message === 'email already exists'){
+				Swal.fire(
+					'No se pudo registrar la casa de adopcion!',
+					'Ya existe una casa de adopcion con ese email',
 					'error'
 				)
 			}
@@ -92,17 +119,11 @@ export const AuthProvider = ({ children }) =>{
     Cookies.remove('token')
     setAutenticado(false)
     setUsuario(null)
+		setHouse(null)
   }
 
 
 	useEffect(() => {
-		// const cookies = Cookies.get()
-
-		// console.log(cookies)
-
-		// if(cookies.token){
-		// 	// console.log(cookies.token)
-
 		// }
 		    //Verifica si al montar el componente hay una cookie, cuando recargamos la pagina o pasamos a otra parte de la app se borran los estados, esto es para determinar que hay una cookie con un token y por tanto dejarme pasar a las rutas que necesitan autenticacion
 				async function checkLogin(){
@@ -113,7 +134,8 @@ export const AuthProvider = ({ children }) =>{
 					if(!cookies.token){
 					 setAutenticado(false)
 					 setCargando(false)
-					 return setUsuario(null)
+					 setHouse(null)
+					 return setUsuario(null) 
 					}
 					 // console.log(cookies.token)
 					 try {
@@ -128,12 +150,23 @@ export const AuthProvider = ({ children }) =>{
 						 }
 						 //si es valido  torna el isauthenticated en true le pasa al estado user global el los datos que necesitamos del usuario guardado 
 						 setAutenticado(true);
-						 setUsuario(res.data);
-						 setCargando(false)
+						 //Aqui tiene que estar la clave para  determinar si lo que se loega es una casa o un usuario
+						 
+						 if(res.data.nombre){
+							setUsuario(res.data);
+						 	setCargando(false)
+						 }
+
+						 if(res.data.nombreDeOng){
+							 setHouse(res.data)
+							 setCargando(false)
+						 }
+						 console.log(usuario, house)
 					 } catch (error) {
 						 console.log(error)
 						 setAutenticado(false);
 						 setUsuario(null)
+						 setHouse(null)
 						 setCargando(false)
 					 }	
 				}
@@ -144,6 +177,8 @@ export const AuthProvider = ({ children }) =>{
     <AuthContext.Provider
       value={{
         usuario,
+				house,
+				signupHouse,
         signup,
 			 	autenticado,
 				signin, 

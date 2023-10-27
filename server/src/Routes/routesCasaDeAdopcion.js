@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const postCasaDeAdopcion = require("../controllers/postCasaDeAdopcion");
+
 const fillHomes = require('../utils/fillHomes')
 const getAllHomes = require('../controllers/getAllHomes')
 const modHouseById = require('../controllers/modHouseById')
@@ -17,15 +17,15 @@ const postHouseComments=require('../controllers/postHouseComments')
 const getCasaById = require("../controllers/getCasaById");
 const getComentarios = require("../controllers/getComentarios");
 
-router.post("/", async (req, res) => {
-  try {
-    const response = req.body;
-    const casaPost = await postCasaDeAdopcion(response);
-    res.status(200).json(casaPost);
-  } catch (error) {
-    res.status(error.status || 500).json({ message: error.message });
-  }
-});
+// router.post("/", async (req, res) => {
+//   try {
+//     const response = req.body;
+//     const casaPost = await postCasaDeAdopcion(response);
+//     res.status(200).json(casaPost);
+//   } catch (error) {
+//     res.status(error.status || 500).json({ message: error.message });
+//   }
+// });
 
 router.get('/fill', async (req, res) => {
   try {
