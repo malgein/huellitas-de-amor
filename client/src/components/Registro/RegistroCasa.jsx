@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import styles from "./RegistroCasa.module.css";
@@ -13,6 +13,7 @@ import {
 import Dropzone from "react-dropzone";
 import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import validationSchema from "./Validaciones";
+import validationSchemaLogin from "./ValidacionesLogin";
 import * as Yup from "yup";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 // import NewLogin from "../NewRegis/NewLogin";
@@ -32,7 +33,7 @@ const RegistroCasa = () => {
     foto: ""
   });
 
-  const {signupHouse, autenticado} = useAuth()
+  const {signupHouse, autenticado, signinHouse} = useAuth()
 
   const [pageType, setPageType] = useState("login");
 
@@ -43,6 +44,8 @@ const RegistroCasa = () => {
   const isLogin = pageType === "login";
   //Si esta registrado la casa de adopcion
   const isRegister = pageType === "register";
+
+  console.log(pageType)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,8 +81,15 @@ const RegistroCasa = () => {
     // this allows us to send form info with image
     //Hacemos en loop para enviar las imagenes a traves de un request body al backend esta es una forma de hacer eso
     //creo que formData es  una propiedad de material ui para guardar data de los inputs
-    console.log(values)
+    const file = values.foto
    
+    const data = new FormData()
+
+    data.append("file", file)
+
+    data.append("upload_preset" ,"Huellitas")
+
+    const response = await axios.post("https://api.cloudinary.com/v1_1/dz9ytnn8w/image/upload", data)
     //Despues del loop guardaremos el archivo en nuestra carpeta local de assets a traves del nombre eso es lo que hacee esta linea de codigo
     //Y aqui formData tendra el valor de las pictures de los archivos
    
@@ -100,54 +110,58 @@ const RegistroCasa = () => {
     //   '',
     //   'success'
     // )
-    // onSubmitProps.resetForm();
+    
 
     // if (savedUser) {
     //   setPageType("login");
     // }
 
-    signupHouse(values)
+    // signupHouse(values)
+    onSubmitProps.resetForm();
   };
 
 
   //funcion que hace posible el loggin del usuario mediante una llamada al endpoint
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
-    const loggedIn = await loggedInResponse.json();
+    // const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(values),
+    // });
+    // const loggedIn = await loggedInResponse.json();
+    // onSubmitProps.resetForm();
+    // console.log(loggedIn)
+    // if(loggedIn.msg === 'Invalid credentials. '){
+    //   Swal.fire(
+    //     'Invalid password',
+    //     '',
+    //     'error'
+    //   )
+    // } else if(loggedIn.msg === 'User does not exist. '){
+    //   Swal.fire(
+    //     'This email is not registered',
+    //     '',
+    //     'error'
+    //   )
+    // } else if (loggedIn) {
+    //   Swal.fire(
+    //     'Login successfully',
+    //     '',
+    //     'success'
+    //   )
+    //   navigate("/home");
+    // }
+    // console.log('click')
+    signinHouse(values)
     onSubmitProps.resetForm();
-    console.log(loggedIn)
-    if(loggedIn.msg === 'Invalid credentials. '){
-      Swal.fire(
-        'Invalid password',
-        '',
-        'error'
-      )
-    } else if(loggedIn.msg === 'User does not exist. '){
-      Swal.fire(
-        'This email is not registered',
-        '',
-        'error'
-      )
-    } else if (loggedIn) {
-      Swal.fire(
-        'Login successfully',
-        '',
-        'success'
-      )
-      navigate("/home");
-    }
   };
 
   const onSubmit = async(values, onSubmitProps) => {
     // e.preventDefault();
-    // console.log(values)
+    console.log(values)
 
-    if (isLogin) await login(values, onSubmitProps);
-    if (isRegister) await register(values, onSubmitProps);
+    if (isLogin) return await login(values, onSubmitProps);
+    if (isRegister) return await register(values, onSubmitProps);
 
 
     // axios
@@ -169,12 +183,18 @@ const RegistroCasa = () => {
     //   });
   };
 
+  useEffect(() => {
+    if(autenticado){
+      navigate('/')
+    }
+  }, [autenticado])
+
   return (
     // <div className={styles.formcontainer}>
     <div className="flex flex-col items-center">
       <Formik
         initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
-        validationSchema={validationSchema}
+        validationSchema={isLogin ? validationSchemaLogin : validationSchema}
         onSubmit={onSubmit}
         // enableReinitialize={true}
       >
@@ -300,6 +320,9 @@ const RegistroCasa = () => {
             )}
             {isLogin && (
               <>
+                <div className={styles.tittle}>
+                  <h1>Ingresa como Casa de Adopcion</h1>
+                </div>
                 <div>
                     <FormInput
                       placeholder="Email"
@@ -327,7 +350,7 @@ const RegistroCasa = () => {
           
             <Button
               type="submit"
-              disabled={isSubmitting}
+              // disabled={isSubmitting}
               className="border border-black text-black hover:bg-slate-100 mt-8 bg-inherit "
               size="lg"
             >

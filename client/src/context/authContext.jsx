@@ -114,6 +114,46 @@ export const AuthProvider = ({ children }) =>{
 		}
 	}
 
+	const signinHouse = async (house) => {
+		try {
+			const res = await axios.post('/loginHouse', house)
+			console.log(res)
+			setHouse(res.data)
+			const Toast = Swal.mixin({
+				toast: true,
+				position: 'center',
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			})
+			
+			Toast.fire({
+				icon: 'success',
+				title: 'Inicio de sesion exitoso'
+			})
+			setAutenticado(true)
+		} catch (error) {
+			console.log(error);
+			if(error?.response?.data?.message === 'house not found'){
+				Swal.fire(
+					'No se pudo iniciar sesion!',
+					'La casa de adopcion con dicho email no existe',
+					'error'
+				)
+			} else if(error?.response?.data?.message === 'invalid password'){
+				Swal.fire(
+					'No se pudo iniciar sesion!',
+					'password incorrecta',
+					'error'
+				)
+			}
+		}
+	}
+
 	const deslogear = () =>{
 		// navigate('/login')
     Cookies.remove('token')
@@ -182,6 +222,7 @@ export const AuthProvider = ({ children }) =>{
         signup,
 			 	autenticado,
 				signin, 
+				signinHouse,
 				cargando,
 				deslogear
       }}

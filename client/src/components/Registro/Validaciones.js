@@ -1,3 +1,5 @@
+//Archivo de validaciones para el registro de casa de adopcion
+
 import * as Yup from "yup";
 
 const validationSchema = Yup.object({
@@ -48,11 +50,11 @@ const validationSchema = Yup.object({
   //   .min(5, "La dirección debe tener al menos 5 caracteres")
   //   .max(15, "La dirección no puede tener más de 15 caracteres"),
 
-  // telefono: Yup.string()
-  //   .required("Por favor, ingresa tu número de teléfono.")
-  //   .matches(/^[0-9]+$/, "El teléfono debe contener solo números")
-  //   .min(5, "El telefono debe tener al menos 5 caracteres")
-  //   .max(20, "El telefono no puede tener más de 20 caracteres"),
+  telefono: Yup.string()
+    .required("Por favor, ingresa tu número de teléfono.")
+    .matches(/^[0-9]+$/, "El teléfono debe contener solo números")
+    .min(5, "El telefono debe tener al menos 5 caracteres")
+    .max(20, "El telefono no puede tener más de 20 caracteres"),
 
   // acerca: Yup.string()
   //   .required("Por favor, cuéntanos un poco acerca de ti.")
