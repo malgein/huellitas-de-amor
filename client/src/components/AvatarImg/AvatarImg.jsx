@@ -18,7 +18,7 @@ import {useAuth} from '../../context/authContext'
 export default function AvatarImg() {
   const { user, logout } = useAuth0();
   // const { user, isAuthenticated, isLoading } = useAuth0();
-  const {usuario} = useAuth()
+  const {usuario, house} = useAuth()
   // console.log(loading, isAuthenticated)
   const imgProfile = usuario?.imagenPerfil;
   const navigate = useNavigate();
@@ -26,6 +26,8 @@ export default function AvatarImg() {
   const handleLogout = async () => {
     await logout();
   };
+
+  console.log(usuario, house)
   return (
     <div className="flex items-center gap-4">
       {/* {console.log(user?.id)} */}
@@ -43,7 +45,20 @@ export default function AvatarImg() {
             name={user?.given_name}/>
     
           </DropdownTrigger>
-        ): (
+        ): house ? (
+          <DropdownTrigger>
+            <User
+            as="button"
+            avatarProps={{
+              isBordered: true,
+              src: house?.foto,
+            }}
+            className="transition-transform"
+            description={house?.email}
+            name={house?.nombreDeOng}/>
+          </DropdownTrigger>
+        ) 
+        : (
           <DropdownTrigger>
           <User
           as="button"
@@ -69,15 +84,36 @@ export default function AvatarImg() {
                   <p className="font-bold" >Hola {user?.name}🐾 </p>
             </DropdownItem>
           )}
-          {(!usuario && !user) ? (
-            <DropdownItem key="analytics" to="/registro">
-              <Link to={PathRoutes.LOGIN}>Inicia sesion</Link>
+
+          {house && (
+            <DropdownItem key="profile-house" className="h-14 gap-2">
+                <Link to={`/perfil-house/${house?.id}`}>
+                  <p className="font-bold" onClick={() => console.log(usuario?.id)}>Hola {house?.nombreDeOng}🐾 </p>
+                </Link>
             </DropdownItem>
+          )}
+
+          {(!usuario && !user && !house) ? (
+              <DropdownItem key="analytics" to="/registro">
+                <Link to={PathRoutes.LOGIN}>Inicia sesion</Link>
+              </DropdownItem>
+          ): null }
+
+          {(!usuario && !user && !house) ? (
+              <DropdownItem key="register" to="/registro-casa">
+                <Link to={PathRoutes.REGISTRO_CASA}>Eres una casa de adopcion?</Link>
+              </DropdownItem>
           ): null }
 
           {usuario?.tipoDeUsuario === 'Administrador' ? (
             <DropdownItem key="dashboard">
               <Link to={PathRoutes.DASHBOARD_ADMIN}>Panel</Link>
+            </DropdownItem>
+          ) : null}
+
+          {house ? (
+            <DropdownItem key="dashboard-house">
+              <Link to={PathRoutes.DASHBOARD_HOUSES}>Panel</Link>
             </DropdownItem>
           ) : null}
 
@@ -87,7 +123,7 @@ export default function AvatarImg() {
             </DropdownItem>
           ) : null}
 
-          {usuario ? (
+          {usuario || house ? (
             <DropdownItem key="logout" color="danger">
               <Link>
                 <LogoutButton />

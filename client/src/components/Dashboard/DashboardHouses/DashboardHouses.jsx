@@ -1,10 +1,14 @@
 import React from "react";
 import Sidebar from "./Sidebar";
+import {useAuth} from '../../../context/authContext'
 
 import { Outlet } from "react-router-dom";
 
 //Este es el componente del dashboard principal
 const DashboardHouses = () => {
+
+  const {house} = useAuth()
+
   return (
     <div className="flex overflow-scroll">
       <div className="flex overflow-scroll ">
@@ -17,9 +21,9 @@ const DashboardHouses = () => {
           <div>
             {/* El elemento Outlet es necesario para poder navegar en subrutas del dashboard*/}
             <Outlet></Outlet>
-            <h1>Bienvenido Admind</h1>
-            <h1>Nombre del admin</h1>
-            <h1>Correo del admin</h1>
+            <h1>Bienvenido </h1>
+            <h1>{house?.nombreDeOng}</h1>
+            <h1>{house?.email}</h1>
           </div>
         </div>
       </div>

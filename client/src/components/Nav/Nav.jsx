@@ -56,13 +56,13 @@ const Nav = () => {
           <Link className="text-lg text-black" href="/">
             Inicio
           </Link>
-          {isAuthenticated ? (
+          {/* {isAuthenticated ? (
             <Link href={`/perfil/${user.id}`} className="text-lg text-black">
               Mi Perfil
             </Link>
           ) : (
             ""
-          )}
+          )} */}
           <div className="flex flex-wrap justify-center gap-3">
             {sizes.map((size) => (
               <Link

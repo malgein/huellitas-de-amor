@@ -19,7 +19,7 @@ const Sidebar = () => {
 			<div>
         <div className='bg-[#4E73DF] px-[35px]  h-screen'>
             <div className='px-[35px] py-[55px] flex items-center justify-center border-b-[1px] border-[#EDEDED]/[0.3]'>
-                <h1 className='text-white text-[20px] leading-[24px] font-extrabold cursor-pointer'>Admin Panel</h1>
+                <h1 className='text-white text-[20px] leading-[24px] font-extrabold cursor-pointer'>Panel de Usuario</h1>
             </div>
             <div className='flex items-center justify-center gap-[15px] py-[20px] border-b-[1px] border-[#EDEDED]/[0.3] cursor-pointer hover:bg-[#3954A2] hover:text-white'>
 							{/* Link que te lleva al dashboard como tal */}

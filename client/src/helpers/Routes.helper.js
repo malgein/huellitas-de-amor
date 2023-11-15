@@ -2,16 +2,22 @@ const PathRoutes = {
   // LANDINGPAGE: "/",
   HOME: "/",
   FILTER: "/mascotas",
+  //Perfil de usuario
   PERFIL: "/perfil/:id",
+  //Perfil de casa de adopcion
+  PERFIL_HOUSE: 'perfil-house/:id',
   DETAIL: "/detail/:id",
+  //Agregar mascotas siendo admin
   AGREGAR: "/agregar",
+  AGREGAR_MASCOTA_HOUSE: "/mascota-house",
   REGISTRO: "/registro",
   LOGIN: "/login",
   CASADETAIL: "/casaDeAdopcion/:id",
   NOTIFICACION: "/notificaciones",
   DASHBOARD: "/dashboard",
+  //Ruta para registro/login de las casas de adopcion
   REGISTRO_CASA: "/registro-casa",
-  LOGIN_CASA: "/login-casa",
+
 
   DASHBOARD_SUPER_ADMIN: "dashboard-super-admin",
   //Sub ruta para el dashboard de mascotas

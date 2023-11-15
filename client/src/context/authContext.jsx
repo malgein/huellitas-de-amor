@@ -190,7 +190,7 @@ export const AuthProvider = ({ children }) =>{
 						 }
 						 //si es valido  torna el isauthenticated en true le pasa al estado user global el los datos que necesitamos del usuario guardado 
 						 setAutenticado(true);
-						 //Aqui tiene que estar la clave para  determinar si lo que se loega es una casa o un usuario
+						 //Aqui tiene que estar la clave para  determinar si lo que se logea es una casa o un usuario
 						 
 						 if(res.data.nombre){
 							setUsuario(res.data);

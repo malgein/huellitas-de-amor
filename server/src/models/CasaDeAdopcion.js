@@ -5,10 +5,15 @@ module.exports = (sequelize) => {
     "casaDeAdopcion",
     {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
+        // type: DataTypes.INTEGER,
+        // autoIncrement: true,
+        // allowNull: false,
+        // primaryKey: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+        allowNull: false,
+        unique: true,
       },
       foto: {
         type: DataTypes.JSON,

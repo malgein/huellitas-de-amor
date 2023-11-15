@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
 // import Perfil from "./components/PerfilUser/Perfiluser";
 import Perfil from "./components/PerfilUser/Perfiluser";
+import PerfilHouse from "./components/PerfilUser/PerfilHouse";
 import AgregarMascota from "./components/AgregarMascota/AgregarMascota";
 import FilterMascotas from "./components/FilterButtons/FilterButtons";
 import Detail from "./components/Detail/Detail";
@@ -44,6 +45,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import Usuarios from "./components/usuarios/Usuarios";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import AuthorizationAdmin from "./components/ProtectedRoutes/AuthorizationAdmin";
+import AuthorizationHouse from "./components/ProtectedRoutes/AuthorizationHouse";
 import Error404 from "./components/Error404/Error404";
 import AuthorizationUser from "./components/ProtectedRoutes/AuthorizationUser";
 
@@ -103,6 +105,7 @@ function App() {
             />
             <Route element={<ProtectedRoutes />}>
               <Route path={PathRoutes.PERFIL} element={<Perfil />} />
+              <Route path={PathRoutes.PERFIL_HOUSE} element={<PerfilHouse />} />
             </Route>
             <Route element={<AuthorizationAdmin />}>
               <Route
@@ -124,9 +127,26 @@ function App() {
                <Route
               path={PathRoutes.DASHBOARD_ADMIN_DONACIONES}
               element={<DonationsAdmin />}
-              />
+              /> 
               <Route path={PathRoutes.AGREGAR} element={<AgregarMascota />} />
             </Route>
+
+            <Route element={<AuthorizationHouse />}>
+              <Route path={PathRoutes.AGREGAR_MASCOTA_HOUSE} element={<AgregarMascota />} />
+              <Route
+                path={PathRoutes.DASHBOARD_HOUSES}
+                element={<DashboardHouses />}
+              />
+              <Route
+                path={PathRoutes.DASHBOARD_HOUSES_DONACIONES}
+                element={<DonationsHouses />}
+              />
+              <Route
+              path={PathRoutes.DASHBOARD_HOUSES_MASCOTAS}
+              element={<PetsHouses />}
+              />
+            </Route>
+
             <Route element={<AuthorizationUser/>}>
               <Route path={PathRoutes.DASHBOARD_USERS} element={<DashboardUser />}/>
               <Route path={PathRoutes.DASHBOARD_USERS_ADOPTION_HOUSES} element={<AdoptionHousesUser />}/>
@@ -134,21 +154,7 @@ function App() {
               <Route path={PathRoutes.DASHBOARD_USERS_USERS} element={<UsersUser />}/>
               <Route path={PathRoutes.DASHBOARD_USERS_MASCOTAS} element={<PetsUser />}/>
             </Route>
-          
-           
-
-            <Route
-              path={PathRoutes.DASHBOARD_HOUSES}
-              element={<DashboardHouses />}
-            />
-            <Route
-              path={PathRoutes.DASHBOARD_HOUSES_DONACIONES}
-              element={<DonationsHouses />}
-            />
-            <Route
-              path={PathRoutes.DASHBOARD_HOUSES_MASCOTAS}
-              element={<PetsHouses />}
-            />
+    
             <Route path={PathRoutes.DETAILUSER} element={<DetailUser />} />
             <Route path={PathRoutes.DETAILHOUSE} element={<DetailHouse />} />
             <Route path='*' element={<Error404 />}/>

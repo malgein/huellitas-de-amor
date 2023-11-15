@@ -49,7 +49,7 @@ const postCrearUsuario = async(req, res) => {
             ubicacion,
             direccion,
             telefono,
-            acerca
+            acerca,
           });
 		//le pasamos el id del nuevo usuario para que la funcion importada de libs me cree su token
 		const token = await createAccessToken({id: nuevoUsuario.id})
@@ -64,7 +64,9 @@ const postCrearUsuario = async(req, res) => {
         ubicacion: nuevoUsuario.ubicacion,
         direccion: nuevoUsuario.direccion,
         telefono: nuevoUsuario.telefono,
-        acerca : nuevoUsuario.acerca
+        acerca : nuevoUsuario.acerca,
+        imagenPerfil: nuevoUsuario.imagenPerfil,
+        tipoDeUsuario: nuevoUsuario.tipoDeUsuario
 		})
 
 		//Esta es la forma de obtener para el frontend solo los datos que necesito para el usuario

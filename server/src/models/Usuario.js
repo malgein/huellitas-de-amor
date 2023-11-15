@@ -5,10 +5,15 @@ module.exports = (sequelize) => {
     "usuario",
     {
       id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        // type: DataTypes.INTEGER,
+        // allowNull: false,
+        // primaryKey: true,
+        // autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
+        allowNull: false,
+        unique: true,
       },
       nombre: {
         type: DataTypes.STRING,

@@ -458,7 +458,7 @@ function PetsHouses() {
           />
           <div className="flex p-0">
             {" "}
-            // BARRA SUPERIOR
+            {/* BARRA SUPERIOR */}
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button
@@ -508,7 +508,7 @@ function PetsHouses() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Link to="/agregar">
+            <Link to="/mascota-house">
               <Button color="primary" endContent={<PlusIcon />}>
                 Agregar nueva mascota
               </Button>
@@ -595,7 +595,7 @@ function PetsHouses() {
             {/* Muestra un searchbar, mensajes, nombre y perfil del admin */}
             <div className="mt-10">
               <div className="flex">
-                {mascotas.map((mascota) => (
+                {/* {mascotas.map((mascota) => (
                   <div
                     key={mascota.id}
                     className={`p-4 rounded-lg shadow-md mb-4 ${
@@ -609,7 +609,7 @@ function PetsHouses() {
                         : "bg-gray-200" // Color predeterminado si el estado no coincide
                     }`}
                   ></div>
-                ))}
+                ))} */}
               </div>
             </div>
 
