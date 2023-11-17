@@ -1,4 +1,4 @@
-const { Mascota } = require("../db");
+const { Mascota, Usuario, CasaDeAdopcion } = require("../db");
 
 // const getPets = async () => {
 //   try {
@@ -14,7 +14,18 @@ const { Mascota } = require("../db");
 
 const getPets = async () => {
   try {
-    const allPets = await Mascota.findAll();
+    const allPets = await Mascota.findAll({
+      include: [
+        {
+          model: Usuario,
+           // Alias opcional para TipoDeUsuario
+        },
+        {
+          model: CasaDeAdopcion,
+         // Alias opcional para Donaciones
+        },
+      ],
+    });
     // console.log(allPets)
     // console.log(allPets)
     return allPets;

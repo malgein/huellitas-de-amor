@@ -201,7 +201,7 @@ export const AuthProvider = ({ children }) =>{
 							 setHouse(res.data)
 							 setCargando(false)
 						 }
-						 console.log(usuario, house)
+						//  console.log(usuario, house)
 					 } catch (error) {
 						 console.log(error)
 						 setAutenticado(false);

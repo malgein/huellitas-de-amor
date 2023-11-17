@@ -5,7 +5,7 @@ import Error404 from "../Error404/Error404"
 const AuthorizationAdmin = () => {
 //Nos traemos el estado de carga y el indicativo de si esta autenticado o no del conetxt
 	const {cargando, usuario} = useAuth()
-  console.log(cargando, usuario)
+  // console.log(cargando, usuario)
 	// const navigate = Navigate()
 
   //Si esta cargando  devuelve un texto de loading

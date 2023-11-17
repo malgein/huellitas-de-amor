@@ -36,6 +36,7 @@ import {
   SUBMIT_FORM,
   SUBMIT_FORM_SUCCESS,
   SUBMIT_FORM_FAILURE,
+  GET_PET_BY_HOUSEID
 } from "./actions";
 
 const initialState = {
@@ -244,6 +245,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+      case GET_PET_BY_HOUSEID:
+      return {
+        ...state,
+        mascotas: payload,
       };
   }
 };

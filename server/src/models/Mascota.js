@@ -15,7 +15,8 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       edad: {
-        type: DataTypes.INTEGER,
+        // type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       sexo: {
@@ -39,7 +40,8 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       peso: {
-        type: DataTypes.FLOAT,
+        // type: DataTypes.FLOAT,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       estado: {

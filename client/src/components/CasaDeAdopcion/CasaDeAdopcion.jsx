@@ -32,7 +32,7 @@ export default function CasaDeAdopcion() {
       <div className="m-2 flex rounded-xl pb-32 pt-5 shadow-2x w-full">
         <div className=" w-1/3 h-[100%] ml-10 mt-20">
           <div className="rounded mr-10 ml-10">
-            <Carousel
+            {/* <Carousel
               infiniteLoop={true}
               showThumbs={false}
               showStatus={false}
@@ -47,7 +47,7 @@ export default function CasaDeAdopcion() {
                     alt={`Detalle de casa ${index + 1}`}
                   />
                 ))}
-            </Carousel>
+            </Carousel> */}
           </div>
         </div>
         <div className="w-2/3 m-10 mb-0 mt-20 h-100%">
@@ -70,13 +70,7 @@ export default function CasaDeAdopcion() {
           <div className="h-20 flex flex-col justify-end">
             <div className="flex flex-col items-center"></div>
             <div className="ml-60 h-1/2 w-full ">
-              <MapaFuncional
-                /* googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAnPhpVL3wYG0rQDT3Ixnbj5u_nuhK6Z4g"
-                containerElement={<div style={{ height: "400px" }} />}
-                mapElement={<div style={{ height: "100%" }} />}
-                loadingElement={<p>Cargando...</p>} */
-                location={ubicacion}
-              />
+             
             </div>
           </div>
         </div>

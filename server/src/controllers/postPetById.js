@@ -1,4 +1,4 @@
-const { Mascota, Especie } = require("../db");
+const { Mascota, Especie, CasaDeAdopcion} = require("../db");
 const { Op } = require("sequelize");
 
 const postPetById = async ({
@@ -23,8 +23,8 @@ const postPetById = async ({
       !tamano ||
       !raza ||
       !peso ||
-      !especie || 
-      !casaDeAdopcionId
+      !especie 
+      // !casaDeAdopcionId
     ) {
       return { status: 401, message: "Faltan datos" };
     }
@@ -42,16 +42,32 @@ const postPetById = async ({
     console.log(createPet)
     //const mascEsp = await Especie.findAll({where: {especie: {[Op.in]:especie}}});
 
-    let mascEsp = await Especie.findOne({ where: { especie } }); // Buscar la especie
-    // await createPet.setEspecie(mascEsp);
-
-    if (!mascEsp) {
-      mascEsp = await Especie.create({ especie }); // Crear la especie si no existe
+    if(casaDeAdopcionId){
+      //Aqui buscamos la casa de adopcion mediante al id suministrado del front-end
+      const casaAdopcion = await CasaDeAdopcion.findByPk(casaDeAdopcionId);
+      if(!casaAdopcion){
+        return {message:"No se encontro la casada de adopción"}
+      }
+      //Establecemos la relacion entre la csa de adopcion con el id suministrado y la mascota que crearemos
+      await createPet.setCasaDeAdopcion(casaAdopcion);
+      //y retornamos la csa de adpcion recien creada
+      return createPet
     }
+      // return { message: 'Mascota creada y relacionada con la Casa de Adopción correctamente' };
+    
+      // Manejar el caso donde la Casa de Adopción no existe
+      return createPet
 
-    await createPet.setEspecie(mascEsp);
-    await createPet.setCasaDeAdopcion(casaDeAdopcionId);
-    return createPet;
+    // let mascEsp = await Especie.findOne({ where: { especie } }); // Buscar la especie
+    // // await createPet.setEspecie(mascEsp);
+
+    // if (!mascEsp) {
+    //   mascEsp = await Especie.create({ especie }); // Crear la especie si no existe
+    // }
+
+    // await createPet.setEspecie(mascEsp);
+    // await createPet.setCasaDeAdopcion(casaDeAdopcionId);
+    // return createPet;
 
  
   } catch (error) {

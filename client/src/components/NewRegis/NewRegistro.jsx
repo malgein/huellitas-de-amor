@@ -61,31 +61,7 @@ export function NuevoRegistro() {
       telefono: Number(values.telefono)
     }
 
-    // console.log(result)
-    // dispatch(postCrearUsuario(result))
-    // console.log(newUser)
-    // const res = await registerRequest(result)
-    // console.log(res)
     signup(result)
-    // try {
-    //   // await signup(values.email, values.password);
-    //   // Registro exitoso
-    //   Swal.fire({
-    //     icon: "success",
-    //     title: "Registro exitoso",
-    //     text: "Usuario registrado con éxito",
-    //   });
-    //   dispatchRedux();
-    // } catch (error) {
-    //   if (error.code === "auth/email-already-in-use") {
-    //     setIsAlreadyRegistered(true);
-    //     showAlert(); // Muestra la alerta
-    //   } else {
-    //     setFieldError("email", "Error de registro: " + error.message);
-    //   }
-    // } finally {
-    //   setSubmitting(false);
-    // }
   };
 
   useEffect(() => {

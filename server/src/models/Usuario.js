@@ -46,7 +46,8 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       telefono: {
-        type: DataTypes.INTEGER,
+        // type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       acerca: {
@@ -56,7 +57,7 @@ module.exports = (sequelize) => {
       tipoDeUsuario:{
         type: DataTypes.ENUM("Administrador", "Centro De Adopcion", "Usuario", "Super Administrador"),
         allowNull: false,
-        defaultValue: 'Usuario'
+        defaultValue: 'Administrador'
       },
       imagenPerfil: {
         type: DataTypes.JSON, // Puedes ajustar el tipo de dato según tu necesidad

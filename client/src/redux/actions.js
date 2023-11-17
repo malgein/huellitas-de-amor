@@ -54,11 +54,13 @@ const handleError = (dispatch, errorType, error) => {
 };
 
 export const EDIT_USER = "EDIT_USER";
-
+export const GET_PET_BY_HOUSEID = "GET_PET_BY_HOUSEID"
 // export const basename = "https://huellitas-de-amor-production-6e81.up.railway.app";
 // export const basename = "https://huellitas-de-amor-3.up.railway.app";
 
 export const basename = "http://localhost:3001";
+
+
 
 const ENDPOINT = `${basename}/mascotas`;
 const ENDPOINT_FILTER = `${basename}/mascotas/filtro`;
@@ -89,6 +91,18 @@ export const getMascotas = () => async (dispatch) => {
     const response = await axios.get(ENDPOINT);
 
     dispatch({ type: FETCHING_MASCOTAS, payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMascotasByHouseId = (id) => async (dispatch) => {
+  try {
+    const response = await axios.get(ENDPOINT);
+
+    const result = response.data.filter(pet => pet.casaDeAdopcionId === id)
+
+    dispatch({ type: FETCHING_MASCOTAS, payload: result });
   } catch (error) {
     console.log(error);
   }

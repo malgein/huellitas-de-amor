@@ -23,7 +23,7 @@ const FormSelect = ({label, name, placeholder, optionArray, error}) => {
 					color={error ? "danger" : "success"}
 					id={name}
 					name={name}>
-					{console.log(optionArray)}
+					{/* {console.log(optionArray)} */}
 					{/* <option value=''>{placeholder}</option> */}
 					<SelectItem key='' value=''>
 						{placeholder}

@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SubirImagenes from "../SubirImagenes/SubirImagenes";
 import agregarMascotaSchema from "../../Schemas/agregarMascotaSchema";
+import {useAuth} from '../../context/authContext'
 
 const validationSchema = agregarMascotaSchema;
 
@@ -31,12 +32,22 @@ const AgregarMascota = () => {
     sexo: "",
   });
 
+  const {house} = useAuth()
+
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const imagenes = useSelector((state) => state.imagenes);
+
+  //Funcion importante que se dispara en el onsubmit y llama al endpoint del backen para crear una nueva mascota ye relacionarla con la casa de adopcion logeada si es que la macota es creada por una casa de adopcion su es creada por un admin solo la crea 
   const dispatchRedux = (mascota) => {
+
     const nuevaMascota = { ...mascota };
+    // console.log(nuevaMascota)
     nuevaMascota.foto = [...nuevaMascota.foto, ...imagenes];
+    if(house){
+      nuevaMascota.casaDeAdopcionId = house.id
+    }
+    // console.log(nuevaMascota)
     dispatch(addMascota(nuevaMascota));
     Navigate("/");
     dispatch(limpiarImagenes());
@@ -101,7 +112,7 @@ const AgregarMascota = () => {
                   error={errors.nombre}
                 />
               </div>
-              {console.log(localStorage)}
+              {/* {console.log(localStorage)} */}
               <div>
                 <FormInput
                   label="Especie"
@@ -144,7 +155,7 @@ const AgregarMascota = () => {
               </div>
 
               <div className={styles.selectContainer}>
-                {console.log(tamañoOptions)}
+                {/* {console.log(tamañoOptions)} */}
                 <div>
                   <FormSelect
                     label="Tamaño"

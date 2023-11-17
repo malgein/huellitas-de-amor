@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router-dom"
 const AuthorizationHouse = () => {
 //Nos traemos el estado de carga y el indicativo de si esta autenticado o no del conetxt
 	const {cargando, house} = useAuth()
-  console.log(cargando, house)
+  // console.log(cargando, house)
 	// const navigate = Navigate()
 
   //Si esta cargando  devuelve un texto de loading

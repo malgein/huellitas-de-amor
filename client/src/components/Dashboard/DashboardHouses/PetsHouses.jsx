@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PathRoutes from "../../../helpers/Routes.helper";
 import Sidebar from './Sidebar'
 import { useSelector, useDispatch } from 'react-redux'
-import { getMascotas, deletePets, modCompletePet, editPets } from '../../../redux/actions'
+import { getMascotas, deletePets, modCompletePet, editPets, getMascotasByHouseId } from '../../../redux/actions'
 import Swal from 'sweetalert2'
 import {
   Table,
@@ -28,6 +28,7 @@ import { ChevronDownIcon } from "../ChevronDownIcon";
 // import {columns, users, statusOptions} from "./data";
 import { capitalize } from "../Accesory";
 import { PlusIcon } from "../PlusIcon";
+import {useAuth} from '../../../context/authContext'
 
 const statusColorMap = {
   Macho: "success",
@@ -69,9 +70,11 @@ function PetsHouses() {
 
   const navigate = useNavigate();
 
+  const {house} = useAuth()
+
   useEffect(() => {
     if (petModified) {
-      dispatch(getMascotas());
+      dispatch(getMascotasByHouseId(house.id));
       setPetModified(false);
     }
   }, [dispatch, petModified]);

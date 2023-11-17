@@ -27,7 +27,7 @@ export default function AvatarImg() {
     await logout();
   };
 
-  console.log(usuario, house)
+  // console.log(usuario, house)
   return (
     <div className="flex items-center gap-4">
       {/* {console.log(user?.id)} */}
